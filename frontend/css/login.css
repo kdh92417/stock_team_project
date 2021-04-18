@@ -84,13 +84,13 @@ body::before {
   justify-content: space-between;
 }
 .caption-forgot-pw,
-.caption-register {
+.caption-signup {
   margin-top: 20px;
   text-align: center;
   display: inline-block;
 }
 .caption-forgot-pw a,
-.caption-register a {
+.caption-signup a {
   font-size: 15px; color: rgb(255, 255, 255);
   text-decoration: none;
 }
