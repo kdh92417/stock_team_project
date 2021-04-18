@@ -11,12 +11,12 @@ a {
   color: #fff;
 }
 
-.main-top {
-  min-height: 100vh;
-  background: linear-gradient(140deg, #2f3e81, #4560bf);
+body {
+  background-color: #2f3e81;
 }
 
-.main-middle {
-  min-height: 100vh;
-  background-color: #2f3e81;
+.main-top {
+  min-height: 700px;
+  width: 100vw;
+  background: linear-gradient(140deg, #2f3e81, #4560bf);
 }

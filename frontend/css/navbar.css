@@ -1,13 +1,3 @@
-.main-top {
-  min-height: 100vh;
-  background: linear-gradient(140deg, #2f3e81, #4560bf);
-}
-
-.main-middle {
-  min-height: 100vh;
-  background-color: #2f3e81;
-}
-
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -20,7 +10,7 @@
   position: fixed;
   padding: 8px 12px;
   transition: 0.2s ease-in-out;
-  background-color: #2f3e81;
+  background-color: #222f45;
   z-index: 999;
 }
 
