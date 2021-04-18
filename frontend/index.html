@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/topcontents.css">
     <link rel="stylesheet" href="./css/search.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="middle.css">
-    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="./css/middle.css">
+    <link rel="stylesheet" href="./css/footer.css">
     <script src="https://kit.fontawesome.com/831618fb82.js" crossorigin="anonymous"></script>
     <script src="./js/script.js" defer></script>
     <title>건강한 주식투자를 위한 주식 커뮤니티</title>
@@ -41,12 +40,20 @@
           <p>주식 포트폴리오 공유 사이트</p>
         </div>
         <div class="site-image">
-          <img src="./css/output-onlinepngtools.png">
+          <div class="loader">
+            <div style="--i:0"></div>
+            <div style="--i:1"></div>
+            <div style="--i:2"></div>
+            <div style="--i:3"></div>
+            <div style="--i:4"></div>
+          </div>
         </div>
       </div>
+    </section>
+    <section class="main-search">
       <div class="company-seach-contents">
-        <input type="text" name="company-seach" class="company-seach" placeholder="기업 정보 검색">
-        <button type="submit"><i class="fas fa-search"></i>검색하기</button>
+        <input type="text" name="company-seach" class="company-search" placeholder="기업 정보 검색">
+        <button type="submit"><i class="fas fa-search"></i>검색</button>
       </div>
     </section>
     <section class="main-middle">
