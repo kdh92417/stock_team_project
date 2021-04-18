@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
 
 * {
-  margin: 0; padding: 0; box-sizing: border-box; color: #fff
+  margin: 0; padding: 0; box-sizing: border-box; color: #fff;
 }
 body {
   font-family: 'Noto Sans KR', sans-serif;
@@ -78,6 +79,9 @@ body::before {
   border: none;
   border-radius: 25px;
   cursor: pointer;
+}
+.btn-area button:hover {
+  background-color: #3b77d1
 }
 .captions {
   display: flex;
