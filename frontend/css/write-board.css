@@ -60,6 +60,10 @@ body {
   padding: 5px;
 }
 
+.portfolio-title>input:focus {
+  border: 1px solid #48E0A6;
+}
+
 .input-stock-info::-webkit-scrollbar {
   width: 10px;
 }
@@ -79,6 +83,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   align-content: flex-start;
+  padding: 20px 0;
   overflow:scroll
 }
 
