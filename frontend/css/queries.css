@@ -8,6 +8,7 @@
   .nav-container {
     max-width: 900px;
   }
+
 }
 
 @media (min-width: 768px) and (max-width: 959px) {
@@ -31,4 +32,5 @@
 }
 
 @media (max-width: 499px) {
+
 }
