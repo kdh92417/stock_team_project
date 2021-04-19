@@ -12,11 +12,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
+  z-index: 1000;
 }
 
 .navbar.nav-active {
   transition: 0.2s ease-in-out;
   background-color: #222f45;
+  z-index: 999;
 }
 
 .main-logo {
@@ -39,7 +41,6 @@
   list-style: none;
   font-size: 18px;
   background-color: #222f45;
-  z-index: 999;
 }
 
 .mypage-menu li {
