@@ -1,0 +1,139 @@
+@media (min-width: 1200px) and (max-width: 2560px) {
+}
+
+@media (min-width: 960px) and (max-width: 1199px) {
+}
+
+@media (min-width: 768px) and (max-width: 959px) {
+  .main-info-contents {
+    flex-direction: column;
+  }
+
+  .site-info {
+    height: 250px;
+    width: 350px;
+    font-size: 32px;
+  }
+  .site-image {
+    width: 325px;
+    height: 300px;
+  }
+
+  .loader div {
+    position: relative;
+    width: 30px;
+    height: 250px;
+    margin: 10px;
+  }
+
+  .loader div::before {
+    border-radius: 25px;
+  }
+
+  .loader div::after {
+    left: 0;
+    width: 29px;
+    height: 29px;
+    transform: translateY(220px);
+  }
+
+  @keyframes animate {
+    0% {
+      transform: translateY(220px);
+      filter: hue-rotate(180deg);
+    }
+    50% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(220px);
+      filter: hue-rotate(0deg);
+    }
+  }
+
+  .company-seach-contents {
+  }
+
+  .company-seach-contents input[type="text"] {
+  }
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+  .main-info-contents {
+    flex-direction: column;
+  }
+
+  .site-image {
+    width: 250px;
+    height: 250px;
+  }
+
+  .site-info {
+    height: 250px;
+    width: 300px;
+    font-size: 28px;
+  }
+  .loader div {
+    position: relative;
+    width: 25px;
+    height: 200px;
+    margin: 10px;
+  }
+
+  .loader div::before {
+    border-radius: 25px;
+  }
+
+  .loader div::after {
+    left: 0;
+    width: 25px;
+    height: 26px;
+    transform: translateY(175px);
+  }
+
+  @keyframes animate {
+    0% {
+      transform: translateY(175px);
+      filter: hue-rotate(180deg);
+    }
+    50% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(175px);
+      filter: hue-rotate(0deg);
+    }
+  }
+}
+
+@media (max-width: 499px) {
+  .main-info-contents {
+    flex-direction: column;
+  }
+
+  .site-image {
+    width: 250px;
+    max-height: 250px;
+  }
+
+  .site-info {
+    height: 250px;
+    width: 300px;
+    font-size: 28px;
+  }
+  .loader div {
+    position: relative;
+    width: 20px;
+    height: 200px;
+    margin: 10px;
+  }
+
+  .loader div::before {
+    border-radius: 25px;
+  }
+
+  .loader div::after {
+    width: 19px;
+    height: 25px;
+  }
+}

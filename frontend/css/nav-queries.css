@@ -14,6 +14,7 @@
   .nav-container {
     max-width: 720px;
   }
+
   .main-menu,
   .main-login {
     display: none;
@@ -24,6 +25,7 @@
   .nav-container {
     max-width: 560px;
   }
+
   .main-menu,
   .main-login {
     display: none;
@@ -31,4 +33,21 @@
 }
 
 @media (max-width: 499px) {
+  .nav-container {
+    max-width: 560px;
+  }
+
+  .main-menu,
+  .main-login {
+    display: none;
+  }
+
+  .mypage-title {
+    font-size: 24px;
+  }
+
+  .myinfo th,
+  .myinfo .contxt-title {
+    font-size: 16px;
+  }
 }
