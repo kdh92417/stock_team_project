@@ -26,10 +26,17 @@
   display: flex;
   list-style: none;
   font-size: 18px;
+  margin-bottom: 0;
+}
+
+.logo,
+.nav-menu {
+  color: #fff;
 }
 
 .main-menu li {
   padding: 8px 12px;
+  justify-content: center;
 }
 
 .main-login {
