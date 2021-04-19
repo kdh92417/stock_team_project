@@ -7,6 +7,14 @@
   background-color: #293852;
 }
 
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 700px;
+  text-align: center;
+}
+
 .card-search,
 .card-portfolio,
 .card-like {
@@ -27,8 +35,8 @@
 }
 
 .main-middle ul {
+  padding: 60px 0;
   color: #fff;
   font-size: 25px;
   list-style: none;
-  /* list-style-position: inside; */
 }

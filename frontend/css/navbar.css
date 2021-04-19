@@ -26,6 +26,10 @@
   color: #ffff;
 }
 
+.nav-menu {
+  display: flex;
+}
+
 .main-menu {
   display: flex;
   list-style: none;
@@ -33,7 +37,7 @@
   margin-bottom: 0;
 }
 
-.mypage-menu {
+.main-menu ul {
   position: absolute;
   top: 61px;
   display: flex;
@@ -41,7 +45,13 @@
   list-style: none;
   font-size: 18px;
   background-color: #222f45;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.main-menu li:hover ul {
+  opacity: 1;
+  visibility: visible;
 }
 
 .mypage-menu li {
@@ -50,16 +60,24 @@
 }
 
 .logo,
-.nav-menu {
+.nav-item {
   color: #fff;
 }
 
+#mypage label {
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
 .main-menu li {
-  padding: 8px 25px;
+  padding: 15px 25px;
   justify-content: center;
 }
 
-.main-menu a:hover {
+.main-login a:hover,
+.main-menu a:hover,
+#mypage label:hover {
   padding-bottom: 5px;
   border-bottom: 3px solid #48e0a6;
 }
@@ -71,9 +89,19 @@
 }
 
 .main-login li {
-  padding: 8px 12px;
+  padding: 15px 15px;
 }
 
 #admin {
+  display: none;
+}
+
+.nav-container .navbar_toggleBtn {
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.nav-container input[type="checkbox"] {
   display: none;
 }

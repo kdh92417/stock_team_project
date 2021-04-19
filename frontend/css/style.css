@@ -14,9 +14,3 @@ body {
   background-color: #2f3e81;
   line-height: 1.42857143;
 }
-
-.main-top {
-  min-height: 700px;
-  width: 100vw;
-  background: linear-gradient(140deg, #2f3e81, #4560bf);
-}

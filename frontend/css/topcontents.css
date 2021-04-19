@@ -1,8 +1,16 @@
+.main-top {
+  padding-top: 10rem !important;
+  height: 600px;
+  width: 100%;
+  background: linear-gradient(140deg, #2f3e81, #4560bf);
+}
+
 .main-info-contents {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 700px;
+  height: 400px;
 }
 
 .site-info {
