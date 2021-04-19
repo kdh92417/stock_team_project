@@ -1,16 +1,21 @@
 .nav-container {
   position: relative;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  background-color: #2f3e81;
   z-index: 998;
 }
 
 .nav-container.nav-active {
-  width: 100vw;
+  width: 100%;
   position: fixed;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 8px 12px;
   transition: 0.2s ease-in-out;
   background-color: #222f45;
@@ -29,6 +34,20 @@
   margin-bottom: 0;
 }
 
+.mypage-menu {
+  position: absolute;
+  top: 61px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  font-size: 18px;
+  background-color: #222f45;
+}
+
+.mypage-menu li {
+  padding: 8px 12px;
+}
+
 .logo,
 .nav-menu {
   color: #fff;
@@ -37,6 +56,11 @@
 .main-menu li {
   padding: 8px 12px;
   justify-content: center;
+}
+
+.main-menu a:hover {
+  padding-bottom: 5px;
+  border-bottom: 3px solid #48e0a6;
 }
 
 .main-login {
@@ -51,4 +75,8 @@
 
 .main-login li {
   padding: 8px 12px;
+}
+
+#admin {
+  display: none;
 }
