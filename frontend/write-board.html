@@ -38,8 +38,26 @@
       <li><a class="nav-menu" href="">Login</a></li>
     </ul>
   </nav>
-
-  <div id="summernote">Hello Summernote</div>
+  <div class="write-portfolio-title">포트폴리오 업로드</div>
+  <div class="write-container"> 
+    <div class="portfolio-title">
+      <input type="text" placeholder="포트폴리오 제목">
+    </div>
+    <div class="input-stock-info">
+      <table id="table">
+        <tr>
+          <td class="stock-info">기업명 <input type="text"></td>
+          <td class="stock-info">보유 주식수 <input type="number"></td>
+          <td><button class="add-input">+</button></td>
+        </tr>
+      </table>
+    </div>
+    <div id="summernote">Hello Summernote</div>
+  </div>
+  <div class="btn-container">
+    <button class="submit-portfolio">글쓰기</button>
+  </div>
+  
   <script>
     $(document).ready(function() {
       $('#summernote').summernote({
@@ -50,6 +68,22 @@
         focus: true                  // set focus to editable area after initializing summernote
       });
     });
+
+    const addInputBtn = document.querySelector(".add-input");
+    const deleteInputBtn = document.querySelector(".delete-input");
+    addInputBtn.addEventListener("click", () => {
+      $("#table").append(`<tr>
+          <td class="stock-info">기업명 <input type="text"></td>
+          <td class="stock-info">보유 주식수 <input type="number"></td>
+          <td><button class="delete-input" onclick="deleteLine(this);">-</button></td>
+        </tr>`)
+    });
+
+    function deleteLine(obj) {
+      let tr = $(obj).parent().parent();
+      tr.remove();
+    }
+
   </script>
 </body>
 </html>
