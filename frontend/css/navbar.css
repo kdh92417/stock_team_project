@@ -75,9 +75,13 @@
   justify-content: center;
 }
 
-.main-login a:hover,
-.main-menu a:hover,
 #mypage label:hover {
+  border-bottom: 3px solid #48e0a6;
+  padding-bottom: 5px;
+}
+
+.main-login a:hover,
+.main-menu a:hover {
   padding-bottom: 5px;
   border-bottom: 3px solid #48e0a6;
 }
