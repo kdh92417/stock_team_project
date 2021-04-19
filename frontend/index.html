@@ -19,34 +19,40 @@
   </head>
 
   <body>
-    <section class="main-top">
-      <nav class="navbar">
-        <div class="nav-container">
-          <div class="main-logo">
-            <i class="fas fa-chart-pie"></i>
-            <a class="logo" href="">S.Folio</a>
-          </div>
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="main-logo">
+          <i class="fas fa-chart-pie"></i>
+          <a class="logo" href="">S.Folio</a>
+        </div>
+        <input type="checkbox" id="show-menu">
+        <label for="show-menu" class="navbar_toggleBtn"><i class="fas fa-bars"></i></label>
+        <div class="nav-menu">
           <ul class="main-menu">
-            <li><a class="nav-menu" href="">포트폴리오 게시판</a></li>
-            <li><a class="nav-menu" href="">명예의 전당</a></li>
-            <li id="admin"><a class="nav-menu" href="">관리자</a></li>
-            <li>
-              <a class="nav-menu" href="">마이페이지</a>
+            <li><a class="nav-item" href="">포트폴리오 게시판</a></li>
+            <li><a class="nav-item" href="">명예의 전당</a></li>
+            <li id="admin"><a class="nav-item" href="">관리자</a></li>
+            <li id="mypage">
+              <a class="nav-item desktop-link" href="">마이페이지</a>
+              <input type="checkbox" id="show-mypage">
+              <label for="show-mypage">마이페이지</label>
               <ul class="mypage-menu">
-                <li><a class="nav-menu" href="">회원정보수정</a></li>
-                <li><a class="nav-menu" href="">작성글</a></li>
-                <li><a class="nav-menu" href="">작성댓글</a></li>
-                <li><a class="nav-menu" href="">추천 기업</a></li>
-                <li><a class="nav-menu" href="">추천 포트폴리오</a></li>
+                <li><a class="nav-item" href="">회원정보수정</a></li>
+                <li><a class="nav-item" href="">작성글</a></li>
+                <li><a class="nav-item" href="">작성댓글</a></li>
+                <li><a class="nav-item" href="">추천 기업</a></li>
+                <li><a class="nav-item" href="">추천 포트폴리오</a></li>
               </ul>
             </li>
           </ul>
           <ul class="main-login">
-            <li><a class="nav-menu" href="">Sign Up</a></li>
-            <li><a class="nav-menu" href="">Login</a></li>
+            <li><a class="nav-item" href="">Sign Up</a></li>
+            <li><a class="nav-item" href="">Login</a></li>
           </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
+    <section class="main-top">
       <div class="main-info-contents">
         <div class="site-info">
           <p>2030 건강한 주식투자 솔루션</p>
@@ -70,43 +76,45 @@
       </div>
     </section>
     <section class="main-middle">
-      <div class="card-search">
-        <div class="search-text">기업 검색순위</div>
-        <hr>
-        <div class="ul-search">
-          <ul>
-            <li>카카오</li>
-            <li>삼성전자</li>
-            <li>팬오션</li>
-            <li>HMM</li>
-            <li>효성티앤씨</li>
-          </ul>
+      <div class="card-container">
+        <div class="card-search">
+          <div class="search-text">기업 검색순위</div>
+          <hr>
+          <div class="ul-search">
+            <ul>
+              <li>카카오</li>
+              <li>삼성전자</li>
+              <li>팬오션</li>
+              <li>HMM</li>
+              <li>효성티앤씨</li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="card-portfolio">
-        <div class="portfolio-text">포트폴리오 순위</div>
-        <hr>
-        <div class="ul-portfolio">
-          <ul>
-            <li>카카오 위주 포트폴리오</li>
-            <li>제 포트폴리오 입니다.</li>
-            <li>안정 추구형 포트폴리오</li>
-            <li>저위험 포트폴리오</li>
-            <li>가치투자 포트폴리오</li>
-          </ul>
+        <div class="card-portfolio">
+          <div class="portfolio-text">포트폴리오 순위</div>
+          <hr>
+          <div class="ul-portfolio">
+            <ul>
+              <li>카카오 위주 포트폴리오</li>
+              <li>제 포트폴리오 입니다.</li>
+              <li>안정 추구형 포트폴리오</li>
+              <li>저위험 포트폴리오</li>
+              <li>가치투자 포트폴리오</li>
+            </ul>
+          </div>
         </div>
-      </div>
-      <div class="card-like">
-        <div class="like-text">기업 좋아요 순위</div>
-        <hr>
-        <div class="ul-like">
-          <ul>
-            <li>삼성전자</li>
-            <li>카카오</li>
-            <li>현대차</li>
-            <li>SK하이닉스</li>
-            <li>카카오게임즈</li>
-          </ul>
+        <div class="card-like">
+          <div class="like-text">기업 좋아요 순위</div>
+          <hr>
+          <div class="ul-like">
+            <ul>
+              <li>삼성전자</li>
+              <li>카카오</li>
+              <li>현대차</li>
+              <li>SK하이닉스</li>
+              <li>카카오게임즈</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>

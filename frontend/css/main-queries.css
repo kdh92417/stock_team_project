@@ -5,6 +5,10 @@
 }
 
 @media (min-width: 768px) and (max-width: 959px) {
+  .main-top {
+    padding-top: 15rem !important;
+  }
+
   .main-info-contents {
     flex-direction: column;
   }
@@ -52,9 +56,31 @@
   }
 
   .company-seach-contents {
+    width: 600px;
   }
 
   .company-seach-contents input[type="text"] {
+    width: 350px;
+  }
+
+  .main-middle {
+    flex-direction: column;
+    height: 1100px;
+  }
+
+  .card-container {
+    flex-direction: column;
+  }
+
+  .card-search,
+  .card-portfolio,
+  .card-like {
+    height: 250px;
+    margin: 20px;
+  }
+
+  .main-middle ul {
+    padding: 30px 0;
   }
 }
 
@@ -104,6 +130,47 @@
       filter: hue-rotate(0deg);
     }
   }
+
+  .company-seach-contents {
+    width: 450px;
+    height: 210px;
+  }
+
+  .company-seach-contents input[type="text"] {
+    width: 250px;
+    padding: 10px 10px;
+    font-size: 22px;
+  }
+
+  .company-seach-contents input[type="text"]::placeholder {
+    font-size: 22px;
+  }
+
+  .company-seach-contents button[type="submit"] {
+    width: 80px;
+    padding: 10px 10px;
+    font-size: 22px;
+  }
+
+  .main-middle {
+    flex-direction: column;
+    height: 1100px;
+  }
+
+  .card-container {
+    flex-direction: column;
+  }
+
+  .card-search,
+  .card-portfolio,
+  .card-like {
+    height: 250px;
+    margin: 20px;
+  }
+
+  .main-middle ul {
+    padding: 30px 0;
+  }
 }
 
 @media (max-width: 499px) {
@@ -135,5 +202,46 @@
   .loader div::after {
     width: 19px;
     height: 25px;
+  }
+
+  .company-seach-contents {
+    width: 350px;
+    height: 180px;
+  }
+
+  .company-seach-contents input[type="text"] {
+    width: 200px;
+    padding: 10px 10px;
+    font-size: 22px;
+  }
+
+  .company-seach-contents input[type="text"]::placeholder {
+    font-size: 22px;
+  }
+
+  .company-seach-contents button[type="submit"] {
+    width: 80px;
+    padding: 10px 10px;
+    font-size: 22px;
+  }
+
+  .main-middle {
+    flex-direction: column;
+    height: 1100px;
+  }
+
+  .card-container {
+    flex-direction: column;
+  }
+
+  .card-search,
+  .card-portfolio,
+  .card-like {
+    height: 250px;
+    margin: 20px;
+  }
+
+  .main-middle ul {
+    padding: 30px 0;
   }
 }
