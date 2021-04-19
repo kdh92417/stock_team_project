@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/navbar.css">
   <link rel="stylesheet" href="./css/write-board.css">
+  <link rel="stylesheet" href="./css/write-board-queries.css">
   <script src="https://kit.fontawesome.com/831618fb82.js" crossorigin="anonymous"></script>
 
   <!-- include libraries(jQuery, bootstrap) -->
@@ -38,7 +39,7 @@
       <li><a class="nav-menu" href="">Login</a></li>
     </ul>
   </nav>
-  <div class="write-portfolio-title">포트폴리오 업로드</div>
+  <div class="write-portfolio-title">포트폴리오 작성</div>
   <div class="write-container"> 
     <div class="portfolio-title">
       <input type="text" placeholder="포트폴리오 제목">
@@ -46,13 +47,16 @@
     <div class="input-stock-info">
       <table id="table">
         <tr>
-          <td class="stock-info">기업명 <input type="text"></td>
-          <td class="stock-info">보유 주식수 <input type="number"></td>
+          <td class="stock-info"> <input placeholder="기업명" type="text"></td>
+          <td class="stock-info"> <input placeholder="보유 주식수" type="number"></td>
           <td><button class="add-input">+</button></td>
         </tr>
       </table>
+      
     </div>
-    <div id="summernote">Hello Summernote</div>
+    <div style="width: 90%;">
+      <div id="summernote">자신의 포트폴리오를 소개해주세요.</div>
+    </div>
   </div>
   <div class="btn-container">
     <button class="submit-portfolio">글쓰기</button>
@@ -61,20 +65,20 @@
   <script>
     $(document).ready(function() {
       $('#summernote').summernote({
-        height: 400, 
-        width: 900,                // set editor height
+        height: 250,                // set editor height
         minHeight: null,             // set minimum height of editor
         maxHeight: null,             // set maximum height of editor
-        focus: true                  // set focus to editable area after initializing summernote
+        focus: true                  // set focus to editable area after initializing summernote);
       });
     });
 
     const addInputBtn = document.querySelector(".add-input");
     const deleteInputBtn = document.querySelector(".delete-input");
+
     addInputBtn.addEventListener("click", () => {
       $("#table").append(`<tr>
-          <td class="stock-info">기업명 <input type="text"></td>
-          <td class="stock-info">보유 주식수 <input type="number"></td>
+          <td class="stock-info"> <input placeholder="기업명" type="text"></td>
+          <td class="stock-info"> <input placeholder="보유 주식수" type="number"></td>
           <td><button class="delete-input" onclick="deleteLine(this);">-</button></td>
         </tr>`)
     });
