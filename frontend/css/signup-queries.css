@@ -1,0 +1,37 @@
+@media (min-width: 1200px) and (max-width: 2560px) {
+
+}
+
+@media (min-width: 960px) and (max-width: 1199px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 959px) {
+
+}
+
+@media (min-width: 500px) and (max-width: 584px) {
+  input {
+    width: 150px;
+  }
+  .signup-container {
+    padding: 10px;
+
+  }
+}
+
+@media (max-width: 499px) {
+  input {
+    width: 150px;
+  }
+  .signup-container {
+    padding: 10px;
+
+  }
+  td, input {
+    font-size: 16px;
+  }
+  /* .check-btn {
+    font-size: 13px;
+  } */
+}
