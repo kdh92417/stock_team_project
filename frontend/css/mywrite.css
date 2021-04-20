@@ -1,9 +1,3 @@
-.writepage-title {
-  font-size: 30px;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
 .mypage-write {
   padding-top: 10rem !important;
   width: 100%;
@@ -13,6 +7,28 @@
   flex-direction: column;
   align-items: center;
   background: linear-gradient(140deg, #2f3e81, #4560bf);
+}
+
+.writepage-title {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.comments-title {
+  padding-top: 12rem !important;
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.mypage-comments {
+  padding-top: 10rem !important;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .content {
@@ -27,13 +43,15 @@
 .scroll-table {
   width: 600px;
   margin-top: 0;
-  max-height: 600px;
+  max-height: 300px;
   padding: 0px 20px;
   overflow: scroll;
 }
 
 .head-table,
-.body-table {
+.body-table,
+.cm-head-table,
+.cm-body-table {
   position: relative;
   width: 100%;
   border-spacing: 0;
@@ -41,6 +59,7 @@
   border: 1px solid #e5e5e5;
 }
 
+/* ------ 작성글 테이블 ------ */
 .head-table .check,
 .body-table .td-check-box {
   width: 8%;
@@ -61,24 +80,54 @@
   width: 25%;
 }
 
+/* ------ 댓글 테이블 ------ */
+.cm-head-table .check,
+.cm-body-table .td-cm-check-box {
+  width: 8%;
+}
+
+.cm-head-table .comments,
+.cm-body-table .td-comments {
+  width: 48%;
+}
+
+.cm-head-table .cm-date,
+.cm-body-table .td-cm-date {
+  width: 25%;
+}
+
 .head-table th,
 .head-table td,
 .body-table th,
-.body-table td {
+.body-table td,
+.cm-head-table th,
+.cm-head-table td,
+.cm-body-table th,
+.cm-body-table td {
   color: #fff;
   border: 1px solid #e5e5e5;
   text-align: center;
 }
 
-.head-table th {
+.head-table th,
+.cm-head-table th {
   font-size: 24px;
 }
 
-.body-table .check-box input[type="checkbox"] {
+.body-table .check-box input[type="checkbox"],
+.cm-body-table .check-box input[type="checkbox"] {
   margin: 0 3px;
   margin-top: 6px;
   width: 18px;
   height: 18px;
+}
+
+tbody a {
+  color: #fff;
+}
+
+tbody a:hover {
+  border-bottom: 1px solid #fff;
 }
 
 .select {
