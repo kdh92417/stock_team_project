@@ -49,6 +49,7 @@ button {
   padding: 0 10px;
   border-radius: 10px;
   margin-left: 5px;
+  border: none;
 }
 
 .user-list-container,
@@ -65,6 +66,9 @@ button {
   /* overflow: scroll; */
 }
 
+.black-list-container {
+  margin-bottom: 80px;
+}
 .sub-title {
   font-size: 30px;
   margin-bottom: 20px;
