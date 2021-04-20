@@ -65,7 +65,7 @@ body {
 }
 
 .input-stock-info::-webkit-scrollbar {
-  width: 10px;
+  width: 13px;
 }
 .input-stock-info::-webkit-scrollbar-thumb {
   background-color: #b8c5e0;
@@ -84,7 +84,7 @@ body {
   flex-wrap: wrap;
   align-content: flex-start;
   padding: 20px 0;
-  overflow:scroll
+  overflow:scroll;
 }
 
 .add-input {
