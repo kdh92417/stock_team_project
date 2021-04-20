@@ -8,7 +8,8 @@
 }
 
 @media screen and (max-width: 768px) {
-  .writepage-title {
+  .writepage-title,
+  .comments-title {
     font-size: 24px;
   }
 
@@ -20,7 +21,8 @@
     width: 400px;
   }
 
-  .head-table th {
+  .head-table th,
+  .cm-head-table th {
     font-size: 20px;
   }
 
@@ -38,11 +40,13 @@
     width: 320px;
   }
 
-  .head-table th {
+  .head-table th,
+  .cm-head-table th {
     font-size: 17px;
   }
 
-  .body-table td {
+  .body-table td,
+  .cm-body-table td {
     font-size: 14px;
   }
 
