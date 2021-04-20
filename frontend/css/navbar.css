@@ -1,4 +1,4 @@
-.navbar {
+.sfolio-navbar {
   position: fixed;
   top: 0;
   right: 0;
@@ -15,7 +15,7 @@
   padding: 8px 12px;
 }
 
-.navbar.nav-active {
+.sfolio-navbar.nav-active {
   transition: 0.2s ease-in-out;
   background-color: #222f45;
   z-index: 999;
