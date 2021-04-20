@@ -84,7 +84,7 @@ body {
   flex-wrap: wrap;
   align-content: flex-start;
   padding: 20px 0;
-  overflow:scroll;
+  overflow: auto;
 }
 
 .input-stock-info input {
