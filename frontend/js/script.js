@@ -1,6 +1,6 @@
 "use strict";
 
-const mainNav = document.querySelector('.navbar'),
+const mainNav = document.querySelector('.sfolio-navbar'),
   mainLogin = document.querySelector(".main-login"),
   searchInput = document.querySelector(".company-search"),
   mainTop = document.querySelector(".main-top"),
