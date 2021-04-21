@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(140deg, #2f3e81, #4560bf);
 }
 
 .writepage-title {
