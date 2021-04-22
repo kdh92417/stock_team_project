@@ -7,7 +7,6 @@ class Company(models.Model):
     total_like      = models.IntegerField(default=0)
     user            = models.ManyToManyField("account.Account", through='LikeCompany')
 
-
     class Meta:
         db_table = 'companies'
 

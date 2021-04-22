@@ -5,8 +5,8 @@ class Portfolio(models.Model):
     name        = models.CharField(max_length=100)
     content     = models.CharField(max_length=1000)
     total_like  = models.IntegerField(default=0)
-    create_date = models.DateTimeField(auto_now_add=True)
-    modify_date = models.DateTimeField(auto_now=True)
+    create_date = models.DateTimeField(auto_now_add=True, null=True)
+    modify_date = models.DateTimeField(auto_now=True, null=True)
     user        = models.ForeignKey("account.Account", on_delete=models.CASCADE, related_name='portfolio_user')
     company     = models.ManyToManyField("companies.Company", through='PortfolioStock')
 
@@ -17,8 +17,8 @@ class Portfolio(models.Model):
 class Comment(models.Model):
     user_name   = models.CharField(max_length=50)
     content     = models.CharField(max_length=1000)
-    create_date = models.DateTimeField(auto_now_add=True)
-    modify_date = models.DateTimeField(auto_now=True)
+    create_date = models.DateTimeField(auto_now_add=True, null=True)
+    modify_date = models.DateTimeField(auto_now=True, null=True)
     portfolio   = models.ForeignKey('Portfolio', on_delete=models.CASCADE)
     user        = models.ForeignKey('account.Account', on_delete=models.CASCADE)
 
