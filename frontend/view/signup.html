@@ -1,111 +1,117 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../public/css/signup.css">
-  <link rel="stylesheet" href="../public/css/signup-queries.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  
-  <title>Sign up</title>
-</head>
-<body>
-  <div class="signup-container">
-    <h1>SIGN UP</h1>
-    <div class="input-area">
-      <table class="signup-form">
-        <tr>
-          <td>ID</td>
-          <td><input id="input-id" type="text"></input>
-          <!-- <button class="check-btn">중복확인</button> -->
-        </td>
-        </tr>
-        <tr>
-          <td>비밀번호</td>
-          <td><input id="input-pw" type="password"></td>
-        </tr>
-        <tr>
-          <td>비밀번호 확인</td>
-          <td><input id="check-pw" type="password"></td>
-        </tr>
-        <tr>
-          <td>이름</td>
-          <td><input id="input-name" type="text"></td>
-        </tr>
-        <tr>
-          <td>생년월일</td>
-          <td><input id="input-birth" type="date"></td>
-        </tr>
-        <tr>
-          <td>전화번호</td>
-          <td><input id="input-phone" type="text"></td>
-        </tr>
-        <tr>
-          <td>이메일</td>
-          <td><input id="input-email" type="email"></td>
-        </tr>
-      </table>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/signup.css">
+    <link rel="stylesheet" href="../public/css/signup-queries.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Sign up</title>
+  </head>
+
+  <body>
+    <div class="signup-container">
+      <h1>SIGN UP</h1>
+      <div class="input-area">
+        <form action="">
+          <table class="signup-form">
+            <tr>
+              <td>ID</td>
+              <td><input id="input-id" type="text" autocomplete="off" required></input>
+                <!-- <button class="check-btn">중복확인</button> -->
+              </td>
+            </tr>
+            <tr>
+              <td>비밀번호</td>
+              <td><input id="input-pw" type="password" required></td>
+            </tr>
+            <tr>
+              <td>비밀번호 확인</td>
+              <td><input id="check-pw" type="password" required></td>
+            </tr>
+            <tr>
+              <td>이름</td>
+              <td><input id="input-name" type="text" required></td>
+            </tr>
+            <tr>
+              <td>생년월일</td>
+              <td><input id="input-birth" type="date" required></td>
+            </tr>
+            <tr>
+              <td>전화번호</td>
+              <td><input id="input-phone" type="text" required></td>
+            </tr>
+            <tr>
+              <td>이메일</td>
+              <td><input id="input-email" type="email" required></td>
+            </tr>
+          </table>
+          <button type="submit" id="submit-btn">확인</button>
+        </form>
+      </div>
+
     </div>
-    <p id="submit-btn">확인</p>
-  </div>
 
-  <script>
-    let id = $('#input-id');
-    let pw = $('#input-pw');
-    let checkPw = $('#check-pw');
-    let _name = $('#input-name');
-    let birth = $('#input-birth');
-    let phone = $('#input-phone');
-    let email = $('#input-email');
-    let btn = $('#submit-btn');
+    <script>
+      let id = $('#input-id');
+      let pw = $('#input-pw');
+      let checkPw = $('#check-pw');
+      let _name = $('#input-name');
+      let birth = $('#input-birth');
+      let phone = $('#input-phone');
+      let email = $('#input-email');
+      let btn = $('#submit-btn');
 
-    $(btn).on('click', function() {
-      if($(id).val() == "") {
-        $(id).addClass('warning');
-        setTimeout(function() {
-          $(id).removeClass('warning');
-        },1500);
-      }
-      else if($(pw).val() == "") {
-        $(pw).addClass('warning');
-        setTimeout(function() {
-          $(pw).removeClass('warning');
-        },1500);
-      }
-      else if($(checkPw).val() == "") {
-        $(checkPw).addClass('warning');
-        setTimeout(function() {
-          $(checkPw).removeClass('warning');
-        },1500);
-      } 
-      else if($(_name).val() == "") {
-        $(_name).addClass('warning');
-        setTimeout(function() {
-          $(_name).removeClass('warning');
-        },1500);
-      }
-      else if($(birth).val() == "") {
-        $(birth).addClass('warning');
-        setTimeout(function() {
-          $(birth).removeClass('warning');
-        },1500);
-      }
-      else if($(phone).val() == "") {
-        $(phone).addClass('warning');
-        setTimeout(function() {
-          $(phone).removeClass('warning');
-        },1500);
-      }
-      else if($(email).val() == "") {
-        $(email).addClass('warning');
-        setTimeout(function() {
-          $(email).removeClass('warning');
-        },1500);
-      }
-    });
-  </script>
-  <script src="../view/view.js/signup.js"></script>
-  <script src="../app.js" type="module"></script>
-</body>
+      $(btn).on('click', function () {
+        if ($(id).val() == "") {
+          $(id).addClass('warning');
+          setTimeout(function () {
+            $(id).removeClass('warning');
+          }, 1500);
+        }
+        else if ($(pw).val() == "") {
+          $(pw).addClass('warning');
+          setTimeout(function () {
+            $(pw).removeClass('warning');
+          }, 1500);
+        }
+        else if ($(checkPw).val() == "") {
+          $(checkPw).addClass('warning');
+          setTimeout(function () {
+            $(checkPw).removeClass('warning');
+          }, 1500);
+        }
+        else if ($(_name).val() == "") {
+          $(_name).addClass('warning');
+          setTimeout(function () {
+            $(_name).removeClass('warning');
+          }, 1500);
+        }
+        else if ($(birth).val() == "") {
+          $(birth).addClass('warning');
+          setTimeout(function () {
+            $(birth).removeClass('warning');
+          }, 1500);
+        }
+        else if ($(phone).val() == "") {
+          $(phone).addClass('warning');
+          setTimeout(function () {
+            $(phone).removeClass('warning');
+          }, 1500);
+        }
+        else if ($(email).val() == "") {
+          $(email).addClass('warning');
+          setTimeout(function () {
+            $(email).removeClass('warning');
+          }, 1500);
+        }
+      });
+    </script>
+    <script src="../view/view.js/signup.js"></script>
+    <script src="../app.js" type="module"></script>
+  </body>
+
 </html>
