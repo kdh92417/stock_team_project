@@ -8,18 +8,24 @@ class SignupView {
     this.phone = document.getElementById('input-phone');
     this.email = document.getElementById('input-email');
     this.submit = document.getElementById('submit-btn');
-    
-    // console.log(this.id, this.pw, this.checkPw, this.name, this.birth, this.phone, this.email);
+    this.userId = document.getElementById('id');
+    this.userPw = document.getElementById('pw');
+    this.loginBtn = document.getElementById('btn');
   }
 
-  signUp(callback) {
-    this.submit.addEventListener("click", event => {
+  // signUp(callback) {
+  //   this.submit.addEventListener("click", event => {
+  //     event.preventDefault();
+  //     callback();
+  //   })
+  // }
+
+  login(callback) {
+    this.loginBtn.addEventListener("click", event => {
       event.preventDefault();
       callback();
     })
   }
-
-  // showLogin() 
 }
 
 

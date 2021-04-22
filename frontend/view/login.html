@@ -12,7 +12,7 @@
 <body>
   <section class="login-form">
     <h1>LOGIN</h1>
-    <form action="">
+    
       <div class="int-area">
         <input type="text" name="id" id="id" autocomplete="off" required>
         <label for="id">USER ID</label>
@@ -22,7 +22,7 @@
         <label for="pw">PASSWORD</label>
       </div>
       <div class="btn-area">
-        <button id="btn" type="submit">LOGIN</button>
+        <button id="btn">LOGIN</button>
       </div>
       <div class="captions">
         <div class="caption-forgot-pw">
@@ -32,7 +32,7 @@
           <a href="">Sign up</a>
         </div>
       </div>
-    </form>
+    
   </section>
   <script>
     let id = $('#id');
@@ -55,6 +55,7 @@
     });
   </script>
   
-  <script src="js/login.js"></script>
+  <script src="../view/view.js/signup.js"></script>
+  <script src="../app.js" type="module"></script>
 </body>
 </html>
