@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import datetime
+from datetime       import timedelta
 import my_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -28,6 +30,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*", "192.168.1.32", "192.168.1.32:8000"]
 
+# CORS_ORIGIN_WHITELIST = ['*']
+# APPEND_SLASH = False
+
 
 # Application definition
 
@@ -41,7 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'account',
     'companies',
-    'portfolio'
+    'portfolio',
 ]
 
 MIDDLEWARE = [
