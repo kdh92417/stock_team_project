@@ -1,4 +1,4 @@
-class View {
+class SignupView {
   constructor () {
     this.id = document.querySelector('#input-id');
     this.pw = document.getElementById('input-pw');
@@ -18,7 +18,9 @@ class View {
       callback();
     })
   }
+
+  // showLogin() 
 }
 
 
-export default View;
+export default SignupView;
