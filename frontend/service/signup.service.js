@@ -1,16 +1,20 @@
+// import API from '../api/api.js'
+
 class SignupService {
   constructor(user) {
     this.user = user
+    // this.api = new API();
     console.log(this.user)
   }
 
+  // ctrl에서 호출됨
   checkUser(value) {
-
+    console.log(value);
     this.checkId(value);
     this.checkPw(value);
     this.checkNameAndBirth(value);
-    this.checkPhoneAndEmail(value)
-
+    this.checkPhoneAndEmail(value);
+    this.user.signupUser(value);
   }
 
   checkId(value) {
@@ -21,8 +25,8 @@ class SignupService {
       console.log("아이디를 입력해주세요")
     } else if (!idReg.test(value.id)) {
       console.log("잘못된 아이디입니다.");
-    } else if (user.id === value.id) {
-      console.log("아이디 같음")
+    } else if (user.id.includes(value.id)) {
+      console.log("아이디 중복")
     }
   }
 
@@ -61,13 +65,18 @@ class SignupService {
       console.log("이메일을 입력해주세요") 
     } else if (!emailReg.test(value.email)) {
       console.log("잘못된 이메일입니다.")
-    } else this.renderLogin();
+    } 
+    // else this.renderLogin();
   }  
   
   renderLogin() {
     location.href = "../view/login.html"
   }
 
+  //로그인 함수
+  loginCheckUser(value) {
+    console.log(value);
+  }
 }
 
 export default SignupService;

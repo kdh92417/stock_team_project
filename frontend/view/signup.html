@@ -14,40 +14,43 @@
   <div class="signup-container">
     <h1>SIGN UP</h1>
     <div class="input-area">
-      <table class="signup-form">
-        <tr>
-          <td>ID</td>
-          <td><input id="input-id" type="text"></input>
-          <!-- <button class="check-btn">중복확인</button> -->
-        </td>
-        </tr>
-        <tr>
-          <td>비밀번호</td>
-          <td><input id="input-pw" type="password"></td>
-        </tr>
-        <tr>
-          <td>비밀번호 확인</td>
-          <td><input id="check-pw" type="password"></td>
-        </tr>
-        <tr>
-          <td>이름</td>
-          <td><input id="input-name" type="text"></td>
-        </tr>
-        <tr>
-          <td>생년월일</td>
-          <td><input id="input-birth" type="date"></td>
-        </tr>
-        <tr>
-          <td>전화번호</td>
-          <td><input id="input-phone" type="text"></td>
-        </tr>
-        <tr>
-          <td>이메일</td>
-          <td><input id="input-email" type="email"></td>
-        </tr>
-      </table>
+      <form action="">
+        <table class="signup-form">
+          <tr>
+            <td>ID</td>
+            <td><input id="input-id" type="text" autocomplete="off" required></input>
+            <!-- <button class="check-btn">중복확인</button> -->
+          </td>
+          </tr>
+          <tr>
+            <td>비밀번호</td>
+            <td><input id="input-pw" type="password" required></td>
+          </tr>
+          <tr>
+            <td>비밀번호 확인</td>
+            <td><input id="check-pw" type="password" required></td>
+          </tr>
+          <tr>
+            <td>이름</td>
+            <td><input id="input-name" type="text" required></td>
+          </tr>
+          <tr>
+            <td>생년월일</td>
+            <td><input id="input-birth" type="date" required></td>
+          </tr>
+          <tr>
+            <td>전화번호</td>
+            <td><input id="input-phone" type="text" required></td>
+          </tr>
+          <tr>
+            <td>이메일</td>
+            <td><input id="input-email" type="email" required></td>
+          </tr>
+        </table>
+        <button type="submit" id="submit-btn">확인</button>
+      </form>
     </div>
-    <p id="submit-btn">확인</p>
+    
   </div>
 
   <script>
