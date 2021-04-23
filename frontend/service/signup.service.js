@@ -1,10 +1,10 @@
-// import API from '../api/api.js'
+import API from '../api/api.js'
 
 class SignupService {
   constructor(user) {
     this.user = user
-    // this.api = new API();
-    console.log(this.user)
+    this.api = new API();
+    // console.log(this.user)
   }
 
   // ctrl에서 호출됨
@@ -15,6 +15,8 @@ class SignupService {
     this.checkNameAndBirth(value);
     this.checkPhoneAndEmail(value);
     this.user.signupUser(value);
+    // console.log(this.user)
+    this.api.postSignup(this.user.user);
   }
 
   checkId(value) {
@@ -25,9 +27,10 @@ class SignupService {
       console.log("아이디를 입력해주세요")
     } else if (!idReg.test(value.id)) {
       console.log("잘못된 아이디입니다.");
-    } else if (user.id.includes(value.id)) {
-      console.log("아이디 중복")
     }
+    // else if (user.id.includes(value.id)) {
+    //   console.log("아이디 중복")
+    // }
   }
 
   checkPw(value) {
@@ -54,6 +57,7 @@ class SignupService {
   }
 
   checkPhoneAndEmail(value) {
+    const user = this.user;
     let phoneReg = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/
     let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
 
@@ -65,22 +69,12 @@ class SignupService {
       console.log("이메일을 입력해주세요")
     } else if (!emailReg.test(value.email)) {
       console.log("잘못된 이메일입니다.")
-    } else this.renderLogin();
-
+    }
+    // else this.renderLogin();
     // else this.api.getLogin();
   }
 
-  renderLogin() {
-    location.href = "../view/login.html"
-  }
 
-  //로그인 함수
-  loginCheckUser(value) {
-    const user = this.user;
-    if (user.id.includes(value.id) && user.pw[user.id.indexOf(value.id)] === value.pw) {
-      console.log("올바른 사용자")
-    } else console.log("아이디 또는 비밀번호를 확인해주세요.")
-  }
 }
 
 export default SignupService;
