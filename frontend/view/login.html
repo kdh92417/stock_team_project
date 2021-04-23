@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../public/css/login.css">
-  <link rel="stylesheet" href="../public/css/login-queries.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <title>Login</title>
-</head>
-<body>
-  <section class="login-form">
-    <h1>LOGIN</h1>
-    
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/login.css">
+    <link rel="stylesheet" href="../public/css/login-queries.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Login</title>
+  </head>
+
+  <body>
+    <section class="login-form">
+      <h1>LOGIN</h1>
       <div class="int-area">
         <input type="text" name="id" id="id" autocomplete="off" required>
         <label for="id">USER ID</label>
@@ -32,30 +33,30 @@
           <a href="">Sign up</a>
         </div>
       </div>
-    
-  </section>
-  <script>
-    let id = $('#id');
-    let pw = $('#pw');
-    let btn = $('#btn');
+    </section>
+    <script>
+      let id = $('#id');
+      let pw = $('#pw');
+      let btn = $('#btn');
 
-    $(btn).on('click', function() {
-      if($(id).val() == "") {
-        $(id).next('label').addClass('warning');
-        setTimeout(function() {
-          $('label').removeClass('warning');
-        },1500);
-      }
-      else if($(pw).val() == "") {
-        $(pw).next('label').addClass('warning');
-        setTimeout(function() {
-          $('label').removeClass('warning');
-        },1500);
-      }
-    });
-  </script>
-  
-  <script src="../view/view.js/signup.js"></script>
-  <script src="../app.js" type="module"></script>
-</body>
+      $(btn).on('click', function () {
+        if ($(id).val() == "") {
+          $(id).next('label').addClass('warning');
+          setTimeout(function () {
+            $('label').removeClass('warning');
+          }, 1500);
+        }
+        else if ($(pw).val() == "") {
+          $(pw).next('label').addClass('warning');
+          setTimeout(function () {
+            $('label').removeClass('warning');
+          }, 1500);
+        }
+      });
+    </script>
+
+    <script src="../view/view.js/login.view.js"></script>
+    <script src="../app/loginApp.js" type="module"></script>
+  </body>
+
 </html>

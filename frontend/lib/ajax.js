@@ -6,10 +6,12 @@ var sendRequest = (method, url, data = null) => {
 
         ajax.open(method, url);
         ajax.setRequestHeader('Content-type', 'application/json');
+        console.log(ajax);
+        ajax.send(data);
 
-        if (!data) {
-            ajax.send(data);
-        }
+        // if (!data) {
+        //     ajax.send(data);
+        // }
         ajax.addEventListener('load', (err, result) => {
 
             return err ? res(err) : res(result)

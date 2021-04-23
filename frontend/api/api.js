@@ -5,7 +5,7 @@ class API {
 
     getLogin() {
         console.log("실행")
-        let url = '../view/login.html';
+        let url = '/asd';
         let response = sendRequest('GET', url);
 
         return response;
