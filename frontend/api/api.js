@@ -1,4 +1,4 @@
-import {sendRequest} from '../lib/ajax.js';
+import { sendRequest } from '../lib/ajax.js';
 
 
 class API {

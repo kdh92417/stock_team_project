@@ -3,9 +3,9 @@ class Controller {
     this.view = view;
     this.service = service;
 
-    // this.view.signUp(this.save);
+    this.view.signUp(this.save);
     this.view.login(this.login);
-     // 컨트롤러 호출 될때 메서드 실행, 이벤트리스너 달아줌
+    // 컨트롤러 호출 될때 메서드 실행, 이벤트리스너 달아줌
   }
 
   save = () => {
@@ -23,7 +23,7 @@ class Controller {
 
     //service에 checkUser 호출
     this.service.checkUser(this.signup);
-    
+
   }
 
   login = () => {
