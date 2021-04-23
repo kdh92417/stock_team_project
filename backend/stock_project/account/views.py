@@ -16,14 +16,14 @@ from .models             import Account
 class SignInView(View):
     def post(self, request):
         account_data = json.loads(request.body)
+        print(account_data)
         try:
             if Account.objects.filter(user_id=account_data['user_id']).exists():
                 account = Account.objects.get(user_id=account_data['user_id'])
                 if bcrypt.checkpw(account_data['password'].encode('utf-8'), account.password.encode('utf-8')):
                     token = jwt.encode({'user_account' : account.id}, SECRET_KEY, algorithm=ALGORITHM)
-                    res = JsonResponse({'message' : 'success'},status=200)
-                    res.set_cookie('access_token', token.decode('utf-8'))
-                    return res
+                    return JsonResponse({'access_token' : token.decode('utf-8')}, status=200)
+
                 return HttpResponse(status=401)
 
         except KeyError:
@@ -33,6 +33,7 @@ class SignInView(View):
 class SignUpView(View):
     def post(self, request):
         account_data = json.loads(request.body)
+        print(account_data)
         try:
             if Account.objects.filter(user_id=account_data['user_id']).exists():
                 return JsonResponse({'message' : 'Aleady exists user'}, status=400)
