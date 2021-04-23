@@ -9,22 +9,17 @@ const users = {
 
 class User {
   constructor() {
-    this.id = ["abcde"];
-    this.pw = ["a1234!"];
-    this.name = ["박선아"];
-    this.birth = ["1989-09-26"];
-    this.phone = ["0202323232"];
-    this.email = ["abc@gmail.com"];
+    this.user = {};
   }
 
   signupUser(value) {
-    this.id.push(value.id);
-    this.pw.push(value.pw);
-    this.name.push(value.name);
-    this.birth.push(value.birth);
-    this.phone.push(value.phone);
-    this.email.push(value.email);
-    console.log(this.id);
+    this.user.user_id = value.id;
+    this.user.password = value.pw;
+    this.user.user_name = value.name;
+    this.user.birth_date = value.birth;
+    this.user.phone_number = value.phone;
+    this.user.email = value.email;
+    // console.log(this.id);
   }
 }
 
