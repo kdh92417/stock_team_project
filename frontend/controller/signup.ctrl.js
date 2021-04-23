@@ -13,6 +13,7 @@ class Controller {
     const save = this.signup;
     const view = this.view;
 
+    //this.signup 객체에 view로부터 얻은 값 넣어줌
     save.id = view.id.value;
     save.pw = view.pw.value;
     save.name = view.name.value;
