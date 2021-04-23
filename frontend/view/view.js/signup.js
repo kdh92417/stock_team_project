@@ -13,12 +13,12 @@ class SignupView {
     this.loginBtn = document.getElementById('btn');
   }
 
-  // signUp(callback) {
-  //   this.submit.addEventListener("click", event => {
-  //     event.preventDefault();
-  //     callback();
-  //   })
-  // }
+  signUp(callback) {
+    this.submit.addEventListener("click", event => {
+      event.preventDefault();
+      callback();
+    })
+  }
 
   login(callback) {
     this.loginBtn.addEventListener("click", event => {
