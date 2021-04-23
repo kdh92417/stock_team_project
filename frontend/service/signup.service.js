@@ -33,7 +33,7 @@ class SignupService {
   checkPw(value) {
     let pwReg = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/
 
-    if (value.pw === ""){
+    if (value.pw === "") {
       console.log("비밀번호를 입력해주세요")
     } else if (!pwReg.test(value.pw)) {
       console.log("잘못된 비밀번호입니다.")
@@ -62,13 +62,14 @@ class SignupService {
     } else if (!phoneReg.test(value.phone)) {
       console.log("잘못된 전화번호입니다.")
     } else if (value.email === "") {
-      console.log("이메일을 입력해주세요") 
+      console.log("이메일을 입력해주세요")
     } else if (!emailReg.test(value.email)) {
       console.log("잘못된 이메일입니다.")
-    } 
-    // else this.renderLogin();
-  }  
-  
+    } else this.renderLogin();
+
+    // else this.api.getLogin();
+  }
+
   renderLogin() {
     location.href = "../view/login.html"
   }
@@ -76,7 +77,7 @@ class SignupService {
   //로그인 함수
   loginCheckUser(value) {
     const user = this.user;
-    if(user.id.includes(value.id) && user.pw[user.id.indexOf(value.id)] === value.pw) {
+    if (user.id.includes(value.id) && user.pw[user.id.indexOf(value.id)] === value.pw) {
       console.log("올바른 사용자")
     } else console.log("아이디 또는 비밀번호를 확인해주세요.")
   }

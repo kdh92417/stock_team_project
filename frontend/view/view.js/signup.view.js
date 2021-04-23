@@ -1,5 +1,5 @@
 class SignupView {
-  constructor () {
+  constructor() {
     this.id = document.querySelector('#input-id');
     this.pw = document.getElementById('input-pw');
     this.checkPw = document.getElementById('check-pw');
@@ -8,9 +8,6 @@ class SignupView {
     this.phone = document.getElementById('input-phone');
     this.email = document.getElementById('input-email');
     this.submit = document.getElementById('submit-btn');
-    this.userId = document.getElementById('id');
-    this.userPw = document.getElementById('pw');
-    this.loginBtn = document.getElementById('btn');
   }
 
   signUp(callback) {
@@ -20,12 +17,6 @@ class SignupView {
     })
   }
 
-  login(callback) {
-    this.loginBtn.addEventListener("click", event => {
-      event.preventDefault();
-      callback();
-    })
-  }
 }
 
 

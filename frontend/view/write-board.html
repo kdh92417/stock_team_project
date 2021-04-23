@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/nav-queries.css">
-    <link rel="stylesheet" href="./css/write-board.css">
-    <link rel="stylesheet" href="./css/write-board-queries.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="../public/css/nav-queries.css">
+    <link rel="stylesheet" href="../public/css/write-board.css">
+    <link rel="stylesheet" href="../public/css/write-board-queries.css">
 
     <script src="https://kit.fontawesome.com/831618fb82.js" crossorigin="anonymous"></script>
 
@@ -32,24 +32,29 @@
       <div class="nav-container">
         <div class="main-logo">
           <i class="fas fa-chart-pie"></i>
-          <a class="logo" href="">S.Folio</a>
+          <a class="logo" href="./index.html">S.Folio</a>
         </div>
         <input type="checkbox" id="show-menu">
         <label for="show-menu" class="navbar_toggleBtn"><i class="fas fa-bars"></i></label>
         <div class="nav-menu">
           <ul class="main-menu">
-            <li><a class="nav-item" href="">포트폴리오 게시판</a></li>
-            <li><a class="nav-item" href="">명예의 전당</a></li>
-            <li id="admin"><a class="nav-item" href="">관리자</a></li>
+            <li><a class="nav-item" href="./portfolio-board.html">포트폴리오 게시판</a></li>
+            <li><a class="nav-item" href="./halloffame.html">명예의 전당</a></li>
+            <li id="admin"><a class="nav-item" href="./manager.html">관리자</a></li>
             <li id="mypage">
-              <a class="nav-item desktop-link" href="">마이페이지</a>
+              <a class="nav-item desktop-link" href="#">마이페이지</a>
               <input type="checkbox" id="show-mypage">
               <label for="show-mypage">마이페이지</label>
               <ul class="mypage-menu">
-                <li><a class="nav-item" href="">회원정보수정</a></li>
-                <li><a class="nav-item" href="">작성글 / 작성댓글</a></li>
+                <li><a class="nav-item" href="./mypage.html">회원정보수정</a></li>
+                <li><a class="nav-item" href="./mywrite.html">작성글 / 작성댓글</a></li>
               </ul>
             </li>
+          </ul>
+          <ul class="main-login">
+            <li><a class="nav-item" href="./signup.html">Sign Up</a></li>
+            <li><a class="nav-item" href="./login.html">Login</a></li>
+          </ul>
           </ul>
           <ul class="main-login">
             <li><a class="nav-item" href="">Sign Up</a></li>
@@ -108,7 +113,7 @@
       }
 
     </script>
-    <script src="./js/script.js" defer></script>
+    <script src="../public/js/script.js" defer></script>
   </body>
 
 </html>
