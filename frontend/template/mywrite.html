@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/navbar.css">
+    <link rel="stylesheet" href="../public/css/nav-queries.css">
+    <link rel="stylesheet" href="../public/css/mywrite.css">
+    <link rel="stylesheet" href="../public/css/mywrite-queries.css">
+    <script src="https://kit.fontawesome.com/831618fb82.js" crossorigin="anonymous"></script>
+    <script src="../public/js/script.js" defer></script>
+    <title>내가 작성한 글</title>
+  </head>
+
+  <body>
+    <section class="mypage-top">
+      <nav class="sfolio-navbar">
+        <div class="nav-container">
+          <div class="main-logo">
+            <i class="fas fa-chart-pie"></i>
+            <a class="logo" href="./index.html">S.Folio</a>
+          </div>
+          <input type="checkbox" id="show-menu">
+          <label for="show-menu" class="navbar_toggleBtn"><i class="fas fa-bars"></i></label>
+          <div class="nav-menu">
+            <ul class="main-menu">
+              <li><a class="nav-item" href="./portfolio-board.html">포트폴리오 게시판</a></li>
+              <li><a class="nav-item" href="./halloffame.html">명예의 전당</a></li>
+              <li id="admin"><a class="nav-item" href="./manager.html">관리자</a></li>
+              <li id="mypage">
+                <a class="nav-item desktop-link" href="#">마이페이지</a>
+                <input type="checkbox" id="show-mypage">
+                <label for="show-mypage">마이페이지</label>
+                <ul class="mypage-menu">
+                  <li><a class="nav-item" href="./mypage.html">회원정보수정</a></li>
+                  <li><a class="nav-item" href="./mywrite.html">작성글 / 작성댓글</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="main-login">
+              <li><a class="nav-item" href="./signup.html">Sign Up</a></li>
+              <li><a class="nav-item" href="./login.html">Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </section>
+    <section class="mypage-write">
+      <div class="content">
+        <div class="writepage-title">
+          <h2>작성글</h2>
+        </div>
+        <div class="select">
+          <div class="all-check-box">
+            <input type="checkbox" id="all-check"><span> 전체선택</span>
+          </div>
+          <button>삭제</button>
+        </div>
+        <table class="head-table">
+          <thead>
+            <th class="check"></th>
+            <th class="number">번호</th>
+            <th class="title">제목</th>
+            <th class="date">작성일</th>
+            <th class="view">조회 수</th>
+          </thead>
+        </table>
+        <div class="scroll-table">
+          <table class="body-table">
+            <tbody>
+              <tr>
+                <td class="td-check-box">
+                  <div class="check-box">
+                    <input type="checkbox" name="" id="">
+                  </div>
+                </td>
+                <td class="td-number">
+                  <div class="board-number">1</div>
+                </td>
+                <td class="td-article">
+                  <div class="board-list">퀸트 투자 포트폴리오</div>
+                </td>
+                <td class="td-date">2021.04.20</td>
+                <td class="td-view">10</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="content">
+        <div class="comments-title">
+          <h2>작성댓글</h2>
+        </div>
+        <div class="select">
+          <div class="all-check-box">
+            <input type="checkbox" id="all-check"><span> 전체선택</span>
+          </div>
+          <button>삭제</button>
+        </div>
+        <table class="cm-head-table">
+          <thead>
+            <th class="check"></th>
+            <th class="comments">댓글</th>
+            <th class="write-page">원문보기</th>
+            <th class="cm-date">작성일</th>
+          </thead>
+        </table>
+        <div class="scroll-table">
+          <table class="cm-body-table">
+            <tbody>
+              <tr>
+                <td class="td-cm-check-box">
+                  <div class="check-box">
+                    <input type="checkbox" name="" id="">
+                  </div>
+                </td>
+                <td class="td-comments">
+                  <div class="board-list">
+                    <a href="">포트폴리오 공유 감사합니다.</a>
+                  </div>
+                </td>
+                <td class="td-cm-page">
+                  <a href="">원문보기</a><span>▶︎</span>
+                </td>
+                <td class="td-cm-date">2021.04.20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </body>
+
+</html>
