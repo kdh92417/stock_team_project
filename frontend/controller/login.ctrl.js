@@ -12,8 +12,8 @@ class LoginController {
     const login = this.user;
     const view = this.view;
 
-    login.id = view.userId.value;
-    login.pw = view.userPw.value;
+    login.user_id = view.userId.value;
+    login.password = view.userPw.value;
 
     this.service.loginCheckUser(this.user);
   }
