@@ -18,16 +18,16 @@ body {
 }
 
 .logo,
-.nav-menu {
+.nav-item {
   color: #fff;
 }
 .logo:hover,
-.nav-menu:hover {
+.nav-item:hover {
   text-decoration: none;
 }
 
 .logo:hover,
-.nav-menu:hover {
+.nav-item:hover {
   color: #fff;
 }
 
