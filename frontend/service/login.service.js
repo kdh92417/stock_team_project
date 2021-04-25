@@ -15,7 +15,8 @@ class LoginService {
     //   console.log("올바른 사용자")
     //   this.renderMain();
     // } else console.log("아이디 또는 비밀번호를 확인해주세요.")
-    this.api.getLogin(vlaue)
+    this.api.getLogin(value)
+    this.api.getInfo();
   }
 
   renderMain() {

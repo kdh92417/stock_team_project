@@ -6,7 +6,18 @@ class API {
   // constructor() {
   //     this.signup = new SignupService();
   // }
-
+  getInfo() {
+    fetch("http://3.35.169.52:8000/account/signup/", {
+      method: "GET",
+    })
+      .then(res => {
+        if (res.status === 200) {
+          location.href = "/login";
+        } else {
+          alert(res.msg);
+        }
+      })
+  }
   getLogin(loginData) {
     console.log(loginData);
     // const req = {
