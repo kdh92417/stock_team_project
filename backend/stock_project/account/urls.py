@@ -2,6 +2,18 @@ from django.urls    import path, include
 from .              import views
 
 urlpatterns = [
+    # 로그인
     path('login/', views.SignInView.as_view()),
+    # 회원가입
     path('signup/', views.SignUpView.as_view()),
+    # 마이페이지
+    path('user/', views.MyPage.as_view()),
+    # 비밀번호 변경
+    path('user/password/', views.UserPWView.as_view()),
+    # 이름 변경
+    path('user/name/', views.UserNameView.as_view()),
+    # 이메일 변경
+    path('user/email/', views.UserEmailView.as_view()),
+    # 폰번호 변경
+    path('user/phone/', views.UserPhoneNumberView.as_view())
 ]

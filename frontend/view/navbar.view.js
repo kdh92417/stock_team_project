@@ -7,7 +7,7 @@ class Navbar {
     // console.log(this.root);
     this.api = new API();
     this.showNavbar();
-    
+
   }
 
   async showNavbar(userId) {
@@ -75,8 +75,8 @@ class Navbar {
               </li>
             </ul>
             <ul class="main-logout">
-              <div class="user-name">${user_id}님</div>
-              <li><a class="nav-item" href="./index.html"> | Logout</a></li>
+              <div class="user-name"><span>${user_id}</span>님</div>
+              <li><a class="nav-item" href="./index.html">Logout</a></li>
             </ul>
           </div>
         </div>

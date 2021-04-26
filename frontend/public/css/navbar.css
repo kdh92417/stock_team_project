@@ -33,7 +33,7 @@
 .main-menu {
   display: flex;
   list-style: none;
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 0;
 }
 
@@ -60,8 +60,13 @@
 }
 
 .logo,
-.nav-item {
+.nav-item,
+.main-logout div {
   color: #fff;
+}
+
+.main-logout div > span {
+  color: #f48fb1;
 }
 
 #mypage label {
@@ -86,14 +91,20 @@
   border-bottom: 3px solid #48e0a6;
 }
 
-.main-login {
+.main-login,
+.main-logout {
   display: flex;
   list-style: none;
-  font-size: 18px;
+  font-size: 20px;
 }
 
-.main-login li {
+.main-login li,
+.main-logout div {
   padding: 15px 15px;
+}
+
+.main-logout li {
+  padding: 15px 0;
 }
 
 #admin {
