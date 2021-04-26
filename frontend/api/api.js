@@ -6,54 +6,41 @@ class API {
   // constructor() {
   //     this.signup = new SignupService();
   // }
-  // getInfo() {
-  //   fetch("http://192.168.1.32:8000/account/signup/", {
-  //     method: "GET",
+  // async getInfo() {
+  //   await fetch("http://192.168.1.32:8000/account/signup/", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: localStorage.getItem("token"),
+  //     },
   //   })
-  //     .then(res => {
-  //       if (res.status === 200) {
-  //         location.href = "/login";
-  //       } else {
-  //         alert(res.msg);
-  //       }
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       console.log(res);
   //     })
   // }
   async getLogin(loginData) {
     console.log(loginData);
-    // const req = {
-    //   user_id: signData.user_id,
-    //   password: signData.password,
-    //   user_name: signData.user_name,
-    //   birth_date: signData.birth_date,
-    //   phone_number: signData.phone_number
-    // };
-    // console.log(req)
     await fetch("http://192.168.1.32:8000/account/login/", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
       },
       body: JSON.stringify(loginData),
     })
       .then((res) => (res.json()))
-      .then((res) => console.log(res));
-    // console.log("실행")
-    // let url = '/asd';
-    // let response = sendRequest('GET', url);
-
-    // return response;
+      .then((res) => {
+        // console.log(res);
+        if (res.message === "success") {
+          localStorage.setItem("token", res.access_token);
+        }
+        // localStorage.getItem("token")
+      });
   }
 
   postSignup(signData) {
     console.log(signData);
-    // const req = {
-    //   user_id: signData.user_id,
-    //   password: signData.password,
-    //   user_name: signData.user_name,
-    //   birth_date: signData.birth_date,
-    //   phone_number: signData.phone_number
-    // };
-    // console.log(req)
     fetch("http://192.168.1.32:8000/account/signup/", {
       method: "POST",
       headers: {
@@ -61,27 +48,16 @@ class API {
       },
       body: JSON.stringify(signData),
     })
-      .then((res) => (res.text()))
-      .then((console.log));
-    // console.log(signData);
-    // var xhr = new XMLHttpRequest();
-    // console.log(xhr);
-    // xhr.onreadystatechange = () => {
-    //   if (xhr.status == 200) {
-    //     //서버 응답 결과에 따라 알맞은 작업 처리 
-    //     console.log(xhr.status)
-    //     location.href = "../template/login.html"
-    //   } else {
-    //     alert("문제 발생:" + xhr.status);
-    //   }
-    // }
-    // xhr.open('POST', 'http://3.35.169.52:8000/account/signup/');
-    // xhr.setRequestHeader('Content-type', "application/json");
-    // xhr.send(JSON.stringify(signData));
-
-    // xhr.addEventListener('load', () => {
-    //   console.log(JSON.stringify(signData));
-    // })
+      .then((res) => (res.json()))
+      .then((res) => {
+        console.log(res);
+        if (res.message === "success") {
+          location.href = "../template/login.html"
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   callbackFunction() { //서버로부터 응답이 왔으므로 알맞은 작업을 수행 
