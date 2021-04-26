@@ -2,6 +2,7 @@ import { sendRequest } from '../lib/ajax.js';
 import SignupService from "../service/signup.service.js"
 
 
+
 class API {
   // constructor() {
   //     this.signup = new SignupService();
@@ -53,6 +54,10 @@ class API {
         console.log(res);
         if (res.message === "success") {
           location.href = "../template/login.html"
+        } else if (res.message === "Aleady exists user"){
+          alert("중복된 아이디입니다.") 
+        } else {
+          alert("중복된 이메일입니다.")
         }
       })
       .catch((err) => {
