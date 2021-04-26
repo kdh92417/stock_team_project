@@ -6,19 +6,19 @@ class API {
   // constructor() {
   //     this.signup = new SignupService();
   // }
-  getInfo() {
-    fetch("http://3.35.169.52:8000/account/signup/", {
-      method: "GET",
-    })
-      .then(res => {
-        if (res.status === 200) {
-          location.href = "/login";
-        } else {
-          alert(res.msg);
-        }
-      })
-  }
-  getLogin(loginData) {
+  // getInfo() {
+  //   fetch("http://192.168.1.32:8000/account/signup/", {
+  //     method: "GET",
+  //   })
+  //     .then(res => {
+  //       if (res.status === 200) {
+  //         location.href = "/login";
+  //       } else {
+  //         alert(res.msg);
+  //       }
+  //     })
+  // }
+  async getLogin(loginData) {
     console.log(loginData);
     // const req = {
     //   user_id: signData.user_id,
@@ -28,14 +28,15 @@ class API {
     //   phone_number: signData.phone_number
     // };
     // console.log(req)
-    fetch("http://3.35.169.52:8000/account/login/", {
+    await fetch("http://192.168.1.32:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(loginData),
     })
-      .then((res) => (console.log(res)));
+      .then((res) => (res.json()))
+      .then((res) => console.log(res));
     // console.log("실행")
     // let url = '/asd';
     // let response = sendRequest('GET', url);
@@ -53,7 +54,7 @@ class API {
     //   phone_number: signData.phone_number
     // };
     // console.log(req)
-    fetch("http://3.35.169.52:8000/account/signup/", {
+    fetch("http://192.168.1.32:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -61,8 +62,7 @@ class API {
       body: JSON.stringify(signData),
     })
       .then((res) => (res.text()))
-      .then((console.log))
-      ;
+      .then((console.log));
     // console.log(signData);
     // var xhr = new XMLHttpRequest();
     // console.log(xhr);
