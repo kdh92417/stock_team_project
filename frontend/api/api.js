@@ -4,9 +4,9 @@ import SignupService from "../service/signup.service.js"
 
 
 class API {
-  // constructor() {
-  //     this.signup = new SignupService();
-  // }
+  constructor() {
+      
+  }
   // async getInfo() {
   //   await fetch("http://192.168.1.32:8000/account/signup/", {
   //     method: "POST",
@@ -26,19 +26,45 @@ class API {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token"),
+        // Authorization: localStorage.getItem("token"),
       },
       body: JSON.stringify(loginData),
     })
       .then((res) => (res.json()))
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         if (res.message === "success") {
+          
           localStorage.setItem("token", res.access_token);
+          this.sendToken();
         }
         // localStorage.getItem("token")
       });
   }
+
+   saveUser (userId) {
+   localStorage.setItem("userId", userId )
+  }
+
+  async sendToken(userId) {
+    
+      console.log(this.loginId);
+    await fetch("http://192.168.1.32:8000/account/user/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        userId = res.user_data.user_id;
+        console.log(userId);
+        this.saveUser (userId);
+        location.href = "../template/index.html"
+      })
+  }
+
 
   postSignup(signData) {
     console.log(signData);
