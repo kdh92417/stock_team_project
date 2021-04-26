@@ -5,7 +5,7 @@ import SignupService from "../service/signup.service.js"
 
 class API {
   constructor() {
-      
+
   }
   // async getInfo() {
   //   await fetch("http://192.168.1.32:8000/account/signup/", {
@@ -34,7 +34,7 @@ class API {
       .then((res) => {
         console.log(res);
         if (res.message === "success") {
-          
+
           localStorage.setItem("token", res.access_token);
           this.sendToken();
         }
@@ -42,13 +42,13 @@ class API {
       });
   }
 
-   saveUser (userId) {
-   localStorage.setItem("userId", userId )
+  saveUser(userId) {
+    localStorage.setItem("userId", userId)
   }
 
   async sendToken(userId) {
-    
-      console.log(this.loginId);
+
+    console.log(this.loginId);
     await fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
       headers: {
@@ -60,7 +60,7 @@ class API {
       .then((res) => {
         userId = res.user_data.user_id;
         console.log(userId);
-        this.saveUser (userId);
+        this.saveUser(userId);
         location.href = "../template/index.html"
       })
   }
@@ -80,8 +80,8 @@ class API {
         console.log(res);
         if (res.message === "success") {
           location.href = "../template/login.html"
-        } else if (res.message === "Aleady exists user"){
-          alert("중복된 아이디입니다.") 
+        } else if (res.message === "Aleady exists user") {
+          alert("중복된 아이디입니다.")
         } else {
           alert("중복된 이메일입니다.")
         }
@@ -90,22 +90,5 @@ class API {
         console.log(err);
       })
   }
-
-  callbackFunction() { //서버로부터 응답이 왔으므로 알맞은 작업을 수행 
-    var xhr = new XMLHttpRequest();
-    // xhr.response
-    console.log(xhr);
-    // if (xhr.readyState == 0) {
-    //     //서버 응답 결과에 따라 알맞은 작업 처리 
-    //     console.log(xhr.status)
-    //     // location.href = "../view/login.html"
-    // } else {
-    //     alert("문제 발생:" + xhr.status);
-    // }
-  }
-
-  // renderLogin() {
-
-  // }
 }
 export default API;
