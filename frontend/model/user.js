@@ -1,12 +1,3 @@
-const users = {
-  id: ["abcde"],
-  pw: ["1234"],
-  name: ["박선아"],
-  birth: ["1989-09-26"],
-  phone: ["0101111111"],
-  email: ["abc@gmail.com"]
-}
-
 class User {
   constructor() {
     this.user = {};
