@@ -4,7 +4,6 @@ class UserInfo {
     this.root = document.querySelector('.root');
     console.log(this.root);
     this.loadUserInfo();
-    // this.showMyInfo()
   }
 
   loadUserInfo() {
@@ -102,8 +101,8 @@ class UserInfo {
   changeName(res) {
     const userName = res.user_name;
     const modifyBtn = document.getElementById("modify-name"),
-     name = document.getElementById("name"),
-     tdName = document.querySelector(".td-name");
+      name = document.getElementById("name"),
+      tdName = document.querySelector(".td-name");
 
     modifyBtn.addEventListener("click", () => {
       tdName.removeChild(name);
@@ -114,23 +113,23 @@ class UserInfo {
   }
   saveName(res) {
     const modifyBtn = document.getElementById("modify-name"),
-     saveName = document.querySelector(".change-name"),
-     tdName = document.querySelector(".td-name");
+      saveName = document.querySelector(".change-name"),
+      tdName = document.querySelector(".td-name");
 
     modifyBtn.addEventListener("click", () => {
       console.dir(saveName.value);
       tdName.removeChild(saveName);
       tdName.innerHTML = `<p id="name" class="contxt-title">${saveName.value}</p>`;
       tdName.innerHTML += `<p id="modify-name" class="modify-btn">수정</p>`
-      this.put("http://3.35.169.52:8000/account/user/name/", { "user_name" : `${saveName.value}` })
-      this.changeName(res);      
+      this.put("http://3.35.169.52:8000/account/user/name/", { "user_name": `${saveName.value}` })
+      this.changeName();
     })
   }
   changeBirth(res) {
     // const userBirth = res.user_birth;
     const modifyBtn = document.getElementById("modify-birth"),
-     birth = document.getElementById("birth"),
-     tdBirth = document.querySelector(".td-birth");
+      birth = document.getElementById("birth"),
+      tdBirth = document.querySelector(".td-birth");
 
     modifyBtn.addEventListener("click", () => {
       tdBirth.removeChild(birth);
@@ -141,8 +140,8 @@ class UserInfo {
   }
   changePhone(res) {
     const modifyBtn = document.getElementById("modify-phone"),
-     phone = document.getElementById("phone"),
-     tdPhone = document.querySelector(".td-phone");
+      phone = document.getElementById("phone"),
+      tdPhone = document.querySelector(".td-phone");
 
     modifyBtn.addEventListener("click", () => {
       tdPhone.removeChild(phone);
@@ -152,8 +151,8 @@ class UserInfo {
   }
   changeEmail(res) {
     const modifyBtn = document.getElementById("modify-email"),
-     email = document.getElementById("email"),
-     tdEmail = document.querySelector(".td-email");
+      email = document.getElementById("email"),
+      tdEmail = document.querySelector(".td-email");
 
     modifyBtn.addEventListener("click", () => {
       tdEmail.removeChild(email);
@@ -163,14 +162,14 @@ class UserInfo {
   }
 
   put(url, payload) {
-      return fetch(url, {
-        method: 'PUT',
-        headers: { 
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token")
-        },
-        body: JSON.stringify(payload)
-      })
+    return fetch(url, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token")
+      },
+      body: JSON.stringify(payload)
+    })
       .then((res) => res.json())
       .then((res) => {
         this.loadUserInfo()

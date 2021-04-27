@@ -1,16 +1,14 @@
-import API from '../api/api.js'
-
 class Navbar {
 
-  constructor() {
+  constructor(api) {
     this.root = document.querySelector('.root');
-    // console.log(this.root);
-    this.api = new API();
-    this.showNavbar();
+    this.api = api;
+    console.log(this.api);
+    this.showNavbar(this.api);
 
   }
 
-  async showNavbar(userId) {
+  async showNavbar(api) {
     const user_id = localStorage.getItem('userId');
     console.log(user_id);
     // let self = this;
@@ -61,7 +59,7 @@ class Navbar {
                 <input type="checkbox" id="show-mypage">
                 <label for="show-mypage">마이페이지</label>
                 <ul class="mypage-menu">
-                  <li><a class="nav-item" href="./mypage.html">회원정보수정</a></li>
+                  <li><a id="myinfo" class="nav-item" href="./mypage.html">회원정보수정</a></li>
                   <li><a class="nav-item" href="./mywrite.html">작성글 / 작성댓글</a></li>
                 </ul>
               </li>
@@ -76,6 +74,7 @@ class Navbar {
       this.root.insertAdjacentHTML('afterend', logout_navbar_HTML);
       this.navbarLogout();
       this.userLogout();
+      this.loadInfoPage(api);
     }
 
   }
@@ -97,7 +96,7 @@ class Navbar {
 
   navbarLogout() {
     const mainNav = document.querySelector('.sfolio-navbar'),
-      mainLogout = document.querySelector(".main-logout")
+      mainLogout = document.querySelector(".main-logout");
 
     window.onscroll = () => {
       if (window.scrollY > 25) {
@@ -117,7 +116,14 @@ class Navbar {
       localStorage.removeItem("token");
     })
   }
+
+  loadInfoPage(api) {
+    const myInfo = document.getElementById("myinfo");
+    myInfo.addEventListener("click", () => {
+      console.log("클릭")
+      console.log(api.loadUserInfo());
+    })
+  }
 }
 
-
-const app = new Navbar();
+export default Navbar;

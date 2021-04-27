@@ -1,9 +1,9 @@
-import API from '../api/api.js'
+
 
 class SignupService {
-  constructor(user) {
+  constructor(user, api) {
     this.user = user
-    this.api = new API();
+    this.api = api;
     // console.log(this.user)
   }
 
@@ -21,7 +21,7 @@ class SignupService {
 
     try {
       if (value.id === "") {
-      throw "아이디를 입력해주세요"
+        throw "아이디를 입력해주세요"
       } else if (!idReg.test(value.id)) {
         throw "잘못된 아이디입니다."
       } else this.checkPw(value);
@@ -44,10 +44,10 @@ class SignupService {
       } else if (value.pw !== value.checkPw) {
         throw "다름"
       } else this.checkNameAndBirth(value);
-    } catch(error) {
+    } catch (error) {
       alert(error)
     }
-    
+
   }
 
   checkNameAndBirth(value) {
@@ -63,7 +63,7 @@ class SignupService {
     } catch (error) {
       alert(error);
     }
-    
+
   }
 
   checkPhoneAndEmail(value) {

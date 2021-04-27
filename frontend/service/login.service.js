@@ -1,10 +1,7 @@
-import API from '../api/api.js'
-
 class LoginService {
-  constructor(user) {
+  constructor(user, api) {
     this.user = user
-    this.api = new API();
-    console.log(this.user)
+    this.api = api;
   }
 
   //로그인 함수
@@ -18,11 +15,6 @@ class LoginService {
     this.api.getLogin(value)
     // this.api.getInfo();
   }
-
-  renderMain() {
-    location.href = "../view/index.html"
-  }
-
 
 }
 

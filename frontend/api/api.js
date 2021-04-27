@@ -1,11 +1,9 @@
 import { sendRequest } from '../lib/ajax.js';
-import SignupService from "../service/signup.service.js"
-
-
 
 class API {
   constructor() {
-
+    // this.myinfo = myinfo
+    // console.log(this.myinfo);
   }
   // async getInfo() {
   //   await fetch("http://192.168.1.32:8000/account/signup/", {
@@ -34,7 +32,6 @@ class API {
       .then((res) => {
         console.log(res);
         if (res.message === "success") {
-
           localStorage.setItem("token", res.access_token);
           this.sendToken();
         }
@@ -47,8 +44,6 @@ class API {
   }
 
   async sendToken(userId) {
-
-    console.log(this.loginId);
     await fetch("http://3.35.169.52:8000/account/user/", {
       method: "GET",
       headers: {
@@ -88,6 +83,21 @@ class API {
       })
       .catch((err) => {
         console.log(err);
+      })
+  }
+
+  loadUserInfo() {
+    fetch("http://3.35.169.52:8000/account/user/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        this.myinfo.showMyInfo(res.user_data);
       })
   }
 }
