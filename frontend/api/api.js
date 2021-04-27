@@ -22,7 +22,7 @@ class API {
   // }
   async getLogin(loginData) {
     console.log(loginData);
-    await fetch("http://192.168.1.32:8000/account/login/", {
+    await fetch("http://3.35.169.52:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ class API {
   async sendToken(userId) {
 
     console.log(this.loginId);
-    await fetch("http://192.168.1.32:8000/account/user/", {
+    await fetch("http://3.35.169.52:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ class API {
 
   postSignup(signData) {
     console.log(signData);
-    fetch("http://192.168.1.32:8000/account/signup/", {
+    fetch("http://3.35.169.52:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
