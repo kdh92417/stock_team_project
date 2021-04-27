@@ -21,7 +21,6 @@ from portfolio.models           import (
 class SignInView(View):
     def post(self, request):
         account_data = json.loads(request.body)
-        print(request.headers.get('Authorization', None))
         try:
             if Account.objects.filter(user_id=account_data['user_id']).exists():
                 account = Account.objects.get(user_id=account_data['user_id'])

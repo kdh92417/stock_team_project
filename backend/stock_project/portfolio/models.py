@@ -38,7 +38,7 @@ class PortfolioStock(models.Model):
     company       = models.ForeignKey('companies.Company', on_delete=models.CASCADE)
     portfolio     = models.ForeignKey('portfolio.Portfolio', on_delete=models.CASCADE)
     shares_count  = models.IntegerField(default=0)
-    sheres_amount = models.IntegerField(default=0)
+    shares_amount = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'portfolio_stocks'
