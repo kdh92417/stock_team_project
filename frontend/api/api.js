@@ -1,9 +1,10 @@
 import { sendRequest } from '../lib/ajax.js';
 
 class API {
-  constructor() {
-    // this.myinfo = myinfo
-    // console.log(this.myinfo);
+  constructor(myinfo) {
+    this.myinfo = myinfo
+    console.log(this.myinfo);
+    // this.myinfo.showMyInfo();
   }
   // async getInfo() {
   //   await fetch("http://192.168.1.32:8000/account/signup/", {
@@ -86,8 +87,8 @@ class API {
       })
   }
 
-  loadUserInfo() {
-    fetch("http://3.35.169.52:8000/account/user/", {
+  async loadUserInfo() {
+    await fetch("http://3.35.169.52:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

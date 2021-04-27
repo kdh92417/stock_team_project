@@ -3,8 +3,8 @@ class Navbar {
   constructor(api) {
     this.root = document.querySelector('.root');
     this.api = api;
-    console.log(this.api);
-    this.showNavbar(this.api);
+    // console.log(this.api);
+    this.showNavbar();
 
   }
 
@@ -74,7 +74,7 @@ class Navbar {
       this.root.insertAdjacentHTML('afterend', logout_navbar_HTML);
       this.navbarLogout();
       this.userLogout();
-      this.loadInfoPage(api);
+      this.loadInfoPage();
     }
 
   }
@@ -117,12 +117,11 @@ class Navbar {
     })
   }
 
-  loadInfoPage(api) {
+  loadInfoPage() {
     const myInfo = document.getElementById("myinfo");
-    myInfo.addEventListener("click", () => {
-      console.log("클릭")
-      console.log(api.loadUserInfo());
-    })
+
+    this.api.loadUserInfo();
+
   }
 }
 
