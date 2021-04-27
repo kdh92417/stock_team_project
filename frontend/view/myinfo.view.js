@@ -1,7 +1,7 @@
 class MyInfoView {
 
   constructor() {
-    this.root = document.querySelector('.root');
+    this.root = document.querySelector('.myinfo-root');
   }
 
   showMyInfo(res) {
