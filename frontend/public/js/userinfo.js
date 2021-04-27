@@ -3,10 +3,10 @@ class UserInfo {
   constructor() {
     this.root = document.querySelector('.root');
     console.log(this.root);
-    this.loadUserInfo ();
+    this.loadUserInfo();
   }
-  
-  loadUserInfo () {
+
+  loadUserInfo() {
     fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
       headers: {
@@ -17,11 +17,11 @@ class UserInfo {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        this.showMyInfo (res.user_data);
+        this.showMyInfo(res.user_data);
       })
   }
-  
-  showMyInfo (res) {
+
+  showMyInfo(res) {
     const userId = res.user_id;
     const userName = res.user_name;
     const userBirth = res.birth_date;
