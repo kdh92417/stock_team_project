@@ -1,24 +1,11 @@
-import { sendRequest } from '../lib/ajax.js';
+// import { sendRequest } from '../lib/ajax.js';
 
 class API {
   constructor(myinfo) {
     this.myinfo = myinfo
     console.log(this.myinfo);
-    // this.myinfo.showMyInfo();
   }
-  // async getInfo() {
-  //   await fetch("http://192.168.1.32:8000/account/signup/", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: localStorage.getItem("token"),
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  // }
+
   async getLogin(loginData) {
     console.log(loginData);
     await fetch("http://3.35.169.52:8000/account/login/", {
@@ -60,7 +47,6 @@ class API {
         location.href = "../template/index.html"
       })
   }
-
 
   postSignup(signData) {
     console.log(signData);
