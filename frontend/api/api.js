@@ -7,8 +7,8 @@ class API {
   }
 
   // functionName - getLogin
-  // Job - signup view에서 입력된 유저 정보를 저장해서 service에 전달 / service에 checkUser 호출
-  // Input(args, params) - none
+  // Job - login view에서 입력된 유저 정보를 받아서 server로 전달
+  // Input(args, params) - login user info
   // Output(return) - none
   async getLogin(loginData) {
     await fetch("http://192.168.1.32:8000/account/login/", {
@@ -21,11 +21,9 @@ class API {
       .then((res) => (res.json()))
       .then((res) => {
         console.log(res);
-        if (res.status === 401) {
-          console.log("아이디없음");
+        if (res.status === 402) {
           this.value.loginCheckUser(res);
-        } else if (res.status === 402) {
-          console.log("비밀번호 다름");
+        } else if (res.status === 401) {
           this.value.loginCheckUser(res);
         } else if (res.message === "success") {
           localStorage.setItem("token", res.access_token);
@@ -37,6 +35,10 @@ class API {
       })
   }
 
+  // functionName - sendToken
+  // Job - login할 때 전달받은 token을 다시 서버로 전송해서 인증하는 함수
+  // Input(args, params) - userId
+  // Output(return) - none
   async sendToken(userId) {
     await fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
@@ -48,15 +50,18 @@ class API {
       .then((res) => res.json())
       .then((res) => {
         userId = res.user_data.user_id;
-        console.log(userId);
         this.saveUserId(userId);
-        // location.href = "../template/index.html"
+        location.href = "../template/index.html"
       })
       .catch((err) => {
         console.log(err);
       })
   }
 
+  // functionName - saveUserId
+  // Job - 회원의 아이디를 홈페이지에 적용시키기 위해 localStorage에 저장
+  // Input(args, params) - userInfo
+  // Output(return) - none
   saveUserId(userId) {
     localStorage.setItem("userId", userId)
   }

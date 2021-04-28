@@ -4,9 +4,7 @@ class LoginController {
   // Input(args, params) - service, view
   constructor(api, view) {
     this.view = view;
-    this.service = api.value;
     this.api = api;
-    console.log(api, api.value, view);
     this.view.Userlogin(this.login);
     // 컨트롤러 호출 될때 메서드 실행, 이벤트리스너 달아줌
   }

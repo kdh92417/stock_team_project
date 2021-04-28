@@ -1,18 +1,15 @@
 class Navbar {
 
-  constructor(api) {
+  constructor(value) {
     this.root = document.querySelector('.root');
-    this.api = api;
-    // console.log(this.api);
-    this.showNavbar();
-
+    this.showNavbar(value);
   }
 
   // functionName - showNavbar
   // Job - Navbar를 페이지마다 출력해줌
   // Input(args, params) - none
   // Output(return) - none
-  async showNavbar() {
+  async showNavbar(value) {
 
     const user_id = localStorage.getItem('userId');
 
