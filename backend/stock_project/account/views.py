@@ -28,7 +28,8 @@ class SignInView(View):
                     token = jwt.encode({'user_account' : account.id}, SECRET_KEY, algorithm=ALGORITHM)
                     return JsonResponse({'access_token' : token.decode('utf-8'),
                                         'message' : 'success'}, status=200)
-                return HttpResponse(status=401)
+                else:
+                    return JsonResponse({'MESSAGE' : 'PASSWORD DOES NOT REMATCH'}, status=401)
 
         except KeyError:
             return JsonResponse({ 'message' : 'INVALID_KEYS'}, status=400)
