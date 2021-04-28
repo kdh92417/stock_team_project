@@ -1,11 +1,12 @@
 class MyInfoView {
 
   constructor() {
-    this.root = document.querySelector('.myinfo-root');
+    this.root = document.querySelector('.root');
+
   }
 
   showMyInfo(res) {
-    console.log(res);
+    console.log(res)
     const userId = res.user_id;
     const userName = res.user_name;
     const userBirth = res.birth_date;
@@ -81,7 +82,6 @@ class MyInfoView {
     // this.changePhone(res);
     // this.changeEmail(res);
   }
-
 }
 
 export default MyInfoView;
