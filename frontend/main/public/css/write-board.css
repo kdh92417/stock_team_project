@@ -127,12 +127,12 @@ body {
   width: 180px;
 } */
 
-#stock-name>input,
-#stock-price>input {
+.td-stock-name>input,
+.td-stock-amount>input {
   width: 180px
 }
 
-#stock-amount>input {
+.td-stock-count>input {
   width: 120px;
 }
 
