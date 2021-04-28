@@ -1,13 +1,20 @@
 class SignupController {
+
+  // Job - signup 기능 동작에 필요한 service, view 정보를 받아 컨트롤해줌
+  // Input(args, params) - service, view
   constructor(service, view) {
     this.view = view;
     this.service = service;
 
-    this.view.signUp(this.save);
+    this.view.signUp(this.saveUser);
     // 컨트롤러 호출 될때 메서드 실행, 이벤트리스너 달아줌
   }
 
-  save = () => {
+  // functionName - saveUser
+  // Job - signup view에서 입력된 유저 정보를 저장해서 service에 전달 / service에 checkUser 호출
+  // Input(args, params) - none
+  // Output(return) - none
+  saveUser = () => {
     this.signup = {};
     const save = this.signup;
     const view = this.view;

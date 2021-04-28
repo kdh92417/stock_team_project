@@ -1,31 +1,16 @@
-import { sendRequest } from '../lib/ajax.js';
+// import { sendRequest } from '../lib/ajax.js';
 
 class API {
   constructor(myinfo) {
     this.myinfo = myinfo
-    console.log(this.myinfo);
-    // this.myinfo.showMyInfo();
   }
-  // async getInfo() {
-  //   await fetch("http://192.168.1.32:8000/account/signup/", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: localStorage.getItem("token"),
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  // }
+
   async getLogin(loginData) {
     console.log(loginData);
     await fetch("http://3.35.169.52:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: localStorage.getItem("token"),
       },
       body: JSON.stringify(loginData),
     })
@@ -36,8 +21,10 @@ class API {
           localStorage.setItem("token", res.access_token);
           this.sendToken();
         }
-        // localStorage.getItem("token")
-      });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   saveUser(userId) {
@@ -57,13 +44,19 @@ class API {
         userId = res.user_data.user_id;
         console.log(userId);
         this.saveUser(userId);
-        location.href = "../template/index.html"
+        location.href = "../main/template/index.html"
+      })
+      .catch((err) => {
+        console.log(err);
       })
   }
 
 
+  // functionName - postSignup
+  // Job - signup service에서 검증된 유저 정보를 전달 받아 서버에 등록
+  // Input(args, params) - userInfo
+  // Output(return) - none
   postSignup(signData) {
-    console.log(signData);
     fetch("http://3.35.169.52:8000/account/signup/", {
       method: "POST",
       headers: {
@@ -75,7 +68,7 @@ class API {
       .then((res) => {
         console.log(res);
         if (res.message === "success") {
-          location.href = "../template/login.html"
+          location.href = "../main/template/login.html"
         } else if (res.message === "Aleady exists user") {
           alert("중복된 아이디입니다.")
         } else {
@@ -99,6 +92,9 @@ class API {
       .then((res) => {
         console.log(res);
         this.myinfo.showMyInfo(res.user_data);
+      })
+      .catch((err) => {
+        console.log(err);
       })
   }
 }
