@@ -5,8 +5,11 @@ class API {
     this.myinfo = myinfo
   }
 
+  // functionName - getLogin
+  // Job - signup view에서 입력된 유저 정보를 저장해서 service에 전달 / service에 checkUser 호출
+  // Input(args, params) - none
+  // Output(return) - none
   async getLogin(loginData) {
-    console.log(loginData);
     await fetch("http://3.35.169.52:8000/account/login/", {
       method: "POST",
       headers: {
@@ -27,10 +30,6 @@ class API {
       })
   }
 
-  saveUser(userId) {
-    localStorage.setItem("userId", userId)
-  }
-
   async sendToken(userId) {
     await fetch("http://3.35.169.52:8000/account/user/", {
       method: "GET",
@@ -43,12 +42,16 @@ class API {
       .then((res) => {
         userId = res.user_data.user_id;
         console.log(userId);
-        this.saveUser(userId);
+        this.saveUserId(userId);
         location.href = "../main/template/index.html"
       })
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  saveUserId(userId) {
+    localStorage.setItem("userId", userId)
   }
 
 
