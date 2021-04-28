@@ -82,6 +82,7 @@ class MyInfoView {
 
     this.root.insertAdjacentHTML('afterend', myInfo_HTML);
   }
+
 }
 
 export default MyInfoView;

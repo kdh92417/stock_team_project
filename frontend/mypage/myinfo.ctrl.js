@@ -1,6 +1,7 @@
 class MyInfoController {
 
-  constructor() {
+  constructor(service) {
+    this.api = service.api
 
   }
 

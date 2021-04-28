@@ -119,6 +119,30 @@ class API {
       })
   }
 
+  // functionName - put
+  // Job - 마이페이지 수정용 api
+  // Input(args, params) - url, payload
+  // Output(return) - none
+  put(url, payload) {
+    return fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.loadUserInfo();
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
   postPortfolio(portfolioData) {
     fetch("http://192.168.1.32:8000/portfolio/write/", {
       method: "POST",
