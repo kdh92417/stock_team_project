@@ -11,7 +11,7 @@ class LoginView {
   // Job - login botton click 시 callback 함수를 전달받아 login 진행
   // Input(args, params) - callback
   // Output(return) - none
-  login(callback) {
+  Userlogin(callback) {
     this.loginBtn.addEventListener("click", event => {
       event.preventDefault();
       callback();

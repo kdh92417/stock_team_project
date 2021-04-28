@@ -1,10 +1,9 @@
 // import { sendRequest } from '../lib/ajax.js';
 
 class API {
-  constructor(myInfo, loginInfo) {
-    this.myInfo = myInfo
-    this.loginInfo = loginInfo
-    console.log(this.myInfo, this.loginInfo);
+  constructor(value) {
+    this.value = value
+    console.log(this.value)
   }
 
   // functionName - getLogin
@@ -22,7 +21,13 @@ class API {
       .then((res) => (res.json()))
       .then((res) => {
         console.log(res);
-        if (res.message === "success") {
+        if (res.status === 401) {
+          console.log("아이디없음");
+          this.value.loginCheckUser(res);
+        } else if (res.status === 402) {
+          console.log("비밀번호 다름");
+          this.value.loginCheckUser(res);
+        } else if (res.message === "success") {
           localStorage.setItem("token", res.access_token);
           this.sendToken();
         }
@@ -45,7 +50,7 @@ class API {
         userId = res.user_data.user_id;
         console.log(userId);
         this.saveUserId(userId);
-        location.href = "../template/index.html"
+        // location.href = "../template/index.html"
       })
       .catch((err) => {
         console.log(err);
@@ -85,6 +90,10 @@ class API {
       })
   }
 
+  // functionName - loadUserInfo
+  // Job - 로그인 시 서버에 토큰을 전달해서 회원정보를 받아옴
+  // Input(args, params) - none
+  // Output(return) - none
   async loadUserInfo() {
     await fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
@@ -95,8 +104,9 @@ class API {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        this.myInfo.showMyInfo(res.user_data);
+
+        // MyInfoView에 user_data전달
+        this.value.showMyInfo(res.user_data);
       })
       .catch((err) => {
         console.log(err);
