@@ -50,7 +50,7 @@ class API {
         userId = res.user_data.user_id;
         console.log(userId);
         this.saveUserId(userId);
-        // location.href = "../template/index.html"
+        location.href = "../template/index.html"
       })
       .catch((err) => {
         console.log(err);
