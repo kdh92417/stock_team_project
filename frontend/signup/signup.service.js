@@ -1,22 +1,27 @@
-
-
 class SignupService {
+
+
   constructor(user, api) {
     this.user = user
     this.api = api;
     // console.log(this.user)
   }
 
-  // ctrl에서 호출됨
+  // functionName - checkUser
+  // Job - signup ctrl에서 보내준 유저정보가 담긴 signup 객체를 받아 예외처리를 순차적으로 진행시키는 함수
+  //     - 검증이 완료된 유저를 Model user에서 최종 정보를 전달받아 api.postSignup 유저정보를 담아서 호출
+  // Input(args, params) - 유저정보가 담긴 signup 객체
+  // Output(return) - none
   checkUser(value) {
-    console.log(value);
     this.checkId(value);
-    // console.log(this.user)
-    this.api.postSignup(this.user.user);
+    this.api.postSignup(this.user.userInfo);
   }
 
+  // functionName - checkId
+  // Job - checkUser에서 받은 유저정보에서 id만 받아 예외처리 진행 / checkPw 호출
+  // Input(args, params) - 유저정보가 담긴 signup 객체
+  // Output(return) - none
   checkId(value) {
-    const user = this.user;
     let idReg = /^[A-za-z0-9]{5,15}$/g;
 
     try {
@@ -28,11 +33,12 @@ class SignupService {
     } catch (error) {
       alert(error);
     }
-    // else if (user.id.includes(value.id)) {
-    //   console.log("아이디 중복")
-    // }
   }
 
+  // functionName - checkPw
+  // Job - checkUser에서 받은 유저정보에서 pw만 받아 예외처리 진행 / checkNameAndBirth 호출
+  // Input(args, params) - 유저정보가 담긴 signup 객체
+  // Output(return) - none
   checkPw(value) {
     let pwReg = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{5,50}$/
 
@@ -50,6 +56,10 @@ class SignupService {
 
   }
 
+  // functionName - checkNameAndBirth
+  // Job - checkUser에서 받은 유저정보에서 name, birth만 받아 예외처리 진행 / checkPhoneAndEmail 호출
+  // Input(args, params) - 유저정보가 담긴 signup 객체
+  // Output(return) - none
   checkNameAndBirth(value) {
     let nameReg = /^[가-힣]+$/;
     try {
@@ -66,8 +76,11 @@ class SignupService {
 
   }
 
+  // functionName - checkPhoneAndEmail
+  // Job - checkUser에서 받은 유저정보에서 phone, email만 받아 예외처리 진행 / user.signupUser 호출
+  // Input(args, params) - 유저정보가 담긴 signup 객체
+  // Output(return) - none
   checkPhoneAndEmail(value) {
-    const user = this.user;
     let phoneReg = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/
     let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
 
