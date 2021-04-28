@@ -8,7 +8,11 @@ class Navbar {
 
   }
 
-  async showNavbar(api) {
+  // functionName - showNavbar
+  // Job - Navbar를 페이지마다 출력해줌
+  // Input(args, params) - none
+  // Output(return) - none
+  async showNavbar() {
     const user_id = localStorage.getItem('userId');
     console.log(user_id);
     // let self = this;
@@ -38,7 +42,7 @@ class Navbar {
         </div>
       </nav>`
       this.root.insertAdjacentHTML('afterend', navbar_HTML);
-      this.navbarLogin();
+      this.defaultNavbar();
     } else {
       let logout_navbar_HTML =
         `<nav class="sfolio-navbar">
@@ -72,14 +76,19 @@ class Navbar {
         </div>
       </nav>`
       this.root.insertAdjacentHTML('afterend', logout_navbar_HTML);
-      this.navbarLogout();
+      this.loginNavbar();
       this.userLogout();
       this.loadInfoPage();
     }
 
   }
 
-  navbarLogin() {
+
+  // functionName - defaultNavbar
+  // Job - 로그인이 안되었을 때 Navbar, 스크롤시 동작
+  // Input(args, params) - none
+  // Output(return) - none
+  defaultNavbar() {
     const mainNav = document.querySelector('.sfolio-navbar'),
       mainLogin = document.querySelector(".main-login")
 
@@ -94,7 +103,12 @@ class Navbar {
     };
   }
 
-  navbarLogout() {
+
+  // functionName - loginNavbar
+  // Job - 로그인이 되었을 때 Navbar, 스크롤시 동작
+  // Input(args, params) - none
+  // Output(return) - none
+  loginNavbar() {
     const mainNav = document.querySelector('.sfolio-navbar'),
       mainLogout = document.querySelector(".main-logout");
 
@@ -109,6 +123,11 @@ class Navbar {
     };
   }
 
+
+  // functionName - userLogout
+  // Job - 로그아웃 시 토큰 삭제 기능
+  // Input(args, params) - none
+  // Output(return) - none
   userLogout() {
     const removeUser = document.getElementById("logout");
 
@@ -117,11 +136,12 @@ class Navbar {
     })
   }
 
+  // functionName - loadInfoPage
+  // Job - 로그인 시 마이페이지 정보를 api에서 받아오게 호출
+  // Input(args, params) - none
+  // Output(return) - none
   loadInfoPage() {
-    const myInfo = document.getElementById("myinfo");
-
     this.api.loadUserInfo();
-
   }
 }
 

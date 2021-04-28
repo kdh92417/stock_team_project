@@ -1,15 +1,15 @@
 class User {
   constructor() {
-    this.user = {};
+    this.userInfo = {};
   }
 
   signupUser(value) {
-    this.user.user_id = value.id;
-    this.user.password = value.pw;
-    this.user.user_name = value.name;
-    this.user.birth_date = value.birth;
-    this.user.phone_number = value.phone;
-    this.user.email = value.email;
+    this.userInfo.user_id = value.id;
+    this.userInfo.password = value.pw;
+    this.userInfo.user_name = value.name;
+    this.userInfo.birth_date = value.birth;
+    this.userInfo.phone_number = value.phone;
+    this.userInfo.email = value.email;
     // console.log(this.id);
   }
 }
