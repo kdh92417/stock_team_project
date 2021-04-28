@@ -3,7 +3,6 @@ class LoginView {
     this.userId = document.getElementById('id');
     this.userPw = document.getElementById('pw');
     this.loginBtn = document.getElementById('btn');
-    console.log(this.userId);
   }
 
   login(callback) {
