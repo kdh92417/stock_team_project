@@ -127,8 +127,13 @@ body {
   width: 180px;
 } */
 
-.input-stock-info input {
+#stock-name>input,
+#stock-price>input {
   width: 180px
+}
+
+#stock-amount>input {
+  width: 120px;
 }
 
 .btn-container {
