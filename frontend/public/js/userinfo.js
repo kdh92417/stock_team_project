@@ -1,7 +1,6 @@
 class UserInfo {
-
   constructor() {
-    this.root = document.querySelector('.root');
+    this.root = document.querySelector(".root");
     console.log(this.root);
     this.loadUserInfo();
   }
@@ -18,7 +17,7 @@ class UserInfo {
       .then((res) => {
         console.log(res);
         this.showMyInfo(res.user_data);
-      })
+      });
   }
 
   showMyInfo(res) {
@@ -89,9 +88,9 @@ class UserInfo {
         </tbody>
       </table>
     </div>
-  </section>`
+  </section>`;
 
-    this.root.insertAdjacentHTML('afterend', myInfo_HTML);
+    this.root.insertAdjacentHTML("afterend", myInfo_HTML);
     this.changeName(res);
     this.changeBirth(res);
     this.changePhone(res);
@@ -107,9 +106,9 @@ class UserInfo {
     modifyBtn.addEventListener("click", () => {
       tdName.removeChild(name);
       tdName.innerHTML = `<input class="change-name" type="text" value=${userName}>`;
-      tdName.innerHTML += `<p id="modify-name" class="modify-btn">확인</p>`
+      tdName.innerHTML += `<p id="modify-name" class="modify-btn">확인</p>`;
       this.saveName();
-    })
+    });
   }
   saveName(res) {
     const modifyBtn = document.getElementById("modify-name"),
@@ -120,10 +119,12 @@ class UserInfo {
       console.dir(saveName.value);
       tdName.removeChild(saveName);
       tdName.innerHTML = `<p id="name" class="contxt-title">${saveName.value}</p>`;
-      tdName.innerHTML += `<p id="modify-name" class="modify-btn">수정</p>`
-      this.put("http://3.35.169.52:8000/account/user/name/", { "user_name": `${saveName.value}` })
+      tdName.innerHTML += `<p id="modify-name" class="modify-btn">수정</p>`;
+      this.put("http://3.35.169.52:8000/account/user/name/", {
+        user_name: `${saveName.value}`,
+      });
       this.changeName();
-    })
+    });
   }
   changeBirth(res) {
     // const userBirth = res.user_birth;
@@ -135,8 +136,8 @@ class UserInfo {
       tdBirth.removeChild(birth);
       // tdBirth.appendChild(input);
       tdBirth.innerHTML = `<input class="change-birth" type="text" value="1994-04-04">`;
-      tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">확인</p>`
-    })
+      tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">확인</p>`;
+    });
   }
   changePhone(res) {
     const modifyBtn = document.getElementById("modify-phone"),
@@ -146,8 +147,8 @@ class UserInfo {
     modifyBtn.addEventListener("click", () => {
       tdPhone.removeChild(phone);
       tdPhone.innerHTML = `<input class="change-phone" type="text" value="010-2414-2892">`;
-      tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">확인</p>`
-    })
+      tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">확인</p>`;
+    });
   }
   changeEmail(res) {
     const modifyBtn = document.getElementById("modify-email"),
@@ -157,28 +158,28 @@ class UserInfo {
     modifyBtn.addEventListener("click", () => {
       tdEmail.removeChild(email);
       tdEmail.innerHTML = `<input class="change-email" type="text" value="dave@gmail.com">`;
-      tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">확인</p>`
-    })
+      tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">확인</p>`;
+    });
   }
 
   put(url, payload) {
     return fetch(url, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token")
+        Authorization: localStorage.getItem("token"),
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     })
       .then((res) => res.json())
       .then((res) => {
-        this.loadUserInfo()
+        this.loadUserInfo();
         console.log(res);
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 }
 
-window.onload = new UserInfo;
+window.onload = new UserInfo();
