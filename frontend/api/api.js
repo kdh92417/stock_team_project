@@ -100,5 +100,23 @@ class API {
         console.log(err);
       })
   }
+
+  postPortfolio(portfolioData) {
+    fetch("http://192.168.1.32:8000/portfolio/write/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify(portfolioData),
+    })
+      .then((res) => (res.json()))
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 }
 export default API;
