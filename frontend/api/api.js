@@ -3,6 +3,8 @@
 class API {
   constructor(myInfo, loginInfo) {
     this.myInfo = myInfo
+    this.loginInfo = loginInfo
+    console.log(this.myInfo, this.loginInfo);
   }
 
   // functionName - getLogin
@@ -10,7 +12,7 @@ class API {
   // Input(args, params) - none
   // Output(return) - none
   async getLogin(loginData) {
-    await fetch("http://3.35.169.52:8000/account/login/", {
+    await fetch("http://192.168.1.32:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +33,7 @@ class API {
   }
 
   async sendToken(userId) {
-    await fetch("http://3.35.169.52:8000/account/user/", {
+    await fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +45,7 @@ class API {
         userId = res.user_data.user_id;
         console.log(userId);
         this.saveUserId(userId);
-        location.href = "../main/template/index.html"
+        location.href = "../template/index.html"
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +62,7 @@ class API {
   // Input(args, params) - userInfo
   // Output(return) - none
   postSignup(signData) {
-    fetch("http://3.35.169.52:8000/account/signup/", {
+    fetch("http://192.168.1.32:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -71,7 +73,7 @@ class API {
       .then((res) => {
         console.log(res);
         if (res.message === "success") {
-          location.href = "../main/template/login.html"
+          location.href = "../template/login.html"
         } else if (res.message === "Aleady exists user") {
           alert("중복된 아이디입니다.")
         } else {
@@ -84,7 +86,7 @@ class API {
   }
 
   async loadUserInfo() {
-    await fetch("http://3.35.169.52:8000/account/user/", {
+    await fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -102,3 +104,6 @@ class API {
   }
 }
 export default API;
+
+
+// http://3.35.169.52:8000/

@@ -13,9 +13,9 @@ class Navbar {
   // Input(args, params) - none
   // Output(return) - none
   async showNavbar() {
+
     const user_id = localStorage.getItem('userId');
-    console.log(user_id);
-    // let self = this;
+
     let token = localStorage.getItem("token");
 
     if (!token) {
@@ -41,9 +41,12 @@ class Navbar {
           </div>
         </div>
       </nav>`
+
       this.root.insertAdjacentHTML('afterend', navbar_HTML);
       this.defaultNavbar();
+
     } else {
+
       let logout_navbar_HTML =
         `<nav class="sfolio-navbar">
         <div class="nav-container">
@@ -75,10 +78,10 @@ class Navbar {
           </div>
         </div>
       </nav>`
+
       this.root.insertAdjacentHTML('afterend', logout_navbar_HTML);
       this.loginNavbar();
       this.userLogout();
-      this.loadInfoPage();
     }
 
   }
@@ -136,13 +139,6 @@ class Navbar {
     })
   }
 
-  // functionName - loadInfoPage
-  // Job - 로그인 시 마이페이지 정보를 api에서 받아오게 호출
-  // Input(args, params) - none
-  // Output(return) - none
-  loadInfoPage() {
-    this.api.loadUserInfo();
-  }
 }
 
 export default Navbar;
