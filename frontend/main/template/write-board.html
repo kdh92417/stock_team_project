@@ -37,8 +37,9 @@
       <div class="input-stock-info">
         <table id="table">
           <tr>
-            <td class="stock-info"> <input placeholder="기업명" type="text"></td>
-            <td class="stock-info"> <input placeholder="보유 주식수" type="number"></td>
+            <td id="stock-name" class="stock-info"> <input placeholder="기업명" type="text"></td>
+            <td id="stock-amount" class="stock-info"> <input placeholder="보유 주식수" type="number"></td>
+            <td id="stock-price" class="stock-info"> <input placeholder="주당 매수가격"></td>
             <td><button class="add-input">+</button></td>
           </tr>
         </table>
@@ -67,8 +68,9 @@
 
       addInputBtn.addEventListener("click", () => {
         $("#table").append(`<tr>
-          <td class="stock-info"> <input placeholder="기업명" type="text"></td>
-          <td class="stock-info"> <input placeholder="보유 주식수" type="number"></td>
+          <td id="stock-name" class="stock-info"> <input placeholder="기업명" type="text"></td>
+          <td id="stock-amount" class="stock-info"> <input placeholder="보유 주식수" type="number"></td>
+          <td id="stock-price" class="stock-info"> <input placeholder="주당 매수가격"></td>
           <td><button class="delete-input" onclick="deleteLine(this);">-</button></td>
         </tr>`)
       });
