@@ -30,8 +30,7 @@ class PortfolioView {
                           "stock_count": stockCount[i].value,
                           "stock_amount": stockAmount[i].value })
     }
-    console.log(this.stockInfo);
-
+    
     this.portfolio.title = this.title.value;
     this.portfolio.content = content;
     this.portfolio.stock = this.stockInfo;
