@@ -1,18 +1,16 @@
 class LoginService {
-  constructor(user, api) {
-    this.user = user
-    this.api = api;
-  }
 
-  //로그인 함수
+  // functionName - loginCheckUser
+  // Job - api에서 서버에서 전달받은 유저 정보로 예외처리 하는 함수
+  // Input(args, params) - response.status
+  // Output(return) - none
   loginCheckUser(value) {
     console.log(value);
-    // const user = this.user;
-    // if (user.id.includes(value.id) && user.pw[user.id.indexOf(value.id)] === value.pw) {
-    //   console.log("올바른 사용자")
-    //   this.renderMain();
-    // } else console.log("아이디 또는 비밀번호를 확인해주세요.")
-    this.api.getLogin(value);
+    if (value.status === 401) {
+      alert("등록된 아이디가 없습니다.")
+    } else if (value.status === 402) {
+      alert("비밀번호가 틀렸습니다.")
+    }
   }
 
 }

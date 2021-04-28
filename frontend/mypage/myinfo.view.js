@@ -5,8 +5,12 @@ class MyInfoView {
 
   }
 
+  // functionName - showMyInfo
+  // Job - 로그인 된 회원정보를 서버에서 전달받아 화면에 보여줌
+  // Input(args, params) - user_data
+  // Output(return) - none
   showMyInfo(res) {
-    console.log(res)
+
     const userId = res.user_id;
     const userName = res.user_name;
     const userBirth = res.birth_date;
@@ -77,10 +81,6 @@ class MyInfoView {
   </section>`
 
     this.root.insertAdjacentHTML('afterend', myInfo_HTML);
-    // this.changeName(res);
-    // this.changeBirth(res);
-    // this.changePhone(res);
-    // this.changeEmail(res);
   }
 }
 
