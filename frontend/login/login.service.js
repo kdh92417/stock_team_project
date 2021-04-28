@@ -6,9 +6,9 @@ class LoginService {
   // Output(return) - none
   loginCheckUser(value) {
     console.log(value);
-    if (value.status === 401) {
+    if (value.status === 402) {
       alert("등록된 아이디가 없습니다.")
-    } else if (value.status === 402) {
+    } else if (value.status === 401) {
       alert("비밀번호가 틀렸습니다.")
     }
   }
