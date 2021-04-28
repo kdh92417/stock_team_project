@@ -27,12 +27,15 @@ class SignInView(View):
                 if bcrypt.checkpw(account_data['password'].encode('utf-8'), account.password.encode('utf-8')):
                     token = jwt.encode({'user_account' : account.id}, SECRET_KEY, algorithm=ALGORITHM)
                     return JsonResponse({'access_token' : token.decode('utf-8'),
-                                        'message' : 'success'}, status=200)
+                                        'message' : 'success', 'status' : 200}, status=200)
                 else:
-                    return JsonResponse({'MESSAGE' : 'PASSWORD DOES NOT REMATCH'}, status=401)
+                    return JsonResponse({'message' : 'PASSWORD DOES NOT REMATCH', 'status' : 401}, status=401)
+
+            else:
+                return JsonResponse({'message' : 'ID DOES NOT EXIST', 'status' : 402}, status=402)
 
         except KeyError:
-            return JsonResponse({ 'message' : 'INVALID_KEYS'}, status=400)
+            return JsonResponse({ 'message' : 'INVALID_KEYS', 'status' : 400}, status=400)
 
 
 class SignUpView(View):
@@ -40,9 +43,9 @@ class SignUpView(View):
         account_data = json.loads(request.body)
         try:
             if Account.objects.filter(user_id=account_data['user_id']).exists():
-                return JsonResponse({'message' : 'Aleady exists user'}, status=400)
+                return JsonResponse({'message' : 'Aleady exists user', 'status' : 401}, status=401)
             if Account.objects.filter(email=account_data['email']).exists():
-                return JsonResponse({'message' : 'Aleady exists email'}, status=400)
+                return JsonResponse({'message' : 'Aleady exists email', 'status' : 402}, status=402)
 
             hashed_password = bcrypt.hashpw(account_data['password'].encode('utf-8'), bcrypt.gensalt())
             Account.objects.create(
@@ -54,10 +57,10 @@ class SignUpView(View):
                 birth_date = account_data['birth_date'],
                 type = '주린이',
             )
-            return JsonResponse({'message': 'success'}, status=200)
+            return JsonResponse({'message': 'success', 'status' : 200}, status=200)
 
         except KeyError:
-            return JsonResponse({'message' : 'INVALID_KEYS'}, status = 400)
+            return JsonResponse({'message' : 'INVALID_KEYS', 'status' : 400}, status = 400)
 
 
 class MyPage(View):
@@ -90,11 +93,12 @@ class MyPage(View):
             return JsonResponse({
                     'user_data'    : user_data,
                     'board_list'   : board_list,
-                    'comment_list' : comment_list
+                    'comment_list' : comment_list,
+                    'status'       : 200
                  }, status=200)
 
         except KeyError:
-            return JsonResponse({'MESSAGE' : 'KEY_ERROR'}, status=400)
+            return JsonResponse({'message' : 'KEY_ERROR', 'status' : 400}, status=400)
 
 
 # 비밀번호 변경 API
@@ -107,10 +111,10 @@ class UserPWView(View):
             hashed_password = bcrypt.hashpw(modify_data['password'].encode('utf-8'), bcrypt.gensalt())
             user.password = hashed_password.decode('utf-8')
             user.save()
-            return JsonResponse({'MESSAGE' : 'SUCCESS'}, status=200)
+            return JsonResponse({'MESSAGE' : 'SUCCESS', 'status' : 200}, status=200)
 
         except KeyError:
-            return JsonResponse({'MESSAGE' : 'KEY_ERROR'}, status=400)
+            return JsonResponse({'message' : 'KEY_ERROR', 'status' : 400}, status=400)
 
 
 # EMAIL 변경 API
@@ -122,10 +126,10 @@ class UserEmailView(View):
             user = Account.objects.get(id=request.user.id)
             user.email = modify_data['email']
             user.save()
-            return JsonResponse({'MESSAGE': 'SUCCESS'}, status=200)
+            return JsonResponse({'message': 'SUCCESS', 'status' : 200}, status=200)
 
         except KeyError:
-            return JsonResponse({'MESSAGE': 'KEY_ERROR'}, status=400)
+            return JsonResponse({'message': 'KEY_ERROR', 'status' : 400}, status=400)
 
 
 # 이름 변경 API
@@ -137,10 +141,10 @@ class UserNameView(View):
             user = Account.objects.get(id=request.user.id)
             user.user_name = modify_data['user_name']
             user.save()
-            return JsonResponse({'MESSAGE': 'SUCCESS'}, status=200)
+            return JsonResponse({'message': 'SUCCESS', 'status' : 200}, status=200)
 
         except KeyError:
-            return JsonResponse({'MESSAGE': 'KEY_ERROR'}, status=400)
+            return JsonResponse({'message': 'KEY_ERROR', 'status' : 400}, status=400)
 
 
 # 폰넘버 변경 API
@@ -152,9 +156,9 @@ class UserPhoneNumberView(View):
             user = Account.objects.get(id=request.user.id)
             user.phone_number = modify_data['phone_number']
             user.save()
-            return JsonResponse({'MESSAGE': 'SUCCESS'}, status=200)
+            return JsonResponse({'message': 'SUCCESS', 'status' : 200}, status=200)
 
         except KeyError:
-            return JsonResponse({'MESSAGE': 'KEY_ERROR'}, status=400)
+            return JsonResponse({'message': 'KEY_ERROR', 'status' : 400}, status=400)
 
 

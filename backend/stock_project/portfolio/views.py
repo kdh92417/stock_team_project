@@ -39,9 +39,9 @@ class TotalPortfolioView(View):
             } for board in board_list]
 
         except KeyError:
-            return JsonResponse({'message': 'INVALID_KEYS'}, status=400)
+            return JsonResponse({'message': 'INVALID_KEYS', 'status' : 400}, status=400)
 
-        return JsonResponse({'board_data' : board_data}, status=200)
+        return JsonResponse({'board_data' : board_data, 'status' : 200}, status=200)
 
 
 class BasePortfolioView(View):
@@ -54,8 +54,8 @@ class BasePortfolioView(View):
             ).get(id=board_id)
 
             board_data = {
-                'user_name'  : board.user.user_name,
-                'pofol_name' : board.name,
+                'user_id'  : board.user.user_id,
+                'title' : board.name,
                 'like_count' : board.total_like,
                 'stock'      : [{
                   'stock_name' : stock.company.cp_name,
@@ -65,9 +65,9 @@ class BasePortfolioView(View):
             }
 
         except KeyError:
-            return JsonResponse({'MESSAGE' : 'SUCCESS'}, status=200)
+            return JsonResponse({'message' : 'SUCCESS', 'status' : 400}, status=400)
 
-        return JsonResponse({'board_data': board_data}, status=200)
+        return JsonResponse({'board_data': board_data, 'status' : 200}, status=200)
 
     @login_required
     def post(self, request):
@@ -76,24 +76,37 @@ class BasePortfolioView(View):
             pf_data = json.loads(request.body)
             stock_list = pf_data['stock']
 
-            pf_id = Portfolio.objects.create(
-                name = pf_data['pofol_name'],
+            pf = Portfolio.objects.create(
+                name = pf_data['title'],
                 content = pf_data['content'],
                 user_id = user.id
-            ).id
+            )
 
             for stock in stock_list:
                 cp = Company.objects.get_or_create(cp_name=stock['stock_name'])
                 PortfolioStock.objects.create(
                     company_id = cp[0].id,
-                    portfolio_id = pf_id,
+                    portfolio_id = pf.id,
                     shares_count = stock['stock_count'],
-                    sheres_amount = stock['stock_amount']
+                    shares_amount = stock['stock_amount']
                 )
-            return JsonResponse({'MESSAGE' : 'SUCCESS'}, status=200)
+
+            board_data = {
+                'portfolio_id' : pf.id,
+                'user_id': user.user_id,
+                'title': pf.name,
+                'like_count': pf.total_like,
+                'stock': [{
+                    'stock_name': stock['stock_name'],
+                    'stock_count': stock['stock_count'],
+                    'stock_amount': stock['stock_amount']
+                } for stock in stock_list]
+            }
+
+            return JsonResponse({'message' : 'SUCCESS', 'status' : 200, 'board_data' : board_data}, status=200)
 
         except KeyError:
-            return JsonResponse({'MESSAGE' : 'KEY_ERROR'}, status=400)
+            return JsonResponse({'message' : 'KEY_ERROR', 'status' : 400}, status=400)
 
 
 class CommentView(View):
@@ -110,9 +123,9 @@ class CommentView(View):
             } for comment in comment_list]
 
         except KeyError:
-            return JsonResponse({'message': 'KEY_ERROR'}, status=400)
+            return JsonResponse({'message': 'KEY_ERROR', 'status' : 400}, status=400)
 
-        return JsonResponse({'comment_data' : comment_data}, status=200)
+        return JsonResponse({'comment_data' : comment_data, 'status' : 200}, status=200)
 
     @login_required
     def post(self, request):
@@ -127,6 +140,6 @@ class CommentView(View):
             )
 
         except KeyError:
-            return JsonResponse({'message' : 'KEY_ERROR'}, status=400)
+            return JsonResponse({'message' : 'KEY_ERROR', 'status' : 400}, status=400)
 
-        return JsonResponse({'MESSAGE' : 'SUCCESS'}, status=200)
+        return JsonResponse({'message' : 'SUCCESS', 'status' : 200}, status=200)
