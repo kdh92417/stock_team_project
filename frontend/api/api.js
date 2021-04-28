@@ -1,8 +1,9 @@
 // import { sendRequest } from '../lib/ajax.js';
 
 class API {
-  constructor(value) {
-    this.value = value
+  constructor(value, portfolio) {
+    this.value = value;
+    this.portfolio = portfolio;
     console.log(this.value)
   }
 
@@ -129,7 +130,9 @@ class API {
     })
       .then((res) => (res.json()))
       .then((res) => {
-        console.log(res);
+        console.log(res.board_data);
+        // this.portfolio.showPortfoilo(res.board_data);
+        location.href = "../main/template/write-view.html"
       })
       .catch((err) => {
         console.log(err);
