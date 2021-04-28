@@ -1,8 +1,8 @@
 // import { sendRequest } from '../lib/ajax.js';
 
 class API {
-  constructor(myinfo) {
-    this.myinfo = myinfo
+  constructor(myInfo, loginInfo) {
+    this.myInfo = myInfo
   }
 
   // functionName - getLogin
@@ -94,7 +94,7 @@ class API {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        this.myinfo.showMyInfo(res.user_data);
+        this.myInfo.showMyInfo(res.user_data);
       })
       .catch((err) => {
         console.log(err);
