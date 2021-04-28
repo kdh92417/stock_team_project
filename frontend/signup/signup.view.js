@@ -22,8 +22,6 @@ class SignupView {
       callback();
     })
   }
-
 }
-
 
 export default SignupView;

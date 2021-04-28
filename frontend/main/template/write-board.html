@@ -32,21 +32,21 @@
     <div class="write-portfolio-title">포트폴리오 작성</div>
     <div class="write-container">
       <div class="portfolio-title">
-        <input type="text" placeholder="포트폴리오 제목">
+        <input id="title" type="text" placeholder="포트폴리오 제목">
       </div>
       <div class="input-stock-info">
         <table id="table">
           <tr>
-            <td id="stock-name" class="stock-info"> <input placeholder="기업명" type="text"></td>
-            <td id="stock-amount" class="stock-info"> <input placeholder="보유 주식수" type="number"></td>
-            <td id="stock-price" class="stock-info"> <input placeholder="주당 매수가격"></td>
+            <td class="td-stock-name"> <input class="stock-name" placeholder="기업명" type="text"></td>
+            <td class="td-stock-count"> <input class="stock-count" placeholder="보유 주식수" type="number"></td>
+            <td class="td-stock-amount"> <input class="stock-amount" placeholder="주당 매수가격"></td>
             <td><button class="add-input">+</button></td>
           </tr>
         </table>
 
       </div>
       <div style="width: 90%;">
-        <div id="summernote">자신의 포트폴리오를 소개해주세요.</div>
+        <div id="summernote"></div>
       </div>
     </div>
     <div class="btn-container">
@@ -55,22 +55,24 @@
 
     <script>
       $(document).ready(function () {
+        $('#summernote').summernote('code', '<p>자신의 포트폴리오를 소개해주세요.</p>');
         $('#summernote').summernote({
-          height: 250,                // set editor height
+          height: 300,                // set editor height
           minHeight: null,             // set minimum height of editor
           maxHeight: null,             // set maximum height of editor
           focus: true                  // set focus to editable area after initializing summernote);
         });
       });
 
+
       const addInputBtn = document.querySelector(".add-input");
       const deleteInputBtn = document.querySelector(".delete-input");
 
       addInputBtn.addEventListener("click", () => {
         $("#table").append(`<tr>
-          <td id="stock-name" class="stock-info"> <input placeholder="기업명" type="text"></td>
-          <td id="stock-amount" class="stock-info"> <input placeholder="보유 주식수" type="number"></td>
-          <td id="stock-price" class="stock-info"> <input placeholder="주당 매수가격"></td>
+          <td class="td-stock-name"> <input class="stock-name" placeholder="기업명" type="text"></td>
+            <td class="td-stock-count"> <input class="stock-count" placeholder="보유 주식수" type="number"></td>
+            <td class="td-stock-amount"> <input class="stock-amount" placeholder="주당 매수가격"></td>
           <td><button class="delete-input" onclick="deleteLine(this);">-</button></td>
         </tr>`)
       });
@@ -82,6 +84,8 @@
 
     </script>
     <script src="../app/navbarApp.js" type="module"></script>
+    <script src="../../portfolio/portfolio.view.js" type="module"></script>
+    <script src="../../portfolio/portfolioApp.js" type="module"></script>
   </body>
 
 </html>
