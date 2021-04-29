@@ -2,7 +2,8 @@ from django.db      import models
 
 
 class Company(models.Model):
-    cp_name         = models.CharField(max_length=50)
+    cp_name         = models.CharField(max_length=1000)
+    corp_code       = models.CharField(max_length=100, null=True)
     count_searching = models.IntegerField(default=0)
     total_like      = models.IntegerField(default=0)
     user            = models.ManyToManyField("account.Account", through='LikeCompany')

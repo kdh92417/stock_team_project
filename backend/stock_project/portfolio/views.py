@@ -56,6 +56,7 @@ class BasePortfolioView(View):
             board_data = {
                 'user_id'  : board.user.user_id,
                 'title' : board.name,
+                'content' : board.content,
                 'like_count' : board.total_like,
                 'stock'      : [{
                   'stock_name' : stock.company.cp_name,
@@ -67,7 +68,7 @@ class BasePortfolioView(View):
         except KeyError:
             return JsonResponse({'message' : 'SUCCESS', 'status' : 400}, status=400)
 
-        return JsonResponse({'board_data': board_data, 'status' : 200}, status=200)
+        return JsonResponse({'message' : 'SUCCESS', 'board_data': board_data, 'status' : 200}, status=200)
 
     @login_required
     def post(self, request):
@@ -83,13 +84,19 @@ class BasePortfolioView(View):
             )
 
             for stock in stock_list:
-                cp = Company.objects.get_or_create(cp_name=stock['stock_name'])
-                PortfolioStock.objects.create(
-                    company_id = cp[0].id,
-                    portfolio_id = pf.id,
-                    shares_count = stock['stock_count'],
-                    shares_amount = stock['stock_amount']
-                )
+                try:
+                    cp = Company.objects.get(cp_name=stock['stock_name'])
+                    PortfolioStock.objects.create(
+                        company_id = cp.id,
+                        portfolio_id = pf.id,
+                        shares_count = stock['stock_count'],
+                        shares_amount = stock['stock_amount']
+                    )
+                except Company.DoesNotExist:
+                    return JsonResponse({
+                        'status'  : 400,
+                        'message' : 'Does Not Exist Company'
+                    }, status=400)
 
             board_data = {
                 'portfolio_id' : pf.id,
