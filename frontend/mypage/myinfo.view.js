@@ -1,21 +1,22 @@
 class MyInfoView {
 
   constructor(service) {
+    console.log(this.service)
     this.service = service
     this.root = document.querySelector('.root');
   }
 
   // functionName - showMyInfo
-  // Job - 로그인 된 회원정보를 서버에서 전달받아 화면에 보여줌
+  // Job - 로그인 된 회원정보를 controller에서 전달받아 화면에 보여줌
   // Input(args, params) - user_data
   // Output(return) - none
   showMyInfo(res) {
-
     const userId = res.user_id;
     const userName = res.user_name;
     const userBirth = res.birth_date;
     const userPhone = res.phone_number;
     const userEmail = res.email;
+
     let myInfo_HTML = `<section class="mypage-info">
     <div class="mypage-title">
       <h2>회원정보수정</h2>
@@ -85,6 +86,7 @@ class MyInfoView {
   }
 
   changeInfo(res) {
+    console.log(this.service)
     this.service.changeName(res)
     this.service.changeBirth(res)
     this.service.changePhone(res)

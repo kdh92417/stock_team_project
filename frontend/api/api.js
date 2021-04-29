@@ -1,4 +1,6 @@
 // import { sendRequest } from '../lib/ajax.js';
+import MyInfoView from "../mypage/myinfo.view.js"
+import MyInfoService from "../mypage/myinfo.service.js"
 
 class API {
   constructor(value) {
@@ -133,8 +135,9 @@ class API {
     })
       .then((res) => res.json())
       .then((res) => {
-        const saveUser = new API();
-        saveUser.loadUserInfo();
+        const api = new API(new MyInfoView(new MyInfoService()));
+
+        api.loadUserInfo();
         console.log(res);
       })
       .catch((err) => {
