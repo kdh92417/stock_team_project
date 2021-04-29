@@ -1,9 +1,8 @@
 // import { sendRequest } from '../lib/ajax.js';
 
 class API {
-  constructor(value, portfolio) {
+  constructor(value) {
     this.value = value;
-    this.portfolio = portfolio;
     console.log(this.value)
   }
 
@@ -123,7 +122,7 @@ class API {
   // Job - 마이페이지 수정용 api
   // Input(args, params) - url, payload
   // Output(return) - none
-  put(url, payload) {
+  static put(url, payload) {
     return fetch(url, {
       method: "PUT",
       headers: {
@@ -134,14 +133,14 @@ class API {
     })
       .then((res) => res.json())
       .then((res) => {
-        this.loadUserInfo();
+        const saveUser = new API();
+        saveUser.loadUserInfo();
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
   }
-
 
   postPortfolio(portfolioData) {
     fetch("http://192.168.1.32:8000/portfolio/write/", {

@@ -1,8 +1,8 @@
 class MyInfoView {
 
-  constructor() {
+  constructor(service) {
+    this.service = service
     this.root = document.querySelector('.root');
-
   }
 
   // functionName - showMyInfo
@@ -81,6 +81,14 @@ class MyInfoView {
   </section>`
 
     this.root.insertAdjacentHTML('afterend', myInfo_HTML);
+    this.changeInfo(res);
+  }
+
+  changeInfo(res) {
+    this.service.changeName(res)
+    this.service.changeBirth(res)
+    this.service.changePhone(res)
+    this.service.changeEmail(res)
   }
 
 }
