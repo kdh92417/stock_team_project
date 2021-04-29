@@ -24,7 +24,6 @@ class MyInfoService {
       tdName = document.querySelector(".td-name");
 
     modifyBtn.addEventListener("click", () => {
-      console.dir(saveName.value);
       tdName.removeChild(saveName);
       tdName.innerHTML = `<p id="name" class="contxt-title">${saveName.value}</p>`;
       tdName.innerHTML += `<p id="modify-name" class="modify-btn">수정</p>`;
@@ -36,16 +35,33 @@ class MyInfoService {
   }
 
   changeBirth(res) {
-    // const userBirth = res.user_birth;
+    const userBirth = res.user_birth;
     const modifyBtn = document.getElementById("modify-birth"),
       birth = document.getElementById("birth"),
       tdBirth = document.querySelector(".td-birth");
 
     modifyBtn.addEventListener("click", () => {
       tdBirth.removeChild(birth);
-      // tdBirth.appendChild(input);
-      tdBirth.innerHTML = `<input class="change-birth" type="text" value="1994-04-04">`;
+      tdBirth.innerHTML = `<input class="change-birth" type="text" value=${userBirth}>`;
       tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">확인</p>`;
+      this.saveBirth(res);
+    });
+  }
+
+  saveBirth(res) {
+    const modifyBtn = document.getElementById("modify-birth"),
+      saveBirth = document.querySelector(".change-birth"),
+      tdBirth = document.querySelector(".td-birth");
+
+    modifyBtn.addEventListener("click", () => {
+      console.dir(saveBirth.value);
+      tdBirth.removeChild(saveBirth);
+      tdBirth.innerHTML = `<p id="birth" class="contxt-title">${saveBirth.value}</p>`;
+      tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">수정</p>`;
+      API.put("http://192.168.1.32:8000/account/user/birth/", {
+        birth_date: `${saveBirth.value}`,
+      });
+      this.changeBirth(res);
     });
   }
 

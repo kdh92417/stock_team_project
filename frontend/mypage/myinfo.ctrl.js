@@ -2,8 +2,7 @@ class MyInfoController {
 
   constructor(service) {
     this.api = service
-    this.view = service.value.service
-    console.log(this.view)
+    console.log(service)
     this.loadInfoPage();
 
   }
