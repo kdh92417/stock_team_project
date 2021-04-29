@@ -35,7 +35,7 @@ class MyInfoService {
   }
 
   changeBirth(res) {
-    const userBirth = res.user_birth;
+    const userBirth = res.birth_date;
     const modifyBtn = document.getElementById("modify-birth"),
       birth = document.getElementById("birth"),
       tdBirth = document.querySelector(".td-birth");
@@ -52,9 +52,9 @@ class MyInfoService {
     const modifyBtn = document.getElementById("modify-birth"),
       saveBirth = document.querySelector(".change-birth"),
       tdBirth = document.querySelector(".td-birth");
-
+    console.dir(saveBirth);
     modifyBtn.addEventListener("click", () => {
-      console.dir(saveBirth.value);
+
       tdBirth.removeChild(saveBirth);
       tdBirth.innerHTML = `<p id="birth" class="contxt-title">${saveBirth.value}</p>`;
       tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">수정</p>`;
@@ -66,13 +66,14 @@ class MyInfoService {
   }
 
   changePhone(res) {
+    const userPhone = res.phone_number;
     const modifyBtn = document.getElementById("modify-phone"),
       phone = document.getElementById("phone"),
       tdPhone = document.querySelector(".td-phone");
 
     modifyBtn.addEventListener("click", () => {
       tdPhone.removeChild(phone);
-      tdPhone.innerHTML = `<input class="change-phone" type="text" value="010-2414-2892">`;
+      tdPhone.innerHTML = `<input class="change-phone" type="text" value="${userPhone}">`;
       tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">확인</p>`;
       this.savePhone(res);
     });
@@ -95,13 +96,14 @@ class MyInfoService {
   }
 
   changeEmail(res) {
+    const userEmail = res.email;
     const modifyBtn = document.getElementById("modify-email"),
       email = document.getElementById("email"),
       tdEmail = document.querySelector(".td-email");
 
     modifyBtn.addEventListener("click", () => {
       tdEmail.removeChild(email);
-      tdEmail.innerHTML = `<input class="change-email" type="text" value="dave@gmail.com">`;
+      tdEmail.innerHTML = `<input class="change-email" type="text" value="${userEmail}">`;
       tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">확인</p>`;
       this.saveEmail(res)
     });
