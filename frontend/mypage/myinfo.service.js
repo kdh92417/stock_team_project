@@ -74,6 +74,23 @@ class MyInfoService {
       tdPhone.removeChild(phone);
       tdPhone.innerHTML = `<input class="change-phone" type="text" value="010-2414-2892">`;
       tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">확인</p>`;
+      this.savePhone(res);
+    });
+  }
+
+  savePhone(res) {
+    const modifyBtn = document.getElementById("modify-phone"),
+      savePhone = document.querySelector(".change-phone"),
+      tdPhone = document.querySelector(".td-phone");
+
+    modifyBtn.addEventListener("click", () => {
+      tdPhone.removeChild(savePhone);
+      tdPhone.innerHTML = `<p id="phone" class="contxt-title">${savePhone.value}</p>`;
+      tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">수정</p>`;
+      API.put("http://192.168.1.32:8000/account/user/phone/", {
+        phone_number: `${savePhone.value}`,
+      });
+      this.changePhone(res);
     });
   }
 
@@ -86,10 +103,25 @@ class MyInfoService {
       tdEmail.removeChild(email);
       tdEmail.innerHTML = `<input class="change-email" type="text" value="dave@gmail.com">`;
       tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">확인</p>`;
+      this.saveEmail(res)
     });
   }
 
+  saveEmail(res) {
+    const modifyBtn = document.getElementById("modify-email"),
+      saveEmail = document.querySelector(".change-email"),
+      tdEmail = document.querySelector(".td-email");
 
+    modifyBtn.addEventListener("click", () => {
+      tdEmail.removeChild(saveEmail);
+      tdEmail.innerHTML = `<p id="email" class="contxt-title">${saveEmail.value}</p>`;
+      tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">수정</p>`;
+      API.put("http://192.168.1.32:8000/account/user/email/", {
+        email: `${saveEmail.value}`,
+      });
+      this.changeEmail(res);
+    });
+  }
 
 }
 
