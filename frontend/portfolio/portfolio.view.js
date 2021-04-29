@@ -12,6 +12,7 @@ class PortfolioView {
     this.submitBtn.addEventListener("click", event => {
       event.preventDefault();
       this.saveContent();
+
     })
   }
 
@@ -37,6 +38,7 @@ class PortfolioView {
 
     console.log(this.portfolio);
     this.api.postPortfolio(this.portfolio);
+    
   }
 }
 

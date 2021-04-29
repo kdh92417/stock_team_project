@@ -10,74 +10,17 @@
     <link rel="stylesheet" href="../public/css/nav-queries.css">
     <link rel="stylesheet" href="../public/css/write-view.css">
     <link rel="stylesheet" href="../public/css/write-board-queries.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://kit.fontawesome.com/831618fb82.js" crossorigin="anonymous"></script>
     <title>포트폴리오 내용</title>
   </head>
 
   <body>
     <div class="root"></div>
-    <div class="view-all-container">
-      <div class="view-button-content">
-        <a href="" role="button" class="btn prev-btn">
-          <span class="btn-text">이전글</span>
-        </a>
-        <a href="" role="button" class="btn next-btn">
-          <span class="btn-text">다음글</span>
-        </a>
-        <a href="" role="button" class="btn list-btn">
-          <span class="btn-text">목록</span>
-        </a>
-      </div>
-      <div class="write-content-box">
-        <div class="write-title">
-          <span class="title">포트폴리오 제목</span>
-        </div>
-        <div class="user-info">
-          <span class="user-nickname">주린이</span>
-          <div class="write-info">
-            <span class="date">2021.04.21 12:41</span>
-            <span class="view-count">조회 10</span>
-          </div>
-        </div>
-        <div class="view-graph-content">
-          <div class="view-graph">
+    <div class="portfolio-root"></div>
 
-          </div>
-          <div class="view-text">
-            <span class="main-text-title">포트폴리오 세부사항</span>
-            <span class="main-text">기업명-보유 주식수</span>
-            <span class="main-text">기업명-보유 주식수</span>
-            <span class="main-text">기업명-보유 주식수</span>
-            <span class="main-text">기업명-보유 주식수</span>
-          </div>
-        </div>
-        <div class="write-main-text">
-          <span>본문내용</span>
-        </div>
-        <div class="comment-write">
-          <div class="comment-inbox">
-            <strong class="comment-inbox-name">주린이</strong>
-            <textarea class="comment-inbox-text" placeholder="댓글을 남겨보세요" cols="20" wrap="virtual" rows="3"
-              maxlength="3000"></textarea>
-          </div>
-          <div class="register-box">
-            <a href="" role="button" class="btn-register">등록</a>
-          </div>
-        </div>
-      </div>
-      <div class="bottom-button-content">
-        <a href="" role="button" class="btn write-btn">
-          <span class="btn-text">글쓰기</span>
-        </a>
-        <a href="" role="button" class="btn list-btn">
-          <span class="btn-text">목록</span>
-        </a>
-        <a href="" role="button" class="btn top-btn">
-          <span class="btn-text">▲TOP</span>
-        </a>
-      </div>
-    </div>
-    <script src="../public/js/script.js" defer></script>
+    <script src="../../portfolio/show_portfolio.view.js" type="module"></script>
+    <script src="../../portfolio/show_PortfolioApp.js" type="module"></script>
     <script src="../app/navbarApp.js" type="module"></script>
   </body>
 

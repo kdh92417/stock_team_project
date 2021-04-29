@@ -156,14 +156,34 @@ class API {
     })
       .then((res) => (res.json()))
       .then((res) => {
-        console.log(res.board_data);
-        // this.portfolio.showPortfoilo(res.board_data);
-        location.href = "../main/template/write-view.html"
+        console.log(res);
+        location.href = "../template/write-view.html" + `?board_id=${res.board_data.portfolio_id}`;
+        // this.getPortfolio(res.board_data.portfolio_id);
       })
       .catch((err) => {
         console.log(err);
       })
   }
+
+  getPortfolio(pfId) {
+    fetch("http://192.168.1.32:8000/portfolio/write/"+`?board_id=${pfId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => (res.json()))
+      .then((res) => {
+        console.log(res);
+        this.value.showPortfolio(res.board_data);
+
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  
 }
 export default API;
 
