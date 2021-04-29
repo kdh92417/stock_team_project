@@ -74,9 +74,10 @@ class ShowPortfolioView {
     </div>
   </div>`
   
-  // for (let i = 0; i < stockNameArry.length; i++) {
-  //   document.getElementById('stock-name').innerHTML += 
-  // }
+  for (let i = 0; i < stockNameArry.length; i++) {
+
+    document.getElementById('stock-name').append(``)
+  }
 
 
   this.root.insertAdjacentHTML('afterend', portfolio_HTML);

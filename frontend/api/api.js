@@ -146,7 +146,7 @@ class API {
   }
 
   postPortfolio(portfolioData) {
-    fetch("http://192.168.1.32:8000/portfolio/write/", {
+    fetch("../main/public/response.json", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -158,7 +158,7 @@ class API {
       .then((res) => {
         console.log(res);
         location.href = "../template/write-view.html" + `?board_id=${res.board_data.portfolio_id}`;
-        // this.getPortfolio(res.board_data.portfolio_id);
+
       })
       .catch((err) => {
         console.log(err);

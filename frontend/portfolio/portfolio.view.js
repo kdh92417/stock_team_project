@@ -12,7 +12,6 @@ class PortfolioView {
     this.submitBtn.addEventListener("click", event => {
       event.preventDefault();
       this.saveContent();
-
     })
   }
 
