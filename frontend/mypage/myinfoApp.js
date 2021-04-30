@@ -5,4 +5,4 @@ import LoginUser from './myinfo.model.js';
 
 
 
-const app = new MyInfoController(new MyInfoService(), new MyInfoView());
+const app = new LoginUser(new MyInfoController(new MyInfoService(), new MyInfoView()));

@@ -5,6 +5,7 @@ class MyInfoController {
     this.view = view;
   }
 
+
   handleShowInfo(userInfo) {
     this.view.showMyInfo(userInfo);
     this.handleChangeInfo(userInfo)
