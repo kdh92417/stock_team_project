@@ -29,7 +29,8 @@
 
   <body>
     <div class="root"></div>
-    <div class="write-portfolio-title">포트폴리오 작성</div>
+    <div class="container">
+      <div class="write-portfolio-title">포트폴리오 작성</div>
     <div class="write-container">
       <div class="portfolio-title">
         <input id="title" type="text" placeholder="포트폴리오 제목">
@@ -49,18 +50,24 @@
         <div id="summernote"></div>
       </div>
     </div>
+    <div class="btn-area">
+      <a href="./portfolio-board.html" role="button"><span class="btn-list">목록</span></a>
+    </div>
     <div class="btn-container">
       <button class="submit-portfolio">글쓰기</button>
     </div>
 
+
+    </div>
+    
+
     <script>
       $(document).ready(function () {
-        $('#summernote').summernote('code', '<p>자신의 포트폴리오를 소개해주세요.</p>');
+        $('#summernote').summernote('code', '<p>자신의 포트폴리오를 소개해주세요.</p>'),
         $('#summernote').summernote({
-          height: 300,                // set editor height
-          minHeight: null,             // set minimum height of editor
-          maxHeight: null,             // set maximum height of editor
-          focus: true                  // set focus to editable area after initializing summernote);
+          placeholder: 'Hello Bootstrap 4',
+          tabsize: 2,
+          height: 300
         });
       });
 
