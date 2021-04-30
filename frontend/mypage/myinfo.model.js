@@ -3,9 +3,12 @@ import MyInfoService from "./myinfo.service.js"
 import MyInfoView from './myinfo.view.js';
 
 class LoginUser {
+  constructor(ctrl) {
+    this.ctrl = ctrl
+    console.log(this.ctrl)
+  }
 
   sendUserData(user_data) {
-    const ctrl = new MyInfoController(new MyInfoService(), new MyInfoView());
 
     this.userInfo = {};
 
@@ -15,7 +18,7 @@ class LoginUser {
     this.userInfo.userPhone = user_data.phone_number;
     this.userInfo.userEmail = user_data.email;
 
-    ctrl.handleShowInfo(this.userInfo);
+    this.ctrl.handleShowInfo(this.userInfo);
   }
 
 }

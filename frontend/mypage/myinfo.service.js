@@ -2,7 +2,7 @@ import API from "../api/api.js"
 
 class MyInfoService {
   constructor() {
-    // this.loadInfoPage();
+    this.loadInfoPage();
   }
 
   // functionName - loadInfoPage
