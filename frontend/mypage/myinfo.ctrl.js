@@ -1,22 +1,25 @@
 class MyInfoController {
 
-  constructor(service) {
-    this.api = service
-    console.log(service)
-    this.loadInfoPage();
+  constructor(view) {
+
+    this.view = view;
+    // this.userInfo = this.api.value.sendUserData();
+
 
   }
 
-  // functionName - loadInfoPage
-  // Job - 로그인 시 마이페이지에 회원정보를 api에서 받아오게 호출
-  // Input(args, params) - none
-  // Output(return) - none
-  loadInfoPage() {
-    // api에서 서버에서 response로 회원정보를 전달받음
-    this.api.loadUserInfo();
+  handleShowInfo(userInfo) {
+    console.log(userInfo)
+    this.view.showMyInfo(userInfo);
   }
 
-
+  handleChangeInfo(userInfo) {
+    console.log(userInfo)
+    this.service.changeName(userInfo.userName)
+    this.service.changeBirth(userInfo.userBirth)
+    this.service.changePhone(userInfo.userPhone)
+    this.service.changeEmail(userInfo.userEmail)
+  }
 }
 
 export default MyInfoController

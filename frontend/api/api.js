@@ -1,6 +1,7 @@
 // import { sendRequest } from '../lib/ajax.js';
-import MyInfoView from "../mypage/myinfo.view.js"
-import MyInfoService from "../mypage/myinfo.service.js"
+import LoginUser from "../mypage/myinfo.model.js"
+// import MyInfoController from "../mypage/myinfo.ctrl.js"
+
 
 class API {
   constructor(value) {
@@ -13,7 +14,7 @@ class API {
   // Input(args, params) - login user info
   // Output(return) - none
   async getLogin(loginData) {
-    await fetch("http://192.168.1.32:8000/account/login/", {
+    await fetch("http://3.36.120.133:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +43,7 @@ class API {
   // Input(args, params) - userId
   // Output(return) - none
   async sendToken(userId) {
-    await fetch("http://192.168.1.32:8000/account/user/", {
+    await fetch("http://3.36.120.133:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -54,6 +55,7 @@ class API {
         userId = res.user_data.user_id;
         this.saveUserId(userId);
         location.href = "../template/index.html"
+
       })
       .catch((err) => {
         console.log(err);
@@ -74,7 +76,7 @@ class API {
   // Input(args, params) - userInfo
   // Output(return) - none
   postSignup(signData) {
-    fetch("http://192.168.1.32:8000/account/signup/", {
+    fetch("http://3.36.120.133:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -101,8 +103,8 @@ class API {
   // Job - 로그인 시 서버에 토큰을 전달해서 회원정보를 받아옴
   // Input(args, params) - none
   // Output(return) - none
-  async loadUserInfo() {
-    await fetch("http://192.168.1.32:8000/account/user/", {
+  static async loadUserInfo() {
+    await fetch("http://3.36.120.133:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -111,9 +113,9 @@ class API {
     })
       .then((res) => res.json())
       .then((res) => {
+        new LoginUser(res.user_data);
+        // LoginUser에 user_data전달
 
-        // MyInfoView에 user_data전달
-        this.value.showMyInfo(res.user_data);
       })
       .catch((err) => {
         console.log(err);
@@ -135,7 +137,7 @@ class API {
     })
       .then((res) => res.json())
       .then((res) => {
-        const api = new API(new MyInfoView(new MyInfoService()));
+        const api = new API()
 
         api.loadUserInfo();
         console.log(res);
@@ -166,7 +168,7 @@ class API {
   }
 
   getPortfolio(pfId) {
-    fetch("http://192.168.1.32:8000/portfolio/write/"+`?board_id=${pfId}`, {
+    fetch("http://3.36.120.133:8000/portfolio/write/" + `?board_id=${pfId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -183,7 +185,7 @@ class API {
       })
   }
 
-  
+
 }
 export default API;
 

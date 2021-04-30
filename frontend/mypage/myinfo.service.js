@@ -2,10 +2,20 @@ import API from "../api/api.js"
 
 class MyInfoService {
   constructor() {
+    this.loadInfoPage();
   }
 
-  changeName(res) {
-    const userName = res.user_name;
+  // functionName - loadInfoPage
+  // Job - 로그인 시 마이페이지에 회원정보를 api에서 받아오게 호출
+  // Input(args, params) - none
+  // Output(return) - none
+  loadInfoPage() {
+    // api에서 서버에서 response로 회원정보를 전달받음
+    API.loadUserInfo();
+  }
+
+
+  changeName(userName) {
     const modifyBtn = document.getElementById("modify-name"),
       name = document.getElementById("name"),
       tdName = document.querySelector(".td-name");
@@ -14,11 +24,11 @@ class MyInfoService {
       tdName.removeChild(name);
       tdName.innerHTML = `<input class="change-name" type="text" value=${userName}>`;
       tdName.innerHTML += `<p id="modify-name" class="modify-btn">확인</p>`;
-      this.saveName(res);
+      this.saveName(userName);
     });
   }
 
-  saveName(res) {
+  saveName(userName) {
     const modifyBtn = document.getElementById("modify-name"),
       saveName = document.querySelector(".change-name"),
       tdName = document.querySelector(".td-name");
@@ -27,10 +37,10 @@ class MyInfoService {
       tdName.removeChild(saveName);
       tdName.innerHTML = `<p id="name" class="contxt-title">${saveName.value}</p>`;
       tdName.innerHTML += `<p id="modify-name" class="modify-btn">수정</p>`;
-      API.put("http://192.168.1.32:8000/account/user/name/", {
+      API.put("http://3.36.120.133:8000/account/user/name/", {
         user_name: `${saveName.value}`,
       });
-      this.changeName(res);
+      this.changeName(userName);
     });
   }
 
@@ -58,7 +68,7 @@ class MyInfoService {
       tdBirth.removeChild(saveBirth);
       tdBirth.innerHTML = `<p id="birth" class="contxt-title">${saveBirth.value}</p>`;
       tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">수정</p>`;
-      API.put("http://192.168.1.32:8000/account/user/birth/", {
+      API.put("http://3.36.120.133:8000/account/user/birth/", {
         birth_date: `${saveBirth.value}`,
       });
       this.changeBirth(res);
@@ -88,7 +98,7 @@ class MyInfoService {
       tdPhone.removeChild(savePhone);
       tdPhone.innerHTML = `<p id="phone" class="contxt-title">${savePhone.value}</p>`;
       tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">수정</p>`;
-      API.put("http://192.168.1.32:8000/account/user/phone/", {
+      API.put("http://3.36.120.133:8000/account/user/phone/", {
         phone_number: `${savePhone.value}`,
       });
       this.changePhone(res);
@@ -118,7 +128,7 @@ class MyInfoService {
       tdEmail.removeChild(saveEmail);
       tdEmail.innerHTML = `<p id="email" class="contxt-title">${saveEmail.value}</p>`;
       tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">수정</p>`;
-      API.put("http://192.168.1.32:8000/account/user/email/", {
+      API.put("http://3.36.120.133:8000/account/user/email/", {
         email: `${saveEmail.value}`,
       });
       this.changeEmail(res);
