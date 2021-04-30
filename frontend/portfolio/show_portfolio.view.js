@@ -13,7 +13,9 @@ class ShowPortfolioView {
     let stockCountArr = [];
     let stockAmountArr = [];
     for (let i = 0; i < res.stock.length; i++){
-      stockName.push(res.stock[i]["stock_name"]);
+      stockNameArr.push(res.stock[i]["stock_name"]);
+      stockCountArr.push(res.stock[i]["stock_count"]);
+      stockAmountArr.push(res.stock[i]["stock_amount"]);
     }
     let portfolio_HTML = `<div class="view-all-container">
     <div class="view-button-content">
@@ -44,7 +46,7 @@ class ShowPortfolioView {
         </div>
         <div class="view-text">
           <span class="main-text-title">포트폴리오 세부사항</span>
-          <a id="stock-name" class="main-text"></a>-<a id="stock-count"></apan>
+          <a id="stock" class="main-text"></a></apan>
         </div>
       </div>
       <div class="write-main-text">
@@ -74,13 +76,15 @@ class ShowPortfolioView {
     </div>
   </div>`
   
-  for (let i = 0; i < stockNameArry.length; i++) {
-
-    document.getElementById('stock-name').append(``)
-  }
-
 
   this.root.insertAdjacentHTML('afterend', portfolio_HTML);
+
+  let stock = document.querySelector('#stock')
+  for (let i = 0; i < stockNameArr.length; i++) {
+
+    stock.innerHTML += `${stockNameArr[i]} - ${stockCountArr[i]}주 <br>`;
+    
+  }
   }
 }
 
