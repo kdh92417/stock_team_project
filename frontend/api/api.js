@@ -6,7 +6,8 @@ import LoginUser from "../mypage/myinfo.model.js"
 class API {
   constructor(value) {
     this.value = value;
-    console.log(this.value)
+    this.loginUser = new LoginUser();
+    this.loadUserInfo();
   }
 
   // functionName - getLogin
@@ -103,7 +104,7 @@ class API {
   // Job - 로그인 시 서버에 토큰을 전달해서 회원정보를 받아옴
   // Input(args, params) - none
   // Output(return) - none
-  static async loadUserInfo() {
+  async loadUserInfo() {
     await fetch("http://3.36.120.133:8000/account/user/", {
       method: "GET",
       headers: {
@@ -113,9 +114,9 @@ class API {
     })
       .then((res) => res.json())
       .then((res) => {
-        new LoginUser(res.user_data);
-        // LoginUser에 user_data전달
 
+        // LoginUser에 user_data전달
+        this.loginUser.sendUserData(res.user_data);
       })
       .catch((err) => {
         console.log(err);
@@ -137,7 +138,7 @@ class API {
     })
       .then((res) => res.json())
       .then((res) => {
-        const api = new API()
+        const api = new API();
 
         api.loadUserInfo();
         console.log(res);

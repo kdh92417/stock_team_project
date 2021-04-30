@@ -9,7 +9,7 @@ class MyInfoView {
   // Input(args, params) - user_data
   // Output(return) - none
   showMyInfo(userInfo) {
-    console.log(userInfo)
+
     let myInfo_HTML = `<section class="mypage-info">
     <div class="mypage-title">
       <h2>회원정보수정</h2>

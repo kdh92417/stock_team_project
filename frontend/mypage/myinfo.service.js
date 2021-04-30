@@ -2,7 +2,7 @@ import API from "../api/api.js"
 
 class MyInfoService {
   constructor() {
-    this.loadInfoPage();
+    // this.loadInfoPage();
   }
 
   // functionName - loadInfoPage
@@ -44,8 +44,7 @@ class MyInfoService {
     });
   }
 
-  changeBirth(res) {
-    const userBirth = res.birth_date;
+  changeBirth(userBirth) {
     const modifyBtn = document.getElementById("modify-birth"),
       birth = document.getElementById("birth"),
       tdBirth = document.querySelector(".td-birth");
@@ -54,29 +53,27 @@ class MyInfoService {
       tdBirth.removeChild(birth);
       tdBirth.innerHTML = `<input class="change-birth" type="text" value=${userBirth}>`;
       tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">확인</p>`;
-      this.saveBirth(res);
+      this.saveBirth(userBirth);
     });
   }
 
-  saveBirth(res) {
+  saveBirth(userBirth) {
     const modifyBtn = document.getElementById("modify-birth"),
       saveBirth = document.querySelector(".change-birth"),
       tdBirth = document.querySelector(".td-birth");
-    console.dir(saveBirth);
     modifyBtn.addEventListener("click", () => {
 
       tdBirth.removeChild(saveBirth);
       tdBirth.innerHTML = `<p id="birth" class="contxt-title">${saveBirth.value}</p>`;
       tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">수정</p>`;
-      API.put("http://3.36.120.133:8000/account/user/birth/", {
+      API.put("http://3.36.120.133:8000/account/user/birth-date/", {
         birth_date: `${saveBirth.value}`,
       });
-      this.changeBirth(res);
+      this.changeBirth(userBirth);
     });
   }
 
-  changePhone(res) {
-    const userPhone = res.phone_number;
+  changePhone(userPhone) {
     const modifyBtn = document.getElementById("modify-phone"),
       phone = document.getElementById("phone"),
       tdPhone = document.querySelector(".td-phone");
@@ -85,11 +82,11 @@ class MyInfoService {
       tdPhone.removeChild(phone);
       tdPhone.innerHTML = `<input class="change-phone" type="text" value="${userPhone}">`;
       tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">확인</p>`;
-      this.savePhone(res);
+      this.savePhone(userPhone);
     });
   }
 
-  savePhone(res) {
+  savePhone(userPhone) {
     const modifyBtn = document.getElementById("modify-phone"),
       savePhone = document.querySelector(".change-phone"),
       tdPhone = document.querySelector(".td-phone");
@@ -101,12 +98,11 @@ class MyInfoService {
       API.put("http://3.36.120.133:8000/account/user/phone/", {
         phone_number: `${savePhone.value}`,
       });
-      this.changePhone(res);
+      this.changePhone(userPhone);
     });
   }
 
-  changeEmail(res) {
-    const userEmail = res.email;
+  changeEmail(userEmail) {
     const modifyBtn = document.getElementById("modify-email"),
       email = document.getElementById("email"),
       tdEmail = document.querySelector(".td-email");
@@ -115,11 +111,11 @@ class MyInfoService {
       tdEmail.removeChild(email);
       tdEmail.innerHTML = `<input class="change-email" type="text" value="${userEmail}">`;
       tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">확인</p>`;
-      this.saveEmail(res)
+      this.saveEmail(userEmail)
     });
   }
 
-  saveEmail(res) {
+  saveEmail(userEmail) {
     const modifyBtn = document.getElementById("modify-email"),
       saveEmail = document.querySelector(".change-email"),
       tdEmail = document.querySelector(".td-email");
@@ -131,7 +127,7 @@ class MyInfoService {
       API.put("http://3.36.120.133:8000/account/user/email/", {
         email: `${saveEmail.value}`,
       });
-      this.changeEmail(res);
+      this.changeEmail(userEmail);
     });
   }
 
