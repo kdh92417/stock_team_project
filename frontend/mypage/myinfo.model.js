@@ -1,14 +1,11 @@
 import MyInfoController from './myinfo.ctrl.js';
+import MyInfoService from "./myinfo.service.js"
 import MyInfoView from './myinfo.view.js';
 
 class LoginUser {
-  constructor() {
-
-  }
 
   sendUserData(user_data) {
-    console.log(user_data)
-    const ctrl = new MyInfoController();
+    const ctrl = new MyInfoController(new MyInfoService(), new MyInfoView());
 
     this.userInfo = {};
 
