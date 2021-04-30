@@ -12,11 +12,15 @@ class ShowPortfolioView {
     let stockNameArr = [];
     let stockCountArr = [];
     let stockAmountArr = [];
+    let stockPriceArr = []
+
     for (let i = 0; i < res.stock.length; i++){
       stockNameArr.push(res.stock[i]["stock_name"]);
       stockCountArr.push(res.stock[i]["stock_count"]);
       stockAmountArr.push(res.stock[i]["stock_amount"]);
+      stockPriceArr.push(stockCountArr[i] * stockAmountArr[i])
     }
+
     let portfolio_HTML = `<div class="view-all-container">
     <div class="view-button-content">
       <a href="" role="button" class="btn prev-btn">
@@ -25,8 +29,8 @@ class ShowPortfolioView {
       <a href="" role="button" class="btn next-btn">
         <span class="btn-text">다음글</span>
       </a>
-      <a href="" role="button" class="btn list-btn">
-        <span class="btn-text">목록</span>
+      <a href="../template/portfolio-board.html" role="button" class="btn list-btn">
+        <span id="btn-list" class="btn-text">목록</span>
       </a>
     </div>
     <div class="write-content-box">
@@ -46,7 +50,7 @@ class ShowPortfolioView {
           <canvas id="myChart" width="250" height="250"></canvas>
         </div>
         <div class="view-text">
-          <span class="main-text-title">포트폴리오 세부사항</span>
+          <span class="main-text-title">포트폴리오 세부사항</span><br>
           <a id="stock" class="main-text"></a></apan>
         </div>
       </div>
@@ -83,9 +87,11 @@ class ShowPortfolioView {
   let stock = document.querySelector('#stock')
   for (let i = 0; i < stockNameArr.length; i++) {
 
-    stock.innerHTML += `${stockNameArr[i]} - ${stockCountArr[i]}주 <br>`;
-    
+    stock.innerHTML += `${stockNameArr[i]} - ${stockCountArr[i]}주 - ${stockPriceArr[i].toLocaleString()}원<br>`;
+  
   }
+
+
 
   // Chart JS
   var ctx = document.getElementById('myChart');
@@ -96,7 +102,7 @@ class ShowPortfolioView {
       datasets: [
         {
           label: "# of Votes",
-          data: stockCountArr,
+          data: stockPriceArr,
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
             "rgba(54, 162, 235, 0.2)",
@@ -104,6 +110,9 @@ class ShowPortfolioView {
             "rgba(75, 192, 192, 0.2)",
             "rgba(153, 102, 255, 0.2)",
             "rgba(255, 159, 64, 0.2)",
+            "rgba(183, 255, 176, 0.2)",
+            "rgba(255, 170, 192, 0.2)",
+            "rgba(255, 248, 149, 0.2)",
           ],
           borderColor: [
             "rgba(255, 99, 132, 1)",
@@ -112,6 +121,9 @@ class ShowPortfolioView {
             "rgba(75, 192, 192, 1)",
             "rgba(153, 102, 255, 1)",
             "rgba(255, 159, 64, 1)",
+            "rgba(94, 199, 62, 1)",
+            "rgba(255, 86, 131, 1)",
+            "rgba(218, 206, 47, 1)",
           ],
           borderWidth: 1,
         },
