@@ -166,7 +166,7 @@ class API {
   }
 
   getPortfolio(pfId) {
-    fetch("http://192.168.1.32:8000/portfolio/write/"+`?board_id=${pfId}`, {
+    fetch("http://3.36.120.133:8000/portfolio/write/"+`?board_id=${pfId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -183,7 +183,22 @@ class API {
       })
   }
 
-  
+  getPortfolioList() {
+    fetch("http://3.36.120.133:8000/portfolio/list/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => (res.json()))
+      .then((res) => {
+        console.log(res);
+        this.value.showPortfolioList(res.board_data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 }
 export default API;
 
