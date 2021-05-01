@@ -1,8 +1,6 @@
 class MyInfoView {
 
-  constructor(service) {
-    console.log(this.service)
-    this.service = service
+  constructor() {
     this.root = document.querySelector('.root');
   }
 
@@ -10,12 +8,7 @@ class MyInfoView {
   // Job - 로그인 된 회원정보를 controller에서 전달받아 화면에 보여줌
   // Input(args, params) - user_data
   // Output(return) - none
-  showMyInfo(res) {
-    const userId = res.user_id;
-    const userName = res.user_name;
-    const userBirth = res.birth_date;
-    const userPhone = res.phone_number;
-    const userEmail = res.email;
+  showMyInfo(userInfo) {
 
     let myInfo_HTML = `<section class="mypage-info">
     <div class="mypage-title">
@@ -29,7 +22,7 @@ class MyInfoView {
               <span>아이디</span>
             </th>
             <td>
-              <p class="contxt-title">${userId}</p>
+              <p class="contxt-title">${userInfo.userId}</p>
             </td>
           </tr>
           <tr>
@@ -45,7 +38,7 @@ class MyInfoView {
               <span>사용자이름</span>
             </th>
             <td class="td-name">
-              <p id="name" class="contxt-title">${userName}</p>
+              <p id="name" class="contxt-title">${userInfo.userName}</p>
               <p id="modify-name" class="modify-btn">수정</p>
             </td>
           </tr>
@@ -54,7 +47,7 @@ class MyInfoView {
               <span>생년월일</span>
             </th>
             <td class="td-birth">
-              <p id="birth" class="contxt-title">${userBirth}</p>
+              <p id="birth" class="contxt-title">${userInfo.userBirth}</p>
               <p id="modify-birth" class="modify-btn">수정</p>
             </td>
           </tr>
@@ -63,7 +56,7 @@ class MyInfoView {
               <span>전화번호</span>
             </th>
             <td class="td-phone">
-              <p id="phone" class="contxt-title">${userPhone}</p>
+              <p id="phone" class="contxt-title">${userInfo.userPhone}</p>
               <p id="modify-phone" class="modify-btn">수정</p>
             </td>
           </tr>
@@ -72,7 +65,7 @@ class MyInfoView {
               <span>이메일</span>
             </th>
             <td class="td-email">
-              <p id="email" class="contxt-title">${userEmail}</p>
+              <p id="email" class="contxt-title">${userInfo.userEmail}</p>
               <p id="modify-email" class="modify-btn">수정</p>
             </td>
           </tr>
@@ -82,15 +75,6 @@ class MyInfoView {
   </section>`
 
     this.root.insertAdjacentHTML('afterend', myInfo_HTML);
-    this.changeInfo(res);
-  }
-
-  changeInfo(res) {
-    console.log(this.service)
-    this.service.changeName(res)
-    this.service.changeBirth(res)
-    this.service.changePhone(res)
-    this.service.changeEmail(res)
   }
 
 }

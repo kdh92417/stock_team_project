@@ -1,14 +1,17 @@
 import json
-from django.views       import View
-from django.http        import (
+
+from django.views          import View
+from django.http           import (
     JsonResponse,
     HttpResponse
 )
 
-from account.utils      import login_required
-from account.models     import Account
-from companies.models   import Company
-from portfolio.models   import (
+from django.core.paginator import Paginator
+
+from account.utils         import login_required
+from account.models        import Account
+from companies.models      import Company
+from portfolio.models      import (
     Portfolio,
     PortfolioStock,
     Comment
@@ -18,6 +21,7 @@ class TotalPortfolioView(View):
     def get(self, request):
         try:
             company_name = request.GET.get('company_name', None)
+
             if company_name != None:
                 board_list = Portfolio.objects.prefetch_related(
                     'portfoliostock_set__company', 'user'
@@ -25,10 +29,14 @@ class TotalPortfolioView(View):
             else:
                 board_list = Portfolio.objects.prefetch_related(
                     'portfoliostock_set__company', 'user'
-                ).all()
-
+                ).all().order_by('-create_date')
+            page = request.GET.get('page', 1)
+            paginator = Paginator(board_list, 6)
+            total_count = paginator.count
+            board_list = paginator.get_page(page)
             board_data = [{
-                'user_name'  : board.user.user_name,
+                'pofol_id'   : board.id,
+                'user_id'    : board.user.user_id,
                 'pofol_name' : board.name,
                 'like_count' : board.total_like,
                 'stock' : [{
@@ -56,6 +64,7 @@ class BasePortfolioView(View):
             board_data = {
                 'user_id'  : board.user.user_id,
                 'title' : board.name,
+                'content' : board.content,
                 'like_count' : board.total_like,
                 'stock'      : [{
                   'stock_name' : stock.company.cp_name,
@@ -67,7 +76,7 @@ class BasePortfolioView(View):
         except KeyError:
             return JsonResponse({'message' : 'SUCCESS', 'status' : 400}, status=400)
 
-        return JsonResponse({'board_data': board_data, 'status' : 200}, status=200)
+        return JsonResponse({'message' : 'SUCCESS', 'board_data': board_data, 'status' : 200}, status=200)
 
     @login_required
     def post(self, request):
@@ -83,13 +92,19 @@ class BasePortfolioView(View):
             )
 
             for stock in stock_list:
-                cp = Company.objects.get_or_create(cp_name=stock['stock_name'])
-                PortfolioStock.objects.create(
-                    company_id = cp[0].id,
-                    portfolio_id = pf.id,
-                    shares_count = stock['stock_count'],
-                    shares_amount = stock['stock_amount']
-                )
+                try:
+                    cp = Company.objects.get(cp_name=stock['stock_name'])
+                    PortfolioStock.objects.create(
+                        company_id = cp.id,
+                        portfolio_id = pf.id,
+                        shares_count = stock['stock_count'],
+                        shares_amount = stock['stock_amount']
+                    )
+                except Company.DoesNotExist:
+                    return JsonResponse({
+                        'status'  : 400,
+                        'message' : 'Does Not Exist Company'
+                    }, status=400)
 
             board_data = {
                 'portfolio_id' : pf.id,
