@@ -1,0 +1,122 @@
+.sfolio-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+}
+
+.sfolio-navbar.nav-active {
+  transition: 0.2s ease-in-out;
+  background-color: #222f45;
+  z-index: 999;
+}
+
+.main-logo {
+  font-size: 32px;
+  color: #ffff;
+}
+
+.nav-menu {
+  display: flex;
+}
+
+.main-menu {
+  display: flex;
+  list-style: none;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.main-menu ul {
+  position: absolute;
+  top: 61px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  font-size: 18px;
+  background-color: #222f45;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.main-menu li:hover ul {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mypage-menu li {
+  padding: 8px 12px;
+  z-index: 10;
+}
+
+.logo,
+.nav-item,
+.main-logout div {
+  color: #fff;
+}
+
+.main-logout div > span {
+  color: #f48fb1;
+}
+
+#mypage label {
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.main-menu li {
+  padding: 15px 25px;
+  justify-content: center;
+}
+
+#mypage label:hover {
+  border-bottom: 3px solid #48e0a6;
+  padding-bottom: 5px;
+}
+
+.main-login a:hover,
+.main-menu a:hover {
+  padding-bottom: 5px;
+  border-bottom: 3px solid #48e0a6;
+}
+
+.main-login,
+.main-logout {
+  display: flex;
+  list-style: none;
+  font-size: 20px;
+}
+
+.main-login li,
+.main-logout div {
+  padding: 15px 15px;
+}
+
+.main-logout li {
+  padding: 15px 0;
+}
+
+#admin {
+  display: none;
+}
+
+.nav-container .navbar_toggleBtn {
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.nav-container input[type="checkbox"] {
+  display: none;
+}

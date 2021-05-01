@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+body {
+  background: linear-gradient(140deg, #2f3e81, #4560bf);
+}
+
+.main-login {
+  margin-bottom: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.write-portfolio-title {
+  font-family: "Do Hyeon", sans-serif;
+  color: #fff;
+  text-align: center;
+  margin-top: 140px;
+  font-size: 50px;
+}
+
+.logo,
+.nav-item {
+  color: #fff;
+}
+.logo:hover,
+.nav-item:hover {
+  text-decoration: none;
+}
+
+.logo:hover,
+.nav-item:hover {
+  color: #fff;
+}
+
+.btn-area {
+  width: 80%;
+  min-height: 20px;
+  text-align: right;
+  margin-top: 10px;
+}
+
+.btn-area a {
+  padding: 5px 10px;
+  margin-left: 10px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  background-color: #48e0a6;
+  color: #000;
+}
+
+.write-container{
+  font-family: 'Nanum Gothic', sans-serif;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 50px;
+  background-color: #fff;;
+}
+
+.portfolio-title {
+  width: 100%;
+  text-align: center;
+}
+
+.portfolio-title>input {
+  font-family: 'Nanum Gothic', sans-serif;
+  width: 90%;
+  height: 35px;
+  margin: 20px 0;
+  border: 1px solid rgb(175, 175, 175);
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.portfolio-title>input:focus {
+  border: 1px solid #48E0A6;
+}
+
+.input-stock-info::-webkit-scrollbar {
+  width: 13px;
+}
+.input-stock-info::-webkit-scrollbar-thumb {
+  background-color: #b8c5e0;
+}
+.input-stock-info::-webkit-scrollbar-track {
+  background-color: #ececec;
+}
+
+.input-stock-info {
+  border: 1px solid rgb(175, 175, 175);
+  border-radius: 10px;
+  width: 90%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: 20px 0;
+  overflow: auto;
+}
+
+.input-stock-info input {
+  font-family: 'Nanum Gothic', sans-serif;
+}
+.add-input {
+  padding: 0 10px;
+  margin: 2px;
+  font-size: 22px;
+  border-radius: 5px;
+  border: none;
+  background-color: #48E0A6;
+}
+
+.delete-input {
+  padding: 0 10px; /* 폰트에따라 변경 */
+  margin: 2px;
+  font-size: 22px;
+  border-radius: 5px;
+  border: none;
+  background-color: #48E0A6;
+}
+
+.stock-info{
+  font-size: 20px;
+  height: 22px;
+  padding: 5px;
+}
+
+.input-stock-info input {
+  border: 1px solid rgb(175, 175, 175);
+  height: 30px;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 10px;
+  margin: 5px;
+}
+
+/* .input-stock-info input:nth-child(odd) {
+  width: 180px;
+} */
+
+.td-stock-name>input,
+.td-stock-amount>input {
+  width: 180px
+}
+
+.td-stock-count>input {
+  width: 120px;
+}
+
+.btn-container {
+  text-align: center;
+}
+
+.list-btn {
+  text-align: right;
+}
+
+.note-editable {
+  min-height: 250px;
+}
+
+.submit-portfolio {
+  margin: 20px 0 50px 0;
+  padding: 5px 150px;
+  background: #48E0A6;
+  color: #1c3060;
+  font-size: 22px;
+  border: none;
+  border-radius: 25px;
+}

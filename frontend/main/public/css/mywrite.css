@@ -1,0 +1,162 @@
+.mypage-write {
+  padding-top: 10rem !important;
+  width: 100%;
+  height: 800px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.writepage-title {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.comments-title {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.mypage-comments {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  position: relative;
+  width: 600px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scroll-table {
+  width: 600px;
+  margin-top: 0;
+  max-height: 300px;
+  padding: 0px 20px;
+  overflow: auto;
+}
+
+.head-table,
+.body-table,
+.cm-head-table,
+.cm-body-table {
+  position: relative;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+/* ------ 작성글 테이블 ------ */
+.head-table .check,
+.body-table .td-check-box {
+  width: 8%;
+}
+
+.head-table .number,
+.body-table .td-number {
+  width: 12%;
+}
+
+.head-table .title,
+.body-table .td-article {
+  width: 40%;
+}
+
+.head-table .date,
+.body-table .td-date {
+  width: 25%;
+}
+
+/* ------ 댓글 테이블 ------ */
+.cm-head-table .check,
+.cm-body-table .td-cm-check-box {
+  width: 8%;
+}
+
+.cm-head-table .comments,
+.cm-body-table .td-comments {
+  width: 48%;
+}
+
+.cm-head-table .cm-date,
+.cm-body-table .td-cm-date {
+  width: 25%;
+}
+
+.head-table th,
+.head-table td,
+.body-table th,
+.body-table td,
+.cm-head-table th,
+.cm-head-table td,
+.cm-body-table th,
+.cm-body-table td {
+  color: #fff;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: center;
+}
+
+.head-table th,
+.cm-head-table th {
+  font-size: 24px;
+}
+
+.body-table .check-box input[type="checkbox"],
+.cm-body-table .check-box input[type="checkbox"] {
+  margin: 0 3px;
+  margin-top: 6px;
+  width: 18px;
+  height: 18px;
+}
+
+tbody a {
+  color: #fff;
+}
+
+tbody a:hover {
+  border-bottom: 1px solid #fff;
+}
+
+.select {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.select .all-check-box {
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+.select button {
+  padding: 0 10px;
+  padding-top: 3px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  background-color: #48e0a6;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+
+.select .all-check-box input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.select .all-check-box span {
+  font-size: 17px;
+  padding-left: 5px;
+}
