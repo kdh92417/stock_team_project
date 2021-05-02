@@ -1,12 +1,11 @@
 class BoardPortfolioView {
   constructor() {
-    this.root = document.querySelector('.portfolio-list-root');
+    this.root = document.querySelector(".portfolio-list-root");
   }
 
   showPortfolioList(res) {
     console.log(res);
-    let portfolio_HTML = 
-    `<div class="portfolio-container">
+    let portfolio_HTML = `<div class="portfolio-container">
       <div class="portfolio-content">
         <div class="portfolio-title">포트폴리오 게시판</div>
         <div class="portfolio-list-container">
@@ -21,101 +20,105 @@ class BoardPortfolioView {
         </div>
       </div>
     </div>`;
-  
 
-  this.root.insertAdjacentHTML('afterend', portfolio_HTML);
+    this.root.insertAdjacentHTML("afterend", portfolio_HTML);
 
-  const list = document.querySelector(".portfolio-list");
+    const list = document.querySelector(".portfolio-list");
 
-  let stockName = [];
-  let stockCount = [];
-  let stockAmount = [];
-  let stockPrice = []
+    let stockName = [];
+    let stockCount = [];
+    let stockAmount = [];
+    let stockPrice = [];
 
-  for (let i = 0; i < res.length; i++){
-    let stockNameList = [];
-    let stockCountList = [];
-    let stockAmountList = [];
-    let stockPriceList = [];
-    
-    for (let j = 0; j < res[i]["stock"].length; j++){
-      stockNameList.push(res[i]["stock"][j]["stock_name"]);
-      stockCountList.push(res[i]["stock"][j]["stock_count"]);
-      stockAmountList.push(res[i]["stock"][j]["stock_amount"]);
-      stockPriceList.push(stockCountList[j] * stockAmountList[j]);
+    for (let i = 0; i < res.length; i++) {
+      let stockNameList = [];
+      let stockCountList = [];
+      let stockAmountList = [];
+      let stockPriceList = [];
+
+      for (let j = 0; j < res[i]["stock"].length; j++) {
+        stockNameList.push(res[i]["stock"][j]["stock_name"]);
+        stockCountList.push(res[i]["stock"][j]["stock_count"]);
+        stockAmountList.push(res[i]["stock"][j]["stock_amount"]);
+        stockPriceList.push(stockCountList[j] * stockAmountList[j]);
+      }
+      stockName.push(stockNameList);
+      stockCount.push(stockCountList);
+      stockAmount.push(stockAmountList);
+      stockPrice.push(stockPriceList);
     }
-    stockName.push(stockNameList);
-    stockCount.push(stockCountList);
-    stockAmount.push(stockAmountList);
-    stockPrice.push(stockPriceList);
-    
-  }
 
-  console.log(stockName);
-  console.log(stockPrice);
+    console.log(stockName);
+    console.log(stockPrice);
 
-    
-  for (let i = 0; i < res.length; i++) {
-    list.innerHTML += 
-    `<div class="card-item">
-      <div class="card-thumbnail">
-        <div><canvas class="myChart" width="200" height="200"></canvas></div>
-      </div>
-      <div class="card-body">
-        <a href="http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${res[i]["pofol_id"]}">
-        <div class="write-title">${res[i]["pofol_name"]}</div><a>
-        <div class="writer">
-          <img src="" alt="">
-          <span class="nickname">${res[i]["user_id"]}</span>
+    for (let i = 0; i < res.length; i++) {
+      list.innerHTML += 
+      `<div class="card">
+      <div class="card-item">
+        <div class="card-thumbnail">
+          <div><canvas id="myChart${i}" width="150" height="150"></canvas></div>
+        </div>
+        <div class="card-body">
+          <a href="http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${res[i]["pofol_id"]}">
+          <div class="write-title">${res[i]["pofol_name"]}</div><a>
+          <div class="writer">
+            <span class="nickname">${res[i]["user_id"]}</span>
+          </div>
         </div>
       </div>
-    </div>`
-
-    // Chart JS
-    var ctx = document.querySelectorAll('.myChart')[i];
-    var myChart = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: stockName[i],
-        datasets: [
-          {
-            data: stockPrice[i],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-              "rgba(183, 255, 176, 0.2)",
-              "rgba(255, 170, 192, 0.2)",
-              "rgba(255, 248, 149, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(94, 199, 62, 1)",
-              "rgba(255, 86, 131, 1)",
-              "rgba(218, 206, 47, 1)",
-            ],
-            borderWidth: 1,
+      </div>`;
+    }
+    for (let i = 0; i < res.length; i++) {
+      // Chart JS
+      let ctx = document.getElementById("myChart" + i);
+      console.log(ctx);
+      let myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: stockName[i],
+          datasets: [
+            {
+              data: stockPrice[i],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+                "rgba(183, 255, 176, 0.2)",
+                "rgba(255, 170, 192, 0.2)",
+                "rgba(255, 248, 149, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(94, 199, 62, 1)",
+                "rgba(255, 86, 131, 1)",
+                "rgba(218, 206, 47, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          legend: {
+            display: false
           },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
+
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
           },
         },
-      },
-    });
+      });
+    }
   }
-}
 }
 
 export default BoardPortfolioView;

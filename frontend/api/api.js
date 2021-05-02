@@ -150,7 +150,7 @@ class API {
   }
 
   postPortfolio(portfolioData) {
-    fetch("http://192.168.1.32:8000/portfolio/write/", {
+    fetch("http://3.36.120.133:8000/portfolio/write/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
