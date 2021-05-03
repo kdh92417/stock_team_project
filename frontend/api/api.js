@@ -16,7 +16,7 @@ class API {
   // Input(args, params) - login user info
   // Output(return) - none
   async getLogin(loginData) {
-    await fetch("http://3.36.120.133:8000/account/login/", {
+    await fetch("http://192.168.1.32:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ class API {
   // Input(args, params) - userId
   // Output(return) - none
   async sendToken(userId) {
-    await fetch("http://3.36.120.133:8000/account/user/", {
+    await fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ class API {
   // Input(args, params) - userInfo
   // Output(return) - none
   postSignup(signData) {
-    fetch("http://3.36.120.133:8000/account/signup/", {
+    fetch("http://192.168.1.32:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -105,23 +105,14 @@ class API {
   // Job - 로그인 시 서버에 토큰을 전달해서 회원정보를 받아옴
   // Input(args, params) - none
   // Output(return) - none
-  static async loadUserInfo() {
-    await fetch("http://3.36.120.133:8000/account/user/", {
+  static async loadUserInfo(url) {
+    return await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: localStorage.getItem("token"),
       },
     })
-      .then((res) => res.json())
-      .then((res) => {
-        // const loginUser = new LoginUser(new MyInfoController(new MyInfoService(), new MyInfoView()));
-        // LoginUser에 user_data전달
-        loginUser.sendUserData(res.user_data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
   }
 
   // functionName - put
@@ -139,18 +130,16 @@ class API {
     })
       .then((res) => res.json())
       .then((res) => {
-        const api = new API();
-
-        api.loadUserInfo();
+        location.href = "../template/mypage.html"
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
-      });
+      });;
   }
 
   postPortfolio(portfolioData) {
-    fetch("http://3.36.120.133:8000/portfolio/write/", {
+    fetch("http://192.168.1.32:8000/portfolio/write/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -170,7 +159,7 @@ class API {
   }
 
   getPortfolio(pfId) {
-    fetch("http://3.36.120.133:8000/portfolio/write/"+`?board_id=${pfId}`, {
+    fetch("http://192.168.1.32:8000/portfolio/write/" + `?board_id=${pfId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -188,7 +177,7 @@ class API {
   }
 
   getPortfolioList() {
-    fetch("http://3.36.120.133:8000/portfolio/list/", {
+    fetch("http://192.168.1.32:8000/portfolio/list/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
