@@ -59,12 +59,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 30px 0 30px 0;
 }
 
 .view-graph-content .view-graph {
   margin: 20px 20px;
-  width: 320px;
-  height: 320px;
+  width: 300px;
+  height: 300px;
   padding: 20px;
   background: rgb(255, 255, 255);
   border-radius: 10px;
@@ -100,7 +101,7 @@
 }
 
 .main-text-title {
-  color: rgb(235, 143, 193);
+  color: rgb(255, 255, 255);
 }
 
 .write-main-text {
