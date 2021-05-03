@@ -38,13 +38,17 @@ class CompanyView {
         }, {
           type: 'bar',
           label: 'Bar Dataset',
-          data: [10, 20, 30, 40]
+          data: [100, 100, 100, 100],
+          backgroundColor: '#0064FF',
+          fill: false, // line의 아래쪽을 색칠할 것인가? 
+          borderColor: '#0064FF',
+          borderWidth: 2
         }],
         labels: ['January', 'February', 'March', 'April']
       },
       options: {
         legend: {
-          display: false,
+          display: true,
           labels: {
             fontSize: 18
           }
