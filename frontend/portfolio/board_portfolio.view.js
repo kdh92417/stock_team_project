@@ -15,7 +15,7 @@ class BoardPortfolioView {
           <div class="portfolio-write">
             <button><a href="../../main/template/write-board.html">글쓰기</a></button>
           </div>
-          <div class="portfolio-list">
+          <div id="portfolio-list">
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@ class BoardPortfolioView {
 
     this.root.insertAdjacentHTML("afterend", portfolio_HTML);
 
-    const list = document.querySelector(".portfolio-list");
+    const list = document.querySelector("#portfolio-list");
 
     let stockName = [];
     let stockCount = [];
@@ -52,8 +52,7 @@ class BoardPortfolioView {
     console.log(stockPrice);
 
     for (let i = 0; i < res.length; i++) {
-      list.innerHTML += 
-      `<div class="card">
+      list.innerHTML += `<div class="card">
       <div class="card-item">
         <div class="card-thumbnail">
           <div><canvas id="myChart${i}" width="150" height="150"></canvas></div>
@@ -68,10 +67,10 @@ class BoardPortfolioView {
       </div>
       </div>`;
     }
+
     for (let i = 0; i < res.length; i++) {
       // Chart JS
       let ctx = document.getElementById("myChart" + i);
-      console.log(ctx);
       let myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -107,7 +106,7 @@ class BoardPortfolioView {
         },
         options: {
           legend: {
-            display: false
+            display: false,
           },
 
           scales: {
@@ -115,6 +114,129 @@ class BoardPortfolioView {
               beginAtZero: true,
             },
           },
+        },
+      });
+    }
+
+    // Ajax paging
+    let page = -1;
+    let temp = false;
+    var type = "type1"; // ajax로 날려 back단에서 확인할 type
+        
+    $(document).ready(function () {
+      $(window).scroll(function () {
+        let scrollT = $(this).scrollTop();
+        let scrollH = $(this).height();
+        let contentH = $(document).height();
+
+        if (scrollT + scrollH + 30 > contentH) {
+          page++;
+          fetchList();
+        }
+      });
+      fetchList();
+    });
+
+    function fetchList() {
+      $.ajax({
+        url: "http://15.165.17.217:8000/portfolio/list/?page=" + page,
+        type: "GET",
+        dataType: "JSON",
+        // data: {type:type, page:page},
+        success: function (data) {
+          for (let i = 0; i < data.board_data.length; i++) {
+            let stockNameList = [];
+            let stockCountList = [];
+            let stockAmountList = [];
+            let stockPriceList = [];
+      
+            for (let j = 0; j < data.board_data[i]["stock"].length; j++) {
+              stockNameList.push(data.board_data[i]["stock"][j]["stock_name"]);
+              stockCountList.push(data.board_data[i]["stock"][j]["stock_count"]);
+              stockAmountList.push(data.board_data[i]["stock"][j]["stock_amount"]);
+              stockPriceList.push(stockCountList[j] * stockAmountList[j]);
+            }
+            stockName.push(stockNameList);
+            stockCount.push(stockCountList);
+            stockAmount.push(stockAmountList);
+            stockPrice.push(stockPriceList);
+
+          }
+          if (data.board_data.length > 0) {
+            console.log(data.board_data);
+            let html = "";
+            $.each(data, function (idx, val) {
+              for (let i = 0; i < data.board_data.length; i++) {
+                html = `<div class="card">
+              <div class="card-item">
+                <div class="card-thumbnail">
+                  <div><canvas id="myChart${i}" width="150" height="150"></canvas></div>
+                </div>
+                <div class="card-body">
+                  <a href="http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${data.board_data[i]["pofol_id"]}">
+                  <div class="write-title">${data.board_data[i]["pofol_name"]}</div><a>
+                  <div class="writer">
+                    <span class="nickname">${data.board_data[i]["user_id"]}</span>
+                  </div>
+                </div>
+              </div>
+              </div>`;
+              }
+              for (let i = 0; i < data.board_data.length; i++) {
+                let ctx = document.getElementById("myChart" + i);
+                let myChart = new Chart(ctx, {
+                  type: "pie",
+                  data: {
+                    labels: stockName[i],
+                    datasets: [
+                      {
+                        data: stockPrice[i],
+                        backgroundColor: [
+                          "rgba(255, 99, 132, 0.2)",
+                          "rgba(54, 162, 235, 0.2)",
+                          "rgba(255, 206, 86, 0.2)",
+                          "rgba(75, 192, 192, 0.2)",
+                          "rgba(153, 102, 255, 0.2)",
+                          "rgba(255, 159, 64, 0.2)",
+                          "rgba(183, 255, 176, 0.2)",
+                          "rgba(255, 170, 192, 0.2)",
+                          "rgba(255, 248, 149, 0.2)",
+                        ],
+                        borderColor: [
+                          "rgba(255, 99, 132, 1)",
+                          "rgba(54, 162, 235, 1)",
+                          "rgba(255, 206, 86, 1)",
+                          "rgba(75, 192, 192, 1)",
+                          "rgba(153, 102, 255, 1)",
+                          "rgba(255, 159, 64, 1)",
+                          "rgba(94, 199, 62, 1)",
+                          "rgba(255, 86, 131, 1)",
+                          "rgba(218, 206, 47, 1)",
+                        ],
+                        borderWidth: 1,
+                      },
+                    ],
+                  },
+                  options: {
+                    legend: {
+                      display: false,
+                    },
+
+                    scales: {
+                      y: {
+                        beginAtZero: true,
+                      },
+                    },
+                  },
+                });
+              }
+            });
+
+            $("#portfolio-list").append(html);
+          } else {
+            // 더이상 조회할 데이터가 없을 시 temp를 true로 만들어 더이상의 ajax호출을 막음.
+            temp = true;
+          }
         },
       });
     }
