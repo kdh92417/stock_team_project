@@ -31,7 +31,7 @@ class TotalPortfolioView(View):
                     'portfoliostock_set__company', 'user'
                 ).all().order_by('-create_date')
             page = request.GET.get('page', 1)
-            paginator = Paginator(board_list, 6)
+            paginator = Paginator(board_list, 8)
             total_count = paginator.count
             board_list = paginator.get_page(page)
             board_data = [{
