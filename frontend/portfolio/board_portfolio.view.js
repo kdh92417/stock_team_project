@@ -29,6 +29,7 @@ class BoardPortfolioView {
     let stockCount = [];
     let stockAmount = [];
     let stockPrice = [];
+    let chartId = 0;
 
     for (let i = 0; i < res.length; i++) {
       let stockNameList = [];
@@ -52,6 +53,7 @@ class BoardPortfolioView {
     console.log(stockPrice);
 
     for (let i = 0; i < res.length; i++) {
+      chartId++;
       list.innerHTML += `<div class="card">
       <div class="card-item">
         <div class="card-thumbnail">
@@ -121,7 +123,6 @@ class BoardPortfolioView {
     // Ajax paging
     let page = -1;
     let temp = false;
-    var type = "type1"; // ajax로 날려 back단에서 확인할 type
         
     $(document).ready(function () {
       $(window).scroll(function () {
@@ -142,8 +143,11 @@ class BoardPortfolioView {
         url: "http://15.165.17.217:8000/portfolio/list/?page=" + page,
         type: "GET",
         dataType: "JSON",
-        // data: {type:type, page:page},
         success: function (data) {
+          let stockNameScroll = [];
+          let stockCountScroll = [];
+          let stockAmountScroll = [];
+          let stockPriceScroll = [];
           for (let i = 0; i < data.board_data.length; i++) {
             let stockNameList = [];
             let stockCountList = [];
@@ -156,41 +160,47 @@ class BoardPortfolioView {
               stockAmountList.push(data.board_data[i]["stock"][j]["stock_amount"]);
               stockPriceList.push(stockCountList[j] * stockAmountList[j]);
             }
-            stockName.push(stockNameList);
-            stockCount.push(stockCountList);
-            stockAmount.push(stockAmountList);
-            stockPrice.push(stockPriceList);
-
+            stockNameScroll.push(stockNameList);
+            stockCountScroll.push(stockCountList);
+            stockAmountScroll.push(stockAmountList);
+            stockPriceScroll.push(stockPriceList);
           }
+
           if (data.board_data.length > 0) {
             console.log(data.board_data);
             let html = "";
-            $.each(data, function (idx, val) {
+            
+              console.log("start")
               for (let i = 0; i < data.board_data.length; i++) {
+                console.log(i+chartId)
+                let id = i + chartId;
                 html = `<div class="card">
               <div class="card-item">
                 <div class="card-thumbnail">
-                  <div><canvas id="myChart${i}" width="150" height="150"></canvas></div>
+                  <div><canvas id="myChart${id}" width="150" height="150"></canvas></div>
                 </div>
                 <div class="card-body">
                   <a href="http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${data.board_data[i]["pofol_id"]}">
-                  <div class="write-title">${data.board_data[i]["pofol_name"]}</div><a>
+                  <div class="write-title">${data.board_data[i]["pofol_name"]}</div></a>
                   <div class="writer">
                     <span class="nickname">${data.board_data[i]["user_id"]}</span>
                   </div>
                 </div>
               </div>
               </div>`;
+              $("#portfolio-list").append(html);
               }
+
               for (let i = 0; i < data.board_data.length; i++) {
-                let ctx = document.getElementById("myChart" + i);
+                let id = i + chartId;
+                let ctx = document.getElementById("myChart" + id);
                 let myChart = new Chart(ctx, {
                   type: "pie",
                   data: {
-                    labels: stockName[i],
+                    labels: stockNameScroll[i],
                     datasets: [
                       {
-                        data: stockPrice[i],
+                        data: stockPriceScroll[i],
                         backgroundColor: [
                           "rgba(255, 99, 132, 0.2)",
                           "rgba(54, 162, 235, 0.2)",
@@ -221,7 +231,6 @@ class BoardPortfolioView {
                     legend: {
                       display: false,
                     },
-
                     scales: {
                       y: {
                         beginAtZero: true,
@@ -230,15 +239,17 @@ class BoardPortfolioView {
                   },
                 });
               }
-            });
 
-            $("#portfolio-list").append(html);
+            // $("#portfolio-list").append(html);
+            chartId = chartId + data.board_data.length;
           } else {
             // 더이상 조회할 데이터가 없을 시 temp를 true로 만들어 더이상의 ajax호출을 막음.
             temp = true;
           }
         },
       });
+
+      
     }
   }
 }
