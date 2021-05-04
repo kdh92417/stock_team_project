@@ -26,6 +26,9 @@ urlpatterns = [
     # Company 도메인
     path('company/', include('companies.urls')),
 
+    # 관리자 도메인
+    path('manager/', include('manager.urls')),
+
     # Main Page
     path('main/', views.MainView.as_view())
 ]
