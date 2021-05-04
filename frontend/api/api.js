@@ -16,7 +16,7 @@ class API {
   // Input(args, params) - login user info
   // Output(return) - none
   async getLogin(loginData) {
-    await fetch("http://15.165.17.217:8000/account/login/", {
+    await fetch("http://192.168.1.32:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ class API {
   // Input(args, params) - userId
   // Output(return) - none
   async sendToken(userId) {
-    await fetch("http://15.165.17.217:8000/account/user/", {
+    await fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ class API {
   // Input(args, params) - userInfo
   // Output(return) - none
   postSignup(signData) {
-    fetch("http://15.165.17.217:8000/account/signup/", {
+    fetch("http://192.168.1.32:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -139,7 +139,7 @@ class API {
   }
 
   postPortfolio(portfolioData) {
-    fetch("http://15.165.17.217:8000/portfolio/write/", {
+    fetch("http://192.168.1.32:8000/portfolio/write/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -159,7 +159,7 @@ class API {
   }
 
   getPortfolio(pfId) {
-    fetch("http://15.165.17.217:8000/portfolio/write/" + `?board_id=${pfId}`, {
+    fetch("http://192.168.1.32:8000/portfolio/write/" + `?board_id=${pfId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -177,7 +177,7 @@ class API {
   }
 
   getPortfolioList() {
-    fetch("http://15.165.17.217:8000/portfolio/list/", {
+    fetch("http://192.168.1.32:8000/portfolio/list/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

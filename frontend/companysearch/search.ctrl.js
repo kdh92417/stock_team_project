@@ -15,7 +15,7 @@ class SearchCtrl {
 
   sendSearchCompany(company) {
     // console.log(company.name);
-    this.get(`http://15.165.17.217:8000/company/search/?cp_name=${company.name}`)
+    this.get(`http://192.168.1.32:8000/company/search/?cp_name=${company.name}`)
       .then((res) => res.json())
       .then((res) => {
         this.getComanyData(res.corp_code);
