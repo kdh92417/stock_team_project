@@ -1,7 +1,8 @@
 import API from "../api/api.js"
 
 class CompanyCtrl {
-  constructor(view) {
+  constructor(service, view) {
+    this.service = service;
     this.view = view;
     this.getCompanyNumber();
   }
@@ -26,7 +27,9 @@ class CompanyCtrl {
     API.get(`https://opendart.fss.or.kr/api/fnlttSinglAcnt.json?crtfc_key=02101d1f9a35c1b17eea050c5099255a830db302&corp_code=${data}&bsns_year=2020&reprt_code=11011`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        console.log(res)
+        this.service.getComprehensiveIncomeStatement(res.list[9], res.list[10], res.list[12]);
+        this.service.getFinancialPosition(res.list[2], res.list[5], res.list[8])
       })
       .catch((err) => {
         console.log(err);
