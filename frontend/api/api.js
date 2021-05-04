@@ -138,6 +138,19 @@ class API {
       });;
   }
 
+  // functionName - get
+  // Job - 기업검색 및 open api용
+  // Input(args, params) - url
+  // Output(return) - none
+  static get(url) {
+    return fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
   postPortfolio(portfolioData) {
     fetch("http://192.168.1.32:8000/portfolio/write/", {
       method: "POST",
