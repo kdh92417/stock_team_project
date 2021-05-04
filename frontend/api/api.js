@@ -78,7 +78,7 @@ class API {
   // Input(args, params) - userInfo
   // Output(return) - none
   postSignup(signData) {
-    fetch("http://15.165.17.217:8000/account/signup/", {
+    fetch("http://192.168.1.32:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
