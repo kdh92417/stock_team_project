@@ -1,9 +1,5 @@
 // import { sendRequest } from '../lib/ajax.js';
-import LoginUser from "../mypage/myinfo.model.js"
-import MyInfoController from "../mypage/myinfo.ctrl.js"
-import MyInfoView from "../mypage/myinfo.view.js"
-import MyInfoService from "../mypage/myinfo.service.js"
-
+import CompanyView from "../companysearch/company.view.js"
 
 class API {
   constructor(value) {
@@ -78,7 +74,7 @@ class API {
   // Input(args, params) - userInfo
   // Output(return) - none
   postSignup(signData) {
-    fetch("http://192.168.1.32:8000/account/signup/", {
+    fetch("http://15.165.17.217:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -139,7 +135,7 @@ class API {
   }
 
   // functionName - get
-  // Job - 기업검색 및 open api용
+  // Job - 기업검색 및 전자공시 open api용
   // Input(args, params) - url
   // Output(return) - none
   static get(url) {
@@ -150,6 +146,7 @@ class API {
       },
     });
   }
+
 
   postPortfolio(portfolioData) {
     fetch("http://15.165.17.217:8000/portfolio/write/", {
@@ -172,7 +169,7 @@ class API {
   }
 
   getPortfolio(pfId) {
-    fetch("http://15.165.17.217:8000/portfolio/write/"+`?board_id=${pfId}`, {
+    fetch("http://15.165.17.217:8000/portfolio/write/" + `?board_id=${pfId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

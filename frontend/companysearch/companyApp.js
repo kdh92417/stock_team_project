@@ -1,3 +1,6 @@
-import CampanyView from "../companysearch/company.view.js"
+import CompanyView from "../companysearch/company.view.js"
+import CompanyCtrl from "../companysearch/company.ctrl.js"
 
-const app = new CampanyView();
+
+
+const app = new CompanyCtrl(new CompanyView());
