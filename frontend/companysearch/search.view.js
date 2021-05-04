@@ -23,6 +23,7 @@ class SearchView {
       callback();
     })
   }
+
 }
 
 export default SearchView;
