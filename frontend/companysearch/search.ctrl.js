@@ -1,5 +1,6 @@
 class SearchCtrl {
-  constructor(view) {
+  constructor(service, view) {
+    this.service = service;
     this.view = view;
     this.view.getSearchCompanyName(this.getCompanyName);
   }
@@ -10,43 +11,9 @@ class SearchCtrl {
     const getName = this.view.searchInput.value;
 
     save.name = getName;
-    this.sendSearchCompany(this.company);
+    this.service.sendSearchCompany(this.company);
   }
 
-  sendSearchCompany(company) {
-    // console.log(company.name);
-    this.get(`http://192.168.1.32:8000/company/search/?cp_name=${company.name}`)
-      .then((res) => res.json())
-      .then((res) => {
-        this.getComanyData(res.corp_code);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  getComanyData(data) {
-    console.log(data);
-    fetch(`https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key=02101d1f9a35c1b17eea050c5099255a830db302&corp_code=00126380&bsns_year=2020&reprt_code=11011&fs_div=OFS`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  get(url) {
-    return fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-  // 02101d1f9a35c1b17eea050c5099255a830db302
 }
 
 export default SearchCtrl;

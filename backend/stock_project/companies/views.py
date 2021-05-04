@@ -1,4 +1,3 @@
-import json
 from django.views           import View
 from django.http            import (
     JsonResponse
@@ -10,7 +9,6 @@ from companies.models       import Company
 class SearchCPView(View):
     def get(self, request):
         cp_name = request.GET.get('cp_name', None)
-        print(cp_name)
         if cp_name != None:
             try:
                 cp = Company.objects.get(cp_name=cp_name)

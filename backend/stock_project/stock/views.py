@@ -40,4 +40,3 @@ class MainView(View):
             'top10_company_list'   : cp_data,
             'top10_portfolio_list' : pf_data
         }, status=200)
-
