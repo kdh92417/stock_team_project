@@ -32,11 +32,13 @@
 
 ### Back-end
 
-- Python, Django
+- Python, Django (API 구축 및 로직 구현)
 
-- Mysql
+- Mysql(Database 구축)
 
 - RESTful API
+
+- AWS EC2, RDS (프로젝트 배포)
 
 <br>
 
@@ -46,22 +48,28 @@
 
 <br>
 
-## 4. ERD 설계
+## 4. API 명세서
+
+ - [Postman API 명세서](https://documenter.getpostman.com/view/11682851/TzJvex3F)
+
+## 5. ERD 설계
+
+![ERD](https://user-images.githubusercontent.com/58774316/116773854-43d6d800-aa93-11eb-9c42-b012ddd8b260.png)
 
 <br>
 
-## 5. 핵심 기능
+## 6. 핵심 기능
 
 - 기업/포폴 좋아요 기능
 
 - 원하는 기업이 있는 포폴 검색 기능
 
--
+- 유저 포트폴리오의 시각화를 위한 차트화
 
 <br>
 
-## 6. 트러블 슈팅
+## 7. 트러블 슈팅
 
 <br>
 
-## 7. 회고 / 느낀점
+## 8. 회고 / 느낀점

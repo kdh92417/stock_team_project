@@ -2,13 +2,14 @@ from django.db          import models
 
 
 class Portfolio(models.Model):
-    name        = models.CharField(max_length=100)
-    content     = models.CharField(max_length=1000)
-    total_like  = models.IntegerField(default=0)
-    create_date = models.DateTimeField(auto_now_add=True, null=True)
-    modify_date = models.DateTimeField(auto_now=True, null=True)
-    user        = models.ForeignKey("account.Account", on_delete=models.CASCADE, related_name='portfolio_user')
-    company     = models.ManyToManyField("companies.Company", through='PortfolioStock')
+    name         = models.CharField(max_length=100)
+    content      = models.CharField(max_length=1000)
+    total_like   = models.IntegerField(default=0)
+    search_count = models.IntegerField(default=0)
+    create_date  = models.DateTimeField(auto_now_add=True, null=True)
+    modify_date  = models.DateTimeField(auto_now=True, null=True)
+    user         = models.ForeignKey("account.Account", on_delete=models.CASCADE, related_name='portfolio_user')
+    company      = models.ManyToManyField("companies.Company", through='PortfolioStock')
 
     class Meta:
         db_table = 'portfolios'

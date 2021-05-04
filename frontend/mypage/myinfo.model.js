@@ -1,11 +1,27 @@
-import MyInfoController from './myinfo.ctrl.js';
-import MyInfoService from "./myinfo.service.js"
-import MyInfoView from './myinfo.view.js';
+import API from "../api/api.js"
+
 
 class LoginUser {
   constructor(ctrl) {
     this.ctrl = ctrl
-    console.log(this.ctrl)
+    this.loadInfoPage();
+  }
+
+  // functionName - loadInfoPage
+  // Job - 로그인 시 마이페이지에 회원정보를 api에서 받아오게 호출
+  // Input(args, params) - none
+  // Output(return) - none
+  loadInfoPage() {
+    // api에서 서버에서 response로 회원정보를 전달받음
+    API.loadUserInfo("http://192.168.1.32:8000/account/user/")
+      .then((res) => res.json())
+      .then((res) => {
+        // LoginUser에 user_data전달
+        this.sendUserData(res.user_data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   sendUserData(user_data) {

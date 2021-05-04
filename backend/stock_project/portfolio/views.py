@@ -31,7 +31,7 @@ class TotalPortfolioView(View):
                     'portfoliostock_set__company', 'user'
                 ).all().order_by('-create_date')
             page = request.GET.get('page', 1)
-            paginator = Paginator(board_list, 6)
+            paginator = Paginator(board_list, 8)
             total_count = paginator.count
             board_list = paginator.get_page(page)
             board_data = [{
@@ -60,12 +60,14 @@ class BasePortfolioView(View):
             board = Portfolio.objects.prefetch_related(
                 'portfoliostock_set__company', 'user'
             ).get(id=board_id)
-
+            board.search_count += 1
+            board.save()
             board_data = {
                 'user_id'  : board.user.user_id,
                 'title' : board.name,
                 'content' : board.content,
                 'like_count' : board.total_like,
+                'search_count' : board.search_count,
                 'stock'      : [{
                   'stock_name' : stock.company.cp_name,
                   'stock_count' : stock.shares_count,
