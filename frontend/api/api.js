@@ -1,4 +1,5 @@
-// import { sendRequest } from '../lib/ajax.js';
+
+//// import { sendRequest } from '../lib/ajax.js';
 import CompanyView from "../companysearch/company.view.js"
 
 class API {
@@ -185,8 +186,7 @@ class API {
       .then((res) => (res.json()))
       .then((res) => {
         console.log(res);
-        this.value.showPortfolio(res.board_data);
-
+        this.value.showPortfolio(res.board_data, pfId, this.getPortfolio);
       })
       .catch((err) => {
         console.log(err);
@@ -215,6 +215,5 @@ class API {
   }
 }
 export default API;
-
 
 // http://3.35.169.52:8000/
