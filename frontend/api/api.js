@@ -147,7 +147,10 @@ class API {
     });
   }
 
-
+  // functionName - postPortfolio
+  // Job - 포트폴리오 작성 완료 후 서버로 전송하는 api
+  // Input(args, params) - 포트폴리오에 속한 데이터
+  // Output(return) - none
   postPortfolio(portfolioData) {
     fetch("http://15.165.17.217:8000/portfolio/write/", {
       method: "POST",
@@ -168,6 +171,10 @@ class API {
       })
   }
 
+  // functionName - getPortfolio
+  // Job - 포트폴리오 id에 해당하는 포트폴리오를 가져오는 api
+  // Input(args, params) - 포트폴리오 id
+  // Output(return) - none
   getPortfolio(pfId) {
     fetch("http://15.165.17.217:8000/portfolio/write/" + `?board_id=${pfId}`, {
       method: "GET",
@@ -185,7 +192,11 @@ class API {
         console.log(err);
       })
   }
-
+  
+  // functionName - getPortfolioList
+  // Job - 포트폴리오 게시판 메인 페이지에 포트폴리오 리스트를 한페이지씩 가져오는 api
+  // Input(args, params) - none
+  // Output(return) - none
   getPortfolioList() {
     fetch("http://15.165.17.217:8000/portfolio/list/?page=1", {
       method: "GET",
