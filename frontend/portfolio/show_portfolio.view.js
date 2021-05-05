@@ -11,6 +11,7 @@ class ShowPortfolioView {
     const title = res.title;
     const content = res.content;
     const userId = res.user_id;
+    const searchCount = res.search_count;
     let stockNameArr = [];
     let stockCountArr = [];
     let stockAmountArr = [];
@@ -43,7 +44,7 @@ class ShowPortfolioView {
         <span class="user-nickname">${userId}</span>
         <div class="write-info">
           <span class="date">2021.04.21 12:41</span>
-          <span class="view-count">조회 10</span>
+          <span class="view-count">조회수: ${searchCount}</span>
         </div>
       </div>
       
