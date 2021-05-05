@@ -4,7 +4,7 @@ class PortfolioController {
     this.service = service;
     this.view.submitPortfolio();
   }
-  
+
 }
 
 export default PortfolioController;

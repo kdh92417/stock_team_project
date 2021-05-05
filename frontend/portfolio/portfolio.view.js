@@ -35,10 +35,40 @@ class PortfolioView {
     this.portfolio.content = content;
     this.portfolio.stock = this.stockInfo;
 
+    this.isValidTitle(this.title.value);
+
     console.log(this.portfolio);
     this.api.postPortfolio(this.portfolio);
     
+    
   }
+
+  isValidTitle(title) {
+    if (title === '') {
+      return alert("제목을 입력해주세요")
+    }
+    this.isValidAmount(this.stockInfo)
+  }
+
+  isValidAmount(stockCount) {
+    for (let i = 0; i < stockCount.length; i++) {
+      if (stockCount[i]["stock_count"] === "") {
+        return alert("주식 수량을 입력해주세요")
+      }
+    }
+    this.isValidPrice(this.stockInfo)
+  }
+
+  isValidPrice(stockAmount) {
+    for (let i = 0; i < stockAmount.length; i++) {
+      if (stockAmount[i]["stock_amount"] === "") {
+        return alert("주식 가격을 입력해주세요")
+      }
+    }
+  }
+
+  
+
 }
 
 export default PortfolioView;
