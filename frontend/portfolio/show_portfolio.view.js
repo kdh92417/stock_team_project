@@ -1,10 +1,12 @@
+import API from '../api/api.js'
+
 class ShowPortfolioView {
   constructor() {
     this.root = document.querySelector('.portfolio-root');
     console.log(this.root)
   }
 
-  showPortfolio(res) {
+  showPortfolio(res, pfId, getPortfolio) {
     console.log(res)
     const title = res.title;
     const content = res.content;
@@ -23,12 +25,12 @@ class ShowPortfolioView {
 
     let portfolio_HTML = `<div class="view-all-container">
     <div class="view-button-content">
-      <a href="" role="button" class="btn prev-btn">
+      <div role="button" class="btn prev-btn">
         <span class="btn-text">이전글</span>
-      </a>
-      <a href="" role="button" class="btn next-btn">
+      </div>
+      <div role="button" class="btn next-btn">
         <span class="btn-text">다음글</span>
-      </a>
+      </div>
       <a href="../template/portfolio-board.html" role="button" class="btn list-btn">
         <span id="btn-list" class="btn-text">목록</span>
       </a>
@@ -137,6 +139,23 @@ class ShowPortfolioView {
       },
     },
   });
+
+  this.movePreviousPortfolio(pfId);
+  this.moveNextPortfolio(pfId)
+  }
+
+  movePreviousPortfolio(pfId) {
+    const previousBtn = document.querySelector(".prev-btn");
+    previousBtn.addEventListener("click", () => {
+      location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${pfId - 1}`
+    })
+  }
+
+  moveNextPortfolio(pfId) {
+    const previousBtn = document.querySelector(".next-btn");
+    previousBtn.addEventListener("click", () => {
+      location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${pfId - 0 + 1}`
+    })
   }
 }
 

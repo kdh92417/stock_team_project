@@ -4,10 +4,10 @@ class ShowPortfolioController {
     
     const params = new URLSearchParams(window.location.search);
     const pfId = params.get('board_id');
-
+    
     this.api.getPortfolio(pfId);
   }
-  
+
 }
 
 export default ShowPortfolioController;
