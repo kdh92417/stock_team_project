@@ -140,7 +140,7 @@ class BoardPortfolioView {
 
     function fetchList() {
       $.ajax({
-        url: "http://192.168.1.32:8000/portfolio/list/?page=" + page,
+        url: "http://15.165.17.217:8000/portfolio/list/?page=" + page,
         type: "GET",
         dataType: "JSON",
         success: function (data) {
