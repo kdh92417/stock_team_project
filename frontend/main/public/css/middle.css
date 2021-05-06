@@ -7,7 +7,7 @@
   background-color: #293852;
 }
 
-.card-container {
+.rank-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,10 +15,9 @@
   text-align: center;
 }
 
-.card-search,
-.card-portfolio,
-.card-like {
-  width: 280px;
+.keywordRank-company,
+.keywordRank-portfolio {
+  width: 350px;
   height: 380px;
   border-radius: 35px;
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -26,17 +25,78 @@
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
   margin: 0 30px;
   text-align: center;
-}
-
-.main-middle > div > div {
   padding: 30px 0;
   font-size: 30px;
   color: #fff;
 }
+.keywordRank-company .rank-company-list {
+  width: 100%;
+}
 
-.main-middle ul {
-  padding: 60px 0;
+.rank-company-list,
+.rank-portfolio-list {
+  width: 100%;
+  padding: 40px 0;
   color: #fff;
   font-size: 25px;
   list-style: none;
+}
+
+.rank-company-list li,
+.rank-portfolio-list li {
+  position: relative;
+  height: 40px;
+  width: 300px;
+  margin: 10px auto;
+  overflow: hidden;
+}
+
+.list-company,
+.list-portfolio {
+  position: relative;
+  width: 100%;
+}
+
+.list-company > div:nth-child(1),
+.list-company > div:nth-child(2),
+.list-portfolio > div:nth-child(1),
+.list-portfolio > div:nth-child(2) {
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  width: 300px;
+  text-align: left;
+  transition: top 0.75s ease-out;
+  z-index: 1;
+  background-color: #293852;
+}
+
+.list-item {
+  width: 100%;
+  position: absolute;
+  list-style: none;
+}
+
+.list-item .rank-num {
+  display: inline-block;
+  text-align: center;
+  width: 40px;
+  height: 36px;
+  border: 2px solid #fff;
+}
+
+.list-item .rank-text {
+  margin-left: 10px;
+}
+
+.list_sliding,
+.list_pf_sliding {
+  top: 40px !important;
+  z-index: 100 !important;
+}
+
+.list_sliding_after,
+.list_pf_sliding_after {
+  top: 0px !important;
+  z-index: 10 !important;
 }

@@ -3,7 +3,7 @@ import CompanyView from "../companysearch/company.view.js"
 
 class SearchService {
   sendSearchCompany(company) {
-    API.get(`http://15.165.17.217:8000/company/search/?cp_name=${company.name}`)
+    API.get(`http://192.168.1.32:8000/company/search/?cp_name=${company.name}`)
       .then((res) => res.json())
       .then((res) => {
         location.href = "../template/company.html"
