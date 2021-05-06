@@ -13,7 +13,7 @@ class LoginUser {
   // Output(return) - none
   loadInfoPage() {
     // api에서 서버에서 response로 회원정보를 전달받음
-    API.loadUserInfo("http://192.168.1.32:8000/account/user/")
+    API.loadUserInfo("http://15.165.17.217:8000/account/user/")
       .then((res) => res.json())
       .then((res) => {
         // LoginUser에 user_data전달
