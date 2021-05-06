@@ -1,14 +1,17 @@
+import API from '../api/api.js'
+
 class ShowPortfolioView {
   constructor() {
     this.root = document.querySelector('.portfolio-root');
     console.log(this.root)
   }
 
-  showPortfolio(res) {
+  showPortfolio(res, pfId, getPortfolio) {
     console.log(res)
     const title = res.title;
     const content = res.content;
     const userId = res.user_id;
+    const searchCount = res.search_count;
     let stockNameArr = [];
     let stockCountArr = [];
     let stockAmountArr = [];
@@ -23,12 +26,12 @@ class ShowPortfolioView {
 
     let portfolio_HTML = `<div class="view-all-container">
     <div class="view-button-content">
-      <a href="" role="button" class="btn prev-btn">
+      <div role="button" class="btn prev-btn">
         <span class="btn-text">이전글</span>
-      </a>
-      <a href="" role="button" class="btn next-btn">
+      </div>
+      <div role="button" class="btn next-btn">
         <span class="btn-text">다음글</span>
-      </a>
+      </div>
       <a href="../template/portfolio-board.html" role="button" class="btn list-btn">
         <span id="btn-list" class="btn-text">목록</span>
       </a>
@@ -41,7 +44,7 @@ class ShowPortfolioView {
         <span class="user-nickname">${userId}</span>
         <div class="write-info">
           <span class="date">2021.04.21 12:41</span>
-          <span class="view-count">조회 10</span>
+          <span class="view-count">조회수: ${searchCount}</span>
         </div>
       </div>
       
@@ -137,6 +140,23 @@ class ShowPortfolioView {
       },
     },
   });
+
+  this.movePreviousPortfolio(pfId);
+  this.moveNextPortfolio(pfId)
+  }
+
+  movePreviousPortfolio(pfId) {
+    const previousBtn = document.querySelector(".prev-btn");
+    previousBtn.addEventListener("click", () => {
+      location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${pfId - 1}`
+    })
+  }
+
+  moveNextPortfolio(pfId) {
+    const previousBtn = document.querySelector(".next-btn");
+    previousBtn.addEventListener("click", () => {
+      location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${pfId - 0 + 1}`
+    })
   }
 }
 

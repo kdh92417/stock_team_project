@@ -15,7 +15,8 @@
   padding: 20px 0;
 }
 
-.view-button-content a {
+.view-button-content div,
+.view-button-content a{
   padding: 5px 10px;
   margin-left: 10px;
   font-size: 18px;
@@ -23,6 +24,7 @@
   border: none;
   background-color: #48e0a6;
   color: #000;
+  cursor:pointer;
 }
 
 .write-content-box {

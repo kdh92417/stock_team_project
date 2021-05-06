@@ -17,6 +17,7 @@ from portfolio.models      import (
     Comment
 )
 
+
 class TotalPortfolioView(View):
     def get(self, request):
         try:
