@@ -12,6 +12,9 @@ class ShowPortfolioView {
     const content = res.content;
     const userId = res.user_id;
     const searchCount = res.search_count;
+    const prev = res.previous_board_id;
+    const next = res.next_board_id;
+
     let stockNameArr = [];
     let stockCountArr = [];
     let stockAmountArr = [];
@@ -141,21 +144,25 @@ class ShowPortfolioView {
     },
   });
 
-  this.movePreviousPortfolio(pfId);
-  this.moveNextPortfolio(pfId)
+  this.movePreviousPortfolio(prev);
+  this.moveNextPortfolio(next)
   }
 
-  movePreviousPortfolio(pfId) {
+  movePreviousPortfolio(prev) {
     const previousBtn = document.querySelector(".prev-btn");
     previousBtn.addEventListener("click", () => {
-      location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${pfId - 1}`
+      if (prev === null) {
+        return alert("첫번째 페이지입니다.")
+      } else location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=` + prev;
     })
   }
 
-  moveNextPortfolio(pfId) {
+  moveNextPortfolio(next) {
     const previousBtn = document.querySelector(".next-btn");
     previousBtn.addEventListener("click", () => {
-      location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${pfId - 0 + 1}`
+      if (next === null) {
+        return alert("마지막 페이지입니다.")
+      } else location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=` + next;
     })
   }
 }

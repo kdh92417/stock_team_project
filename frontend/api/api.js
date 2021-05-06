@@ -153,7 +153,7 @@ class API {
   // Input(args, params) - 포트폴리오에 속한 데이터
   // Output(return) - none
   postPortfolio(portfolioData) {
-    fetch("http://15.165.17.217:8000/portfolio/write/", {
+    fetch("http://192.168.1.32:8000/portfolio/write/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -177,7 +177,7 @@ class API {
   // Input(args, params) - 포트폴리오 id
   // Output(return) - none
   getPortfolio(pfId) {
-    fetch("http://15.165.17.217:8000/portfolio/write/" + `?board_id=${pfId}`, {
+    fetch("http://192.168.1.32:8000/portfolio/write/" + `?board_id=${pfId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -198,7 +198,7 @@ class API {
   // Input(args, params) - none
   // Output(return) - none
   getPortfolioList() {
-    fetch("http://15.165.17.217:8000/portfolio/list/?page=1", {
+    fetch("http://192.168.1.32:8000/portfolio/list/?page=1", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
