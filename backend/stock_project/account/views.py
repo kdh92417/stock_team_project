@@ -204,7 +204,7 @@ class LikePFView(View):
                 pf.save()
                 user_like_pf.delete()
 
-                return JsonResponse({'message': 'Like this Portfolio', 'status': 200}, status=200)
+                return JsonResponse({'message': 'Dislike this Portfolio', 'status': 200}, status=200)
             else:
                 try:
                     LikePortfolio.objects.create(
@@ -213,7 +213,7 @@ class LikePFView(View):
                     )
                     pf.total_like += 1
                     pf.save()
-                    return JsonResponse({'message': 'Dislike this Portfolio', 'status': 200}, status=200)
+                    return JsonResponse({'message': 'Like this Portfolio', 'status': 200}, status=200)
 
                 except Exception as e:
                     return JsonResponse({'message': e, 'status': 400}, status=400)
@@ -239,7 +239,7 @@ class LikeCPView(View):
                 cp.save()
                 user_like_pf.delete()
 
-                return JsonResponse({'message': 'Like this Company', 'status': 200}, status=200)
+                return JsonResponse({'message': 'Dislike this Company', 'status': 200}, status=200)
             else:
                 try:
                     LikeCompany.objects.create(
@@ -248,7 +248,7 @@ class LikeCPView(View):
                     )
                     cp.total_like += 1
                     cp.save()
-                    return JsonResponse({'message': 'Dislike this Company', 'status': 200}, status=200)
+                    return JsonResponse({'message': 'Like this Company', 'status': 200}, status=200)
 
                 except Exception as e:
                     return JsonResponse({'message': e, 'status': 400}, status=400)

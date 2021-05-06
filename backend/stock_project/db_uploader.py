@@ -16,7 +16,7 @@ django.setup()
 # API KEY 지정
 # api_key = 'b40deae54438a9915d18001c4ade2bf1e7f0f44c'
 
-# 회사고유번호 데이터 불러오기
+# 회사고유번호 파일 저장하기
 # url = f'https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key={api_key}'
 # with urlopen(url) as zipresp:
 #     with ZipFile(BytesIO(zipresp.read())) as zfile:

@@ -25,45 +25,71 @@ class PortfolioView {
     let stockName = document.querySelectorAll(".stock-name");
     let stockCount = document.querySelectorAll(".stock-count");
     let stockAmount = document.querySelectorAll(".stock-amount");
+    
     for (let i = 0; i < stockName.length; i++) {
-      this.stockInfo.push({ "stock_name": stockName[i].value, 
+      if (stockName[i].value !== '' && stockCount[i].value !== '' && stockAmount[i].value !== '') {
+        this.stockInfo.push({ "stock_name": stockName[i].value, 
                           "stock_count": stockCount[i].value,
                           "stock_amount": stockAmount[i].value })
+      }
     }
     
     this.portfolio.title = this.title.value;
     this.portfolio.content = content;
     this.portfolio.stock = this.stockInfo;
 
-    this.isValidTitle(this.title.value);
+    this.isValidTitle(this.title.value, stockName, stockCount, stockAmount);
 
+    console.log(stockName[0].value)
     console.log(this.portfolio);
-    this.api.postPortfolio(this.portfolio);
-    
     
   }
 
-  isValidTitle(title) {
-    if (title === '') {
-      return alert("제목을 입력해주세요")
+  isValidTitle(title, stockName, stockCount, stockAmount) {
+    try{
+      if (title === '') {
+        throw "제목을 입력해주세요";
+      } else this.isValidStockName(stockName, stockCount, stockAmount)
+    } catch (error) {
+      alert(error);
     }
-    this.isValidAmount(this.stockInfo)
+    
   }
 
-  isValidAmount(stockCount) {
+  isValidStockName(stockName, stockCount, stockAmount) {
+    for (let i = 0; i < stockName.length; i++) {
+      try {
+        if (stockName[i].value === "") {
+          throw "기업명을 입력해주세요"
+        } else this.isValidCount(stockCount, stockAmount)
+      } catch (error) {
+        alert(error);
+      }
+    }
+  }
+
+  isValidCount(stockCount, stockAmount) {
     for (let i = 0; i < stockCount.length; i++) {
-      if (stockCount[i]["stock_count"] === "") {
-        return alert("주식 수량을 입력해주세요")
+      try {
+        if (stockCount[i].value === "") {
+          throw "주식 수량을 입력해주세요"
+        } else this.isValidAmount(stockAmount)
+      } catch (error) {
+        alert(error);
       }
     }
-    this.isValidPrice(this.stockInfo)
   }
 
-  isValidPrice(stockAmount) {
+  isValidAmount(stockAmount) {
     for (let i = 0; i < stockAmount.length; i++) {
-      if (stockAmount[i]["stock_amount"] === "") {
-        return alert("주식 가격을 입력해주세요")
-      }
+      try {
+        if (stockAmount[i].value === "") {
+          throw "주식 가격을 입력해주세요"
+        } 
+        else this.api.postPortfolio(this.portfolio);
+      } catch (error) {
+        alert(error);
+      } 
     }
   }
 
