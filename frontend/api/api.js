@@ -13,7 +13,7 @@ class API {
   // Input(args, params) - login user info
   // Output(return) - none
   async getLogin(loginData) {
-    await fetch("http://15.165.17.217:8000/account/login/", {
+    await fetch("192.168.1.32:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ class API {
   // Input(args, params) - userId
   // Output(return) - none
   async sendToken(userId) {
-    await fetch("http://15.165.17.217:8000/account/user/", {
+    await fetch("192.168.1.32:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ class API {
   // Input(args, params) - userInfo
   // Output(return) - none
   postSignup(signData) {
-    fetch("http://15.165.17.217:8000/account/signup/", {
+    fetch("192.168.1.32:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -153,7 +153,7 @@ class API {
   // Input(args, params) - 포트폴리오에 속한 데이터
   // Output(return) - none
   postPortfolio(portfolioData) {
-    fetch("http://15.165.17.217:8000/portfolio/write/", {
+    fetch("192.168.1.32:8000/portfolio/write/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -177,7 +177,7 @@ class API {
   // Input(args, params) - 포트폴리오 id
   // Output(return) - none
   getPortfolio(pfId) {
-    fetch("http://15.165.17.217:8000/portfolio/write/" + `?board_id=${pfId}`, {
+    fetch("192.168.1.32:8000/portfolio/write/" + `?board_id=${pfId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -192,13 +192,13 @@ class API {
         console.log(err);
       })
   }
-  
+
   // functionName - getPortfolioList
   // Job - 포트폴리오 게시판 메인 페이지에 포트폴리오 리스트를 한페이지씩 가져오는 api
   // Input(args, params) - none
   // Output(return) - none
   getPortfolioList() {
-    fetch("http://15.165.17.217:8000/portfolio/list/?page=1", {
+    fetch("192.168.1.32:8000/portfolio/list/?page=1", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
