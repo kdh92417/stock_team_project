@@ -16,7 +16,7 @@ class LikeCpPfView {
     this.middle.insertAdjacentHTML('beforeend', likeCompany_HTML);
   }
 
-  addTop5Company(data, callback) {
+  addTop5Company(data) {
     const topRank = document.querySelector(".rank-company-list");
     for (let i = 0; i < 5; i++) {
       topRank.innerHTML += `<li>
@@ -32,8 +32,14 @@ class LikeCpPfView {
         </div>
       </li>`
     }
-    callback();
+
   }
+
+  findCompanyList(callback) {
+    const list = document.querySelector(".rank-company-list")
+    callback(list);
+  }
+
 
   showLikePortfolio() {
     this.bottom = document.querySelector(".keywordRank-company");
@@ -49,7 +55,7 @@ class LikeCpPfView {
     this.bottom.insertAdjacentHTML('afterend', likePortfolio_HTML);
   }
 
-  addTop5Portfolio(data, callback) {
+  addTop5Portfolio(data) {
     const topPortfolio = document.querySelector(".rank-portfolio-list");
     for (let i = 0; i < 5; i++) {
       topPortfolio.innerHTML += `<li>
@@ -65,9 +71,12 @@ class LikeCpPfView {
               </div>
             </li>`
     }
-    callback();
   }
 
+  findPortfolioList(callback) {
+    const list = document.querySelector(".rank-portfolio-list")
+    callback(list);
+  }
 }
 
 export default LikeCpPfView;
