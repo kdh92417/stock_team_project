@@ -12,7 +12,7 @@ class BoardPortfolioController {
     .then((res) => {
       console.log(res);
       this.view.showPortfolioList(res.board_data);
-      this.view.showFilteredPortfolio();
+      // this.view.showFilteredPortfolio();
     })
     .catch((err) => {
       console.log(err);
