@@ -29,7 +29,7 @@ class MyInfoView {
             <th>
               <span>비밀번호</span>
             </th>
-            <td>
+            <td class="td-password">
               <p id="modify-password" class="modify-btn">수정</p>
             </td>
           </tr>

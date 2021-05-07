@@ -11,10 +11,12 @@ class MyInfoController {
   }
 
   handleChangeInfo(userInfo) {
+    console.log(userInfo);
     this.service.changeName(userInfo.userName);
     this.service.changeBirth(userInfo.userBirth);
     this.service.changePhone(userInfo.userPhone);
     this.service.changeEmail(userInfo.userEmail);
+    this.service.changePassword();
   }
 
 
