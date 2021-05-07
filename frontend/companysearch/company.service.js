@@ -1,4 +1,61 @@
+import API from "../api/api.js"
+
 class CompanyService {
+
+  clickLikeBtn = (likeBtn, icon, company, likeCount) => {
+    const companyLike = {};
+    companyLike.name = company.innerHTML;
+    companyLike.count = false;
+    localStorage.setItem("clicked", JSON.stringify(companyLike));
+    likeBtn.addEventListener("click", () => {
+      const clicked = localStorage.getItem("clicked")
+      let value = Object.values(JSON.parse(clicked));
+      console.log(value)
+      if (value[1] === false) {
+        const companyLike = {};
+        companyLike.name = company.innerHTML;
+        companyLike.count = true;
+        localStorage.setItem("clicked", JSON.stringify(companyLike));
+        icon.innerHTML = `<i class="fas fa-thumbs-up"></i>`
+        API.post("http://192.168.1.32:8000/account/like/company/", {
+          cp_name: `${company.innerHTML}`
+        })
+          .then((res) => (res.json()))
+          .then((res) => {
+            console.log(res);
+            likeCount.innerHTML = `좋아요 : ${res.total_like}개`
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      } else {
+        const companyLike = {};
+        companyLike.name = company.innerHTML;
+        companyLike.count = false;
+        localStorage.setItem("clicked", JSON.stringify(companyLike));
+        icon.innerHTML = `<i class="far fa-thumbs-up"></i>`
+        API.post("http://192.168.1.32:8000/account/like/company/", {
+          cp_name: `${company.innerHTML}`
+        })
+          .then((res) => (res.json()))
+          .then((res) => {
+            console.log(res);
+            likeCount.innerHTML = `좋아요 : ${res.total_like}개`
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      }
+    })
+  }
+
+  saveLikeCount(company, count) {
+    const companyLike = {};
+    companyLike.name = company.innerHTML;
+    companyLike.count = true;
+    localStorage.setItem("clicked", JSON.stringify(companyLike));
+  }
+
   // functionName - getComprehensiveIncomeStatement
   // Job - 포괄손익계산서에 필요한 데이터를 받아서 가공 후 차트에 보내줌
   // Input(args, params) - 매출액, 영업이익, 당기순이익

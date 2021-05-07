@@ -2,6 +2,11 @@
 }
 
 @media (min-width: 960px) and (max-width: 1199px) {
+  .chart-title {
+    width: 25%;
+    margin: 20px;
+    font-size: 28px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 959px) {
@@ -76,6 +81,31 @@
   .keywordRank-portfolio {
     height: 380px;
     margin: 20px;
+  }
+
+  .like-item {
+    justify-content: center;
+  }
+
+  .financial-items .chart-item {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chart-title {
+    width: 30%;
+    margin: 20px;
+    font-size: 20px;
+  }
+
+  #fi-chart-1,
+  #fi-chart-2,
+  #fi-chart-3,
+  #fi-chart-4 {
+    width: 50vw !important;
   }
 }
 
@@ -160,6 +190,31 @@
   .keywordRank-portfolio {
     height: 380px;
     margin: 20px;
+  }
+
+  .like-item {
+    justify-content: center;
+  }
+
+  .financial-items .chart-item {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chart-title {
+    width: 30%;
+    margin: 20px;
+    font-size: 16px;
+  }
+
+  #fi-chart-1,
+  #fi-chart-2,
+  #fi-chart-3,
+  #fi-chart-4 {
+    width: 50vw !important;
   }
 }
 
@@ -247,5 +302,30 @@
   .list-portfolio > div:nth-child(1),
   .list-portfolio > div:nth-child(2) {
     width: 240px;
+  }
+
+  .like-item {
+    justify-content: center;
+  }
+
+  .financial-items .chart-item {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chart-title {
+    width: 30%;
+    margin: 20px;
+    font-size: 16px;
+  }
+
+  #fi-chart-1,
+  #fi-chart-2,
+  #fi-chart-3,
+  #fi-chart-4 {
+    width: 75vw !important;
   }
 }

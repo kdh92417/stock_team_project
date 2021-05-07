@@ -5,6 +5,7 @@ class CompanyCtrl {
     this.service = service;
     this.view = view;
     this.getCompanyNumber();
+    this.handleLikeBtn();
   }
 
   // functionName - getCompanyNumber
@@ -15,7 +16,7 @@ class CompanyCtrl {
   getCompanyNumber() {
     const cpName = localStorage.getItem("기업이름")
     let value = Object.values(JSON.parse(cpName));
-    this.view.showCompanyInfo(value[0]);
+    this.view.showCompanyInfo(value[0], value[2]);
     this.getComanyData(value[1])
   }
 
@@ -28,12 +29,21 @@ class CompanyCtrl {
       .then((res) => res.json())
       .then((res) => {
         console.log(res)
-        this.service.getComprehensiveIncomeStatement(res.list[9], res.list[10], res.list[12]);
-        this.service.getFinancialPosition(res.list[2], res.list[5], res.list[8])
+        if (res.status === "013") {
+          alert("기업정보가 없습니다.")
+          location.href = "../template/index.html"
+        } else {
+          this.service.getComprehensiveIncomeStatement(res.list[9], res.list[10], res.list[12]);
+          this.service.getFinancialPosition(res.list[2], res.list[5], res.list[8])
+        }
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  handleLikeBtn() {
+    this.view.selectLikeBtn(this.service.clickLikeBtn);
   }
 }
 

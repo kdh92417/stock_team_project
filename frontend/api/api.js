@@ -147,6 +147,21 @@ class API {
     });
   }
 
+  // functionName - post
+  // Job - 기업 좋아요, 포트폴리오 좋아요 api
+  // Input(args, params) - url, cp_name, pf_id
+  // Output(return) - none
+  static async post(url, payload) {
+    return await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify(payload),
+    })
+  }
+
   // functionName - postPortfolio
   // Job - 포트폴리오 작성 완료 후 서버로 전송하는 api
   // Input(args, params) - 포트폴리오에 속한 데이터
