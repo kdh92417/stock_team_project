@@ -1,6 +1,5 @@
 
 //// import { sendRequest } from '../lib/ajax.js';
-import CompanyView from "../companysearch/company.view.js"
 
 class API {
   constructor(value) {
@@ -13,7 +12,7 @@ class API {
   // Input(args, params) - login user info
   // Output(return) - none
   async getLogin(loginData) {
-    await fetch("192.168.1.32:8000/account/login/", {
+    await fetch("http://192.168.1.32:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +41,7 @@ class API {
   // Input(args, params) - userId
   // Output(return) - none
   async sendToken(userId) {
-    await fetch("192.168.1.32:8000/account/user/", {
+    await fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +74,7 @@ class API {
   // Input(args, params) - userInfo
   // Output(return) - none
   postSignup(signData) {
-    fetch("192.168.1.32:8000/account/signup/", {
+    fetch("http://192.168.1.32:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -1,6 +1,51 @@
 import API from "../api/api.js"
 
 class MyInfoService {
+  saveCheckPassword() {
+    const tdPassword = document.querySelector(".td-password"),
+      addPwInput = document.createElement("input");
+    addPwInput.type = "password"
+    addPwInput.className = "change-password"
+    tdPassword.appendChild(addPwInput);
+    tdPassword.innerHTML += `<p id="modify-password" class="modify-btn">확인</p>`;
+    this.savePassword()
+  }
+
+  changePassword() {
+    const tdPassword = document.querySelector(".td-password"),
+      modifyBtn = document.getElementById("modify-password");
+
+    modifyBtn.addEventListener("click", () => {
+      tdPassword.removeChild(modifyBtn);
+      this.saveCheckPassword();
+    });
+  }
+
+  savePassword() {
+    const modifyBtn = document.getElementById("modify-password"),
+      savePassword = document.querySelector(".change-password"),
+      tdPassword = document.querySelector(".td-password");
+
+    modifyBtn.addEventListener("click", () => {
+      let pwReg = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{5,50}$/
+      try {
+        if (savePassword.value === "") {
+          alert("비밀번호를 입력해주세요");
+        } else if (!pwReg.test(savePassword.value)) {
+          alert("잘못된 비밀번호입니다.");
+        } else {
+          tdPassword.removeChild(savePassword);
+          tdPassword.innerHTML = `<p id="modify-password" class="modify-btn">수정</p>`;
+          API.put("http://192.168.1.32:8000/account/user/password/", {
+            password: `${savePassword.value}`,
+          })
+          this.changePassword();
+        }
+      } catch (error) {
+        alert(error);
+      }
+    });
+  }
 
   saveCheckName(userName) {
     const tdName = document.querySelector(".td-name");
@@ -27,16 +72,14 @@ class MyInfoService {
       tdName = document.querySelector(".td-name");
 
     modifyBtn.addEventListener("click", () => {
-      tdName.removeChild(saveName);
       let nameReg = /^[가-힣]+$/;
       try {
         if (saveName.value === "") {
           alert("이름을 입력해주세요")
-          this.saveCheckName(userName);
         } else if (!nameReg.test(saveName.value)) {
           alert("잘못된 이름입니다.")
-          this.saveCheckName(userName);
         } else {
+          tdName.removeChild(saveName);
           tdName.innerHTML = `<p id="name" class="contxt-title">${saveName.value}</p>`;
           tdName.innerHTML += `<p id="modify-name" class="modify-btn">수정</p>`;
           API.put("http://192.168.1.32:8000/account/user/name/", {
@@ -104,16 +147,14 @@ class MyInfoService {
       tdPhone = document.querySelector(".td-phone");
 
     modifyBtn.addEventListener("click", () => {
-      tdPhone.removeChild(savePhone);
       let phoneReg = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/
       try {
         if (savePhone.value === "") {
           alert("전화번호를 입력해주세요")
-          this.saveCheckPhone(userPhone);
         } else if (!phoneReg.test(savePhone.value)) {
           alert("잘못된 전화번호입니다.")
-          this.saveCheckPhone(userPhone);
         } else {
+          tdPhone.removeChild(savePhone);
           tdPhone.innerHTML = `<p id="phone" class="contxt-title">${savePhone.value}</p>`;
           tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">수정</p>`;
           API.put("http://192.168.1.32:8000/account/user/phone/", {
@@ -152,16 +193,14 @@ class MyInfoService {
       tdEmail = document.querySelector(".td-email");
 
     modifyBtn.addEventListener("click", () => {
-      tdEmail.removeChild(saveEmail);
       let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
       try {
         if (saveEmail.value === "") {
           alert("이메일을 입력해주세요");
-          this.saveCheckEmail(userEmail);
         } else if (!emailReg.test(saveEmail.value)) {
           alert("잘못된 이메일입니다.");
-          this.saveCheckEmail(userEmail);
         } else {
+          tdEmail.removeChild(saveEmail);
           tdEmail.innerHTML = `<p id="email" class="contxt-title">${saveEmail.value}</p>`;
           tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">수정</p>`;
           API.put("http://192.168.1.32:8000/account/user/email/", {
