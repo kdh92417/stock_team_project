@@ -25,5 +25,13 @@ def login_required(func):
             return JsonResponse({'message' : 'INVALID_TOKEN'}, status=402)
 
         return func(self, request, *args, **kwargs)
+    return wrapper
+
+# 좋아요한 유저용 Decorator
+def like_user(func):
+    def wrapper(self, request, *args, **kwargs):
+
+
+        return func(self, request, *args, **kwargs)
 
     return wrapper
