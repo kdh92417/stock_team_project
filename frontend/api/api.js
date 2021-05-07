@@ -167,7 +167,7 @@ class API {
   // Input(args, params) - 포트폴리오에 속한 데이터
   // Output(return) - none
   postPortfolio(portfolioData) {
-    fetch("http://15.165.17.217:8000/portfolio/write/", {
+    fetch("http://192.168.1.32:8000/portfolio/write/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -190,42 +190,37 @@ class API {
   // Job - 포트폴리오 id에 해당하는 포트폴리오를 가져오는 api
   // Input(args, params) - 포트폴리오 id
   // Output(return) - none
-  getPortfolio(pfId) {
-    fetch("http://15.165.17.217:8000/portfolio/write/" + `?board_id=${pfId}`, {
+  static getPortfolio(url) {
+    return fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => (res.json()))
-      .then((res) => {
-        console.log(res);
-        this.value.showPortfolio(res.board_data, pfId, this.getPortfolio);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+      
   }
 
   // functionName - getPortfolioList
   // Job - 포트폴리오 게시판 메인 페이지에 포트폴리오 리스트를 한페이지씩 가져오는 api
   // Input(args, params) - none
   // Output(return) - none
-  getPortfolioList() {
-    fetch("http://15.165.17.217:8000/portfolio/list/?page=1", {
+  static getPortfolioList(url) {
+    return fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => (res.json()))
-      .then((res) => {
-        console.log(res);
-        this.value.showPortfolioList(res.board_data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+  }
+
+  static getFilteredPortfolio(url) {
+    return fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      
   }
 }
 export default API;
