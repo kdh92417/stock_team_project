@@ -8,7 +8,7 @@ class LikeCpPfCtrl {
   }
 
   getLikeCompanyAndPortfolio() {
-    API.get(`http://15.165.17.217:8000/main/`)
+    API.get(`http://192.168.1.32:8000/main/`)
       .then((res) => res.json())
       .then((res) => {
         console.log(res)
@@ -32,9 +32,10 @@ class LikeCpPfCtrl {
   sendCompanyAndPortfolioData(company, portfolio) {
     console.log(this.service, this.view)
     const rankTimer = this.service.rankTimer;
-    const rankPfTimer = this.service.rankPfTimer;
-    this.view.addTop5Company(company, rankTimer);
-    this.view.addTop5Portfolio(portfolio, rankPfTimer);
+    this.view.addTop5Company(company);
+    this.view.addTop5Portfolio(portfolio);
+    this.view.findCompanyList(rankTimer);
+    this.view.findPortfolioList(rankTimer);
   }
 }
 
