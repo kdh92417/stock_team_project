@@ -13,7 +13,8 @@ class SearchService {
           location.href = "../template/company.html"
           const companyInfo = {};
           companyInfo.name = company.name;
-          companyInfo.num = res.corp_code;
+          companyInfo.code = res.corp_code;
+          companyInfo.like_count = res.like_count;
           localStorage.setItem("기업이름", JSON.stringify(companyInfo));
         }
       })

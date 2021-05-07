@@ -45,7 +45,7 @@ class LikeCpPfView {
     this.bottom = document.querySelector(".keywordRank-company");
     let likePortfolio_HTML =
       `<div class="keywordRank-portfolio">
-        <div class="rankPortfolio-title">주간 인기 검색 포트폴리오</div>
+        <div class="rankPortfolio-title">주간 인기 포트폴리오</div>
         <hr>
         <div class="rank-portfolio">
           <ul class="rank-portfolio-list">
