@@ -2,6 +2,12 @@ import API from "../api/api.js"
 import CompanyView from "../companysearch/company.view.js"
 
 class SearchService {
+
+
+  // functionName - sendSearchCompany
+  // Job - 검색창에서 검색한 기업 이름을 서버에 전달해서 고유번호를 받음
+  // Input(args, params) - company name
+  // Output(return) - none
   sendSearchCompany(company) {
     API.get(`http://192.168.1.32:8000/company/search/?cp_name=${company.name}`)
       .then((res) => res.json())

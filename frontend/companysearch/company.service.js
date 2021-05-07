@@ -2,6 +2,10 @@ import API from "../api/api.js"
 
 class CompanyService {
 
+  // functionName - clickLikeBtn
+  // Job - 좋아요 기능 동작 함수
+  // Input(args, params) - likeBtn, icon, company, likeCount
+  // Output(return) - none
   clickLikeBtn = (likeBtn, icon, company, likeCount) => {
     const companyLike = {};
     companyLike.name = company.innerHTML;

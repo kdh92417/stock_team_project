@@ -1,5 +1,9 @@
 class LikeCpPfService {
 
+  // functionName - rankTimer
+  // Job - 주간 인기 검색 기업 / 주간 인기 포트폴리오들을 순차적으로 갱신되는 효과 
+  // Input(args, params) - view list 
+  // Output(return) - none
   rankTimer = (list) => {
     const rankOne = list.children[0].childNodes[1].childNodes[1],
       rankNextOne = list.children[0].childNodes[1].childNodes[3],
