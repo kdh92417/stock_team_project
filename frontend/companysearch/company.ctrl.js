@@ -42,6 +42,11 @@ class CompanyCtrl {
       });
   }
 
+
+  // functionName - handleLikeBtn
+  // Job - view에서 좋아요 버튼을 누르면 view 보여지도록 callback 함수로 서비스 기능을 넘겨줌
+  // Input(args, params) - none
+  // Output(return) - none
   handleLikeBtn() {
     this.view.selectLikeBtn(this.service.clickLikeBtn);
   }

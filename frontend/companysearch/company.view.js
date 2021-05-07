@@ -52,6 +52,10 @@ class CompanyView {
     }
   }
 
+  // functionName - selectLikeBtn
+  // Job - 좋아요 기능을 위한 화면에서 button select
+  // Input(args, params) - callback
+  // Output(return) - none
   selectLikeBtn(callback) {
     const likeBtn = document.querySelector(".like-btn"),
       companyName = document.querySelector(".company-name"),
