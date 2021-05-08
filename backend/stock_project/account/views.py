@@ -279,12 +279,17 @@ class LikeInfoView(View):
     def get(self, request):
         user = request.user
 
-        like_cp_list = LikeCompany.objects.filter(user_id=user.id)
+        like_cp_list = LikeCompany.objects.select_related('company').filter(user_id=user.id)
+        like_pf_list = LikePortfolio.objects.select_related('portfolio').filter(user_id=user.id)
 
-        # like_pf_list = LikePortfolio.objects.filter(user_id=user.id)
-        # is_like_pf = False
-        # if LikePortfolio.objects.filter(Q(user_id=user.id) & Q(portfolio_id=board.id)).exists():
-        #     is_like_pf = True
+        cp_data = { 'like_company_list' : [cp.company.cp_name for cp in like_cp_list] }
+        pf_data = { 'like_portfolio_list' : [pf.portfolio.name for pf in like_pf_list] }
 
-        pass
+        return JsonResponse({
+            'message'             : 'success',
+            'status'              : 200,
+            'user_id'             : user.user_id,
+            'like_company_list'   : cp_data,
+            'like_portfolio_list' : pf_data
+        }, status=200)
 
