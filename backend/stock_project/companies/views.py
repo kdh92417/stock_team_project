@@ -1,29 +1,43 @@
-import json
+import jwt
+
+from django.db.models       import Q
 from django.views           import View
 from django.http            import (
     JsonResponse
 )
 
-from companies.models       import Company
+from my_settings            import ALGORITHM
+from stock.settings         import SECRET_KEY
+
+from account.utils          import like_user
+from account.models         import Account
+from companies.models       import (
+    Company,
+    LikeCompany
+)
 
 
 class SearchCPView(View):
     def get(self, request):
         cp_name = request.GET.get('cp_name', None)
-
         if cp_name != None:
             try:
                 cp = Company.objects.get(cp_name=cp_name)
+                cp.count_searching += 1
+                cp.save()
+
                 return JsonResponse({
-                    'message'   : 'success',
-                    'status'    : 200,
-                    'cp_name'   : cp_name,
-                    'corp_code' : cp.corp_code
+                    'message'         : 'success',
+                    'status'          : 200,
+                    'cp_name'         : cp_name,
+                    'corp_code'       : cp.corp_code,
+                    'like_count'      : cp.total_like
                 }, status=200)
+
             except Company.DoesNotExist:
                 return JsonResponse({
                     'message' : 'Does Not Exist Company',
                     'status'  : 400
-                }, status=400)
+                }, status=200)
         else:
             return JsonResponse({'message' : 'Key_error', 'status' : 400}, status=400)

@@ -21,5 +21,7 @@ urlpatterns = [
     # 포트폴리오 좋아요 API
     path('like/portfolio/', views.LikePFView.as_view()),
     # 기업 좋아요 API
-    path('like/company/', views.LikeCPView.as_view())
+    path('like/company/', views.LikeCPView.as_view()),
+    # 유저의 좋아요 리스트 API
+    path('like/list/', views.LikeInfoView.as_view())
 ]

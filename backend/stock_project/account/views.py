@@ -204,7 +204,12 @@ class LikePFView(View):
                 pf.save()
                 user_like_pf.delete()
 
-                return JsonResponse({'message': 'Like this Portfolio', 'status': 200}, status=200)
+                return JsonResponse({
+                    'message'    : 'Dislike this Portfolio',
+                    'status'     : 200,
+                    'total_like' : pf.total_like,
+
+                }, status=200)
             else:
                 try:
                     LikePortfolio.objects.create(
@@ -213,14 +218,17 @@ class LikePFView(View):
                     )
                     pf.total_like += 1
                     pf.save()
-                    return JsonResponse({'message': 'Dislike this Portfolio', 'status': 200}, status=200)
+                    return JsonResponse({
+                        'message'    : 'Like this Portfolio',
+                        'status'     : 200,
+                        'total_like' : pf.total_like
+                    }, status=200)
 
                 except Exception as e:
                     return JsonResponse({'message': e, 'status': 400}, status=400)
 
         except Exception as e:
             return JsonResponse({'message': e, 'status': 400}, status=400)
-
 
 
 class LikeCPView(View):
@@ -239,7 +247,12 @@ class LikeCPView(View):
                 cp.save()
                 user_like_pf.delete()
 
-                return JsonResponse({'message': 'Like this Company', 'status': 200}, status=200)
+                return JsonResponse({
+                    'message'    : 'Dislike this Company',
+                    'status'     : 200,
+                    'total_like' : cp.total_like,
+                    #'is_user_like':
+                }, status=200)
             else:
                 try:
                     LikeCompany.objects.create(
@@ -248,11 +261,35 @@ class LikeCPView(View):
                     )
                     cp.total_like += 1
                     cp.save()
-                    return JsonResponse({'message': 'Dislike this Company', 'status': 200}, status=200)
+                    return JsonResponse({
+                        'message'    : 'Like this Company',
+                        'status'     : 200,
+                        'total_like' : cp.total_like
+                    }, status=200)
 
                 except Exception as e:
                     return JsonResponse({'message': e, 'status': 400}, status=400)
 
         except Exception as e:
             return JsonResponse({'message': e, 'status': 400}, status=400)
+
+
+class LikeInfoView(View):
+    @login_required
+    def get(self, request):
+        user = request.user
+
+        like_cp_list = LikeCompany.objects.select_related('company').filter(user_id=user.id)
+        like_pf_list = LikePortfolio.objects.select_related('portfolio').filter(user_id=user.id)
+
+        cp_data = { 'like_company_list' : [cp.company.cp_name for cp in like_cp_list] }
+        pf_data = { 'like_portfolio_list' : [pf.portfolio.name for pf in like_pf_list] }
+
+        return JsonResponse({
+            'message'             : 'success',
+            'status'              : 200,
+            'user_id'             : user.user_id,
+            'like_company_list'   : cp_data,
+            'like_portfolio_list' : pf_data
+        }, status=200)
 

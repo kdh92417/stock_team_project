@@ -1,13 +1,25 @@
+import API from '../api/api.js';
+
 class ShowPortfolioController {
-  constructor(api){
-    this.api = api
+  constructor(view){
+    this.view = view
     
     const params = new URLSearchParams(window.location.search);
     const pfId = params.get('board_id');
+    
 
-    this.api.getPortfolio(pfId);
+    // this.api.getPortfolio(pfId);
+    API.getPortfolio("http://192.168.1.32:8000/portfolio/write/" + `?board_id=${pfId}`)
+    .then((res) => (res.json()))
+      .then((res) => {
+        console.log(res);
+        this.view.showPortfolio(res.board_data, pfId);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
-  
+
 }
 
 export default ShowPortfolioController;

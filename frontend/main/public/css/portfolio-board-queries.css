@@ -5,6 +5,9 @@
 }
 
 @media screen and (max-width: 959px) {
+  .portfolio-list-container {
+    width: 780px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -19,6 +22,10 @@
   .porfolio-list {
     width: 500px;
     margin: 0 auto;
+  }
+
+  .portfolio-list-container {
+    width: 550px;
   }
 
   .hall-of-fame-container {
@@ -79,6 +86,10 @@
   .porfolio-list {
     width: 200px;
     margin: 0 auto;
+  }
+
+  .portfolio-list-container {
+    width: 230px;
   }
 
   .hall-of-fame-list-container {

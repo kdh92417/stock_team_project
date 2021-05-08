@@ -39,59 +39,11 @@
     <section class="main-search">
       <div class="company-seach-contents">
         <input type="text" name="company-seach" class="company-search" placeholder="기업 정보 검색">
-        <button type="submit"><i class="fas fa-search"></i>검색</button>
+        <button class="company-search-btn" type="submit"><i class="fas fa-search"></i>검색</button>
       </div>
     </section>
     <section class="main-middle">
-      <div class="card-container">
-        <div class="card-search">
-          <div class="search-text">기업 검색순위</div>
-          <hr>
-          <div class="ul-search">
-            <ul>
-              <li>카카오</li>
-              <li>삼성전자</li>
-              <li>팬오션</li>
-              <li>HMM</li>
-              <li>효성티앤씨</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-portfolio">
-          <div class="portfolio-text">포트폴리오 순위</div>
-          <hr>
-          <div class="ul-portfolio">
-            <ul>
-              <li>카카오 위주 포트폴리오</li>
-              <li>제 포트폴리오 입니다.</li>
-              <li>안정 추구형 포트폴리오</li>
-              <li>저위험 포트폴리오</li>
-              <li>가치투자 포트폴리오</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-like">
-          <div class="like-text">기업 좋아요 순위</div>
-          <hr>
-          <div class="ul-like">
-            <ul>
-              <li>삼성전자</li>
-              <li>카카오</li>
-              <li>현대차</li>
-              <li>SK하이닉스</li>
-              <li>카카오게임즈</li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </section>
-    <script type="text/javascript" src="../public/js/vanilla-tilt.js"></script>
-    <script type="text/javascript">
-      VanillaTilt.init(document.querySelector(".site-image"), {
-        max: 25,
-        speed: 400
-      });
-    </script>
     <footer class="main-footer">
       <div class="footer-content">
         <div class="company-name">(주)에스폴리오</div>
@@ -102,7 +54,16 @@
         <a class="github" href="https://github.com/kdh92417/stock_project">TEAM GITHUB</a>
       </div>
     </footer>
+    <script type="text/javascript" src="../public/js/vanilla-tilt.js"></script>
+    <script type="text/javascript">
+      VanillaTilt.init(document.querySelector(".site-image"), {
+        max: 25,
+        speed: 400
+      });
+    </script>
     <script src="../public/js/script.js"></script>
+    <script src="../../companysearch/searchApp.js" type="module"></script>
+    <script src="../app/like_cp_pfApp.js" type="module"></script>
     <script src="../app/navbarApp.js" type="module"></script>
   </body>
 

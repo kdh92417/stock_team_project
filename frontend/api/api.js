@@ -1,9 +1,5 @@
-// import { sendRequest } from '../lib/ajax.js';
-import LoginUser from "../mypage/myinfo.model.js"
-import MyInfoController from "../mypage/myinfo.ctrl.js"
-import MyInfoView from "../mypage/myinfo.view.js"
-import MyInfoService from "../mypage/myinfo.service.js"
 
+//// import { sendRequest } from '../lib/ajax.js';
 
 class API {
   constructor(value) {
@@ -16,7 +12,7 @@ class API {
   // Input(args, params) - login user info
   // Output(return) - none
   async getLogin(loginData) {
-    await fetch("http://3.36.120.133:8000/account/login/", {
+    await fetch("http://192.168.1.32:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +41,7 @@ class API {
   // Input(args, params) - userId
   // Output(return) - none
   async sendToken(userId) {
-    await fetch("http://3.36.120.133:8000/account/user/", {
+    await fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +74,7 @@ class API {
   // Input(args, params) - userInfo
   // Output(return) - none
   postSignup(signData) {
-    fetch("http://3.36.120.133:8000/account/signup/", {
+    fetch("http://192.168.1.32:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -105,23 +101,14 @@ class API {
   // Job - 로그인 시 서버에 토큰을 전달해서 회원정보를 받아옴
   // Input(args, params) - none
   // Output(return) - none
-  static async loadUserInfo() {
-    await fetch("http://3.36.120.133:8000/account/user/", {
+  static async loadUserInfo(url) {
+    return await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: localStorage.getItem("token"),
       },
     })
-      .then((res) => res.json())
-      .then((res) => {
-        // const loginUser = new LoginUser(new MyInfoController(new MyInfoService(), new MyInfoView()));
-        // LoginUser에 user_data전달
-        loginUser.sendUserData(res.user_data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
   }
 
   // functionName - put
@@ -139,16 +126,46 @@ class API {
     })
       .then((res) => res.json())
       .then((res) => {
-        const api = new API();
-
-        api.loadUserInfo();
+        location.href = "../template/mypage.html"
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
-      });
+      });;
   }
 
+  // functionName - get
+  // Job - 기업검색 및 전자공시 open api용
+  // Input(args, params) - url
+  // Output(return) - none
+  static get(url) {
+    return fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  // functionName - post
+  // Job - 기업 좋아요, 포트폴리오 좋아요 api
+  // Input(args, params) - url, cp_name, pf_id
+  // Output(return) - none
+  static async post(url, payload) {
+    return await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify(payload),
+    })
+  }
+
+  // functionName - postPortfolio
+  // Job - 포트폴리오 작성 완료 후 서버로 전송하는 api
+  // Input(args, params) - 포트폴리오에 속한 데이터
+  // Output(return) - none
   postPortfolio(portfolioData) {
     fetch("http://192.168.1.32:8000/portfolio/write/", {
       method: "POST",
@@ -169,27 +186,43 @@ class API {
       })
   }
 
-  getPortfolio(pfId) {
-    fetch("http://3.36.120.133:8000/portfolio/write/" + `?board_id=${pfId}`, {
+  // functionName - getPortfolio
+  // Job - 포트폴리오 id에 해당하는 포트폴리오를 가져오는 api
+  // Input(args, params) - 포트폴리오 id
+  // Output(return) - none
+  static getPortfolio(url) {
+    return fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => (res.json()))
-      .then((res) => {
-        console.log(res);
-        this.value.showPortfolio(res.board_data);
-
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+      
   }
 
+  // functionName - getPortfolioList
+  // Job - 포트폴리오 게시판 메인 페이지에 포트폴리오 리스트를 한페이지씩 가져오는 api
+  // Input(args, params) - none
+  // Output(return) - none
+  static getPortfolioList(url) {
+    return fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+  }
 
+  static getFilteredPortfolio(url) {
+    return fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      
+  }
 }
 export default API;
-
 
 // http://3.35.169.52:8000/

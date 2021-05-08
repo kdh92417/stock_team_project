@@ -1,0 +1,82 @@
+.chart-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.company-name {
+  padding-top: 5rem !important;
+  width: 100%;
+  text-align: center;
+  font-size: 45px;
+  margin: 40px;
+  color: #fff;
+}
+
+.like-content {
+  width: 85%;
+}
+
+.like-item {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.like-count {
+  font-size: 24px;
+  color: #ffffff;
+  margin-right: 30px;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+}
+
+.like-btn {
+  width: 130px;
+  padding: 10px 15px;
+  background: #2f3e81;
+  color: #ffffff;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.financial-items {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  margin: 30px 30px;
+  text-align: center;
+}
+
+.chart-title {
+  width: 20%;
+  margin: 20px;
+  font-size: 28px;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.chart-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-item canvas {
+  margin: 10px auto;
+  padding: 20px 20px;
+}

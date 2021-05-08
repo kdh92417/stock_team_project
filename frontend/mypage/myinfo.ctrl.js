@@ -5,18 +5,21 @@ class MyInfoController {
     this.view = view;
   }
 
-
   handleShowInfo(userInfo) {
     this.view.showMyInfo(userInfo);
-    this.handleChangeInfo(userInfo)
+    this.handleChangeInfo(userInfo);
   }
 
   handleChangeInfo(userInfo) {
-    this.service.changeName(userInfo.userName)
-    this.service.changeBirth(userInfo.userBirth)
-    this.service.changePhone(userInfo.userPhone)
-    this.service.changeEmail(userInfo.userEmail)
+    console.log(userInfo);
+    this.service.changeName(userInfo.userName);
+    this.service.changeBirth(userInfo.userBirth);
+    this.service.changePhone(userInfo.userPhone);
+    this.service.changeEmail(userInfo.userEmail);
+    this.service.changePassword();
   }
+
+
 }
 
 export default MyInfoController

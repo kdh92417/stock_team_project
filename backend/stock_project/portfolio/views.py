@@ -1,12 +1,12 @@
-import json
+import json, jwt
 
 from django.views          import View
 from django.http           import (
     JsonResponse,
     HttpResponse
 )
-
 from django.core.paginator import Paginator
+from django.db.models      import Q
 
 from account.utils         import login_required
 from account.models        import Account
@@ -14,8 +14,13 @@ from companies.models      import Company
 from portfolio.models      import (
     Portfolio,
     PortfolioStock,
+    LikePortfolio,
     Comment
 )
+
+from my_settings            import ALGORITHM
+from stock.settings         import SECRET_KEY
+
 
 class TotalPortfolioView(View):
     def get(self, request):
@@ -25,26 +30,35 @@ class TotalPortfolioView(View):
             if company_name != None:
                 board_list = Portfolio.objects.prefetch_related(
                     'portfoliostock_set__company', 'user'
-                ).filter(company__cp_name=company_name)
+                ).filter(company__cp_name=company_name).order_by('-create_date')
             else:
                 board_list = Portfolio.objects.prefetch_related(
                     'portfoliostock_set__company', 'user'
-                ).all().order_by('-create_date')
+                ).order_by('-create_date')
+
             page = request.GET.get('page', 1)
-            paginator = Paginator(board_list, 6)
-            total_count = paginator.count
-            board_list = paginator.get_page(page)
-            board_data = [{
-                'pofol_id'   : board.id,
-                'user_id'    : board.user.user_id,
-                'pofol_name' : board.name,
-                'like_count' : board.total_like,
-                'stock' : [{
-                    'stock_name'   : stock.company.cp_name,
-                    'stock_count'  : stock.shares_count,
-                    'stock_amount' : stock.shares_amount
-                } for stock in board.portfoliostock_set.all()]
-            } for board in board_list]
+            paginator = Paginator(board_list, 8)
+
+            if int(page) > paginator.num_pages:
+                return JsonResponse({
+                    'message' : 'There are no more Portfolio board',
+                    'status'  : 404
+                }, status=404)
+
+            else:
+                board_list = paginator.get_page(page)
+                board_data = [{
+                    'pofol_id'   : board.id,
+                    'user_id'    : board.user.user_id,
+                    'pofol_name' : board.name,
+                    'like_count' : board.total_like,
+                    'create_date': board.create_date,
+                    'stock' : [{
+                        'stock_name'   : stock.company.cp_name,
+                        'stock_count'  : stock.shares_count,
+                        'stock_amount' : stock.shares_amount
+                    } for stock in board.portfoliostock_set.all()]
+                } for board in board_list]
 
         except KeyError:
             return JsonResponse({'message': 'INVALID_KEYS', 'status' : 400}, status=400)
@@ -62,15 +76,31 @@ class BasePortfolioView(View):
             ).get(id=board_id)
             board.search_count += 1
             board.save()
+
+            first_board_id = Portfolio.objects.all().first().id
+            last_board_id  = Portfolio.objects.all().last().id
+
+            if int(board_id) == first_board_id:
+                previous_id = None
+            else:
+                previous_id = Portfolio.objects.filter(id__lt=board_id).last().id
+
+            if int(board_id) >= last_board_id:
+                next_id = None
+            else:
+                next_id = Portfolio.objects.filter(id__gt=board_id).first().id
+
             board_data = {
-                'user_id'  : board.user.user_id,
-                'title' : board.name,
-                'content' : board.content,
-                'like_count' : board.total_like,
-                'search_count' : board.search_count,
-                'stock'      : [{
-                  'stock_name' : stock.company.cp_name,
-                  'stock_count' : stock.shares_count,
+                'previous_board_id' : previous_id,
+                'next_board_id'     : next_id,
+                'user_id'           : board.user.user_id,
+                'title'             : board.name,
+                'content'           : board.content,
+                'like_count'        : board.total_like,
+                'search_count'      : board.search_count,
+                'stock'             : [{
+                  'stock_name'   : stock.company.cp_name,
+                  'stock_count'  : stock.shares_count,
                   'stock_amount' : stock.shares_amount
                 }for stock in board.portfoliostock_set.all()]
             }

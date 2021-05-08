@@ -1,19 +1,59 @@
 import API from "../api/api.js"
 
 class MyInfoService {
-  constructor() {
-    this.loadInfoPage();
+  saveCheckPassword() {
+    const tdPassword = document.querySelector(".td-password"),
+      addPwInput = document.createElement("input");
+    addPwInput.type = "password"
+    addPwInput.className = "change-password"
+    tdPassword.appendChild(addPwInput);
+    tdPassword.innerHTML += `<p id="modify-password" class="modify-btn">확인</p>`;
+    this.savePassword()
   }
 
-  // functionName - loadInfoPage
-  // Job - 로그인 시 마이페이지에 회원정보를 api에서 받아오게 호출
-  // Input(args, params) - none
-  // Output(return) - none
-  loadInfoPage() {
-    // api에서 서버에서 response로 회원정보를 전달받음
-    API.loadUserInfo();
+  changePassword() {
+    const tdPassword = document.querySelector(".td-password"),
+      modifyBtn = document.getElementById("modify-password");
+
+    modifyBtn.addEventListener("click", () => {
+      tdPassword.removeChild(modifyBtn);
+      this.saveCheckPassword();
+    });
   }
 
+  savePassword() {
+    const modifyBtn = document.getElementById("modify-password"),
+      savePassword = document.querySelector(".change-password"),
+      tdPassword = document.querySelector(".td-password");
+
+    modifyBtn.addEventListener("click", () => {
+      let pwReg = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{5,50}$/
+      try {
+        if (savePassword.value === "") {
+          alert("비밀번호를 입력해주세요");
+        } else if (!pwReg.test(savePassword.value)) {
+          alert("잘못된 비밀번호입니다.");
+        } else {
+          tdPassword.removeChild(savePassword);
+          tdPassword.innerHTML = `<p id="modify-password" class="modify-btn">수정</p>`;
+          API.put("http://192.168.1.32:8000/account/user/password/", {
+            password: `${savePassword.value}`,
+          })
+          this.changePassword();
+        }
+      } catch (error) {
+        alert(error);
+      }
+    });
+  }
+
+  saveCheckName(userName) {
+    const tdName = document.querySelector(".td-name");
+
+    tdName.innerHTML = `<input class="change-name" type="text" value=${userName}>`;
+    tdName.innerHTML += `<p id="modify-name" class="modify-btn">확인</p>`;
+    this.saveName(userName);
+  }
 
   changeName(userName) {
     const modifyBtn = document.getElementById("modify-name"),
@@ -22,9 +62,7 @@ class MyInfoService {
 
     modifyBtn.addEventListener("click", () => {
       tdName.removeChild(name);
-      tdName.innerHTML = `<input class="change-name" type="text" value=${userName}>`;
-      tdName.innerHTML += `<p id="modify-name" class="modify-btn">확인</p>`;
-      this.saveName(userName);
+      this.saveCheckName(userName);
     });
   }
 
@@ -34,13 +72,24 @@ class MyInfoService {
       tdName = document.querySelector(".td-name");
 
     modifyBtn.addEventListener("click", () => {
-      tdName.removeChild(saveName);
-      tdName.innerHTML = `<p id="name" class="contxt-title">${saveName.value}</p>`;
-      tdName.innerHTML += `<p id="modify-name" class="modify-btn">수정</p>`;
-      API.put("http://3.36.120.133:8000/account/user/name/", {
-        user_name: `${saveName.value}`,
-      });
-      this.changeName(userName);
+      let nameReg = /^[가-힣]+$/;
+      try {
+        if (saveName.value === "") {
+          alert("이름을 입력해주세요")
+        } else if (!nameReg.test(saveName.value)) {
+          alert("잘못된 이름입니다.")
+        } else {
+          tdName.removeChild(saveName);
+          tdName.innerHTML = `<p id="name" class="contxt-title">${saveName.value}</p>`;
+          tdName.innerHTML += `<p id="modify-name" class="modify-btn">수정</p>`;
+          API.put("http://192.168.1.32:8000/account/user/name/", {
+            user_name: `${saveName.value}`,
+          })
+          this.changeName(userName);
+        }
+      } catch (error) {
+        alert(error);
+      }
     });
   }
 
@@ -51,7 +100,7 @@ class MyInfoService {
 
     modifyBtn.addEventListener("click", () => {
       tdBirth.removeChild(birth);
-      tdBirth.innerHTML = `<input class="change-birth" type="text" value=${userBirth}>`;
+      tdBirth.innerHTML = `<input class="change-birth" type="date" value=${userBirth}>`;
       tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">확인</p>`;
       this.saveBirth(userBirth);
     });
@@ -66,11 +115,19 @@ class MyInfoService {
       tdBirth.removeChild(saveBirth);
       tdBirth.innerHTML = `<p id="birth" class="contxt-title">${saveBirth.value}</p>`;
       tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">수정</p>`;
-      API.put("http://3.36.120.133:8000/account/user/birth-date/", {
+      API.put("http://192.168.1.32:8000/account/user/birth-date/", {
         birth_date: `${saveBirth.value}`,
       });
       this.changeBirth(userBirth);
     });
+  }
+
+
+  saveCheckPhone(userPhone) {
+    const tdPhone = document.querySelector(".td-phone");
+    tdPhone.innerHTML = `<input class="change-phone" type="text" value="${userPhone}">`;
+    tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">확인</p>`;
+    this.savePhone(userPhone);
   }
 
   changePhone(userPhone) {
@@ -80,9 +137,7 @@ class MyInfoService {
 
     modifyBtn.addEventListener("click", () => {
       tdPhone.removeChild(phone);
-      tdPhone.innerHTML = `<input class="change-phone" type="text" value="${userPhone}">`;
-      tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">확인</p>`;
-      this.savePhone(userPhone);
+      this.saveCheckPhone(userPhone);
     });
   }
 
@@ -92,14 +147,33 @@ class MyInfoService {
       tdPhone = document.querySelector(".td-phone");
 
     modifyBtn.addEventListener("click", () => {
-      tdPhone.removeChild(savePhone);
-      tdPhone.innerHTML = `<p id="phone" class="contxt-title">${savePhone.value}</p>`;
-      tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">수정</p>`;
-      API.put("http://3.36.120.133:8000/account/user/phone/", {
-        phone_number: `${savePhone.value}`,
-      });
-      this.changePhone(userPhone);
+      let phoneReg = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/
+      try {
+        if (savePhone.value === "") {
+          alert("전화번호를 입력해주세요")
+        } else if (!phoneReg.test(savePhone.value)) {
+          alert("잘못된 전화번호입니다.")
+        } else {
+          tdPhone.removeChild(savePhone);
+          tdPhone.innerHTML = `<p id="phone" class="contxt-title">${savePhone.value}</p>`;
+          tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">수정</p>`;
+          API.put("http://192.168.1.32:8000/account/user/phone/", {
+            phone_number: `${savePhone.value}`,
+          });
+          this.changePhone(userPhone);
+        }
+      } catch (error) {
+        alert(error);
+      }
     });
+  }
+
+  saveCheckEmail(userEmail) {
+    const tdEmail = document.querySelector(".td-email");
+    tdEmail.innerHTML = `<input class="change-email" type="email" value="${userEmail}">`;
+    tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">확인</p>`;
+    this.saveEmail(userEmail)
+
   }
 
   changeEmail(userEmail) {
@@ -109,9 +183,7 @@ class MyInfoService {
 
     modifyBtn.addEventListener("click", () => {
       tdEmail.removeChild(email);
-      tdEmail.innerHTML = `<input class="change-email" type="text" value="${userEmail}">`;
-      tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">확인</p>`;
-      this.saveEmail(userEmail)
+      this.saveCheckEmail(userEmail)
     });
   }
 
@@ -121,13 +193,24 @@ class MyInfoService {
       tdEmail = document.querySelector(".td-email");
 
     modifyBtn.addEventListener("click", () => {
-      tdEmail.removeChild(saveEmail);
-      tdEmail.innerHTML = `<p id="email" class="contxt-title">${saveEmail.value}</p>`;
-      tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">수정</p>`;
-      API.put("http://3.36.120.133:8000/account/user/email/", {
-        email: `${saveEmail.value}`,
-      });
-      this.changeEmail(userEmail);
+      let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/
+      try {
+        if (saveEmail.value === "") {
+          alert("이메일을 입력해주세요");
+        } else if (!emailReg.test(saveEmail.value)) {
+          alert("잘못된 이메일입니다.");
+        } else {
+          tdEmail.removeChild(saveEmail);
+          tdEmail.innerHTML = `<p id="email" class="contxt-title">${saveEmail.value}</p>`;
+          tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">수정</p>`;
+          API.put("http://192.168.1.32:8000/account/user/email/", {
+            email: `${saveEmail.value}`,
+          });
+          this.changeEmail(userEmail);
+        }
+      } catch (error) {
+        alert(error);
+      }
     });
   }
 
