@@ -185,8 +185,8 @@ class BoardPortfolioView {
     const companyName = document.getElementById('company-name');
     let url = '';
     if (companyName.value === ''){
-      url = "http://192.168.1.32:8000/portfolio/list/?page=" + this.page;
-    } else url = "http://192.168.1.32:8000/portfolio/list/?company_name=" + companyName.value + "&page=" + this.page;
+      url = "http://15.165.17.217:8000/portfolio/list/?page=" + this.page;
+    } else url = "http://15.165.17.217:8000/portfolio/list/?company_name=" + companyName.value + "&page=" + this.page;
     
 
     $.ajax({
