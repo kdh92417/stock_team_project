@@ -73,6 +73,7 @@ a {
 
 .write-title {
   margin-top: 23px;
+  width:100%;
 }
 
 .portfolio-write {
@@ -126,5 +127,6 @@ a {
 
 .card-body {
   width: 100%;
-  margin: 10px 10px;
+  margin: 10px;
+  padding: 0;
 }

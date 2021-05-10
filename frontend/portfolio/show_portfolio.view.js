@@ -30,6 +30,7 @@ class ShowPortfolioView {
 
     let portfolio_HTML = `<div class="view-all-container">
     <div class="view-button-content">
+      
       <div role="button" class="btn prev-btn">
         <span class="btn-text">이전글</span>
       </div>
@@ -77,12 +78,12 @@ class ShowPortfolioView {
       </div>
     </div>
     <div class="bottom-button-content">
-      <a href="" role="button" class="btn list-btn">
+      <a href="../template/portfolio-board.html" role="button" class="btn list-btn">
         <span class="btn-text">목록</span>
       </a>
-      <a href="" role="button" class="btn top-btn">
+      
         <span class="btn-text" id="top-btn" onclick="window.scrollTo(0,0);">▲TOP</span>
-      </a>
+
     </div>
   </div>`
   
@@ -94,8 +95,6 @@ class ShowPortfolioView {
     stock.innerHTML += `${stockNameArr[i]} - ${stockCountArr[i]}주 - ${stockPriceArr[i].toLocaleString()}원<br>`;
   
   }
-
-
 
   // Chart JS
   var ctx = document.getElementById('myChart');
@@ -195,19 +194,19 @@ class ShowPortfolioView {
         console.log(err);
       })
     } else alert("댓글을 입력해주세요.")
-    
+
+    // document.querySelector(".comment-inbox-text").value='';
     
       
   }
 
-  printComments(boardData, comments) {
+  printComments(comments) {
     const commentDiv = document.querySelector('.comment-print-box');
     for (let i = 0; i < comments.length; i++) {
-      const userId = boardData.user_id;
       let html = 
       `<div class="each-comment">
         <div class="each-comment-content">
-          <div class="userId">ID: ${userId}</div>
+          <div class="userId">ID: ${comments[i].user_id}</div>
           ${comments[i].content}
         </div>
       </div>`
@@ -231,6 +230,27 @@ class ShowPortfolioView {
     </div>`
 
     commentDiv.innerHTML += html;
+  }
+
+  showDeleteBtn(pfId) {
+    const deleteBtn = document.querySelector('.view-button-content');
+    const html = `<div role="button" class="btn delete-btn">
+    <span class="btn-text">삭제</span></div>`
+    API.userInfoGet("http://192.168.1.32:8000/account/user/")
+    .then((res) => (res.json()))
+      .then((res) => {
+        console.log(res.board_list);
+        for (let i = 0; i < res.board_list.length; i++) {
+          if (res.board_list[i].board_id === Number(pfId)) {
+            deleteBtn.insertAdjacentHTML('afterbegin', html);
+          } 
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+    
   }
 
 }
