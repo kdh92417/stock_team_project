@@ -7,7 +7,7 @@ class ShowPortfolioView {
     console.log(this.root)
   }
 
-  showPortfolio(res, pfId, getPortfolio) {
+  showPortfolio(res, pfId) {
     console.log(res)
     const title = res.title;
     const content = res.content;
@@ -77,19 +77,15 @@ class ShowPortfolioView {
       </div>
     </div>
     <div class="bottom-button-content">
-      <a href="" role="button" class="btn write-btn">
-        <span class="btn-text">글쓰기</span>
-      </a>
       <a href="" role="button" class="btn list-btn">
         <span class="btn-text">목록</span>
       </a>
       <a href="" role="button" class="btn top-btn">
-        <span class="btn-text">▲TOP</span>
+        <span class="btn-text" id="top-btn" onclick="window.scrollTo(0,0);">▲TOP</span>
       </a>
     </div>
   </div>`
   
-
   this.root.insertAdjacentHTML('afterend', portfolio_HTML);
 
   let stock = document.querySelector('#stock')
@@ -148,6 +144,15 @@ class ShowPortfolioView {
 
   this.movePreviousPortfolio(prev);
   this.moveNextPortfolio(next)
+
+  const commentSubmitBtn = document.querySelector(".btn-submit");
+
+  commentSubmitBtn.addEventListener("click", event => {
+
+      this.submitComment(pfId)
+    
+  })
+  
   }
 
   movePreviousPortfolio(prev) {
@@ -169,43 +174,65 @@ class ShowPortfolioView {
   }
 
   submitComment(pfId) {
-    const commentSubmitBtn = document.querySelector(".btn-submit");
+    
     const commentArea = document.querySelector(".comment-inbox-text");
-    const commentContent = commentArea.value;
-    console.dir(commentArea)
-    console.log(commentArea.value)
+    let commentContent = commentArea.value;
+    commentContent = commentContent.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
     this.comment.saveComment(commentContent, pfId);
     const comment = this.comment.comment;
-    commentSubmitBtn.addEventListener("click", event => {
-      API.postComment("http://15.165.17.217:8000/portfolio/comment/write/", comment)
+    console.log(comment)
+
+    if (commentContent !== '') {
+      API.postComment("http://192.168.1.32:8000/portfolio/comment/write/", comment)
       .then((res) => (res.json()))
       .then((res) => {
         console.log(res);
         console.log(res.user_id);
-        this.printComment(res.user_id)
+        this.printNewComment(res.user_id)
       })
       .catch((err) => {
         console.log(err);
       })
+    } else alert("댓글을 입력해주세요.")
+    
+    
       
-    })
   }
 
-  printComment(userId) {
+  printComments(boardData, comments) {
+    const commentDiv = document.querySelector('.comment-print-box');
+    for (let i = 0; i < comments.length; i++) {
+      const userId = boardData.user_id;
+      let html = 
+      `<div class="each-comment">
+        <div class="each-comment-content">
+          <div class="userId">ID: ${userId}</div>
+          ${comments[i].content}
+        </div>
+      </div>`
+
+      commentDiv.innerHTML += html;
+    }
+  }
+
+  //새로 입력된 댓글 추가
+  printNewComment(userId) {
     const commentDiv = document.querySelector('.comment-print-box');
     const commentArea = document.querySelector(".comment-inbox-text");
     let comment = commentArea.value;
-    console.log(comment)
+    comment = comment.replace(/(?:\r\n|\r|\n)/g, '<br>');
     let html = 
     `<div class="each-comment">
       <div class="each-comment-content">
-        <div class="userId">${userId}</div>
+        <div class="userId">ID: ${userId}</div>
         ${comment}
       </div>
     </div>`
 
     commentDiv.innerHTML += html;
   }
+
 }
 
 export default ShowPortfolioView;

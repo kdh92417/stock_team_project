@@ -12,7 +12,7 @@ class API {
   // Input(args, params) - login user info
   // Output(return) - none
   async getLogin(loginData) {
-    await fetch("http://15.165.17.217:8000/account/login/", {
+    await fetch("http://192.168.1.32:8000/account/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ class API {
   // Input(args, params) - userId
   // Output(return) - none
   async sendToken(userId) {
-    await fetch("http://15.165.17.217:8000/account/user/", {
+    await fetch("http://192.168.1.32:8000/account/user/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ class API {
   // Input(args, params) - userInfo
   // Output(return) - none
   postSignup(signData) {
-    fetch("http://15.165.17.217:8000/account/signup/", {
+    fetch("http://192.168.1.32:8000/account/signup/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -182,7 +182,7 @@ class API {
   // Input(args, params) - 포트폴리오에 속한 데이터
   // Output(return) - none
   postPortfolio(portfolioData) {
-    fetch("http://15.165.17.217:8000/portfolio/write/", {
+    fetch("http://192.168.1.32:8000/portfolio/write/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
