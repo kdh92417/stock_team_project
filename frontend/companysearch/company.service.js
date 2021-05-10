@@ -41,13 +41,6 @@ class CompanyService {
     })
   }
 
-  saveLikeCount(company, count) {
-    const companyLike = {};
-    companyLike.name = company.innerHTML;
-    companyLike.count = true;
-    localStorage.setItem("clicked", JSON.stringify(companyLike));
-  }
-
   // functionName - getComprehensiveIncomeStatement
   // Job - 포괄손익계산서에 필요한 데이터를 받아서 가공 후 차트에 보내줌
   // Input(args, params) - 매출액, 영업이익, 당기순이익
