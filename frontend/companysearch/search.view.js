@@ -1,3 +1,6 @@
+import LikeCpPfView from "../main/view/like_cp_pf.view.js"
+
+
 class SearchView {
   constructor() {
     this.searchInput = document.querySelector(".company-search");

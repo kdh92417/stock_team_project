@@ -16,12 +16,13 @@ class LikeCpPfCtrl {
     API.get(`http://192.168.1.32:8000/main/`)
       .then((res) => res.json())
       .then((res) => {
+        console.log(res)
         const companyInfo = [];
         const portfolioInfo = [];
-        for (let x of res.top10_company_list) {
+        for (let x of res.top5_company_list) {
           companyInfo.push(x)
         }
-        for (let x of res.top10_portfolio_list) {
+        for (let x of res.top5_portfolio_list) {
           portfolioInfo.push(x)
         }
         this.view.showLikeCompany();
@@ -38,11 +39,13 @@ class LikeCpPfCtrl {
   // Input(args, params) - companyInfo, portfolioInfo
   // Output(return) - none
   sendCompanyAndPortfolioData(company, portfolio) {
-    const rankTimer = this.service.rankTimer;
+    const rankTimer = this.service.rankTimer,
+      showRankCompany = this.service.showRankCompany
     this.view.addTop5Company(company);
     this.view.addTop5Portfolio(portfolio);
     this.view.findCompanyList(rankTimer);
     this.view.findPortfolioList(rankTimer);
+    this.view.sendRankList(showRankCompany);
   }
 }
 

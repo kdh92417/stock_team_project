@@ -1,5 +1,21 @@
 class LikeCpPfService {
-
+  // functionName - showRankCompany
+  // Job - 주간 인기 검색 기업을 클릭하면 기업정보 페이지로 보내줌 
+  // Input(args, params) - view topRank
+  // Output(return) - none
+  showRankCompany = (topRank) => {
+    topRank.forEach(target => {
+      target.addEventListener("click", event => {
+        console.dir(event.target.previousElementSibling.id)
+        location.href = "../template/company.html"
+        const companyInfo = {};
+        companyInfo.name = event.target.innerHTML;
+        companyInfo.code = event.target.id;
+        companyInfo.like_count = event.target.previousElementSibling.id;
+        localStorage.setItem("기업이름", JSON.stringify(companyInfo));
+      })
+    })
+  }
   // functionName - rankTimer
   // Job - 주간 인기 검색 기업 / 주간 인기 포트폴리오들을 순차적으로 갱신되는 효과 
   // Input(args, params) - view list 

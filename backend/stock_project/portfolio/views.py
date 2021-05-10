@@ -96,6 +96,7 @@ class BasePortfolioView(View):
                 'user_id'           : board.user.user_id,
                 'title'             : board.name,
                 'content'           : board.content,
+                'create_date'       : board.create_date,
                 'like_count'        : board.total_like,
                 'search_count'      : board.search_count,
                 'stock'             : [{
@@ -105,10 +106,26 @@ class BasePortfolioView(View):
                 }for stock in board.portfoliostock_set.all()]
             }
 
-        except KeyError:
-            return JsonResponse({'message' : 'SUCCESS', 'status' : 400}, status=400)
+            comment_list = Comment.objects.select_related('user').filter(portfolio_id=board_id)
 
-        return JsonResponse({'message' : 'SUCCESS', 'board_data': board_data, 'status' : 200}, status=200)
+            comment_data = [{
+                'comment_id'  : comment.id,
+                'user_id'     : comment.user.user_id,
+                'content'     : comment.content,
+                'create_date' : comment.create_date,
+            } for comment in comment_list]
+
+        except KeyError:
+            return JsonResponse({'message' : 'KEY_ERROR', 'status' : 400}, status=400)
+
+        except Portfolio.DoesNotExist:
+            return JsonResponse({'message' : 'This Portfolio does not exist', 'status' : 400}, status=400)
+
+        return JsonResponse({
+            'message'      : 'SUCCESS',
+            'status'       : 200,
+            'board_data'   : board_data,
+            'comment_data' : comment_data}, status=200)
 
     @login_required
     def post(self, request):
@@ -127,9 +144,9 @@ class BasePortfolioView(View):
                 try:
                     cp = Company.objects.get(cp_name=stock['stock_name'])
                     PortfolioStock.objects.create(
-                        company_id = cp.id,
-                        portfolio_id = pf.id,
-                        shares_count = stock['stock_count'],
+                        company_id    = cp.id,
+                        portfolio_id  = pf.id,
+                        shares_count  = stock['stock_count'],
                         shares_amount = stock['stock_amount']
                     )
                 except Company.DoesNotExist:
@@ -140,12 +157,13 @@ class BasePortfolioView(View):
 
             board_data = {
                 'portfolio_id' : pf.id,
-                'user_id': user.user_id,
-                'title': pf.name,
-                'like_count': pf.total_like,
+                'user_id'      : user.user_id,
+                'title'        : pf.name,
+                'create_date'  : pf.create_date,
+                'like_count'   : pf.total_like,
                 'stock': [{
-                    'stock_name': stock['stock_name'],
-                    'stock_count': stock['stock_count'],
+                    'stock_name'  : stock['stock_name'],
+                    'stock_count' : stock['stock_count'],
                     'stock_amount': stock['stock_amount']
                 } for stock in stock_list]
             }
@@ -155,6 +173,33 @@ class BasePortfolioView(View):
         except KeyError:
             return JsonResponse({'message' : 'KEY_ERROR', 'status' : 400}, status=400)
 
+    @login_required
+    def delete(self, request):
+        try:
+            pf_id = json.loads(request.body)['portfolio_id']
+            user  = request.user
+            print(user.id)
+            if not Portfolio.objects.filter(Q(id=pf_id) & Q(user_id=user.id)).exists():
+                return JsonResponse({
+                    'message': 'This Portfolio ID Does Not exist',
+                    'status': 400
+                }, status=400)
+
+            pf = Portfolio.objects.get(Q(id=pf_id) & Q(user_id=user.id))
+            pf.delete()
+
+            return JsonResponse({
+                'message'          : 'success',
+                'deleted_board_id' : pf_id,
+                'status'           : 200,
+            }, status=200)
+
+        except KeyError:
+            return JsonResponse({
+                'message': 'INVALID_KEY',
+                'status': 400
+            }, status=400)
+
 
 class CommentView(View):
     def get(self, request):
@@ -163,6 +208,7 @@ class CommentView(View):
             comment_list = Comment.objects.filter(portfolio_id=portfolio_id)
 
             comment_data = [{
+                'comment_id'  : comment.id,
                 'user_name'   : comment.user_name,
                 'user_id'     : Account.objects.get(id=comment.user_id).user_id,
                 'content'     : comment.content,
@@ -179,14 +225,55 @@ class CommentView(View):
         try:
             user = request.user
             comment_data = json.loads(request.body)
-            Comment.objects.create(
-                user_name = user.user_name,
-                content = comment_data['content'],
+            comment_id = Comment.objects.create(
+                user_name    = user.user_name,
+                content      = comment_data['content'],
                 portfolio_id = comment_data['portfolio_id'],
-                user_id = user.id
-            )
+                user_id      = user.id
+            ).id
 
         except KeyError:
-            return JsonResponse({'message' : 'KEY_ERROR', 'status' : 400}, status=400)
+            return JsonResponse({'message' : 'KEY_ERROR', 'status' : 400 }, status=400)
 
-        return JsonResponse({'message' : 'SUCCESS', 'status' : 200}, status=200)
+        return JsonResponse({
+            'message'    : 'SUCCESS',
+            'status'     : 200,
+            'user_id'    : user.user_id,
+            'comment_id' : comment_id }, status=200)
+
+    @login_required
+    def put(self, request):
+        try:
+            user = request.user
+            comment_data = json.loads(request.body)
+            if Comment.objects.filter(Q(id=comment_data['comment_id']) & Q(user_id=user.id)).exists():
+                user_comment         = Comment.objects.get(id=comment_data['comment_id'])
+                user_comment.content = comment_data['board_content']
+                user_comment.save()
+                return JsonResponse({'message': 'success', 'status': 200}, status=200)
+            else:
+                return JsonResponse({'message': 'Invalid User or Comment', 'status': 400}, status=400)
+
+        except KeyError:
+            return JsonResponse({'message': 'KEY_ERROR', 'status' : 400}, status=400)
+
+        except Comment.DoesNotExist:
+            return JsonResponse({'message': 'This comment does not exist', 'status': 400}, status=400)
+
+    @login_required
+    def delete(self, request):
+        try:
+            user = request.user
+            comment_data = json.loads(request.body)
+            if Comment.objects.filter(Q(id=comment_data['comment_id']) & Q(user_id=user.id)).exists():
+                user_comment = Comment.objects.get(id=comment_data['comment_id'])
+                user_comment.delete()
+                return JsonResponse({'message': 'success', 'status': 200}, status=200)
+            else:
+                return JsonResponse({'message': 'Invalid User or Comment', 'status': 400}, status=400)
+
+        except KeyError:
+            return JsonResponse({'message': 'KEY_ERROR', 'status': 400}, status=400)
+
+        except Comment.DoesNotExist:
+            return JsonResponse({'message': 'This comment does not exist', 'status': 400}, status=400)
