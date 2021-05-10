@@ -15,6 +15,11 @@ class ShowPortfolioView {
     const searchCount = res.search_count;
     const prev = res.previous_board_id;
     const next = res.next_board_id;
+    const date = res.create_date;
+    // const month = res.create_date.getMonth();
+    // const day = res.create_date.getDate();
+    // const hour = res.create_date.getHours();
+    // const minute = res.create_date.getMinuites();
 
     let stockNameArr = [];
     let stockCountArr = [];
@@ -48,7 +53,7 @@ class ShowPortfolioView {
       <div class="user-info">
         <span class="user-nickname">${userId}</span>
         <div class="write-info">
-          <span class="date">2021.04.21 12:41</span>
+          <span class="date">${date}</span>
           <span class="view-count">조회수: ${searchCount}</span>
         </div>
       </div>
@@ -248,10 +253,11 @@ class ShowPortfolioView {
           } 
         }
         this.showDeleteCommentBtn(res.comment_list)
+        this.deletePortfolio(pfId);
       })
       .catch((err) => {
         console.log(err);
-      })  
+      }) 
   }
 
   showDeleteCommentBtn(commentId) {
@@ -270,6 +276,26 @@ class ShowPortfolioView {
       
       }
     }
+  }
+
+  deletePortfolio(pfId) {
+    const deleteBtn = document.querySelector('.delete-btn');
+    const pfObj = {};
+    pfObj.portfolio_id = Number(pfId)
+
+    console.log(pfObj);
+    deleteBtn.addEventListener('click', function() {
+      API.delete('http://192.168.1.32:8000/portfolio/write/', pfObj)
+      .then((res) => (res.json()))
+      .then((res) => {
+        console.log("deleted")
+        alert("게시글이 삭제되었습니다.")
+        location.href = "../template/portfolio-board.html";
+      })
+      .catch((err) => {
+        console.log(err);
+      }) 
+    })
   }
 
 }
