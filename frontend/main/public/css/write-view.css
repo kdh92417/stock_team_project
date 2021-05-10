@@ -218,3 +218,12 @@
 .userId {
   color: #ffff;
 }
+
+.delete-btn {
+  width: 30px;
+  float: right;
+  padding: 2px;
+  border: 1px solid rgb(168, 168, 168);
+  border-radius: 3px;
+  text-align: center;
+}
