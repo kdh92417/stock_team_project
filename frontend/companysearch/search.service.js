@@ -1,5 +1,4 @@
 import API from "../api/api.js"
-import CompanyView from "../companysearch/company.view.js"
 
 class SearchService {
 
@@ -16,7 +15,7 @@ class SearchService {
         if (res.status === 400) {
           alert("검색한 기업이 존재하지 않습니다. 기업명을 확인해 주세요");
         } else {
-          location.href = "../template/company.html"
+          // location.href = "../template/company.html"
           const companyInfo = {};
           companyInfo.name = company.name.toUpperCase();
           companyInfo.code = res.corp_code;
