@@ -9,8 +9,6 @@ from django.http        import (
     HttpResponse
 )
 
-
-
 from my_settings         import ALGORITHM
 from stock.settings      import SECRET_KEY
 from .utils              import login_required
@@ -87,12 +85,15 @@ class MyPage(View):
             }
 
             board_list = [{
+                'board_id'    : board.id,
                 'pofol_name'  : board.name,
                 'pofol_like'  : board.total_like,
                 'create_date' : board.create_date
             }for board in Portfolio.objects.filter(user_id=user.id)]
 
             comment_list = [{
+                'comment_id'      : comment.id,
+                'pofol_id'        : comment.portfolio.id,
                 'pofol_name'      : comment.portfolio.name,
                 'comment_content' : comment.content,
                 'create_date'     : comment.create_date
@@ -243,9 +244,11 @@ class LikeCPView(View):
                     Q(user_id=user.id) & Q(company_id=cp.id)).exists():
                 user_like_pf = LikeCompany.objects.filter(
                     Q(user_id=user.id) & Q(company_id=cp.id)).first()
-                cp.total_like -= 1
-                cp.save()
                 user_like_pf.delete()
+
+                if cp.total_like > 0:
+                    cp.total_like -= 1
+                    cp.save()
 
                 return JsonResponse({
                     'message'    : 'Dislike this Company',
@@ -282,8 +285,8 @@ class LikeInfoView(View):
         like_cp_list = LikeCompany.objects.select_related('company').filter(user_id=user.id)
         like_pf_list = LikePortfolio.objects.select_related('portfolio').filter(user_id=user.id)
 
-        cp_data = { 'like_company_list' : [cp.company.cp_name for cp in like_cp_list] }
-        pf_data = { 'like_portfolio_list' : [pf.portfolio.name for pf in like_pf_list] }
+        cp_data = [cp.company.cp_name for cp in like_cp_list]
+        pf_data = [pf.portfolio.name for pf in like_pf_list]
 
         return JsonResponse({
             'message'             : 'success',
