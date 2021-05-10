@@ -46,7 +46,6 @@ class CompanyView {
   // Input(args, params) - 좋아요기업명(companyName), 검색한기업명(searchWord)
   // Output(return) - none
   userLikeListView(companyName, searchName) {
-    console.log(companyName)
     const token = localStorage.getItem("token"),
       btnContent = document.querySelector(".btn-content"),
       likeBtn = document.querySelector(".like-btn");
