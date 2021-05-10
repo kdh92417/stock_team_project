@@ -21,7 +21,7 @@ class ShowPortfolioView {
     let stockAmountArr = [];
     let stockPriceArr = []
 
-    for (let i = 0; i < res.stock.length; i++){
+    for (let i = 0; i < res.stock.length; i++) {
       stockNameArr.push(res.stock[i]["stock_name"]);
       stockCountArr.push(res.stock[i]["stock_count"]);
       stockAmountArr.push(res.stock[i]["stock_amount"]);
@@ -88,66 +88,66 @@ class ShowPortfolioView {
       </a>
     </div>
   </div>`
-  
-
-  this.root.insertAdjacentHTML('afterend', portfolio_HTML);
-
-  let stock = document.querySelector('#stock')
-  for (let i = 0; i < stockNameArr.length; i++) {
-
-    stock.innerHTML += `${stockNameArr[i]} - ${stockCountArr[i]}주 - ${stockPriceArr[i].toLocaleString()}원<br>`;
-  
-  }
 
 
+    this.root.insertAdjacentHTML('afterend', portfolio_HTML);
 
-  // Chart JS
-  var ctx = document.getElementById('myChart');
-  var myChart = new Chart(ctx, {
-    type: "pie",
-    data: {
-      labels: stockNameArr,
-      datasets: [
-        {
-          label: "# of Votes",
-          data: stockPriceArr,
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-            "rgba(183, 255, 176, 0.2)",
-            "rgba(255, 170, 192, 0.2)",
-            "rgba(255, 248, 149, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-            "rgba(94, 199, 62, 1)",
-            "rgba(255, 86, 131, 1)",
-            "rgba(218, 206, 47, 1)",
-          ],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
+    let stock = document.querySelector('#stock')
+    for (let i = 0; i < stockNameArr.length; i++) {
+
+      stock.innerHTML += `${stockNameArr[i]} - ${stockCountArr[i]}주 - ${stockPriceArr[i].toLocaleString()}원<br>`;
+
+    }
+
+
+
+    // Chart JS
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: stockNameArr,
+        datasets: [
+          {
+            label: "# of Votes",
+            data: stockPriceArr,
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(255, 159, 64, 0.2)",
+              "rgba(183, 255, 176, 0.2)",
+              "rgba(255, 170, 192, 0.2)",
+              "rgba(255, 248, 149, 0.2)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+              "rgba(94, 199, 62, 1)",
+              "rgba(255, 86, 131, 1)",
+              "rgba(218, 206, 47, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
         },
       },
-    },
-  });
+    });
 
-  this.movePreviousPortfolio(prev);
-  this.moveNextPortfolio(next)
+    this.movePreviousPortfolio(prev);
+    this.moveNextPortfolio(next)
   }
 
   movePreviousPortfolio(prev) {
@@ -177,17 +177,17 @@ class ShowPortfolioView {
     this.comment.saveComment(commentContent, pfId);
     const comment = this.comment.comment;
     commentSubmitBtn.addEventListener("click", event => {
-      API.postComment("http://15.165.17.217:8000/portfolio/comment/write/", comment)
-      .then((res) => (res.json()))
-      .then((res) => {
-        console.log(res);
-        console.log(res.user_id);
-        this.printComment(res.user_id)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      
+      API.postComment("http://192.168.1.32:8000/portfolio/comment/write/", comment)
+        .then((res) => (res.json()))
+        .then((res) => {
+          console.log(res);
+          console.log(res.user_id);
+          this.printComment(res.user_id)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+
     })
   }
 
@@ -196,8 +196,8 @@ class ShowPortfolioView {
     const commentArea = document.querySelector(".comment-inbox-text");
     let comment = commentArea.value;
     console.log(comment)
-    let html = 
-    `<div class="each-comment">
+    let html =
+      `<div class="each-comment">
       <div class="each-comment-content">
         <div class="userId">${userId}</div>
         ${comment}

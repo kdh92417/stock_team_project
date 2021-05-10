@@ -28,7 +28,6 @@ class Navbar {
           <div class="nav-menu">
             <ul class="main-menu">
               <li><a class="nav-item" href="../template/portfolio-board.html">포트폴리오 게시판</a></li>
-              <li><a class="nav-item" href="../template/hall_of_fame.html">명예의 전당</a></li>
               <li id="admin"><a class="nav-item" href="./manager.html">관리자</a></li>
             </ul>
             <ul class="main-login">
@@ -56,7 +55,6 @@ class Navbar {
           <div class="nav-menu">
             <ul class="main-menu">
               <li><a class="nav-item" href="../template/portfolio-board.html">포트폴리오 게시판</a></li>
-              <li><a class="nav-item" href="../template/hall_of_fame.html">명예의 전당</a></li>
               <li id="admin"><a class="nav-item" href="./manager.html">관리자</a></li>
               <li id="mypage">
                 <a class="nav-item desktop-link" href="#">마이페이지</a>

@@ -27,6 +27,14 @@ class MyInfoView {
           </tr>
           <tr>
             <th>
+              <span>회원등급</span>
+            </th>
+            <td>
+              <p class="contxt-title">${userInfo.type}</p>
+            </td>
+          </tr>
+          <tr>
+            <th>
               <span>비밀번호</span>
             </th>
             <td class="td-password">

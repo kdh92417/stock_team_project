@@ -31,17 +31,26 @@ class LikeCpPfView {
       topRank.innerHTML += `<li>
         <div class="list-company">
           <div class="list-item list_sliding">
-            <span class="rank-num">${i + 1}</span>
-            <span class="rank-text">${data[i].company_name}</span>
+            <span id="${data[i].company_like}" class="rank-num">${i + 1}</span>
+            <span id="${data[i].corp_code}" class="rank-text">${data[i].company_name}</span>
           </div>
           <div class="list-item">
-            <span class="rank-num">${i + 1}</span>
-            <span class="rank-text">${data[i].company_name}</span>
+            <span id="${data[i].company_like}" class="rank-num">${i + 1}</span>
+            <span id="${data[i].corp_code}"  class="rank-text">${data[i].company_name}</span>
           </div>
         </div>
       </li>`
     }
 
+  }
+
+  // functionName - sendRankList
+  // Job - 메인페이지 top5 회사의 정보를 보내줌
+  // Input(args, params) - callback(service.showRankCompany)  
+  // Output(return) - none
+  sendRankList(callback) {
+    const topRank = document.querySelectorAll(".list-item");
+    callback(topRank);
   }
 
   // functionName - findCompanyList
@@ -83,11 +92,13 @@ class LikeCpPfView {
               <div class="list-portfolio">
                 <div class="list-item list_sliding">
                   <span class="rank-num">${i + 1}</span>
-                  <span class="rank-text">${data[i].portfolio_title}</span>
+                  <a href="http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${data[i].portfolio_id}">
+                  <span id="${data[i].portfolio_id}" class="rank-text">${data[i].portfolio_title}</span></a>
                 </div>
                 <div class="list-item">
                   <span class="rank-num">${i + 1}</span>
-                  <span class="rank-text">${data[i].portfolio_title}</span>
+                  <a href="http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${data[i].portfolio_id}">
+                  <span id="${data[i].portfolio_id}" class="rank-text">${data[i].portfolio_title}</span></a>
                 </div>
               </div>
             </li>`
