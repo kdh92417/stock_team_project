@@ -14,17 +14,14 @@ class ShowPortfolioController {
       .then((res) => {
         console.log(res);
         this.view.showPortfolio(res.board_data, pfId);
-        this.view.submitComment(pfId);
+        this.view.printComments(res.comment_data);
+        this.view.showDeleteBtn(pfId);
+
       })
       .catch((err) => {
         console.log(err);
       })
-
-
   }
-
-
-
 }
 
 export default ShowPortfolioController;

@@ -7,7 +7,7 @@ class ShowPortfolioView {
     console.log(this.root)
   }
 
-  showPortfolio(res, pfId, getPortfolio) {
+  showPortfolio(res, pfId) {
     console.log(res)
     const title = res.title;
     const content = res.content;
@@ -30,6 +30,7 @@ class ShowPortfolioView {
 
     let portfolio_HTML = `<div class="view-all-container">
     <div class="view-button-content">
+      
       <div role="button" class="btn prev-btn">
         <span class="btn-text">이전글</span>
       </div>
@@ -77,18 +78,16 @@ class ShowPortfolioView {
       </div>
     </div>
     <div class="bottom-button-content">
-      <a href="" role="button" class="btn write-btn">
-        <span class="btn-text">글쓰기</span>
-      </a>
-      <a href="" role="button" class="btn list-btn">
+      <a href="../template/portfolio-board.html" role="button" class="btn list-btn">
         <span class="btn-text">목록</span>
       </a>
-      <a href="" role="button" class="btn top-btn">
-        <span class="btn-text">▲TOP</span>
-      </a>
+      
+        <span class="btn-text" id="top-btn" onclick="window.scrollTo(0,0);">▲TOP</span>
+
     </div>
   </div>`
 
+    this.root.insertAdjacentHTML('afterend', portfolio_HTML);
 
     this.root.insertAdjacentHTML('afterend', portfolio_HTML);
 
@@ -97,115 +96,181 @@ class ShowPortfolioView {
 
       stock.innerHTML += `${stockNameArr[i]} - ${stockCountArr[i]}주 - ${stockPriceArr[i].toLocaleString()}원<br>`;
 
+      // Chart JS
+      var ctx = document.getElementById('myChart');
+      var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: stockNameArr,
+          datasets: [
+            {
+              label: "# of Votes",
+              data: stockPriceArr,
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+                "rgba(183, 255, 176, 0.2)",
+                "rgba(255, 170, 192, 0.2)",
+                "rgba(255, 248, 149, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+                "rgba(94, 199, 62, 1)",
+                "rgba(255, 86, 131, 1)",
+                "rgba(218, 206, 47, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        });
+
+      this.movePreviousPortfolio(prev);
+      this.moveNextPortfolio(next)
+
+      const commentSubmitBtn = document.querySelector(".btn-submit");
+
+      commentSubmitBtn.addEventListener("click", event => {
+
+        this.submitComment(pfId)
+
+      })
+
     }
 
+    movePreviousPortfolio(prev) {
+      const previousBtn = document.querySelector(".prev-btn");
+      previousBtn.addEventListener("click", () => {
+        if (prev === null) {
+          return alert("첫번째 페이지입니다.")
+        } else location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=` + prev;
+      })
+    }
+
+    moveNextPortfolio(next) {
+      const previousBtn = document.querySelector(".next-btn");
+      previousBtn.addEventListener("click", () => {
+        if (next === null) {
+          return alert("마지막 페이지입니다.")
+        } else location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=` + next;
+      })
+    }
+
+    submitComment(pfId) {
+
+      const commentArea = document.querySelector(".comment-inbox-text");
+      let commentContent = commentArea.value;
+      commentContent = commentContent.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+      this.comment.saveComment(commentContent, pfId);
+      const comment = this.comment.comment;
+      console.log(comment)
+
+      if (commentContent !== '') {
+        API.postComment("http://192.168.1.32:8000/portfolio/comment/write/", comment)
+          .then((res) => (res.json()))
+          .then((res) => {
+            console.log(res);
+            console.log(res.user_id);
+            this.printNewComment(res.user_id, res.comment_id);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      } else alert("댓글을 입력해주세요.")
+
+      // document.querySelector(".comment-inbox-text").value='';
 
 
-    // Chart JS
-    var ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: stockNameArr,
-        datasets: [
-          {
-            label: "# of Votes",
-            data: stockPriceArr,
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-              "rgba(183, 255, 176, 0.2)",
-              "rgba(255, 170, 192, 0.2)",
-              "rgba(255, 248, 149, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(94, 199, 62, 1)",
-              "rgba(255, 86, 131, 1)",
-              "rgba(218, 206, 47, 1)",
-            ],
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-    });
+    }
 
-    this.movePreviousPortfolio(prev);
-    this.moveNextPortfolio(next)
-  }
+    printComments(comments) {
+      const commentDiv = document.querySelector('.comment-print-box');
+      for (let i = 0; i < comments.length; i++) {
+        let html =
+          `<div class="each-comment">
+        <div class="each-comment-content">
+          <div class="comment" id="${comments[i].comment_id}">ID: ${comments[i].user_id}</div>
+          ${comments[i].content}
+        </div>
+      </div>`
 
-  movePreviousPortfolio(prev) {
-    const previousBtn = document.querySelector(".prev-btn");
-    previousBtn.addEventListener("click", () => {
-      if (prev === null) {
-        return alert("첫번째 페이지입니다.")
-      } else location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=` + prev;
-    })
-  }
+        commentDiv.innerHTML += html;
+      }
+    }
 
-  moveNextPortfolio(next) {
-    const previousBtn = document.querySelector(".next-btn");
-    previousBtn.addEventListener("click", () => {
-      if (next === null) {
-        return alert("마지막 페이지입니다.")
-      } else location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=` + next;
-    })
-  }
+    //새로 입력된 댓글 추가
+    printNewComment(userId, commentId) {
+      const commentDiv = document.querySelector('.comment-print-box');
+      const commentArea = document.querySelector(".comment-inbox-text");
 
-  submitComment(pfId) {
-    const commentSubmitBtn = document.querySelector(".btn-submit");
-    const commentArea = document.querySelector(".comment-inbox-text");
-    const commentContent = commentArea.value;
-    console.dir(commentArea)
-    console.log(commentArea.value)
-    this.comment.saveComment(commentContent, pfId);
-    const comment = this.comment.comment;
-    commentSubmitBtn.addEventListener("click", event => {
-      API.postComment("http://192.168.1.32:8000/portfolio/comment/write/", comment)
-        .then((res) => (res.json()))
-        .then((res) => {
-          console.log(res);
-          console.log(res.user_id);
-          this.printComment(res.user_id)
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-
-    })
-  }
-
-  printComment(userId) {
-    const commentDiv = document.querySelector('.comment-print-box');
-    const commentArea = document.querySelector(".comment-inbox-text");
-    let comment = commentArea.value;
-    console.log(comment)
-    let html =
-      `<div class="each-comment">
+      let comment = commentArea.value;
+      comment = comment.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      let html =
+        `<div class="each-comment">
       <div class="each-comment-content">
-        <div class="userId">${userId}</div>
+        <div class="comment" id="${commentId}">ID: ${userId}</div>
         ${comment}
       </div>
     </div>`
 
-    commentDiv.innerHTML += html;
-  }
-}
+      commentDiv.innerHTML += html;
+      window.location.reload();
+    }
 
-export default ShowPortfolioView;
+    showDeleteBtn(pfId) {
+      const deleteBtn = document.querySelector('.view-button-content');
+      const html = `<div role="button" class="btn delete-btn">
+    <span class="btn-text">삭제</span></div>`
+      API.userInfoGet("http://192.168.1.32:8000/account/user/")
+        .then((res) => (res.json()))
+        .then((res) => {
+          console.log(res.comment_list);
+          for (let i = 0; i < res.board_list.length; i++) {
+            if (res.board_list[i].board_id === Number(pfId)) {
+              deleteBtn.insertAdjacentHTML('afterbegin', html);
+            }
+          }
+          this.showDeleteCommentBtn(res.comment_list)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+
+    showDeleteCommentBtn(commentId) {
+      const comments = document.querySelectorAll('.comment');
+      const deleteBtnHTML = `<div role="button" class="btn delete-btn">
+    <span class="btn-text">삭제</span></div>`
+
+      for (let i = 0; i < comments.length; i++) {
+        for (let j = 0; j < commentId.length; j++) {
+          console.log("몇번 반복?")
+          if (Number(comments[i].getAttribute('id')) === commentId[j].comment_id) {
+            console.log(Number(comments[i].getAttribute('id'), commentId[j].comment_id))
+            let position = document.getElementById(comments[i].getAttribute('id'));
+            position.innerHTML += deleteBtnHTML;
+          }
+
+        }
+      }
+    }
+
+  }
+
+  export default ShowPortfolioView;
