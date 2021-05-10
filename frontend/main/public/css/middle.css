@@ -16,8 +16,9 @@
 }
 
 .keywordRank-company,
-.keywordRank-portfolio {
-  width: 350px;
+.keywordRank-portfolio,
+.rank-best-member {
+  width: 300px;
   height: 380px;
   border-radius: 35px;
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -26,7 +27,7 @@
   margin: 0 30px;
   text-align: center;
   padding: 30px 0;
-  font-size: 30px;
+  font-size: 26px;
   color: #fff;
 }
 .keywordRank-company .rank-company-list {
@@ -34,7 +35,8 @@
 }
 
 .rank-company-list,
-.rank-portfolio-list {
+.rank-portfolio-list,
+.best-member-list {
   width: 100%;
   padding: 40px 0;
   color: #fff;
@@ -43,10 +45,11 @@
 }
 
 .rank-company-list li,
-.rank-portfolio-list li {
+.rank-portfolio-list li,
+.best-member-list li {
   position: relative;
   height: 40px;
-  width: 300px;
+  width: 250px;
   margin: 10px auto;
   overflow: hidden;
 }
@@ -64,7 +67,7 @@
   top: 0px;
   left: 0px;
   height: 40px;
-  width: 300px;
+  width: 250px;
   text-align: left;
   transition: top 0.75s ease-out;
   z-index: 1;

@@ -41,7 +41,6 @@ class LikeCpPfView {
         </div>
       </li>`
     }
-
   }
 
   // functionName - sendRankList
@@ -67,7 +66,7 @@ class LikeCpPfView {
   // Input(args, params) - none 
   // Output(return) - none
   showLikePortfolio() {
-    this.bottom = document.querySelector(".keywordRank-company");
+    this.middle = document.querySelector(".keywordRank-company");
     let likePortfolio_HTML =
       `<div class="keywordRank-portfolio">
         <div class="rankPortfolio-title">주간 인기 포트폴리오</div>
@@ -77,7 +76,7 @@ class LikeCpPfView {
           </ul>
         </div>
       </div>`
-    this.bottom.insertAdjacentHTML('afterend', likePortfolio_HTML);
+    this.middle.insertAdjacentHTML('afterend', likePortfolio_HTML);
   }
 
 
@@ -112,6 +111,46 @@ class LikeCpPfView {
   findPortfolioList(callback) {
     const list = document.querySelector(".rank-portfolio-list")
     callback(list);
+  }
+
+  // functionName - showLikePortfolio
+  // Job - 주간 인기 포트폴리오 화면에 출력
+  // Input(args, params) - none 
+  // Output(return) - none
+  showBestMember() {
+    this.bottom = document.querySelector(".keywordRank-portfolio");
+    let likePortfolio_HTML =
+      `<div class="rank-best-member">
+        <div class="best-member-title">Best Member</div>
+        <hr>
+        <div class="best-member">
+          <ul class="best-member-list">
+          </ul>
+        </div>
+      </div>`
+    this.bottom.insertAdjacentHTML('afterend', likePortfolio_HTML);
+  }
+
+  // functionName - addTop5Company
+  // Job - 주간 인기 검색 기업 top5 화면에 출력
+  // Input(args, params) - company data 
+  // Output(return) - none
+  addTop5Member(data) {
+    const bestList = document.querySelector(".best-member-list");
+    for (let i = 0; i < 5; i++) {
+      bestList.innerHTML += `<li>
+        <div class="list-member">
+          <div class="list-item list_sliding">
+            <span class="rank-num">${i + 1}</span>
+            <span id="${data[i]}" class="rank-text">${data[i].user_id}</span>
+          </div>
+          <div class="list-item">
+            <span class="rank-num">${i + 1}</span>
+            <span id="${data[i]}" class="rank-text">${data[i].user_id}</span>
+          </div>
+        </div>
+      </li>`
+    }
   }
 }
 

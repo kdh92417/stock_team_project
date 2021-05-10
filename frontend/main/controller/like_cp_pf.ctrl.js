@@ -19,15 +19,20 @@ class LikeCpPfCtrl {
         console.log(res)
         const companyInfo = [];
         const portfolioInfo = [];
+        const bestMember = [];
         for (let x of res.top5_company_list) {
-          companyInfo.push(x)
+          companyInfo.push(x);
         }
         for (let x of res.top5_portfolio_list) {
-          portfolioInfo.push(x)
+          portfolioInfo.push(x);
+        }
+        for (let x of res.top5_user_list) {
+          bestMember.push(x);
         }
         this.view.showLikeCompany();
         this.view.showLikePortfolio();
-        this.sendCompanyAndPortfolioData(companyInfo, portfolioInfo)
+        this.view.showBestMember();
+        this.sendCompanyAndPortfolioData(companyInfo, portfolioInfo, bestMember)
       })
       .catch((err) => {
         console.log(err);
@@ -38,11 +43,12 @@ class LikeCpPfCtrl {
   // Job - 주간 인기 검색 기업 / 주간 인기 포트폴리오를 서버에서 받아온 데이터를 view에 전달
   // Input(args, params) - companyInfo, portfolioInfo
   // Output(return) - none
-  sendCompanyAndPortfolioData(company, portfolio) {
+  sendCompanyAndPortfolioData(company, portfolio, bestMember) {
     const rankTimer = this.service.rankTimer,
       showRankCompany = this.service.showRankCompany
     this.view.addTop5Company(company);
     this.view.addTop5Portfolio(portfolio);
+    this.view.addTop5Member(bestMember);
     this.view.findCompanyList(rankTimer);
     this.view.findPortfolioList(rankTimer);
     this.view.sendRankList(showRankCompany);
