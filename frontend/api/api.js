@@ -147,6 +147,21 @@ class API {
     });
   }
 
+
+  // functionName - userInfoGet
+  // Job - 유저 정보를 얻기 위한 get api (토큰같이 전송)
+  // Input(args, params) - url
+  // Output(return) - none
+  static userInfoGet(url) {
+    return fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+  }
+
   // functionName - post
   // Job - 기업 좋아요, 포트폴리오 좋아요 api
   // Input(args, params) - url, cp_name, pf_id
@@ -197,7 +212,7 @@ class API {
         "Content-Type": "application/json",
       },
     })
-      
+
   }
 
   // functionName - getPortfolioList
@@ -220,7 +235,7 @@ class API {
         "Content-Type": "application/json",
       },
     })
-      
+
   }
 }
 export default API;
