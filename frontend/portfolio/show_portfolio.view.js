@@ -188,7 +188,7 @@ class ShowPortfolioView {
       .then((res) => {
         console.log(res);
         console.log(res.user_id);
-        this.printNewComment(res.user_id)
+        this.printNewComment(res.user_id, res.comment_id);
       })
       .catch((err) => {
         console.log(err);
@@ -206,7 +206,7 @@ class ShowPortfolioView {
       let html = 
       `<div class="each-comment">
         <div class="each-comment-content">
-          <div class="userId">ID: ${comments[i].user_id}</div>
+          <div class="comment" id="${comments[i].comment_id}">ID: ${comments[i].user_id}</div>
           ${comments[i].content}
         </div>
       </div>`
@@ -216,20 +216,22 @@ class ShowPortfolioView {
   }
 
   //새로 입력된 댓글 추가
-  printNewComment(userId) {
+  printNewComment(userId, commentId) {
     const commentDiv = document.querySelector('.comment-print-box');
     const commentArea = document.querySelector(".comment-inbox-text");
+    
     let comment = commentArea.value;
     comment = comment.replace(/(?:\r\n|\r|\n)/g, '<br>');
     let html = 
     `<div class="each-comment">
       <div class="each-comment-content">
-        <div class="userId">ID: ${userId}</div>
+        <div class="comment" id="${commentId}">ID: ${userId}</div>
         ${comment}
       </div>
     </div>`
 
     commentDiv.innerHTML += html;
+    window.location.reload();
   }
 
   showDeleteBtn(pfId) {
@@ -239,18 +241,35 @@ class ShowPortfolioView {
     API.userInfoGet("http://192.168.1.32:8000/account/user/")
     .then((res) => (res.json()))
       .then((res) => {
-        console.log(res.board_list);
+        console.log(res.comment_list);
         for (let i = 0; i < res.board_list.length; i++) {
           if (res.board_list[i].board_id === Number(pfId)) {
             deleteBtn.insertAdjacentHTML('afterbegin', html);
           } 
         }
+        this.showDeleteCommentBtn(res.comment_list)
       })
       .catch((err) => {
         console.log(err);
-      })
+      })  
+  }
 
-    
+  showDeleteCommentBtn(commentId) {
+    const comments = document.querySelectorAll('.comment');
+    const deleteBtnHTML = `<div role="button" class="btn delete-btn">
+    <span class="btn-text">삭제</span></div>`
+
+    for (let i = 0; i < comments.length; i++) {
+      for (let j = 0; j < commentId.length; j++) {
+        console.log("몇번 반복?")
+        if (Number(comments[i].getAttribute('id')) === commentId[j].comment_id){
+          console.log(Number(comments[i].getAttribute('id'),commentId[j].comment_id))
+          let position = document.getElementById(comments[i].getAttribute('id'));
+          position.innerHTML += deleteBtnHTML;
+        }
+      
+      }
+    }
   }
 
 }
