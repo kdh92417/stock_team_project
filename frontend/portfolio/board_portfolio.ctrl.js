@@ -7,12 +7,12 @@ class BoardPortfolioController {
   }
   
   loadBoardPage() {
-    API.getPortfolioList( "http://192.168.1.32:8000/portfolio/list/?page=1")
+    API.getPortfolioList( "http://15.165.17.217:8000/portfolio/list/?page=1")
     .then((res) => (res.json()))
     .then((res) => {
       console.log(res);
       this.view.showPortfolioList(res.board_data);
-      this.view.showFilteredPortfolio();
+      // this.view.showFilteredPortfolio();
     })
     .catch((err) => {
       console.log(err);

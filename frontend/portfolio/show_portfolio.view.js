@@ -1,8 +1,9 @@
 import API from '../api/api.js'
 
 class ShowPortfolioView {
-  constructor() {
+  constructor(comment) {
     this.root = document.querySelector('.portfolio-root');
+    this.comment = comment;
     console.log(this.root)
   }
 
@@ -65,13 +66,14 @@ class ShowPortfolioView {
       </div>
       <div class="comment-write">
         <div class="comment-inbox">
-          <strong class="comment-inbox-name">주린이</strong>
           <textarea class="comment-inbox-text" placeholder="댓글을 남겨보세요" cols="20" wrap="virtual" rows="3"
             maxlength="3000"></textarea>
         </div>
         <div class="register-box">
-          <a href="" role="button" class="btn-register">등록</a>
+          <button class="btn-submit">등록</button>
         </div>
+      </div>
+      <div class="comment-print-box">
       </div>
     </div>
     <div class="bottom-button-content">
@@ -164,6 +166,45 @@ class ShowPortfolioView {
         return alert("마지막 페이지입니다.")
       } else location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=` + next;
     })
+  }
+
+  submitComment(pfId) {
+    const commentSubmitBtn = document.querySelector(".btn-submit");
+    const commentArea = document.querySelector(".comment-inbox-text");
+    const commentContent = commentArea.value;
+    console.dir(commentArea)
+    console.log(commentArea.value)
+    this.comment.saveComment(commentContent, pfId);
+    const comment = this.comment.comment;
+    commentSubmitBtn.addEventListener("click", event => {
+      API.postComment("http://15.165.17.217:8000/portfolio/comment/write/", comment)
+      .then((res) => (res.json()))
+      .then((res) => {
+        console.log(res);
+        console.log(res.user_id);
+        this.printComment(res.user_id)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      
+    })
+  }
+
+  printComment(userId) {
+    const commentDiv = document.querySelector('.comment-print-box');
+    const commentArea = document.querySelector(".comment-inbox-text");
+    let comment = commentArea.value;
+    console.log(comment)
+    let html = 
+    `<div class="each-comment">
+      <div class="each-comment-content">
+        <div class="userId">${userId}</div>
+        ${comment}
+      </div>
+    </div>`
+
+    commentDiv.innerHTML += html;
   }
 }
 

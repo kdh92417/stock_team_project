@@ -1,12 +1,12 @@
-import json
+import json, jwt
 
 from django.views          import View
 from django.http           import (
     JsonResponse,
     HttpResponse
 )
-
 from django.core.paginator import Paginator
+from django.db.models      import Q
 
 from account.utils         import login_required
 from account.models        import Account
@@ -14,8 +14,12 @@ from companies.models      import Company
 from portfolio.models      import (
     Portfolio,
     PortfolioStock,
+    LikePortfolio,
     Comment
 )
+
+from my_settings            import ALGORITHM
+from stock.settings         import SECRET_KEY
 
 
 class TotalPortfolioView(View):
@@ -26,11 +30,12 @@ class TotalPortfolioView(View):
             if company_name != None:
                 board_list = Portfolio.objects.prefetch_related(
                     'portfoliostock_set__company', 'user'
-                ).filter(company__cp_name=company_name)
+                ).filter(company__cp_name=company_name).order_by('-create_date')
             else:
                 board_list = Portfolio.objects.prefetch_related(
                     'portfoliostock_set__company', 'user'
                 ).order_by('-create_date')
+
             page = request.GET.get('page', 1)
             paginator = Paginator(board_list, 8)
 
@@ -47,6 +52,7 @@ class TotalPortfolioView(View):
                     'user_id'    : board.user.user_id,
                     'pofol_name' : board.name,
                     'like_count' : board.total_like,
+                    'create_date': board.create_date,
                     'stock' : [{
                         'stock_name'   : stock.company.cp_name,
                         'stock_count'  : stock.shares_count,
@@ -83,7 +89,6 @@ class BasePortfolioView(View):
                 next_id = None
             else:
                 next_id = Portfolio.objects.filter(id__gt=board_id).first().id
-
 
             board_data = {
                 'previous_board_id' : previous_id,

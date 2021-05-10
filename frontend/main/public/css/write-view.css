@@ -120,16 +120,13 @@
 }
 
 .comment-write {
-  width: 85%;
+  width: 90%;
   margin: 20px auto;
   padding: 10px 20px;
   min-height: 100px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-right: 2px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .comment-write .comment-inbox {
@@ -139,11 +136,16 @@
 }
 
 .comment-inbox textarea {
-  caret-color: #ffff;
+  width: 100%;
+  caret-color: black;
   border: none;
-  background: none;
+  background: #ffff;
   resize: none;
-  color: #ffff;
+  color: black;
+  border-radius: 5px;
+  margin: 10px 0;
+  height: 100px;
+  font-size: 15px;
 }
 
 .comment-inbox textarea:focus {
@@ -156,8 +158,16 @@
   justify-content: flex-end;
 }
 
-.comment-write .register-box .btn-register {
-  color: #b2bec3;
+.comment-write .register-box {
+  color: #cad2d6;
+}
+
+.btn-submit {
+  padding: 5px 10px;
+  background-color: #48e0a6;
+  border-radius: 5px;
+  color: black;
+
 }
 
 .bottom-button-content {
@@ -176,4 +186,26 @@
   border: none;
   background-color: #48e0a6;
   color: #000;
+}
+
+.comment-print-box {
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px 20px;
+  color: #ffff;
+  font-size: 20px;
+  min-height: 0px;
+  
+}
+
+.each-comment-content {
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 5px;
+}
+
+.userId {
+  color: black;
 }
