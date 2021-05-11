@@ -1,9 +1,6 @@
+import API from "../api/api.js"
 
 class WriteService {
-  constructor() {
-
-  }
-
   // functionName - selectAllCheckbox
   // Job - 작성글 / 작성댓글의 전체삭제를 위한 체크박스 전체선택 함수
   // Input(args, params) - selectAll, items
@@ -21,15 +18,33 @@ class WriteService {
   // Input(args, params) - deleteBtn, items
   // Output(return) - none
   sendDeleteItem = (deleteBtn, selectAll, items) => {
+    console.log(items)
     deleteBtn.addEventListener("click", () => {
       if (selectAll.checked === true) {
-        console.log("all")
+        API.writeAndCommentDelete("http://192.168.1.32:8000/account/user/portfolio/delete/")
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log(err);
+          })
       } else {
+        let deleteItems = [];
         for (let i = 0; i < items.length; i++) {
           if (items[i].checked === true) {
-            console.log(items[i]);
+            deleteItems.push(Number(items[i].id));
           }
         }
+        console.log(deleteItems);
+        API.post("http://192.168.1.32:8000/account/user/portfolio/delete/", { delete_pf_id_list: deleteItems })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
       }
     })
   }
