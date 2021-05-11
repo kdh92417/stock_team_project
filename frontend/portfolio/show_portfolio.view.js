@@ -225,15 +225,14 @@ class ShowPortfolioView {
       let comment = commentArea.value;
       comment = comment.replace(/(?:\r\n|\r|\n)/g, '<br>');
       let html =
-        `<div class="each-comment">
-      <div class="each-comment-content">
-        <div class="comment" id="${commentId}">ID: ${userId}</div>
-        ${comment}
-      </div>
-    </div>`
+        `<div class="each-comment-content">
+          <div class="comment" id="${commentId}">ID: ${userId}</div>
+          ${comment}
+        </div>`
 
       commentDiv.innerHTML += html;
       window.location.reload();
+      
     }
 
     showDeleteBtn(pfId) {
@@ -259,7 +258,7 @@ class ShowPortfolioView {
 
     showDeleteCommentBtn(commentId) {
       const comments = document.querySelectorAll('.comment');
-      const deleteBtnHTML = `<div role="button" class="btn delete-btn">
+      const deleteBtnHTML = `<div role="button" class="btn delete-comment-btn">
     <span class="btn-text">삭제</span></div>`
 
       for (let i = 0; i < comments.length; i++) {
@@ -272,6 +271,7 @@ class ShowPortfolioView {
           }
         }
       }
+      this.deleteComment(commentId);
     }
 
   deletePortfolio(pfId) {
@@ -291,6 +291,34 @@ class ShowPortfolioView {
       .catch((err) => {
         console.log(err);
       }) 
+    })
+  }
+
+  deleteComment(commentId) {
+    const deleteBtn = document.querySelectorAll('.delete-comment-btn')
+    const commentObj = {};
+    const commentBox = document.querySelector('.comment-print-box')
+
+    deleteBtn.forEach(function(item) {
+      item.addEventListener('click', (event) => {
+        const btn = event.target;
+        const deleteAll = btn.parentNode.parentNode.parentNode.parentNode;
+
+        commentBox.removeChild(deleteAll);
+
+        commentObj.comment_id = btn.parentNode.parentNode.id;
+        
+        API.delete("http://192.168.1.32:8000/portfolio/comment/write/", commentObj)
+        .then((res) => (res.json()))
+        .then((res) => {
+          console.log("deleted")
+          alert("댓글이 삭제되었습니다.");
+        })
+        .catch((err) => {
+          console.log(err);
+        }) 
+      })
+    
     })
   }
 }
