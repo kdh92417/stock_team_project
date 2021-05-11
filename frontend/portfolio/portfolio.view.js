@@ -49,11 +49,12 @@ class PortfolioView {
         .then((res) => (res.json()))
         .then((res) => {
           console.log(res);
-          console.log(this.portfolio)
-          if(res.message === "Does Not Exist Company") {
-            alert("올바른 기업명을 입력해주세요.")
+          if(res.Does_Not_Exists_Company !== [] && res.status !== 200) {
+            alert(`${res.Does_Not_Exists_Company}(은)는 올바른 기업명이 아닙니다.`)
           }
-          location.href = "../template/write-view.html" + `?board_id=${res.board_data.portfolio_id}`;
+          if (res.status === 200) {
+            location.href = "../template/write-view.html" + `?board_id=${res.board_data.portfolio_id}`;
+          }
 
         })
         .catch((err) => {

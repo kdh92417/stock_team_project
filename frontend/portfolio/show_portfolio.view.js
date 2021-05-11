@@ -16,10 +16,6 @@ class ShowPortfolioView {
     const prev = res.previous_board_id;
     const next = res.next_board_id;
     const date = res.create_date;
-    // const month = res.create_date.getMonth();
-    // const day = res.create_date.getDate();
-    // const hour = res.create_date.getHours();
-    // const minute = res.create_date.getMinuites();
 
     let stockNameArr = [];
     let stockCountArr = [];
