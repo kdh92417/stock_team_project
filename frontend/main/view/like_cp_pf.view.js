@@ -30,11 +30,11 @@ class LikeCpPfView {
     for (let i = 0; i < 5; i++) {
       topRank.innerHTML += `<li>
         <div class="list-company">
-          <div class="list-item list_sliding">
+          <div class="list-item company-item list_sliding">
             <span id="${data[i].company_like}" class="rank-num">${i + 1}</span>
             <span id="${data[i].corp_code}" class="rank-text">${data[i].company_name}</span>
           </div>
-          <div class="list-item">
+          <div class="list-item company-item">
             <span id="${data[i].company_like}" class="rank-num">${i + 1}</span>
             <span id="${data[i].corp_code}"  class="rank-text">${data[i].company_name}</span>
           </div>
@@ -48,7 +48,7 @@ class LikeCpPfView {
   // Input(args, params) - callback(service.showRankCompany)  
   // Output(return) - none
   sendRankList(callback) {
-    const topRank = document.querySelectorAll(".list-item");
+    const topRank = document.querySelectorAll(".company-item");
     callback(topRank);
   }
 
@@ -113,8 +113,8 @@ class LikeCpPfView {
     callback(list);
   }
 
-  // functionName - showLikePortfolio
-  // Job - 주간 인기 포트폴리오 화면에 출력
+  // functionName - showBestMember
+  // Job - best member 화면에 출력
   // Input(args, params) - none 
   // Output(return) - none
   showBestMember() {
@@ -131,9 +131,9 @@ class LikeCpPfView {
     this.bottom.insertAdjacentHTML('afterend', likePortfolio_HTML);
   }
 
-  // functionName - addTop5Company
-  // Job - 주간 인기 검색 기업 top5 화면에 출력
-  // Input(args, params) - company data 
+  // functionName - addTop5Member
+  // Job - best member top5 화면에 출력 (글 작성이 많은 사람 순)
+  // Input(args, params) - best member data 
   // Output(return) - none
   addTop5Member(data) {
     const bestList = document.querySelector(".best-member-list");
@@ -142,15 +142,24 @@ class LikeCpPfView {
         <div class="list-member">
           <div class="list-item list_sliding">
             <span class="rank-num">${i + 1}</span>
-            <span id="${data[i]}" class="rank-text">${data[i].user_id}</span>
+            <span id="${data[i].counts_of_writers}" class="rank-text">${data[i].user_id}</span>
           </div>
           <div class="list-item">
             <span class="rank-num">${i + 1}</span>
-            <span id="${data[i]}" class="rank-text">${data[i].user_id}</span>
+            <span id="${data[i].counts_of_writers}" class="rank-text">${data[i].user_id}</span>
           </div>
         </div>
       </li>`
     }
+  }
+
+  // functionName - findMemberList
+  // Job - 갱신화면 효과를 위해 member list select
+  // Input(args, params) - callback 
+  // Output(return) - none
+  findMemberList(callback) {
+    const list = document.querySelector(".best-member-list")
+    callback(list);
   }
 }
 

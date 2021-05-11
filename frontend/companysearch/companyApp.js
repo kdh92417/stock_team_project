@@ -1,6 +1,6 @@
-import CompanyView from "../companysearch/company.view.js"
-import CompanyCtrl from "../companysearch/company.ctrl.js"
-import CompanyService from "../companysearch/company.service.js"
+import CompanyView from "./company.view.js"
+import CompanyCtrl from "./company.ctrl.js"
+import CompanyService from "./company.service.js"
 
 
 

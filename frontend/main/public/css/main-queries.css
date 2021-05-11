@@ -11,7 +11,7 @@
 
 @media (min-width: 768px) and (max-width: 959px) {
   .main-top {
-    padding-top: 15rem !important;
+    padding-top: 8rem !important;
   }
 
   .main-info-contents {
@@ -70,7 +70,7 @@
 
   .main-middle {
     flex-direction: column;
-    height: 1100px;
+    height: 1500px;
   }
 
   .rank-container {
@@ -78,7 +78,8 @@
   }
 
   .keywordRank-company,
-  .keywordRank-portfolio {
+  .keywordRank-portfolio,
+  .rank-best-member {
     height: 380px;
     margin: 20px;
   }
@@ -179,7 +180,7 @@
 
   .main-middle {
     flex-direction: column;
-    height: 1100px;
+    height: 1500px;
   }
 
   .rank-container {
@@ -187,7 +188,8 @@
   }
 
   .keywordRank-company,
-  .keywordRank-portfolio {
+  .keywordRank-portfolio,
+  .rank-best-member {
     height: 380px;
     margin: 20px;
   }
@@ -272,7 +274,7 @@
 
   .main-middle {
     flex-direction: column;
-    height: 1100px;
+    height: 1500px;
   }
 
   .rank-container {
@@ -280,19 +282,22 @@
   }
 
   .keywordRank-company,
-  .keywordRank-portfolio {
+  .keywordRank-portfolio,
+  .rank-best-member {
     width: 280px;
     height: 380px;
     margin: 20px;
   }
 
   .rank-company-list li,
-  .rank-portfolio-list li {
+  .rank-portfolio-list li,
+  .best-member-list li {
     width: 240px;
   }
 
   .list-company,
-  .list-portfolio {
+  .list-portfolio,
+  .list-member {
     position: relative;
     width: 100%;
   }
@@ -300,7 +305,9 @@
   .list-company > div:nth-child(1),
   .list-company > div:nth-child(2),
   .list-portfolio > div:nth-child(1),
-  .list-portfolio > div:nth-child(2) {
+  .list-portfolio > div:nth-child(2),
+  .list-member > div:nth-child(1),
+  .list-member > div:nth-child(2) {
     width: 240px;
   }
 

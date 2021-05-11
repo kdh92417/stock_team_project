@@ -55,7 +55,8 @@
 }
 
 .list-company,
-.list-portfolio {
+.list-portfolio,
+.list-member {
   position: relative;
   width: 100%;
 }
@@ -63,7 +64,9 @@
 .list-company > div:nth-child(1),
 .list-company > div:nth-child(2),
 .list-portfolio > div:nth-child(1),
-.list-portfolio > div:nth-child(2) {
+.list-portfolio > div:nth-child(2),
+.list-member > div:nth-child(1),
+.list-member > div:nth-child(2) {
   top: 0px;
   left: 0px;
   height: 40px;
