@@ -1,10 +1,7 @@
-import json, jwt
+import json
 
 from django.views          import View
-from django.http           import (
-    JsonResponse,
-    HttpResponse
-)
+from django.http           import JsonResponse
 from django.core.paginator import Paginator
 from django.db.models      import Q
 
@@ -18,10 +15,8 @@ from portfolio.models      import (
     Comment
 )
 
-from my_settings            import ALGORITHM
-from stock.settings         import SECRET_KEY
 
-
+# 게시판 리스트 전체 보기
 class TotalPortfolioView(View):
     def get(self, request):
         try:
@@ -127,18 +122,24 @@ class BasePortfolioView(View):
             'board_data'   : board_data,
             'comment_data' : comment_data}, status=200)
 
+    # 게시판 글쓰기
     @login_required
     def post(self, request):
         try:
             user = request.user
             pf_data = json.loads(request.body)
             stock_list = pf_data['stock']
-
             pf = Portfolio.objects.create(
                 name = pf_data['title'],
                 content = pf_data['content'],
                 user_id = user.id
             )
+
+            does_not_exist_cp = []
+
+            for stock in stock_list:
+                if not Company.objects.filter(cp_name=stock['stock_name']).exists():
+                    does_not_exist_cp.append(stock['stock_name'])
 
             for stock in stock_list:
                 try:
@@ -150,10 +151,12 @@ class BasePortfolioView(View):
                         shares_amount = stock['stock_amount']
                     )
                 except Company.DoesNotExist:
+                    pf.delete()
                     return JsonResponse({
                         'status'  : 400,
-                        'message' : 'Does Not Exist Company'
-                    }, status=400)
+                        'message' : 'Does Not Exist Company',
+                        'Does_Not_Exists_Company' : does_not_exist_cp
+                    }, status=200)
 
             board_data = {
                 'portfolio_id' : pf.id,
@@ -173,12 +176,12 @@ class BasePortfolioView(View):
         except KeyError:
             return JsonResponse({'message' : 'KEY_ERROR', 'status' : 400}, status=400)
 
+    # 게시판 글삭제
     @login_required
     def delete(self, request):
         try:
             pf_id = json.loads(request.body)['portfolio_id']
             user  = request.user
-            print(user.id)
             if not Portfolio.objects.filter(Q(id=pf_id) & Q(user_id=user.id)).exists():
                 return JsonResponse({
                     'message': 'This Portfolio ID Does Not exist',
@@ -190,7 +193,7 @@ class BasePortfolioView(View):
 
             return JsonResponse({
                 'message'          : 'success',
-                'deleted_board_id' : pf_id,
+                'deleted_board_id' : int(pf_id),
                 'status'           : 200,
             }, status=200)
 
@@ -201,6 +204,7 @@ class BasePortfolioView(View):
             }, status=400)
 
 
+# 댓글 API
 class CommentView(View):
     def get(self, request):
         try:
