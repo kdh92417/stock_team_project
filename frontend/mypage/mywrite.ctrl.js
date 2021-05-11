@@ -30,24 +30,26 @@ class WriteCtrl {
   // Output(return) - none
   handleShowWriteAndCommentList(userWriteList, userCommentList) {
     this.view.showMyWriteList(userWriteList);
-    this.view.addWriteItem(userWriteList);
+    this.view.addWriteItem(userWriteList, this.handleWriteSelectAndDeleteItems());
     this.view.showMyCommentList(userCommentList);
-    this.view.addCommentItem(userCommentList);
-    this.handleSelectItems();
-    this.handleDeleteItems();
+    this.view.addCommentItem(userCommentList, this.handleCommentSelectAndDeleteItems());
   }
 
-  // functionName - handleSelectItems
+  // functionName - handleWriteSelectAndDeleteItems
   // Job - view에서 찾은 items를 service.selectAllCheckbox함수에 전달을 제어하는 함수
   // Input(args, params) - none
   // Output(return) - none
-  handleSelectItems() {
+  handleWriteSelectAndDeleteItems() {
     this.view.findWriteSelectItems(this.service.selectAllCheckbox);
-    this.view.findCommentSelectItems(this.service.selectAllCheckbox);
+    this.view.findWriteDeleteBtn(this.service.sendDeleteItem);
   }
 
-  handleDeleteItems() {
-    this.view.findWriteDeleteBtn(this.service.sendDeleteItem);
+  // functionName - handleCommentSelectAndDeleteItems
+  // Job - view에서 찾은 items를 service.selectAllCheckbox함수에 전달을 제어하는 함수
+  // Input(args, params) - none
+  // Output(return) - none
+  handleCommentSelectAndDeleteItems() {
+    this.view.findCommentSelectItems(this.service.selectAllCheckbox);
     this.view.findCommentDeleteBtn(this.service.sendDeleteItem);
   }
 }

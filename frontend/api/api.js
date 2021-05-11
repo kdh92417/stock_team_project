@@ -203,7 +203,6 @@ class API {
         "Content-Type": "application/json",
       },
     })
-
   }
 
   // functionName - getPortfolioList
@@ -248,6 +247,16 @@ class API {
         Authorization: localStorage.getItem("token"),
       },
       body: JSON.stringify(id)
+    })
+  }
+
+  static writeAndCommentDelete(url) {
+    return fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      }
     })
   }
 }

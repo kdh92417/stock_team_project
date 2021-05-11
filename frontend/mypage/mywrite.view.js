@@ -73,7 +73,7 @@ class WriteView {
   // Job - 작성글을 작성 갯수 만큼 더해주는 함수
   // Input(args, params) - userWriteList
   // Output(return) - none
-  addWriteItem(userWriteList) {
+  addWriteItem(userWriteList, callback) {
     this.tbody = document.querySelector(".write-table-tbody")
     for (let i = 0; i < userWriteList.length; i++) {
       this.tbody.innerHTML += `<tr>
@@ -93,6 +93,7 @@ class WriteView {
                                 <td class="td-view">${userWriteList[i].pofol_search_count}</td>
                               </tr>`
     }
+    callback();
   }
 
   // functionName - findWriteSelectItems
@@ -120,7 +121,7 @@ class WriteView {
   // Job - 작성댓글을 보여주는 함수
   // Input(args, params) - userWriteList
   // Output(return) - none
-  showMyCommentList(userCommentList) {
+  showMyCommentList(userCommentList, callback) {
     if (userCommentList[0] === undefined) {
       let myCommentList_HTML = `<div class="comment-content">
                                   <div class="comment-title">
@@ -174,6 +175,7 @@ class WriteView {
                                   </div>
                                 </div>`
       this.section.insertAdjacentHTML('beforeend', myCommentList_HTML);
+      callback()
     }
   }
 
@@ -181,7 +183,7 @@ class WriteView {
   // Job - 작성댓글을 작성 갯수 만큼 더해주는 함수
   // Input(args, params) - userWriteList
   // Output(return) - none
-  addCommentItem(userCommentList) {
+  addCommentItem(userCommentList, callback) {
     this.tbody = document.querySelector(".cm-table-tbody")
     for (let i = 0; i < userCommentList.length; i++) {
       this.tbody.innerHTML += `<tr>
@@ -199,6 +201,7 @@ class WriteView {
                                 <td class="td-cm-date">${moment(userCommentList[i].create_date).format("YYYY.MM.DD")}</td>
                               </tr>`
     }
+    callback()
   }
 
   // functionName - findCommentSelectItems
