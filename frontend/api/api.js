@@ -240,14 +240,14 @@ class API {
     })
   }
 
-  static delete(url, pfId) {
+  static delete(url, id) {
     return fetch(url, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: localStorage.getItem("token"),
       },
-      body: JSON.stringify(pfId)
+      body: JSON.stringify(id)
     })
   }
 }
