@@ -35,7 +35,7 @@ class WriteCtrl {
     this.view.addCommentItem(userCommentList, this.handleCommentSelectAndDeleteItems());
   }
 
-  // functionName - handleSelectItems
+  // functionName - handleWriteSelectAndDeleteItems
   // Job - view에서 찾은 items를 service.selectAllCheckbox함수에 전달을 제어하는 함수
   // Input(args, params) - none
   // Output(return) - none
@@ -44,6 +44,10 @@ class WriteCtrl {
     this.view.findWriteDeleteBtn(this.service.sendDeleteItem);
   }
 
+  // functionName - handleCommentSelectAndDeleteItems
+  // Job - view에서 찾은 items를 service.selectAllCheckbox함수에 전달을 제어하는 함수
+  // Input(args, params) - none
+  // Output(return) - none
   handleCommentSelectAndDeleteItems() {
     this.view.findCommentSelectItems(this.service.selectAllCheckbox);
     this.view.findCommentDeleteBtn(this.service.sendDeleteItem);
