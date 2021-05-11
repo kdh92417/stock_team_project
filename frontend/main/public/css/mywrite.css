@@ -1,7 +1,5 @@
 .mypage-write {
-  padding-top: 10rem !important;
   width: 100%;
-  height: 800px;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -14,13 +12,13 @@
   color: #fff;
 }
 
-.comments-title {
+.comment-title {
   font-size: 30px;
   margin-bottom: 20px;
   color: #fff;
 }
 
-.mypage-comments {
+.mypage-comment {
   width: 100%;
   height: 400px;
   display: flex;
@@ -28,7 +26,17 @@
   align-items: center;
 }
 
-.content {
+.write-content {
+  padding-top: 9rem !important;
+  position: relative;
+  width: 600px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comment-content {
   position: relative;
   width: 600px;
   height: 350px;
@@ -82,8 +90,8 @@
   width: 8%;
 }
 
-.cm-head-table .comments,
-.cm-body-table .td-comments {
+.cm-head-table .comment,
+.cm-body-table .td-comment {
   width: 48%;
 }
 

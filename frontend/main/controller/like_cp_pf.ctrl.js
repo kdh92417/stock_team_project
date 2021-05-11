@@ -51,6 +51,7 @@ class LikeCpPfCtrl {
     this.view.addTop5Member(bestMember);
     this.view.findCompanyList(rankTimer);
     this.view.findPortfolioList(rankTimer);
+    this.view.findMemberList(rankTimer);
     this.view.sendRankList(showRankCompany);
   }
 }
