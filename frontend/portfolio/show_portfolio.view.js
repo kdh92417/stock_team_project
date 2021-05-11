@@ -94,7 +94,6 @@ class ShowPortfolioView {
 
     this.root.insertAdjacentHTML('afterend', portfolio_HTML);
 
-    this.root.insertAdjacentHTML('afterend', portfolio_HTML);
 
     let stock = document.querySelector('#stock')
     for (let i = 0; i < stockNameArr.length; i++) {
