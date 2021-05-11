@@ -1,3 +1,5 @@
+import API from '../api/api.js'
+
 class PortfolioView {
   constructor(api) {
     this.api = api;
@@ -9,8 +11,10 @@ class PortfolioView {
   }
 
   submitPortfolio() {
+    
     this.submitBtn.addEventListener("click", (event) => {
       event.preventDefault();
+      this.portfolio = {}; 
       this.saveContent();
     });
   }
@@ -21,9 +25,12 @@ class PortfolioView {
   }
 
   getPortfolioInfo(content) {
+    this.stockInfo = [];
     let stockName = document.querySelectorAll(".stock-name");
     let stockCount = document.querySelectorAll(".stock-count");
     let stockAmount = document.querySelectorAll(".stock-amount");
+
+    console.log(stockName);
 
     if(this.isDataValid(this.title.value, stockName, stockCount, stockAmount) === true) {
       for (let i = 0; i < stockName.length; i++) {
@@ -38,7 +45,20 @@ class PortfolioView {
         this.portfolio.content = content;
         this.portfolio.stock = this.stockInfo;
 
-        this.api.postPortfolio(this.portfolio);
+        API.postPortfolio("http://192.168.1.32:8000/portfolio/write/", this.portfolio)
+        .then((res) => (res.json()))
+        .then((res) => {
+          console.log(res);
+          console.log(this.portfolio)
+          if(res.message === "Does Not Exist Company") {
+            alert("올바른 기업명을 입력해주세요.")
+          }
+          location.href = "../template/write-view.html" + `?board_id=${res.board_data.portfolio_id}`;
+
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     }
   }
 
