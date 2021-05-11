@@ -221,6 +221,7 @@ class ShowPortfolioView {
     const commentDiv = document.querySelector('.comment-print-box');
     const commentArea = document.querySelector(".comment-inbox-text");
 
+<<<<<<< HEAD
     let comment = commentArea.value;
     comment = comment.replace(/(?:\r\n|\r|\n)/g, '<br>');
     let html =
@@ -234,6 +235,20 @@ class ShowPortfolioView {
     commentDiv.innerHTML += html;
     window.location.reload();
   }
+=======
+      let comment = commentArea.value;
+      comment = comment.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      let html =
+        `<div class="each-comment-content">
+          <div class="comment" id="${commentId}">ID: ${userId}</div>
+          ${comment}
+        </div>`
+
+      commentDiv.innerHTML += html;
+      window.location.reload();
+
+    }
+>>>>>>> 272c5bcf5778baf87aadc0b57e91026d76fc7331
 
   showDeleteBtn(pfId) {
     const deleteBtn = document.querySelector('.view-button-content');
@@ -256,10 +271,16 @@ class ShowPortfolioView {
       })
   }
 
+<<<<<<< HEAD
   showDeleteCommentBtn(commentId) {
     const comments = document.querySelectorAll('.comment');
     const deleteBtnHTML = `<div role="button" class="btn delete-btn">
-    <span class="btn-text">삭제</span></div>`
+=======
+    showDeleteCommentBtn(commentId) {
+      const comments = document.querySelectorAll('.comment');
+      const deleteBtnHTML = `< div role = "button" class="btn delete-comment-btn" >
+>>>>>>> 272c5bcf5778baf87aadc0b57e91026d76fc7331
+      <span class="btn-text">삭제</span></ > `
 
     for (let i = 0; i < comments.length; i++) {
       for (let j = 0; j < commentId.length; j++) {
@@ -270,6 +291,7 @@ class ShowPortfolioView {
           position.innerHTML += deleteBtnHTML;
         }
       }
+      this.deleteComment(commentId);
     }
   }
 
@@ -290,6 +312,34 @@ class ShowPortfolioView {
         .catch((err) => {
           console.log(err);
         })
+    })
+  }
+
+  deleteComment(commentId) {
+    const deleteBtn = document.querySelectorAll('.delete-comment-btn')
+    const commentObj = {};
+    const commentBox = document.querySelector('.comment-print-box')
+
+    deleteBtn.forEach(function(item) {
+      item.addEventListener('click', (event) => {
+        const btn = event.target;
+        const deleteAll = btn.parentNode.parentNode.parentNode.parentNode;
+
+        commentBox.removeChild(deleteAll);
+
+        commentObj.comment_id = btn.parentNode.parentNode.id;
+        
+        API.delete("http://192.168.1.32:8000/portfolio/comment/write/", commentObj)
+        .then((res) => (res.json()))
+        .then((res) => {
+          console.log("deleted")
+          alert("댓글이 삭제되었습니다.");
+        })
+        .catch((err) => {
+          console.log(err);
+        }) 
+      })
+    
     })
   }
 }

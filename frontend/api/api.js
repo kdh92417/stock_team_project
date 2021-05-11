@@ -181,8 +181,8 @@ class API {
   // Job - 포트폴리오 작성 완료 후 서버로 전송하는 api
   // Input(args, params) - 포트폴리오에 속한 데이터
   // Output(return) - none
-  postPortfolio(portfolioData) {
-    fetch("http://192.168.1.32:8000/portfolio/write/", {
+  static postPortfolio(url, portfolioData) {
+    return fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -190,15 +190,6 @@ class API {
       },
       body: JSON.stringify(portfolioData),
     })
-      .then((res) => (res.json()))
-      .then((res) => {
-        console.log(res);
-        location.href = "../template/write-view.html" + `?board_id=${res.board_data.portfolio_id}`;
-
-      })
-      .catch((err) => {
-        console.log(err);
-      })
   }
 
   // functionName - getPortfolio
@@ -249,14 +240,14 @@ class API {
     })
   }
 
-  static delete(url, pfId) {
+  static delete(url, id) {
     return fetch(url, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: localStorage.getItem("token"),
       },
-      body: JSON.stringify(pfId)
+      body: JSON.stringify(id)
     })
   }
 }
