@@ -4,6 +4,11 @@ class WriteView {
   constructor() {
     this.section = document.querySelector(".mypage-write")
   }
+
+  // functionName - showMyWriteList
+  // Job - 작성글을 보여주는 함수
+  // Input(args, params) - userWriteList
+  // Output(return) - none
   showMyWriteList(userWriteList) {
     if (userWriteList[0] === undefined) {
       let myWriteList_HTML = `<div class="write-content">
@@ -64,13 +69,17 @@ class WriteView {
     }
   }
 
+  // functionName - addWriteItem
+  // Job - 작성글을 작성 갯수 만큼 더해주는 함수
+  // Input(args, params) - userWriteList
+  // Output(return) - none
   addWriteItem(userWriteList) {
     this.tbody = document.querySelector(".write-table-tbody")
     for (let i = 0; i < userWriteList.length; i++) {
       this.tbody.innerHTML += `<tr>
                                 <td class="td-check-box">
                                   <div class="check-box">
-                                    <input type="checkbox" name="write" id="${i + 1}">
+                                    <input type="checkbox" name="write" id="${userWriteList[i].board_id}">
                                   </div>
                                 </td>
                                 <td class="td-number">
@@ -86,13 +95,32 @@ class WriteView {
     }
   }
 
-  findWriteSelectAll(callback) {
+  // functionName - findWriteSelectItems
+  // Job - 작성글을 삭제하기 위한 체크박스를 찾아서 service로 보내줌
+  // Input(args, params) - service.selectAllCheckbox
+  // Output(return) - none
+  findWriteSelectItems(callback) {
     const selectAll = document.getElementById("write-all-check");
     let items = document.getElementsByName("write");
     callback(selectAll, items)
   }
 
-  showMyCommentList(userCommentList, callback) {
+  // functionName - findWriteDeleteBtn
+  // Job - 작성글을 삭제하기 위한 삭제버튼과 선택 된 items를 찾아서 service로 보내줌
+  // Input(args, params) - service.selectAllCheckbox
+  // Output(return) - none
+  findWriteDeleteBtn(callback) {
+    const deleteBtn = document.getElementById("write-delete"),
+      selectAll = document.getElementById("write-all-check");
+    let items = document.getElementsByName("write");
+    callback(deleteBtn, selectAll, items)
+  }
+
+  // functionName - showMyCommentList
+  // Job - 작성댓글을 보여주는 함수
+  // Input(args, params) - userWriteList
+  // Output(return) - none
+  showMyCommentList(userCommentList) {
     if (userCommentList[0] === undefined) {
       let myCommentList_HTML = `<div class="comment-content">
                                   <div class="comment-title">
@@ -149,13 +177,17 @@ class WriteView {
     }
   }
 
+  // functionName - addCommentItem
+  // Job - 작성댓글을 작성 갯수 만큼 더해주는 함수
+  // Input(args, params) - userWriteList
+  // Output(return) - none
   addCommentItem(userCommentList) {
     this.tbody = document.querySelector(".cm-table-tbody")
     for (let i = 0; i < userCommentList.length; i++) {
       this.tbody.innerHTML += `<tr>
                                 <td class="td-cm-check-box">
                                   <div class="check-box">
-                                    <input type="checkbox" name="comment" id="${i + 1}">
+                                    <input type="checkbox" name="comment" id="${userCommentList[i].comment_id}">
                                   </div>
                                 </td>
                                 <td class="td-comment">
@@ -169,10 +201,25 @@ class WriteView {
     }
   }
 
-  findCommentSelectAll(callback) {
+  // functionName - findCommentSelectItems
+  // Job - 작성댓글을 삭제하기 위한 체크박스를 찾아서 service로 보내줌
+  // Input(args, params) - service.selectAllCheckbox
+  // Output(return) - none
+  findCommentSelectItems(callback) {
     const selectAll = document.getElementById("comment-all-check");
     let items = document.getElementsByName("comment");
     callback(selectAll, items)
+  }
+
+  // functionName - findCommentDeleteBtn
+  // Job - 작성댓글을 삭제하기 위한 삭제버튼과 선택 된 items를 찾아서 service로 보내줌
+  // Input(args, params) - service.selectAllCheckbox
+  // Output(return) - none
+  findCommentDeleteBtn(callback) {
+    const deleteBtn = document.getElementById("comment-delete"),
+      selectAll = document.getElementById("comment-all-check");
+    let items = document.getElementsByName("comment");
+    callback(deleteBtn, selectAll, items)
   }
 }
 
