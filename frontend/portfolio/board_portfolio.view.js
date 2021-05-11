@@ -14,7 +14,11 @@ class BoardPortfolioView {
         <div class="portfolio-title">포트폴리오 게시판</div>
         <div class="portfolio-list-container">
           <div class="company-search">
-            <input id="company-name" type="text" placeholder="기업명 검색"><button id="search-btn">검색</button>
+            <select class="select-box">
+              <option selected>기업명</option>
+              <option>유저ID</option>
+            </select>
+            <input id="company-name" type="text" placeholder=""><button id="search-btn">검색</button>
           </div>
           <div class="portfolio-write">
             <button><a href="../../main/template/write-board.html">글쓰기</a></button>
@@ -36,13 +40,9 @@ class BoardPortfolioView {
 
     searchBtn.addEventListener('click', event => {
       this.page = 1;
-
       event.preventDefault();
-
-      
       const list = document.querySelector("#portfolio-list");
       list.innerHTML = '';
-
 
       API.getFilteredPortfolio("http://192.168.1.32:8000/portfolio/list/?company_name=" + companyName.value)
       .then((res) => (res.json()))
