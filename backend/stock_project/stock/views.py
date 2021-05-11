@@ -39,7 +39,7 @@ class MainView(View):
         } for pf in pf_list]
 
         user_data = [{
-            'counts of Writers' : user['id_count'],
+            'counts_of_writers' : user['id_count'],
             'user_id'           : Account.objects.get(id=user['user_id']).user_id
         } for user in user_list]
 
@@ -50,6 +50,7 @@ class MainView(View):
             'top5_portfolio_list'  : pf_data,
             'top5_user_list'       : user_data
         }, status=200)
+
 
 class RankView(View):
     def get(self, request):
