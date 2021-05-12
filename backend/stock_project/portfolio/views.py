@@ -11,7 +11,6 @@ from companies.models      import Company
 from portfolio.models      import (
     Portfolio,
     PortfolioStock,
-    LikePortfolio,
     Comment
 )
 
@@ -21,15 +20,17 @@ class TotalPortfolioView(View):
     def get(self, request):
         try:
             company_name = request.GET.get('company_name', None)
+            user_id = request.GET.get('user_id', None)
+            pofol_filter = {}
 
-            if company_name != None:
-                board_list = Portfolio.objects.prefetch_related(
-                    'portfoliostock_set__company', 'user'
-                ).filter(company__cp_name=company_name).order_by('-create_date')
-            else:
-                board_list = Portfolio.objects.prefetch_related(
-                    'portfoliostock_set__company', 'user'
-                ).order_by('-create_date')
+            if company_name != None and company_name !='':
+                pofol_filter['company__cp_name'] = company_name
+            if user_id != None and user_id !='':
+                pofol_filter['user__user_id'] = user_id
+
+            board_list = Portfolio.objects.prefetch_related(
+                'portfoliostock_set__company', 'user', 'comment_set'
+            ).filter(**pofol_filter).order_by('-create_date')
 
             page = request.GET.get('page', 1)
             paginator = Paginator(board_list, 8)
@@ -43,11 +44,12 @@ class TotalPortfolioView(View):
             else:
                 board_list = paginator.get_page(page)
                 board_data = [{
-                    'pofol_id'   : board.id,
-                    'user_id'    : board.user.user_id,
-                    'pofol_name' : board.name,
-                    'like_count' : board.total_like,
-                    'create_date': board.create_date,
+                    'pofol_id'      : board.id,
+                    'user_id'       : board.user.user_id,
+                    'pofol_name'    : board.name,
+                    'comment_count' : board.comment_set.count(),
+                    'like_count'    : board.total_like,
+                    'create_date'   : board.create_date,
                     'stock' : [{
                         'stock_name'   : stock.company.cp_name,
                         'stock_count'  : stock.shares_count,
@@ -60,14 +62,13 @@ class TotalPortfolioView(View):
 
         return JsonResponse({'board_data' : board_data, 'status' : 200}, status=200)
 
-
 class BasePortfolioView(View):
     # 게시판 내용 상세보기
     def get(self, request):
         try:
             board_id = request.GET.get('board_id', None)
             board = Portfolio.objects.prefetch_related(
-                'portfoliostock_set__company', 'user'
+                'portfoliostock_set__company', 'user', 'comment_set'
             ).get(id=board_id)
             board.search_count += 1
             board.save()
@@ -91,6 +92,7 @@ class BasePortfolioView(View):
                 'user_id'           : board.user.user_id,
                 'title'             : board.name,
                 'content'           : board.content,
+                'comment_count'     : board.comment_set.count(),
                 'create_date'       : board.create_date,
                 'like_count'        : board.total_like,
                 'search_count'      : board.search_count,
@@ -120,7 +122,8 @@ class BasePortfolioView(View):
             'message'      : 'SUCCESS',
             'status'       : 200,
             'board_data'   : board_data,
-            'comment_data' : comment_data}, status=200)
+            'comment_data' : comment_data
+        }, status=200)
 
     # 게시판 글쓰기
     @login_required
@@ -158,6 +161,8 @@ class BasePortfolioView(View):
                         'Does_Not_Exists_Company' : does_not_exist_cp
                     }, status=200)
 
+            user.type = '버핏'
+            user.save()
             board_data = {
                 'portfolio_id' : pf.id,
                 'user_id'      : user.user_id,
@@ -228,6 +233,8 @@ class CommentView(View):
     def post(self, request):
         try:
             user = request.user
+            if user.type != '버핏' and user.type !='manager':
+                return JsonResponse({'message' : '버핏만 댓글을 작성할 수 있습니다.', 'status' : 400 }, status=400)
             comment_data = json.loads(request.body)
             comment_id = Comment.objects.create(
                 user_name    = user.user_name,
@@ -243,7 +250,8 @@ class CommentView(View):
             'message'    : 'SUCCESS',
             'status'     : 200,
             'user_id'    : user.user_id,
-            'comment_id' : comment_id }, status=200)
+            'comment_id' : comment_id
+        }, status=200)
 
     @login_required
     def put(self, request):
@@ -281,3 +289,48 @@ class CommentView(View):
 
         except Comment.DoesNotExist:
             return JsonResponse({'message': 'This comment does not exist', 'status': 400}, status=400)
+
+
+# 해당 유저아이디의 포폴 리스트 API
+class UserIDPFView(View):
+    def get(self, request):
+        try:
+            user_id = request.GET.get('user_id', None)
+            pofol_filter = {}
+
+            if user_id != None and user_id != '':
+                pofol_filter['user__user_id'] = user_id
+
+            board_list = Portfolio.objects.prefetch_related(
+                'portfoliostock_set__company', 'user', 'comment_set'
+            ).filter(**pofol_filter).order_by('-create_date')
+
+            page = request.GET.get('page', 1)
+            paginator = Paginator(board_list, 8)
+
+            if int(page) > paginator.num_pages:
+                return JsonResponse({
+                    'message': 'There are no more Portfolio board',
+                    'status': 404
+                }, status=404)
+
+            else:
+                board_list = paginator.get_page(page)
+                board_data = [{
+                    'pofol_id': board.id,
+                    'user_id': board.user.user_id,
+                    'pofol_name': board.name,
+                    'like_count': board.total_like,
+                    'comment_count': board.comment_set.count(),
+                    'create_date': board.create_date,
+                    'stock': [{
+                        'stock_name': stock.company.cp_name,
+                        'stock_count': stock.shares_count,
+                        'stock_amount': stock.shares_amount
+                    } for stock in board.portfoliostock_set.all()]
+                } for board in board_list]
+
+        except KeyError:
+            return JsonResponse({'message': 'INVALID_KEYS', 'status': 400}, status=400)
+
+        return JsonResponse({'board_data': board_data, 'status': 200}, status=200)
