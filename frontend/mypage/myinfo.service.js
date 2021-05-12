@@ -183,13 +183,12 @@ class MyInfoService {
           })
             .then((res) => res.json())
             .then((res) => {
-              location.reload();
               console.log(res);
+              this.changePhone(res.user_info.phone_number);
             })
             .catch((err) => {
               console.log(err);
             });
-          this.changePhone(userPhone);
         }
       } catch (error) {
         alert(error);
@@ -237,13 +236,13 @@ class MyInfoService {
           })
             .then((res) => res.json())
             .then((res) => {
-              location.reload();
               console.log(res);
+              this.changeEmail(res.user_info.email);
             })
             .catch((err) => {
+              // location.reload();
               console.log(err);
             });
-          this.changeEmail(userEmail);
         }
       } catch (error) {
         alert(error);
