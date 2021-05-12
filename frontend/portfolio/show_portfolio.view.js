@@ -271,10 +271,10 @@ class ShowPortfolioView {
     }
 
   deletePortfolio(pfId) {
-    const deleteBtn = document.querySelector('.delete-btn');
+    const deleteBtn = document.querySelector('.delete-comment-btn');
     const pfObj = {};
     pfObj.portfolio_id = Number(pfId)
-
+    console.log(deleteBtn);
     console.log(pfObj);
     deleteBtn.addEventListener('click', function() {
       API.delete('http://192.168.1.32:8000/portfolio/write/', pfObj)
