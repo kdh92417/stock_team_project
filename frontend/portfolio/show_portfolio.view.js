@@ -271,23 +271,25 @@ class ShowPortfolioView {
     }
 
   deletePortfolio(pfId) {
-    const deleteBtn = document.querySelector('.delete-comment-btn');
+    const deleteBtn = document.querySelector('.delete-btn');
     const pfObj = {};
     pfObj.portfolio_id = Number(pfId)
     console.log(deleteBtn);
     console.log(pfObj);
-    deleteBtn.addEventListener('click', function() {
-      API.delete('http://192.168.1.32:8000/portfolio/write/', pfObj)
-      .then((res) => (res.json()))
-      .then((res) => {
-        console.log("deleted")
-        alert("게시글이 삭제되었습니다.");
-        location.href = "../template/portfolio-board.html";
+    if(deleteBtn !== null) {
+      deleteBtn.addEventListener('click', function() {
+        API.delete('http://192.168.1.32:8000/portfolio/write/', pfObj)
+        .then((res) => (res.json()))
+        .then((res) => {
+          console.log("deleted")
+          alert("게시글이 삭제되었습니다.");
+          location.href = "../template/portfolio-board.html";
+        })
+        .catch((err) => {
+          console.log(err);
+        }) 
       })
-      .catch((err) => {
-        console.log(err);
-      }) 
-    })
+    }
   }
 
   deleteComment(commentId) {
@@ -295,27 +297,30 @@ class ShowPortfolioView {
     const commentObj = {};
     const commentBox = document.querySelector('.comment-print-box')
 
-    deleteBtn.forEach(function(item) {
-      item.addEventListener('click', (event) => {
-        const btn = event.target;
-        const deleteAll = btn.parentNode.parentNode.parentNode.parentNode;
-
-        commentBox.removeChild(deleteAll);
-
-        commentObj.comment_id = btn.parentNode.parentNode.id;
-        
-        API.delete("http://192.168.1.32:8000/portfolio/comment/write/", commentObj)
-        .then((res) => (res.json()))
-        .then((res) => {
-          console.log("deleted")
-          alert("댓글이 삭제되었습니다.");
+    if(deleteBtn !== null){
+      deleteBtn.forEach(function(item) {
+        item.addEventListener('click', (event) => {
+          const btn = event.target;
+          const deleteAll = btn.parentNode.parentNode.parentNode.parentNode;
+  
+          commentBox.removeChild(deleteAll);
+  
+          commentObj.comment_id = btn.parentNode.parentNode.id;
+          
+          API.delete("http://192.168.1.32:8000/portfolio/comment/write/", commentObj)
+          .then((res) => (res.json()))
+          .then((res) => {
+            console.log("deleted")
+            alert("댓글이 삭제되었습니다.");
+          })
+          .catch((err) => {
+            console.log(err);
+          }) 
         })
-        .catch((err) => {
-          console.log(err);
-        }) 
+      
       })
+    }
     
-    })
   }
 }
 
