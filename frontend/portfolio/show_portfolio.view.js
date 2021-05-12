@@ -274,14 +274,9 @@ class ShowPortfolioView {
     pfObj.portfolio_id = Number(pfId)
     console.log(deleteBtn);
     console.log(pfObj);
-<<<<<<< HEAD
     if(deleteBtn !== null) {
       deleteBtn.addEventListener('click', function() {
         API.delete('http://192.168.1.32:8000/portfolio/write/', pfObj)
-=======
-    deleteBtn.addEventListener('click', function () {
-      API.delete('http://192.168.1.32:8000/portfolio/write/', pfObj)
->>>>>>> 0eb337f3e5f524ea6836cc6b311d81952c73e96e
         .then((res) => (res.json()))
         .then((res) => {
           console.log("deleted")
@@ -290,14 +285,9 @@ class ShowPortfolioView {
         })
         .catch((err) => {
           console.log(err);
-<<<<<<< HEAD
         }) 
       })
     }
-=======
-        })
-    })
->>>>>>> 0eb337f3e5f524ea6836cc6b311d81952c73e96e
   }
 
   deleteComment(commentId) {
@@ -305,30 +295,19 @@ class ShowPortfolioView {
     const commentObj = {};
     const commentBox = document.querySelector('.comment-print-box')
 
-<<<<<<< HEAD
     if(deleteBtn !== null){
       deleteBtn.forEach(function(item) {
         item.addEventListener('click', (event) => {
           const btn = event.target;
-          const deleteAll = btn.parentNode.parentNode.parentNode.parentNode;
+          const deleteAll = btn.parentNode.parentNode.parentNode;
+
+          console.log(deleteAll)
   
           commentBox.removeChild(deleteAll);
   
           commentObj.comment_id = btn.parentNode.parentNode.id;
           
           API.delete("http://192.168.1.32:8000/portfolio/comment/write/", commentObj)
-=======
-    deleteBtn.forEach(function (item) {
-      item.addEventListener('click', (event) => {
-        const btn = event.target;
-        const deleteAll = btn.parentNode.parentNode.parentNode.parentNode;
-
-        commentBox.removeChild(deleteAll);
-
-        commentObj.comment_id = btn.parentNode.parentNode.id;
-
-        API.delete("http://192.168.1.32:8000/portfolio/comment/write/", commentObj)
->>>>>>> 0eb337f3e5f524ea6836cc6b311d81952c73e96e
           .then((res) => (res.json()))
           .then((res) => {
             console.log("deleted")
@@ -336,19 +315,12 @@ class ShowPortfolioView {
           })
           .catch((err) => {
             console.log(err);
-<<<<<<< HEAD
           }) 
         })
       
       })
     }
     
-=======
-          })
-      })
-
-    })
->>>>>>> 0eb337f3e5f524ea6836cc6b311d81952c73e96e
   }
 }
 
