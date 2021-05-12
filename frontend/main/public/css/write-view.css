@@ -226,4 +226,5 @@
   border: 1px solid rgb(168, 168, 168);
   border-radius: 3px;
   text-align: center;
+  cursor: pointer;
 }
