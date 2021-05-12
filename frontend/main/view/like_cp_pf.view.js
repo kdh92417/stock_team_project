@@ -137,7 +137,7 @@ class LikeCpPfView {
   // Output(return) - none
   addTop5Member(data) {
     const bestList = document.querySelector(".best-member-list");
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < data.length; i++) {
       bestList.innerHTML += `<li>
         <div class="list-member">
           <div class="list-item list_sliding">

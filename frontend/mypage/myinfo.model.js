@@ -1,6 +1,4 @@
 import API from "../api/api.js"
-import LoginService from '../login/login.service.js';
-import WriteCtrl from "./mywrite.ctrl.js"
 
 class LoginUser {
   constructor(ctrl) {
@@ -19,8 +17,6 @@ class LoginUser {
       .then((res) => {
         // LoginUser에 user_data전달
         this.sendUserData(res.user_data);
-        console.log(res)
-        LoginUser.sendUserWriteList(res.user_data)
       })
       .catch((err) => {
         console.log(err);

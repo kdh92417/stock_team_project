@@ -29,27 +29,53 @@ class WriteCtrl {
   // Input(args, params) - res.board_list, res.comment_list
   // Output(return) - none
   handleShowWriteAndCommentList(userWriteList, userCommentList) {
-    this.view.showMyWriteList(userWriteList);
-    this.view.addWriteItem(userWriteList, this.handleWriteSelectAndDeleteItems());
-    this.view.showMyCommentList(userCommentList);
-    this.view.addCommentItem(userCommentList, this.handleCommentSelectAndDeleteItems());
+    if (userWriteList[0] === undefined) {
+      this.view.showMyWriteList(userWriteList);
+    } else {
+      this.view.showMyWriteList(userWriteList);
+      this.view.addWriteItem(userWriteList);
+      this.handleWriteSelectItems();
+      this.handleWriteDeleteItems();
+    }
+    if (userCommentList[0] === undefined) {
+      this.view.showMyCommentList(userCommentList);
+    } else {
+      this.view.showMyCommentList(userCommentList);
+      this.view.addCommentItem(userCommentList);
+      this.handleCommentSelectItems();
+      this.handleCommentDeleteItems();
+    }
   }
 
-  // functionName - handleWriteSelectAndDeleteItems
+  // functionName - handleWriteSelectItems
   // Job - view에서 찾은 items를 service.selectAllCheckbox함수에 전달을 제어하는 함수
   // Input(args, params) - none
   // Output(return) - none
-  handleWriteSelectAndDeleteItems() {
+  handleWriteSelectItems() {
     this.view.findWriteSelectItems(this.service.selectAllCheckbox);
+  }
+
+  // functionName - handleWriteDeleteItems
+  // Job - view에서 찾은 items를 service.sendDeleteItem함수에 전달을 제어하는 함수
+  // Input(args, params) - none
+  // Output(return) - none
+  handleWriteDeleteItems() {
     this.view.findWriteDeleteBtn(this.service.sendDeleteItem);
   }
 
-  // functionName - handleCommentSelectAndDeleteItems
+  // functionName - handleCommentSelectItems
   // Job - view에서 찾은 items를 service.selectAllCheckbox함수에 전달을 제어하는 함수
   // Input(args, params) - none
   // Output(return) - none
-  handleCommentSelectAndDeleteItems() {
+  handleCommentSelectItems() {
     this.view.findCommentSelectItems(this.service.selectAllCheckbox);
+  }
+
+  // functionName - handleCommentDeleteItems
+  // Job - view에서 찾은 items를 service.sendDeleteItem함수에 전달을 제어하는 함수
+  // Input(args, params) - none
+  // Output(return) - none
+  handleCommentDeleteItems() {
     this.view.findCommentDeleteBtn(this.service.sendDeleteItem);
   }
 }
