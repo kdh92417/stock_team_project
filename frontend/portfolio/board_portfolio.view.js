@@ -121,7 +121,7 @@ class BoardPortfolioView {
         </div>
         <div class="card-body">
           <a href="http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${res[i]["pofol_id"]}">
-          <div class="write-title">${res[i]["pofol_name"]}</div><a>
+          <div class="write-title">${res[i]["pofol_name"]} [${res[i]["comment_count"]}]</div><a>
           <div class="writer">
             <span class="nickname">${res[i]["user_id"]}</span>
           </div>
@@ -256,7 +256,7 @@ class BoardPortfolioView {
           </div>
           <div class="card-body">
             <a href="http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${data.board_data[i]["pofol_id"]}">
-            <div class="write-title">${data.board_data[i]["pofol_name"]}</div></a>
+            <div class="write-title">${data.board_data[i]["pofol_name"]} [${data.board_data[i]["comment_count"]}]</div></a>
             <div class="writer">
               <span class="nickname">${data.board_data[i]["user_id"]}</span>
             </div>
