@@ -187,6 +187,8 @@ class MyInfoService {
               this.changePhone(res.user_info.phone_number);
             })
             .catch((err) => {
+              alert("이미 사용중인 전화번호입니다.")
+              location.reload();
               console.log(err);
             });
         }
@@ -240,7 +242,8 @@ class MyInfoService {
               this.changeEmail(res.user_info.email);
             })
             .catch((err) => {
-              // location.reload();
+              alert("이미 사용중인 email입니다.")
+              location.reload();
               console.log(err);
             });
         }

@@ -52,7 +52,8 @@ class WriteCtrl {
   // Input(args, params) - none
   // Output(return) - none
   handleWriteSelectItems() {
-    this.view.findWriteSelectItems(this.service.selectAllCheckbox);
+    const selectAllCheckbox = this.service.selectAllCheckbox;
+    this.view.findWriteSelectItems(selectAllCheckbox);
   }
 
   // functionName - handleWriteDeleteItems
@@ -60,7 +61,8 @@ class WriteCtrl {
   // Input(args, params) - none
   // Output(return) - none
   handleWriteDeleteItems() {
-    this.view.findWriteDeleteBtn(this.service.sendDeleteItem);
+    const sendDeleteItem = this.service.sendDeleteItem;
+    this.view.findWriteDeleteBtn(sendDeleteItem);
   }
 
   // functionName - handleCommentSelectItems
@@ -68,7 +70,8 @@ class WriteCtrl {
   // Input(args, params) - none
   // Output(return) - none
   handleCommentSelectItems() {
-    this.view.findCommentSelectItems(this.service.selectAllCheckbox);
+    const selectAllCheckbox = this.service.selectAllCheckbox;
+    this.view.findCommentSelectItems(selectAllCheckbox);
   }
 
   // functionName - handleCommentDeleteItems
@@ -76,7 +79,8 @@ class WriteCtrl {
   // Input(args, params) - none
   // Output(return) - none
   handleCommentDeleteItems() {
-    this.view.findCommentDeleteBtn(this.service.sendDeleteItem);
+    const sendDeleteItem = this.service.sendDeleteItem;
+    this.view.findCommentDeleteBtn(sendDeleteItem);
   }
 }
 
