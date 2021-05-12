@@ -140,17 +140,26 @@ class LikeCpPfView {
     for (let i = 0; i < data.length; i++) {
       bestList.innerHTML += `<li>
         <div class="list-member">
-          <div class="list-item list_sliding">
+          <div class="list-item user-name list_sliding">
             <span class="rank-num">${i + 1}</span>
             <span id="${data[i].counts_of_writers}" class="rank-text">${data[i].user_id}</span>
           </div>
-          <div class="list-item">
+          <div class="list-item user-name">
             <span class="rank-num">${i + 1}</span>
             <span id="${data[i].counts_of_writers}" class="rank-text">${data[i].user_id}</span>
           </div>
         </div>
       </li>`
     }
+  }
+
+  // functionName - sendUserList
+  // Job - 메인페이지 top5 유저의 아이디를 보내줌
+  // Input(args, params) - callback(service.showRankCompany)  
+  // Output(return) - none
+  sendUserList(callback) {
+    const userName = document.querySelectorAll(".user-name");
+    callback(userName);
   }
 
   // functionName - findMemberList

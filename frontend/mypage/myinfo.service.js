@@ -41,13 +41,12 @@ class MyInfoService {
           })
             .then((res) => res.json())
             .then((res) => {
-              location.reload();
+              this.changePassword();
               console.log(res);
             })
             .catch((err) => {
               console.log(err);
             });
-          this.changePassword();
         }
       } catch (error) {
         alert(error);
@@ -95,13 +94,12 @@ class MyInfoService {
           })
             .then((res) => res.json())
             .then((res) => {
-              location.reload();
               console.log(res);
+              this.changeName(res.user_info.user_name);
             })
             .catch((err) => {
               console.log(err);
             });
-          this.changeName(userName);
         }
       } catch (error) {
         alert(error);
@@ -136,13 +134,12 @@ class MyInfoService {
       })
         .then((res) => res.json())
         .then((res) => {
-          location.reload();
           console.log(res);
+          this.changeBirth(res.user_info.birth_date);
         })
         .catch((err) => {
           console.log(err);
         });
-      this.changeBirth(userBirth);
     });
   }
 

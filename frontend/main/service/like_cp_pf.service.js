@@ -16,6 +16,23 @@ class LikeCpPfService {
       })
     })
   }
+
+  // functionName - showUserPortfolio
+  // Job - Best Member를 클릭하면 포트폴리오 페이지로 보내줌 
+  // Input(args, params) - view userName
+  // Output(return) - none
+  showUserPortfolio = (userName) => {
+    userName.forEach(target => {
+      target.addEventListener("click", event => {
+        console.dir(event.target)
+        const user = {};
+        user.name = event.target.innerHTML;
+        localStorage.setItem("bestMember", JSON.stringify(user));
+        location.href = "../template/portfolio-board.html"
+      })
+    })
+  }
+
   // functionName - rankTimer
   // Job - 주간 인기 검색 기업 / 주간 인기 포트폴리오들을 순차적으로 갱신되는 효과 
   // Input(args, params) - view list 
