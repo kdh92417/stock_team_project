@@ -15,6 +15,7 @@ class ShowPortfolioController {
         console.log(res);
         this.view.showPortfolio(res.board_data, pfId);
         this.view.printComments(res.comment_data);
+        console.log(res.comment_data)
         this.view.showDeleteBtn(pfId);
       })
       .catch((err) => {

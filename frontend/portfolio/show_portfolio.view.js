@@ -90,6 +90,14 @@ class ShowPortfolioView {
 
     this.root.insertAdjacentHTML('afterend', portfolio_HTML);
 
+
+    // 로그인 하지 않은 사용자는 댓글 textarea를 비활성화
+    const textArea = document.querySelector(".comment-inbox-text");
+    if (localStorage.getItem("token") === null) {
+      textArea.setAttribute('disabled', false);
+    }
+
+    // 차트 그리기
     let stock = document.querySelector('#stock')
     for (let i = 0; i < stockNameArr.length; i++) {
 
@@ -144,11 +152,13 @@ class ShowPortfolioView {
     this.movePreviousPortfolio(prev);
     this.moveNextPortfolio(next)
 
+    // 댓글 등록 버튼을 눌렀을 때 함수 호출
     const commentSubmitBtn = document.querySelector(".btn-submit");
 
     commentSubmitBtn.addEventListener("click", event => {
       this.submitComment(pfId)
     })
+
   }
 
 
@@ -199,6 +209,7 @@ class ShowPortfolioView {
 
   printComments(comments) {
     const commentDiv = document.querySelector('.comment-print-box');
+    console.log(comments)
     for (let i = 0; i < comments.length; i++) {
       let html =
         `<div class="each-comment-content">
@@ -233,13 +244,16 @@ class ShowPortfolioView {
     const deleteBtn = document.querySelector('.view-button-content');
     const html = `<div role="button" class="btn delete-btn">
     <span class="btn-text">삭제</span></div>`
-    API.userInfoGet("http://192.168.1.32:8000/account/user/")
+    if(localStorage.getItem("token") !== null) {
+      API.userInfoGet("http://192.168.1.32:8000/account/user/")
       .then((res) => (res.json()))
       .then((res) => {
-        console.log(res.comment_list);
-        for (let i = 0; i < res.board_list.length; i++) {
-          if (res.board_list[i].board_id === Number(pfId)) {
-            deleteBtn.insertAdjacentHTML('afterbegin', html);
+        if (localStorage.getItem("token") !== null) {
+          console.log(res.board_list);
+          for (let i = 0; i < res.board_list.length; i++) {
+            if (res.board_list[i].board_id === Number(pfId)) {
+              deleteBtn.insertAdjacentHTML('afterbegin', html);
+            }
           }
         }
         this.showDeleteCommentBtn(res.comment_list)
@@ -248,24 +262,25 @@ class ShowPortfolioView {
       .catch((err) => {
         console.log(err);
       })
+    }
   }
 
   showDeleteCommentBtn(commentId) {
     const comments = document.querySelectorAll('.comment');
     const deleteBtnHTML = `<div role="button" class="btn delete-comment-btn">
       <span class="btn-text">삭제</span></div>`
-
-    for (let i = 0; i < comments.length; i++) {
-      for (let j = 0; j < commentId.length; j++) {
-        console.log("몇번 반복?")
-        if (Number(comments[i].getAttribute('id')) === commentId[j].comment_id) {
-          console.log(Number(comments[i].getAttribute('id'), commentId[j].comment_id))
-          let position = document.getElementById(comments[i].getAttribute('id'));
-          position.innerHTML += deleteBtnHTML;
+      if (localStorage.getItem("token") !== null) {
+        for (let i = 0; i < comments.length; i++) {
+          for (let j = 0; j < commentId.length; j++) {
+            if (Number(comments[i].getAttribute('id')) === commentId[j].comment_id) {
+              console.log(Number(comments[i].getAttribute('id'), commentId[j].comment_id))
+              let position = document.getElementById(comments[i].getAttribute('id'));
+              position.innerHTML += deleteBtnHTML;
+            }
+          }
+          this.deleteComment(commentId);
         }
       }
-      this.deleteComment(commentId);
-    }
   }
 
   deletePortfolio(pfId) {
