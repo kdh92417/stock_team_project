@@ -18,13 +18,13 @@ class WriteService {
   // Input(args, params) - deleteBtn, items
   // Output(return) - none
   sendDeleteItem = (deleteBtn, selectAll, items) => {
-    console.log(items)
     deleteBtn.addEventListener("click", () => {
       if (selectAll.checked === true) {
         API.writeAndCommentDelete("http://192.168.1.32:8000/account/user/portfolio/delete/")
           .then((res) => res.json())
           .then((res) => {
             console.log(res)
+            location.reload();
           })
           .catch((err) => {
             console.log(err);
@@ -41,6 +41,7 @@ class WriteService {
           .then((res) => res.json())
           .then((res) => {
             console.log(res);
+            location.reload();
           })
           .catch((err) => {
             console.log(err);

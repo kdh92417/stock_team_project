@@ -124,14 +124,6 @@ class API {
       },
       body: JSON.stringify(payload),
     })
-      .then((res) => res.json())
-      .then((res) => {
-        location.href = "../template/mypage.html"
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });;
   }
 
   // functionName - get
@@ -163,8 +155,8 @@ class API {
   }
 
   // functionName - post
-  // Job - 기업 좋아요, 포트폴리오 좋아요 api
-  // Input(args, params) - url, cp_name, pf_id
+  // Job - 기업 좋아요, 포트폴리오 좋아요, 작성글 / 작성댓글 삭제 api
+  // Input(args, params) - url, payload
   // Output(return) - none
   static async post(url, payload) {
     return await fetch(url, {
@@ -250,6 +242,10 @@ class API {
     })
   }
 
+  // functionName - writeAndCommentDelete
+  // Job - 작성글 / 작성댓글 전체삭제 api
+  // Input(args, params) - url
+  // Output(return) - none
   static writeAndCommentDelete(url) {
     return fetch(url, {
       method: "DELETE",

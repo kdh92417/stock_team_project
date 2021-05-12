@@ -73,7 +73,7 @@ class WriteView {
   // Job - 작성글을 작성 갯수 만큼 더해주는 함수
   // Input(args, params) - userWriteList
   // Output(return) - none
-  addWriteItem(userWriteList, callback) {
+  addWriteItem(userWriteList) {
     this.tbody = document.querySelector(".write-table-tbody")
     for (let i = 0; i < userWriteList.length; i++) {
       this.tbody.innerHTML += `<tr>
@@ -93,14 +93,13 @@ class WriteView {
                                 <td class="td-view">${userWriteList[i].pofol_search_count}</td>
                               </tr>`
     }
-    callback();
   }
 
   // functionName - findWriteSelectItems
   // Job - 작성글을 삭제하기 위한 체크박스를 찾아서 service로 보내줌
   // Input(args, params) - service.selectAllCheckbox
   // Output(return) - none
-  findWriteSelectItems(callback) {
+  findWriteSelectItems = (callback) => {
     const selectAll = document.getElementById("write-all-check");
     let items = document.getElementsByName("write");
     callback(selectAll, items)
@@ -110,7 +109,7 @@ class WriteView {
   // Job - 작성글을 삭제하기 위한 삭제버튼과 선택 된 items를 찾아서 service로 보내줌
   // Input(args, params) - service.selectAllCheckbox
   // Output(return) - none
-  findWriteDeleteBtn(callback) {
+  findWriteDeleteBtn = (callback) => {
     const deleteBtn = document.getElementById("write-delete"),
       selectAll = document.getElementById("write-all-check");
     let items = document.getElementsByName("write");
@@ -121,7 +120,7 @@ class WriteView {
   // Job - 작성댓글을 보여주는 함수
   // Input(args, params) - userWriteList
   // Output(return) - none
-  showMyCommentList(userCommentList, callback) {
+  showMyCommentList(userCommentList) {
     if (userCommentList[0] === undefined) {
       let myCommentList_HTML = `<div class="comment-content">
                                   <div class="comment-title">
@@ -175,7 +174,6 @@ class WriteView {
                                   </div>
                                 </div>`
       this.section.insertAdjacentHTML('beforeend', myCommentList_HTML);
-      callback()
     }
   }
 
@@ -183,7 +181,7 @@ class WriteView {
   // Job - 작성댓글을 작성 갯수 만큼 더해주는 함수
   // Input(args, params) - userWriteList
   // Output(return) - none
-  addCommentItem(userCommentList, callback) {
+  addCommentItem(userCommentList) {
     this.tbody = document.querySelector(".cm-table-tbody")
     for (let i = 0; i < userCommentList.length; i++) {
       this.tbody.innerHTML += `<tr>
@@ -201,14 +199,13 @@ class WriteView {
                                 <td class="td-cm-date">${moment(userCommentList[i].create_date).format("YYYY.MM.DD")}</td>
                               </tr>`
     }
-    callback()
   }
 
   // functionName - findCommentSelectItems
   // Job - 작성댓글을 삭제하기 위한 체크박스를 찾아서 service로 보내줌
   // Input(args, params) - service.selectAllCheckbox
   // Output(return) - none
-  findCommentSelectItems(callback) {
+  findCommentSelectItems = (callback) => {
     const selectAll = document.getElementById("comment-all-check");
     let items = document.getElementsByName("comment");
     callback(selectAll, items)
@@ -218,7 +215,7 @@ class WriteView {
   // Job - 작성댓글을 삭제하기 위한 삭제버튼과 선택 된 items를 찾아서 service로 보내줌
   // Input(args, params) - service.selectAllCheckbox
   // Output(return) - none
-  findCommentDeleteBtn(callback) {
+  findCommentDeleteBtn = (callback) => {
     const deleteBtn = document.getElementById("comment-delete"),
       selectAll = document.getElementById("comment-all-check");
     let items = document.getElementsByName("comment");

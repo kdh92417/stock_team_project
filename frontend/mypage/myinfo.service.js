@@ -8,7 +8,7 @@ class MyInfoService {
     addPwInput.className = "change-password"
     tdPassword.appendChild(addPwInput);
     tdPassword.innerHTML += `<p id="modify-password" class="modify-btn">확인</p>`;
-    this.savePassword()
+    this.savePassword();
   }
 
   changePassword() {
@@ -39,6 +39,14 @@ class MyInfoService {
           API.put("http://192.168.1.32:8000/account/user/password/", {
             password: `${savePassword.value}`,
           })
+            .then((res) => res.json())
+            .then((res) => {
+              location.reload();
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
           this.changePassword();
         }
       } catch (error) {
@@ -85,6 +93,14 @@ class MyInfoService {
           API.put("http://192.168.1.32:8000/account/user/name/", {
             user_name: `${saveName.value}`,
           })
+            .then((res) => res.json())
+            .then((res) => {
+              location.reload();
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
           this.changeName(userName);
         }
       } catch (error) {
@@ -117,7 +133,15 @@ class MyInfoService {
       tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">수정</p>`;
       API.put("http://192.168.1.32:8000/account/user/birth-date/", {
         birth_date: `${saveBirth.value}`,
-      });
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          location.reload();
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       this.changeBirth(userBirth);
     });
   }
@@ -159,7 +183,15 @@ class MyInfoService {
           tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">수정</p>`;
           API.put("http://192.168.1.32:8000/account/user/phone/", {
             phone_number: `${savePhone.value}`,
-          });
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              location.reload();
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
           this.changePhone(userPhone);
         }
       } catch (error) {
@@ -205,7 +237,15 @@ class MyInfoService {
           tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">수정</p>`;
           API.put("http://192.168.1.32:8000/account/user/email/", {
             email: `${saveEmail.value}`,
-          });
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              location.reload();
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
           this.changeEmail(userEmail);
         }
       } catch (error) {
