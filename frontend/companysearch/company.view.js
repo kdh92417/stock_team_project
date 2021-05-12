@@ -39,6 +39,9 @@ class CompanyView {
   </div>`
 
     this.root.insertAdjacentHTML('afterend', companyInfo_HTML);
+    window.addEventListener("mousedown", () => {
+      localStorage.removeItem("기업이름");
+    })
   }
 
   // functionName - userLikeListView

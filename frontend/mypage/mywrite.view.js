@@ -113,7 +113,7 @@ class WriteView {
     const deleteBtn = document.getElementById("write-delete"),
       selectAll = document.getElementById("write-all-check");
     let items = document.getElementsByName("write");
-    callback(deleteBtn, selectAll, items)
+    callback(deleteBtn, items)
   }
 
   // functionName - showMyCommentList
@@ -219,7 +219,7 @@ class WriteView {
     const deleteBtn = document.getElementById("comment-delete"),
       selectAll = document.getElementById("comment-all-check");
     let items = document.getElementsByName("comment");
-    callback(deleteBtn, selectAll, items)
+    callback(deleteBtn, items)
   }
 }
 
