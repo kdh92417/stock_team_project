@@ -36,6 +36,7 @@ class WriteCtrl {
       this.view.addWriteItem(userWriteList);
       this.handleWriteSelectItems();
       this.handleWriteDeleteItems();
+      this.service.sendAllDeletItems;
     }
     if (userCommentList[0] === undefined) {
       this.view.showMyCommentList(userCommentList);
@@ -61,8 +62,9 @@ class WriteCtrl {
   // Input(args, params) - none
   // Output(return) - none
   handleWriteDeleteItems() {
-    const sendDeleteItem = this.service.sendDeleteItem;
-    this.view.findWriteDeleteBtn(sendDeleteItem);
+    const saveDeleteItem = this.service.saveDeleteItem,
+      sendAllDeleteItems = this.service.sendAllDeleteItems;
+    this.view.findWriteDeleteBtn(saveDeleteItem, sendAllDeleteItems);
   }
 
   // functionName - handleCommentSelectItems
@@ -79,44 +81,11 @@ class WriteCtrl {
   // Input(args, params) - none
   // Output(return) - none
   handleCommentDeleteItems() {
-    const sendDeleteItem = this.service.sendDeleteItem;
-    this.view.findCommentDeleteBtn(sendDeleteItem);
+    const saveDeleteItem = this.service.saveDeleteItem,
+      sendAllDeleteItems = this.service.sendAllDeleteItems;
+    this.view.findCommentDeleteBtn(saveDeleteItem, sendAllDeleteItems);
   }
 
-  handleAllDeleteItems() {
-    API.writeAndCommentDelete("http://192.168.1.32:8000/account/user/portfolio/delete/")
-      .then((res) => res.json())
-      .then((res) => {
-        this.view.showMyWriteList();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
-  handleWriteDeletePost = (deleteItems) => {
-    API.post("http://192.168.1.32:8000/account/user/portfolio/delete/", { delete_pf_id_list: deleteItems })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res.board_list);
-        this.view.addWriteItem(res.board_list);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
-  handleCommentDeletePost = (deleteItems) => {
-    API.post("http://192.168.1.32:8000/account/user/comment/delete/", { delete_comment_id_list: deleteItems })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        // location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
 }
 
 export default WriteCtrl;

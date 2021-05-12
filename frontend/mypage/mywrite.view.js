@@ -109,11 +109,14 @@ class WriteView {
   // Job - 작성글을 삭제하기 위한 삭제버튼과 선택 된 items를 찾아서 service로 보내줌
   // Input(args, params) - service.selectAllCheckbox
   // Output(return) - none
-  findWriteDeleteBtn = (callback) => {
+  findWriteDeleteBtn = (saveItem, sendAllItem) => {
     const deleteBtn = document.getElementById("write-delete"),
       selectAll = document.getElementById("write-all-check");
     let items = document.getElementsByName("write");
-    callback(deleteBtn, items)
+    saveItem(deleteBtn, items);
+    if (selectAll.checked === true) {
+      sendAllItem(deleteBtn);
+    }
   }
 
   // functionName - showMyCommentList
@@ -215,11 +218,15 @@ class WriteView {
   // Job - 작성댓글을 삭제하기 위한 삭제버튼과 선택 된 items를 찾아서 service로 보내줌
   // Input(args, params) - service.selectAllCheckbox
   // Output(return) - none
-  findCommentDeleteBtn = (callback) => {
+  findCommentDeleteBtn = (saveItem, sendAllItem) => {
     const deleteBtn = document.getElementById("comment-delete"),
       selectAll = document.getElementById("comment-all-check");
     let items = document.getElementsByName("comment");
-    callback(deleteBtn, items)
+    saveItem(deleteBtn, items)
+    if (selectAll.checked === true) {
+      sendAllItem(deleteBtn);
+    }
+
   }
 }
 
