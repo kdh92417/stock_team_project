@@ -41,13 +41,12 @@ class MyInfoService {
           })
             .then((res) => res.json())
             .then((res) => {
-              location.reload();
+              this.changePassword();
               console.log(res);
             })
             .catch((err) => {
               console.log(err);
             });
-          this.changePassword();
         }
       } catch (error) {
         alert(error);
@@ -95,13 +94,12 @@ class MyInfoService {
           })
             .then((res) => res.json())
             .then((res) => {
-              location.reload();
               console.log(res);
+              this.changeName(res.user_info.user_name);
             })
             .catch((err) => {
               console.log(err);
             });
-          this.changeName(userName);
         }
       } catch (error) {
         alert(error);
@@ -136,13 +134,12 @@ class MyInfoService {
       })
         .then((res) => res.json())
         .then((res) => {
-          location.reload();
           console.log(res);
+          this.changeBirth(res.user_info.birth_date);
         })
         .catch((err) => {
           console.log(err);
         });
-      this.changeBirth(userBirth);
     });
   }
 
@@ -186,13 +183,14 @@ class MyInfoService {
           })
             .then((res) => res.json())
             .then((res) => {
-              location.reload();
               console.log(res);
+              this.changePhone(res.user_info.phone_number);
             })
             .catch((err) => {
+              alert("이미 사용중인 전화번호입니다.")
+              location.reload();
               console.log(err);
             });
-          this.changePhone(userPhone);
         }
       } catch (error) {
         alert(error);
@@ -240,13 +238,14 @@ class MyInfoService {
           })
             .then((res) => res.json())
             .then((res) => {
-              location.reload();
               console.log(res);
+              this.changeEmail(res.user_info.email);
             })
             .catch((err) => {
+              alert("이미 사용중인 email입니다.")
+              location.reload();
               console.log(err);
             });
-          this.changeEmail(userEmail);
         }
       } catch (error) {
         alert(error);

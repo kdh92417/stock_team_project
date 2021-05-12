@@ -18,6 +18,7 @@ class WriteService {
   // Input(args, params) - deleteBtn, items
   // Output(return) - none
   sendDeleteItem = (deleteBtn, selectAll, items) => {
+    console.log(items[0].name);
     deleteBtn.addEventListener("click", () => {
       if (selectAll.checked === true) {
         API.writeAndCommentDelete("http://192.168.1.32:8000/account/user/portfolio/delete/")
@@ -25,6 +26,22 @@ class WriteService {
           .then((res) => {
             console.log(res)
             location.reload();
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      } else if (items[0].name === "write") {
+        let deleteItems = [];
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].checked === true) {
+            deleteItems.push(Number(items[i].id));
+          }
+        }
+        console.log(deleteItems);
+        API.post("http://192.168.1.32:8000/account/user/portfolio/delete/", { delete_pf_id_list: deleteItems })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res.board_list);
           })
           .catch((err) => {
             console.log(err);
@@ -37,11 +54,11 @@ class WriteService {
           }
         }
         console.log(deleteItems);
-        API.post("http://192.168.1.32:8000/account/user/portfolio/delete/", { delete_pf_id_list: deleteItems })
+        API.post("http://192.168.1.32:8000/account/user/comment/delete/", { delete_comment_id_list: deleteItems })
           .then((res) => res.json())
           .then((res) => {
             console.log(res);
-            location.reload();
+            // location.reload();
           })
           .catch((err) => {
             console.log(err);

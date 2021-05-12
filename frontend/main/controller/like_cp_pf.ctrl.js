@@ -40,12 +40,13 @@ class LikeCpPfCtrl {
   }
 
   // functionName - sendCompanyAndPortfolioData
-  // Job - 주간 인기 검색 기업 / 주간 인기 포트폴리오를 서버에서 받아온 데이터를 view에 전달
-  // Input(args, params) - companyInfo, portfolioInfo
+  // Job - 주간 인기 검색 기업 / 주간 인기 포트폴리오 / Best Member를 서버에서 받아온 데이터를 view에 전달
+  // Input(args, params) - companyInfo, portfolioInfo, bestMember
   // Output(return) - none
   sendCompanyAndPortfolioData(company, portfolio, bestMember) {
     const rankTimer = this.service.rankTimer,
-      showRankCompany = this.service.showRankCompany
+      showRankCompany = this.service.showRankCompany,
+      showUserPortfolio = this.service.showUserPortfolio;
     this.view.addTop5Company(company);
     this.view.addTop5Portfolio(portfolio);
     this.view.addTop5Member(bestMember);
@@ -53,6 +54,7 @@ class LikeCpPfCtrl {
     this.view.findPortfolioList(rankTimer);
     this.view.findMemberList(rankTimer);
     this.view.sendRankList(showRankCompany);
+    this.view.sendUserList(showUserPortfolio);
   }
 }
 
