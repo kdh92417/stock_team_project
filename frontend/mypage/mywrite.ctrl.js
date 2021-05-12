@@ -82,6 +82,41 @@ class WriteCtrl {
     const sendDeleteItem = this.service.sendDeleteItem;
     this.view.findCommentDeleteBtn(sendDeleteItem);
   }
+
+  handleAllDeleteItems() {
+    API.writeAndCommentDelete("http://192.168.1.32:8000/account/user/portfolio/delete/")
+      .then((res) => res.json())
+      .then((res) => {
+        this.view.showMyWriteList();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  handleWriteDeletePost = (deleteItems) => {
+    API.post("http://192.168.1.32:8000/account/user/portfolio/delete/", { delete_pf_id_list: deleteItems })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res.board_list);
+        this.view.addWriteItem(res.board_list);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  handleCommentDeletePost = (deleteItems) => {
+    API.post("http://192.168.1.32:8000/account/user/comment/delete/", { delete_comment_id_list: deleteItems })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        // location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 }
 
 export default WriteCtrl;
