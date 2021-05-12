@@ -14,7 +14,7 @@ class BoardPortfolioView {
         <div class="portfolio-title">포트폴리오 게시판</div>
         <div class="portfolio-list-container">
           <div class="company-search">
-            <select class="select-box">
+            <select id="select-box">
               <option selected>기업명</option>
               <option>유저ID</option>
             </select>
@@ -34,26 +34,7 @@ class BoardPortfolioView {
     const list = document.querySelector("#portfolio-list");
 
     this.addPortfolio(list, res);
-
-    const searchBtn = document.getElementById('search-btn');
-    const companyName = document.getElementById('company-name');
-
-    searchBtn.addEventListener('click', event => {
-      this.page = 1;
-      event.preventDefault();
-      const list = document.querySelector("#portfolio-list");
-      list.innerHTML = '';
-
-      API.getFilteredPortfolio("http://192.168.1.32:8000/portfolio/list/?company_name=" + companyName.value)
-      .then((res) => (res.json()))
-      .then((res) => {
-        console.log(res);
-        this.drawList(res.board_data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    });
+    this.showfilteredPortfolio();
   }
 
   //포트폴리오 리스트를 띄워주는 함수
@@ -61,6 +42,43 @@ class BoardPortfolioView {
     this.drawList(res);
     this.showAjaxFirstPage()
 
+  }
+
+  showfilteredPortfolio() {
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('company-name');
+
+    searchBtn.addEventListener('click', event => {
+      this.page = 1;
+      event.preventDefault();
+      const list = document.querySelector("#portfolio-list");
+      list.innerHTML = '';
+
+      const selectBox = document.getElementById("select-box") 
+      const selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+      if (selectedValue === '기업명') {
+        API.getFilteredPortfolio("http://192.168.1.32:8000/portfolio/list/?company_name=" + searchInput.value)
+        .then((res) => (res.json()))
+        .then((res) => {
+          console.log(res);
+          this.drawList(res.board_data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      } else {
+        API.getFilteredPortfolio("http://192.168.1.32:8000/portfolio/list/user/?user_id=" + searchInput.value)
+        .then((res) => (res.json()))
+        .then((res) => {
+          console.log(res);
+          this.drawList(res.board_data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      }   
+    });
   }
 
   drawList(res) {
