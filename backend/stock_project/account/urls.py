@@ -26,4 +26,6 @@ urlpatterns = [
     path('like/list/', views.LikeInfoView.as_view()),
     # 해당 유저의 포폴 전체/선택 삭제 API
     path('user/portfolio/delete/', views.PortfolioSelectView.as_view()),
+    # 해당 유저의 댓글 전체/선택 삭제 API
+    path('user/comment/delete/', views.CommentSelectView.as_view())
 ]
