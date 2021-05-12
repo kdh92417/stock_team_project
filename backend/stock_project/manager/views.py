@@ -3,7 +3,6 @@ import json
 from django.views           import View
 from django.http            import JsonResponse
 
-from companies.models       import Company
 from portfolio.models       import Portfolio
 from account.models         import Account
 from .utils                 import manager_validate
@@ -54,17 +53,10 @@ class ManagerView(View):
             pf = Portfolio.objects.get(id=pf_id)
             pf.delete()
 
-            return JsonResponse({
-                'message' : 'success',
-                'status'  : 200,
-                }, status=200)
+            return JsonResponse({'message' : 'success', 'status'  : 200,}, status=200)
         
         except KeyError:
-            return JsonResponse({
-                'message' : 'INVALID_KEY',
-                'status'  : 400
-                }, status=400)
-
+            return JsonResponse({'message' : 'INVALID_KEY', 'status'  : 400}, status=400)
 
     @manager_validate
     def put(self, request):
@@ -74,21 +66,13 @@ class ManagerView(View):
             if not Account.objects.filter(user_id=user_id).exists():
                 return JsonResponse({
                     'message' : 'This user does not exist.',
-                    'status'  : 400
-                    }, status=400)
+                    'status'  : 400 }, status=400)
             
             user = Account.objects.get(user_id=user_id)
             user.type = 'black'
             user.save()
 
-            return JsonResponse({
-                'message' : 'success',
-                'status'  : 200
-                }, status=200)
-
+            return JsonResponse({'message' : 'success', 'status'  : 200}, status=200)
 
         except KeyError:
-            return JsonResponse({
-                'message' : 'INVALID_KEY',
-                'status'  : 400
-                }, status=400)
+            return JsonResponse({'message' : 'INVALID_KEY','status'  : 400}, status=400)

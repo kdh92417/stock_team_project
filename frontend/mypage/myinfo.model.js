@@ -1,6 +1,5 @@
 import API from "../api/api.js"
 
-
 class LoginUser {
   constructor(ctrl) {
     this.ctrl = ctrl

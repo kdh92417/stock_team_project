@@ -4,14 +4,12 @@ import bcrypt
 
 from django.views       import View
 from django.db.models   import Q
-from django.http        import (
-    JsonResponse,
-    HttpResponse
-)
+from django.http        import JsonResponse
 
 from my_settings         import ALGORITHM
 from stock.settings      import SECRET_KEY
 from .utils              import login_required
+
 from .models             import Account
 from portfolio.models    import (
     Portfolio,
@@ -85,10 +83,11 @@ class MyPage(View):
             }
 
             board_list = [{
-                'board_id'    : board.id,
-                'pofol_name'  : board.name,
-                'pofol_like'  : board.total_like,
-                'create_date' : board.create_date
+                'board_id'           : board.id,
+                'pofol_name'         : board.name,
+                'pofol_like'         : board.total_like,
+                'pofol_search_count' : board.search_count,
+                'create_date'        : board.create_date
             }for board in Portfolio.objects.filter(user_id=user.id)]
 
             comment_list = [{
@@ -108,6 +107,42 @@ class MyPage(View):
 
         except KeyError:
             return JsonResponse({'message' : 'KEY_ERROR', 'status' : 400}, status=400)
+
+
+class PortfolioSelectView(View):
+    # 해당 유저의 작성글 전체 삭제
+    @login_required
+    def delete(self, request):
+        try:
+            user = request.user
+            Portfolio.objects.filter(user_id=user.id).delete()
+            return JsonResponse({'message': 'success', 'status': 200}, status=200)
+
+        except KeyError:
+            return JsonResponse({'message': 'KEY_ERROR', 'status': 400}, status=400)
+
+    # 해당 유저의 작성글 선택 삭제
+    @login_required
+    def post(self, request):
+        user = request.user
+        pf_list = json.loads(request.body)['delete_pf_id_list']
+        Portfolio.objects.filter(Q(id__in=pf_list) & Q(user_id=user.id)).delete()
+        return JsonResponse({'message': 'success', 'status': 200}, status=200)
+
+
+class CommentSelectView(View):
+    # 해당 유저의 댓글 전체 삭제
+    @login_required
+    def delete(self, request):
+
+
+        pass
+
+    # 해당 유저의 댓글 선택 삭제
+    @login_required
+    def post(self, request):
+        pass
+
 
 
 # 비밀번호 변경 API
@@ -188,6 +223,7 @@ class UserBirthDateView(View):
             return JsonResponse({'message': e, 'status' : 400}, status=400)
 
 
+# 포트폴리오 좋아요 기능 API
 class LikePFView(View):
     @login_required
     def post(self, request):
@@ -200,16 +236,16 @@ class LikePFView(View):
                     Q(user_id=user.id) & Q(portfolio_id=pf_id)).exists():
                 user_like_pf = LikePortfolio.objects.filter(
                     Q(user_id=user.id) & Q(portfolio_id=pf_id)).first()
-
-                pf.total_like -= 1
-                pf.save()
                 user_like_pf.delete()
+
+                if pf.total_like > 0:
+                    pf.total_like -= 1
+                    pf.save()
 
                 return JsonResponse({
                     'message'    : 'Dislike this Portfolio',
                     'status'     : 200,
                     'total_like' : pf.total_like,
-
                 }, status=200)
             else:
                 try:
@@ -232,6 +268,7 @@ class LikePFView(View):
             return JsonResponse({'message': e, 'status': 400}, status=400)
 
 
+# 기업 좋아요 기능 API
 class LikeCPView(View):
     @login_required
     def post(self, request):
@@ -277,6 +314,7 @@ class LikeCPView(View):
             return JsonResponse({'message': e, 'status': 400}, status=400)
 
 
+# 유의 좋아요 목록 API
 class LikeInfoView(View):
     @login_required
     def get(self, request):
@@ -295,4 +333,3 @@ class LikeInfoView(View):
             'like_company_list'   : cp_data,
             'like_portfolio_list' : pf_data
         }, status=200)
-

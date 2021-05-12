@@ -1,16 +1,6 @@
-import jwt
-
-from django.db.models       import Q
 from django.views           import View
-from django.http            import (
-    JsonResponse
-)
+from django.http            import JsonResponse
 
-from my_settings            import ALGORITHM
-from stock.settings         import SECRET_KEY
-
-from account.utils          import like_user
-from account.models         import Account
 from companies.models       import (
     Company,
     LikeCompany
