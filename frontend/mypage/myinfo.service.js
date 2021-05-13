@@ -32,7 +32,7 @@ class MyInfoService {
         if (savePassword.value === "") {
           alert("비밀번호를 입력해주세요");
         } else if (!pwReg.test(savePassword.value)) {
-          alert("잘못된 비밀번호입니다.");
+          alert("잘못된 비밀번호입니다. 최소 5글자 이상, 문자,숫자,특수문자를 포함해주세요");
         } else {
           tdPassword.removeChild(savePassword);
           tdPassword.innerHTML = `<p id="modify-password" class="modify-btn">수정</p>`;
@@ -84,7 +84,7 @@ class MyInfoService {
         if (saveName.value === "") {
           alert("이름을 입력해주세요")
         } else if (!nameReg.test(saveName.value)) {
-          alert("잘못된 이름입니다.")
+          alert("잘못된 이름입니다. 한글 이름만 등록가능합니다.")
         } else {
           tdName.removeChild(saveName);
           tdName.innerHTML = `<p id="name" class="contxt-title">${saveName.value}</p>`;
@@ -173,7 +173,7 @@ class MyInfoService {
         if (savePhone.value === "") {
           alert("전화번호를 입력해주세요")
         } else if (!phoneReg.test(savePhone.value)) {
-          alert("잘못된 전화번호입니다.")
+          alert("잘못된 전화번호입니다. 000-0000-0000형식에 맞게 등록해주세요.")
         } else {
           tdPhone.removeChild(savePhone);
           tdPhone.innerHTML = `<p id="phone" class="contxt-title">${savePhone.value}</p>`;
@@ -228,7 +228,7 @@ class MyInfoService {
         if (saveEmail.value === "") {
           alert("이메일을 입력해주세요");
         } else if (!emailReg.test(saveEmail.value)) {
-          alert("잘못된 이메일입니다.");
+          alert("잘못된 이메일입니다. abc@gmail.com형식에 맞게 등록해주세요.");
         } else {
           tdEmail.removeChild(saveEmail);
           tdEmail.innerHTML = `<p id="email" class="contxt-title">${saveEmail.value}</p>`;
