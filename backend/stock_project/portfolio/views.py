@@ -133,7 +133,7 @@ class BasePortfolioView(View):
             pf_data = json.loads(request.body)
             stock_list = pf_data['stock']
             pf = Portfolio.objects.create(
-                name = pf_data['title'],
+                name    = pf_data['title'],
                 content = pf_data['content'],
                 user_id = user.id
             )
@@ -190,7 +190,7 @@ class BasePortfolioView(View):
             if not Portfolio.objects.filter(Q(id=pf_id) & Q(user_id=user.id)).exists():
                 return JsonResponse({
                     'message': 'This Portfolio ID Does Not exist',
-                    'status': 400
+                    'status' : 400
                 }, status=400)
 
             pf = Portfolio.objects.get(Q(id=pf_id) & Q(user_id=user.id))
@@ -317,15 +317,15 @@ class UserIDPFView(View):
             else:
                 board_list = paginator.get_page(page)
                 board_data = [{
-                    'pofol_id': board.id,
-                    'user_id': board.user.user_id,
-                    'pofol_name': board.name,
-                    'like_count': board.total_like,
+                    'pofol_id'     : board.id,
+                    'user_id'      : board.user.user_id,
+                    'pofol_name'   : board.name,
+                    'like_count'   : board.total_like,
                     'comment_count': board.comment_set.count(),
-                    'create_date': board.create_date,
+                    'create_date'  : board.create_date,
                     'stock': [{
-                        'stock_name': stock.company.cp_name,
-                        'stock_count': stock.shares_count,
+                        'stock_name'  : stock.company.cp_name,
+                        'stock_count' : stock.shares_count,
                         'stock_amount': stock.shares_amount
                     } for stock in board.portfoliostock_set.all()]
                 } for board in board_list]

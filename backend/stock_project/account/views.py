@@ -233,7 +233,7 @@ class UserEmailView(View):
             return JsonResponse({'MESSAGE'  : 'SUCCESS',
                                  'status'   : 200,
                                  'user_info': user_data
-                                 }, status=200)
+             }, status=200)
 
         except Exception as e:
             return JsonResponse({'message': e, 'status' : 400}, status=400)
@@ -262,7 +262,7 @@ class UserNameView(View):
             return JsonResponse({'MESSAGE': 'SUCCESS',
                                  'status': 200,
                                  'user_info': user_data
-                                 }, status=200)
+             }, status=200)
 
         except KeyError:
             return JsonResponse({'message': 'KEY_ERROR', 'status' : 400}, status=400)
@@ -305,8 +305,8 @@ class UserBirthDateView(View):
     @login_required
     def put(self, request):
         try:
-            modify_data = json.loads(request.body)
-            user = Account.objects.get(id=request.user.id)
+            modify_data     = json.loads(request.body)
+            user            = Account.objects.get(id=request.user.id)
             user.birth_date = modify_data['birth_date']
             user.save()
 
@@ -397,7 +397,6 @@ class LikeCPView(View):
                     'message'    : 'Dislike this Company',
                     'status'     : 200,
                     'total_like' : cp.total_like,
-                    #'is_user_like':
                 }, status=200)
             else:
                 try:
