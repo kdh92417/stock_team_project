@@ -8,8 +8,8 @@ class BoardPortfolioView {
   }
 
   showPortfolioList(res) {
-    console.log(res);
-    let portfolio_HTML = `<div class="portfolio-container">
+    if(localStorage.getItem("token") !== null) {
+      let portfolio_HTML = `<div class="portfolio-container">
       <div class="portfolio-content">
         <div class="portfolio-title">포트폴리오 게시판</div>
         <div class="portfolio-list-container">
@@ -30,6 +30,27 @@ class BoardPortfolioView {
     </div>`;
 
     this.root.insertAdjacentHTML("afterend", portfolio_HTML);
+    } else {
+      let portfolio_HTML = `<div class="portfolio-container">
+      <div class="portfolio-content">
+        <div class="portfolio-title">포트폴리오 게시판</div>
+        <div class="portfolio-list-container">
+          <div class="company-search">
+            <select id="select-box">
+              <option>기업명</option>
+              <option>유저ID</option>
+            </select>
+            <input id="company-name" type="text" placeholder=""><button id="search-btn">검색</button>
+          </div>
+          <div id="portfolio-list">
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+    this.root.insertAdjacentHTML("afterend", portfolio_HTML);
+    }
+    
 
     const list = document.querySelector("#portfolio-list");
 

@@ -15,6 +15,7 @@ class ShowPortfolioView {
     const searchCount = res.search_count;
     const prev = res.previous_board_id;
     const next = res.next_board_id;
+    
     const date = moment(res.create_date).format('YYYY-MM-DD HH:mm:ss');
     
     let stockNameArr = [];
