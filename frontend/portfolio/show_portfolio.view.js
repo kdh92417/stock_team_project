@@ -7,7 +7,7 @@ class ShowPortfolioView {
     console.log(this.root)
   }
 
-  showPortfolio(res, pfId) {
+  showPortfolio(res, pfId, callback) {
     console.log(res)
     const title = res.title;
     const content = res.content;
@@ -15,8 +15,9 @@ class ShowPortfolioView {
     const searchCount = res.search_count;
     const prev = res.previous_board_id;
     const next = res.next_board_id;
+    
     const date = moment(res.create_date).format('YYYY-MM-DD HH:mm:ss');
-
+    
     let stockNameArr = [];
     let stockCountArr = [];
     let stockAmountArr = [];
@@ -89,14 +90,12 @@ class ShowPortfolioView {
   </div>`
 
     this.root.insertAdjacentHTML('afterend', portfolio_HTML);
-
-
-    // 로그인 하지 않은 사용자는 댓글 textarea를 비활성화
-    const textArea = document.querySelector(".comment-inbox-text");
-    if (localStorage.getItem("token") === null) {
-      textArea.setAttribute('disabled', false);
-    }
-
+    
+    // ctrl : movePreviousPortfolio
+    const previousBtn = document.querySelector(".prev-btn");
+    callback(prev, previousBtn);
+    
+    
     // 차트 그리기
     let stock = document.querySelector('#stock')
     for (let i = 0; i < stockNameArr.length; i++) {
@@ -149,8 +148,8 @@ class ShowPortfolioView {
       });
     }
 
-    this.movePreviousPortfolio(prev);
-    this.moveNextPortfolio(next)
+    this.moveNextPortfolio(next);
+    this.makeTextareaDisabled();
 
     // 댓글 등록 버튼을 눌렀을 때 함수 호출
     const commentSubmitBtn = document.querySelector(".btn-submit");
@@ -161,16 +160,14 @@ class ShowPortfolioView {
 
   }
 
-
-
-  movePreviousPortfolio(prev) {
-    const previousBtn = document.querySelector(".prev-btn");
-    previousBtn.addEventListener("click", () => {
-      if (prev === null) {
-        return alert("첫번째 페이지입니다.")
-      } else location.href = `http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=` + prev;
-    })
+  makeTextareaDisabled() {
+    const textArea = document.querySelector(".comment-inbox-text");
+    if (localStorage.getItem("token") === null) {
+      textArea.setAttribute('disabled', false);
+    }
   }
+
+  
 
   moveNextPortfolio(next) {
     const previousBtn = document.querySelector(".next-btn");

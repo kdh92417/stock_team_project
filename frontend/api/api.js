@@ -86,9 +86,9 @@ class API {
         console.log(res);
         if (res.message === "success") {
           location.href = "../template/login.html"
-        } else if (res.message === "Aleady exists user") {
+        } else if(res.message === "Aleady exists user") {
           alert("중복된 아이디입니다.")
-        } else {
+        } else if(res.message === "Aleady exists email"){
           alert("중복된 이메일입니다.")
         }
       })
