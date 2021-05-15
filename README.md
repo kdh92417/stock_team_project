@@ -66,12 +66,12 @@
 
 ## 6. 핵심 기능
 
+
 #### 기업 검색 기능
 <img src="https://user-images.githubusercontent.com/58774316/118206452-8211c580-b49d-11eb-980b-458e29f74785.gif" width=70%>
 
 #### 회원가입
 <img src="https://user-images.githubusercontent.com/58774316/118206463-8807a680-b49d-11eb-8c03-f0ebd8ec99ed.gif" width=70%>
-
 
 #### 로그인 / 마이페이지
 <img src="https://user-images.githubusercontent.com/58774316/118206443-7de5a800-b49d-11eb-9335-99783e586e9c.gif" width=70%>
