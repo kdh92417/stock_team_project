@@ -8,7 +8,7 @@ urlpatterns = [
     path('list/', views.TotalPortfolioView.as_view()),
     # 해당 유저가 쓴 포폴 리스트 API
     path('list/user/', views.UserIDPFView.as_view()),
-    # 댓글쓰기
+    # 댓글 API
     path('comment/write/', views.CommentView.as_view())
 ]
 
