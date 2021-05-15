@@ -1,6 +1,5 @@
 import API from "../api/api.js"
 
-
 class LoginUser {
   constructor(ctrl) {
     this.ctrl = ctrl
@@ -25,10 +24,10 @@ class LoginUser {
   }
 
   sendUserData(user_data) {
-
     this.userInfo = {};
 
     this.userInfo.userId = user_data.user_id;
+    this.userInfo.type = user_data.type;
     this.userInfo.userName = user_data.user_name;
     this.userInfo.userBirth = user_data.birth_date;
     this.userInfo.userPhone = user_data.phone_number;

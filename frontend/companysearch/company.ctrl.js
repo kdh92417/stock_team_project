@@ -5,7 +5,6 @@ class CompanyCtrl {
     this.service = service;
     this.view = view;
     this.getCompanyNumber();
-    this.handleLikeBtn();
   }
 
   // functionName - getCompanyNumber
@@ -18,11 +17,12 @@ class CompanyCtrl {
     let value = Object.values(JSON.parse(cpName));
     this.view.showCompanyInfo(value[0], value[2]);
     this.getComanyData(value[1])
+    this.getUserLikeList(value[0]);
   }
 
   // functionName - getComanyData
   // Job - 전자공시 open api이용해서 기업 재무재표 불러옴
-  // Input(args, params) - url
+  // Input(args, params) - 기업이름
   // Output(return) - none
   getComanyData(data) {
     API.get(`https://opendart.fss.or.kr/api/fnlttSinglAcnt.json?crtfc_key=02101d1f9a35c1b17eea050c5099255a830db302&corp_code=${data}&bsns_year=2020&reprt_code=11011`)
@@ -42,6 +42,21 @@ class CompanyCtrl {
       });
   }
 
+  // functionName - getUserLikeList
+  // Job - 유저가 좋아요 한 List 가져옴
+  // Input(args, params) - 검색한 기업명 (searchWord)
+  // Output(return) - none
+  getUserLikeList(searchWord) {
+    API.userInfoGet("http://192.168.1.32:8000/account/like/list/")
+      .then((res) => res.json())
+      .then((res) => {
+        this.view.userLikeListView(res.like_company_list, searchWord);
+        this.handleLikeBtn();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   // functionName - handleLikeBtn
   // Job - view에서 좋아요 버튼을 누르면 view 보여지도록 callback 함수로 서비스 기능을 넘겨줌

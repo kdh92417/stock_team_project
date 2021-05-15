@@ -86,9 +86,9 @@ class API {
         console.log(res);
         if (res.message === "success") {
           location.href = "../template/login.html"
-        } else if (res.message === "Aleady exists user") {
+        } else if(res.message === "Aleady exists user") {
           alert("중복된 아이디입니다.")
-        } else {
+        } else if(res.message === "Aleady exists email"){
           alert("중복된 이메일입니다.")
         }
       })
@@ -124,14 +124,6 @@ class API {
       },
       body: JSON.stringify(payload),
     })
-      .then((res) => res.json())
-      .then((res) => {
-        location.href = "../template/mypage.html"
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });;
   }
 
   // functionName - get
@@ -147,9 +139,24 @@ class API {
     });
   }
 
+
+  // functionName - userInfoGet
+  // Job - 유저 정보를 얻기 위한 get api (토큰같이 전송)
+  // Input(args, params) - url
+  // Output(return) - none
+  static userInfoGet(url) {
+    return fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+  }
+
   // functionName - post
-  // Job - 기업 좋아요, 포트폴리오 좋아요 api
-  // Input(args, params) - url, cp_name, pf_id
+  // Job - 기업 좋아요, 포트폴리오 좋아요, 작성글 / 작성댓글 삭제 api
+  // Input(args, params) - url, payload
   // Output(return) - none
   static async post(url, payload) {
     return await fetch(url, {
@@ -166,8 +173,8 @@ class API {
   // Job - 포트폴리오 작성 완료 후 서버로 전송하는 api
   // Input(args, params) - 포트폴리오에 속한 데이터
   // Output(return) - none
-  postPortfolio(portfolioData) {
-    fetch("http://192.168.1.32:8000/portfolio/write/", {
+  static postPortfolio(url, portfolioData) {
+    return fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -175,15 +182,6 @@ class API {
       },
       body: JSON.stringify(portfolioData),
     })
-      .then((res) => (res.json()))
-      .then((res) => {
-        console.log(res);
-        location.href = "../template/write-view.html" + `?board_id=${res.board_data.portfolio_id}`;
-
-      })
-      .catch((err) => {
-        console.log(err);
-      })
   }
 
   // functionName - getPortfolio
@@ -197,7 +195,6 @@ class API {
         "Content-Type": "application/json",
       },
     })
-      
   }
 
   // functionName - getPortfolioList
@@ -220,7 +217,43 @@ class API {
         "Content-Type": "application/json",
       },
     })
-      
+
+  }
+
+  static postComment(url, comment) {
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify(comment),
+    })
+  }
+
+  static delete(url, id) {
+    return fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify(id)
+    })
+  }
+
+  // functionName - writeAndCommentDelete
+  // Job - 작성글 / 작성댓글 전체삭제 api
+  // Input(args, params) - url
+  // Output(return) - none
+  static writeAndCommentDelete(url) {
+    return fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      }
+    })
   }
 }
 export default API;

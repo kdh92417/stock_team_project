@@ -46,9 +46,9 @@ class SignupService {
       if (value.pw === "") {
         throw "비밀번호를 입력해주세요"
       } else if (!pwReg.test(value.pw)) {
-        throw "잘못된 비밀번호입니다."
+        throw "잘못된 비밀번호입니다. 최소 5글자 이상, 문자,숫자,특수문자를 포함해주세요"
       } else if (value.pw !== value.checkPw) {
-        throw "다름"
+        throw "비밀번호가 다름니다. 다시 확인해주세요"
       } else this.checkNameAndBirth(value);
     } catch (error) {
       alert(error)
@@ -66,7 +66,7 @@ class SignupService {
       if (value.name === "") {
         throw "이름을 입력해주세요"
       } else if (!nameReg.test(value.name)) {
-        throw "잘못된 이름입니다."
+        throw "잘못된 이름입니다. 한글 이름만 등록가능합니다."
       } else if (value.birth === "") {
         throw "생년월일을 입력해주세요"
       } else this.checkPhoneAndEmail(value);
@@ -88,11 +88,11 @@ class SignupService {
       if (value.phone === "") {
         throw "전화번호를 입력해주세요"
       } else if (!phoneReg.test(value.phone)) {
-        throw "잘못된 전화번호입니다."
+        throw "잘못된 전화번호입니다. 000-0000-0000형식에 맞게 등록해주세요."
       } else if (value.email === "") {
         throw "이메일을 입력해주세요"
       } else if (!emailReg.test(value.email)) {
-        throw "잘못된 이메일입니다."
+        throw "잘못된 이메일입니다. abc@gmail.com형식에 맞게 등록해주세요."
       } else this.user.signupUser(value);
     } catch (error) {
       alert(error);

@@ -8,7 +8,7 @@ class MyInfoService {
     addPwInput.className = "change-password"
     tdPassword.appendChild(addPwInput);
     tdPassword.innerHTML += `<p id="modify-password" class="modify-btn">확인</p>`;
-    this.savePassword()
+    this.savePassword();
   }
 
   changePassword() {
@@ -32,14 +32,21 @@ class MyInfoService {
         if (savePassword.value === "") {
           alert("비밀번호를 입력해주세요");
         } else if (!pwReg.test(savePassword.value)) {
-          alert("잘못된 비밀번호입니다.");
+          alert("잘못된 비밀번호입니다. 최소 5글자 이상, 문자,숫자,특수문자를 포함해주세요");
         } else {
           tdPassword.removeChild(savePassword);
           tdPassword.innerHTML = `<p id="modify-password" class="modify-btn">수정</p>`;
           API.put("http://192.168.1.32:8000/account/user/password/", {
             password: `${savePassword.value}`,
           })
-          this.changePassword();
+            .then((res) => res.json())
+            .then((res) => {
+              this.changePassword();
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
       } catch (error) {
         alert(error);
@@ -77,7 +84,7 @@ class MyInfoService {
         if (saveName.value === "") {
           alert("이름을 입력해주세요")
         } else if (!nameReg.test(saveName.value)) {
-          alert("잘못된 이름입니다.")
+          alert("잘못된 이름입니다. 한글 이름만 등록가능합니다.")
         } else {
           tdName.removeChild(saveName);
           tdName.innerHTML = `<p id="name" class="contxt-title">${saveName.value}</p>`;
@@ -85,7 +92,14 @@ class MyInfoService {
           API.put("http://192.168.1.32:8000/account/user/name/", {
             user_name: `${saveName.value}`,
           })
-          this.changeName(userName);
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(res);
+              this.changeName(res.user_info.user_name);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }
       } catch (error) {
         alert(error);
@@ -117,8 +131,15 @@ class MyInfoService {
       tdBirth.innerHTML += `<p id="modify-birth" class="modify-btn">수정</p>`;
       API.put("http://192.168.1.32:8000/account/user/birth-date/", {
         birth_date: `${saveBirth.value}`,
-      });
-      this.changeBirth(userBirth);
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          this.changeBirth(res.user_info.birth_date);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
   }
 
@@ -152,15 +173,24 @@ class MyInfoService {
         if (savePhone.value === "") {
           alert("전화번호를 입력해주세요")
         } else if (!phoneReg.test(savePhone.value)) {
-          alert("잘못된 전화번호입니다.")
+          alert("잘못된 전화번호입니다. 000-0000-0000형식에 맞게 등록해주세요.")
         } else {
           tdPhone.removeChild(savePhone);
           tdPhone.innerHTML = `<p id="phone" class="contxt-title">${savePhone.value}</p>`;
           tdPhone.innerHTML += `<p id="modify-phone" class="modify-btn">수정</p>`;
           API.put("http://192.168.1.32:8000/account/user/phone/", {
             phone_number: `${savePhone.value}`,
-          });
-          this.changePhone(userPhone);
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(res);
+              this.changePhone(res.user_info.phone_number);
+            })
+            .catch((err) => {
+              alert("이미 사용중인 전화번호입니다.")
+              location.reload();
+              console.log(err);
+            });
         }
       } catch (error) {
         alert(error);
@@ -198,15 +228,24 @@ class MyInfoService {
         if (saveEmail.value === "") {
           alert("이메일을 입력해주세요");
         } else if (!emailReg.test(saveEmail.value)) {
-          alert("잘못된 이메일입니다.");
+          alert("잘못된 이메일입니다. abc@gmail.com형식에 맞게 등록해주세요.");
         } else {
           tdEmail.removeChild(saveEmail);
           tdEmail.innerHTML = `<p id="email" class="contxt-title">${saveEmail.value}</p>`;
           tdEmail.innerHTML += `<p id="modify-email" class="modify-btn">수정</p>`;
           API.put("http://192.168.1.32:8000/account/user/email/", {
             email: `${saveEmail.value}`,
-          });
-          this.changeEmail(userEmail);
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(res);
+              this.changeEmail(res.user_info.email);
+            })
+            .catch((err) => {
+              alert("이미 사용중인 email입니다.")
+              location.reload();
+              console.log(err);
+            });
         }
       } catch (error) {
         alert(error);

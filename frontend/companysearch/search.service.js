@@ -1,5 +1,4 @@
 import API from "../api/api.js"
-import CompanyView from "../companysearch/company.view.js"
 
 class SearchService {
 
@@ -18,7 +17,7 @@ class SearchService {
         } else {
           location.href = "../template/company.html"
           const companyInfo = {};
-          companyInfo.name = company.name;
+          companyInfo.name = company.name.toUpperCase();
           companyInfo.code = res.corp_code;
           companyInfo.like_count = res.like_count;
           localStorage.setItem("기업이름", JSON.stringify(companyInfo));

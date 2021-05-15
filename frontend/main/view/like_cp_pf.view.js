@@ -30,18 +30,26 @@ class LikeCpPfView {
     for (let i = 0; i < 5; i++) {
       topRank.innerHTML += `<li>
         <div class="list-company">
-          <div class="list-item list_sliding">
-            <span class="rank-num">${i + 1}</span>
-            <span class="rank-text">${data[i].company_name}</span>
+          <div class="list-item company-item list_sliding">
+            <span id="${data[i].company_like}" class="rank-num">${i + 1}</span>
+            <span id="${data[i].corp_code}" class="rank-text">${data[i].company_name}</span>
           </div>
-          <div class="list-item">
-            <span class="rank-num">${i + 1}</span>
-            <span class="rank-text">${data[i].company_name}</span>
+          <div class="list-item company-item">
+            <span id="${data[i].company_like}" class="rank-num">${i + 1}</span>
+            <span id="${data[i].corp_code}"  class="rank-text">${data[i].company_name}</span>
           </div>
         </div>
       </li>`
     }
+  }
 
+  // functionName - sendRankList
+  // Job - 메인페이지 top5 회사의 정보를 보내줌
+  // Input(args, params) - callback(service.showRankCompany)  
+  // Output(return) - none
+  sendRankList(callback) {
+    const topRank = document.querySelectorAll(".company-item");
+    callback(topRank);
   }
 
   // functionName - findCompanyList
@@ -58,7 +66,7 @@ class LikeCpPfView {
   // Input(args, params) - none 
   // Output(return) - none
   showLikePortfolio() {
-    this.bottom = document.querySelector(".keywordRank-company");
+    this.middle = document.querySelector(".keywordRank-company");
     let likePortfolio_HTML =
       `<div class="keywordRank-portfolio">
         <div class="rankPortfolio-title">주간 인기 포트폴리오</div>
@@ -68,7 +76,7 @@ class LikeCpPfView {
           </ul>
         </div>
       </div>`
-    this.bottom.insertAdjacentHTML('afterend', likePortfolio_HTML);
+    this.middle.insertAdjacentHTML('afterend', likePortfolio_HTML);
   }
 
 
@@ -83,11 +91,13 @@ class LikeCpPfView {
               <div class="list-portfolio">
                 <div class="list-item list_sliding">
                   <span class="rank-num">${i + 1}</span>
-                  <span class="rank-text">${data[i].portfolio_title}</span>
+                  <a href="http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${data[i].portfolio_id}">
+                  <span id="${data[i].portfolio_id}" class="rank-text">${data[i].portfolio_title}</span></a>
                 </div>
                 <div class="list-item">
                   <span class="rank-num">${i + 1}</span>
-                  <span class="rank-text">${data[i].portfolio_title}</span>
+                  <a href="http://127.0.0.1:5503/frontend/main/template/write-view.html?board_id=${data[i].portfolio_id}">
+                  <span id="${data[i].portfolio_id}" class="rank-text">${data[i].portfolio_title}</span></a>
                 </div>
               </div>
             </li>`
@@ -100,6 +110,64 @@ class LikeCpPfView {
   // Output(return) - none
   findPortfolioList(callback) {
     const list = document.querySelector(".rank-portfolio-list")
+    callback(list);
+  }
+
+  // functionName - showBestMember
+  // Job - best member 화면에 출력
+  // Input(args, params) - none 
+  // Output(return) - none
+  showBestMember() {
+    this.bottom = document.querySelector(".keywordRank-portfolio");
+    let likePortfolio_HTML =
+      `<div class="rank-best-member">
+        <div class="best-member-title">Best Member</div>
+        <hr>
+        <div class="best-member">
+          <ul class="best-member-list">
+          </ul>
+        </div>
+      </div>`
+    this.bottom.insertAdjacentHTML('afterend', likePortfolio_HTML);
+  }
+
+  // functionName - addTop5Member
+  // Job - best member top5 화면에 출력 (글 작성이 많은 사람 순)
+  // Input(args, params) - best member data 
+  // Output(return) - none
+  addTop5Member(data) {
+    const bestList = document.querySelector(".best-member-list");
+    for (let i = 0; i < data.length; i++) {
+      bestList.innerHTML += `<li>
+        <div class="list-member">
+          <div class="list-item user-name list_sliding">
+            <span class="rank-num">${i + 1}</span>
+            <span id="${data[i].counts_of_writers}" class="rank-text">${data[i].user_id}</span>
+          </div>
+          <div class="list-item user-name">
+            <span class="rank-num">${i + 1}</span>
+            <span id="${data[i].counts_of_writers}" class="rank-text">${data[i].user_id}</span>
+          </div>
+        </div>
+      </li>`
+    }
+  }
+
+  // functionName - sendUserList
+  // Job - 메인페이지 top5 유저의 아이디를 보내줌
+  // Input(args, params) - callback(service.showRankCompany)  
+  // Output(return) - none
+  sendUserList(callback) {
+    const userName = document.querySelectorAll(".user-name");
+    callback(userName);
+  }
+
+  // functionName - findMemberList
+  // Job - 갱신화면 효과를 위해 member list select
+  // Input(args, params) - callback 
+  // Output(return) - none
+  findMemberList(callback) {
+    const list = document.querySelector(".best-member-list")
     callback(list);
   }
 }

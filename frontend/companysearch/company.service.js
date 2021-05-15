@@ -4,23 +4,14 @@ class CompanyService {
 
   // functionName - clickLikeBtn
   // Job - 좋아요 기능 동작 함수
-  // Input(args, params) - likeBtn, icon, company, likeCount
+  // Input(args, params) - likeBtn, company, likeCount
   // Output(return) - none
-  clickLikeBtn = (likeBtn, icon, company, likeCount) => {
-    const companyLike = {};
-    companyLike.name = company.innerHTML;
-    companyLike.count = false;
-    localStorage.setItem("clicked", JSON.stringify(companyLike));
+  clickLikeBtn = (likeBtn, company, likeCount) => {
+    console.dir(likeBtn.children[0])
     likeBtn.addEventListener("click", () => {
-      const clicked = localStorage.getItem("clicked")
-      let value = Object.values(JSON.parse(clicked));
-      console.log(value)
-      if (value[1] === false) {
-        const companyLike = {};
-        companyLike.name = company.innerHTML;
-        companyLike.count = true;
-        localStorage.setItem("clicked", JSON.stringify(companyLike));
-        icon.innerHTML = `<i class="fas fa-thumbs-up"></i>`
+      if (likeBtn.children[0].id === "full-icon") {
+        likeBtn.innerHTML = `<span id="icon"><i class="far fa-thumbs-up"></i></span>
+                              <span id="count">Like</span>`
         API.post("http://192.168.1.32:8000/account/like/company/", {
           cp_name: `${company.innerHTML}`
         })
@@ -33,11 +24,8 @@ class CompanyService {
             console.log(err);
           })
       } else {
-        const companyLike = {};
-        companyLike.name = company.innerHTML;
-        companyLike.count = false;
-        localStorage.setItem("clicked", JSON.stringify(companyLike));
-        icon.innerHTML = `<i class="far fa-thumbs-up"></i>`
+        likeBtn.innerHTML = `<span id="full-icon"><i class="fas fa-thumbs-up"></i></span>
+                              <span id="count">Like</span>`
         API.post("http://192.168.1.32:8000/account/like/company/", {
           cp_name: `${company.innerHTML}`
         })
@@ -51,13 +39,6 @@ class CompanyService {
           })
       }
     })
-  }
-
-  saveLikeCount(company, count) {
-    const companyLike = {};
-    companyLike.name = company.innerHTML;
-    companyLike.count = true;
-    localStorage.setItem("clicked", JSON.stringify(companyLike));
   }
 
   // functionName - getComprehensiveIncomeStatement

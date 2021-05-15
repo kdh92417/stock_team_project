@@ -26,7 +26,11 @@
 
 ### Front-end
 
-- Javascript, Jquery, Ajax
+- HTML5, CSS3
+
+- Javascript(ES6)
+
+- Jquery, Ajax
 
 <br>
 
@@ -48,7 +52,9 @@
 
 <br>
 
-## 4. API 명세서
+## 4. 프로젝트 문서
+
+ - [PPT 발표자료](https://docs.google.com/presentation/d/17M0V0Ft5-IueszfDI5UBobiCJBI9bNkl/edit#slide=id.p1)
 
  - [Postman API 명세서](https://documenter.getpostman.com/view/11682851/TzJvex3F)
 
@@ -60,11 +66,18 @@
 
 ## 6. 핵심 기능
 
-- 기업 좋아요, 재무정보 출력 기능
 
-- 원하는 기업이 있는 포폴 검색 기능
+#### 기업 검색 기능
+<img src="https://user-images.githubusercontent.com/58774316/118206452-8211c580-b49d-11eb-980b-458e29f74785.gif" width=70%>
 
-- 유저 포트폴리오의 시각화를 위한 차트화
+#### 회원가입
+<img src="https://user-images.githubusercontent.com/58774316/118206463-8807a680-b49d-11eb-8c03-f0ebd8ec99ed.gif" width=70%>
+
+#### 로그인 / 마이페이지
+<img src="https://user-images.githubusercontent.com/58774316/118206443-7de5a800-b49d-11eb-9335-99783e586e9c.gif" width=70%>
+
+#### 회원가입
+<img src="https://user-images.githubusercontent.com/58774316/118206456-85a54c80-b49d-11eb-8b1a-d245f3f9902c.gif" width=70%>
 
 <br>
 

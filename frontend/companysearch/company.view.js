@@ -39,16 +39,28 @@ class CompanyView {
   </div>`
 
     this.root.insertAdjacentHTML('afterend', companyInfo_HTML);
+    window.addEventListener("mousedown", () => {
+      localStorage.removeItem("기업이름");
+    })
+  }
+
+  // functionName - userLikeListView
+  // Job - 유저가 좋아요한 기업을 검색어랑 매칭하여 표시해줌
+  // Input(args, params) - 좋아요기업명(companyName), 검색한기업명(searchWord)
+  // Output(return) - none
+  userLikeListView(companyName, searchName) {
     const token = localStorage.getItem("token"),
-      clicked = localStorage.getItem("clicked");
-    let value = Object.values(JSON.parse(clicked));
+      btnContent = document.querySelector(".btn-content"),
+      likeBtn = document.querySelector(".like-btn");
     if (!token) {
-      const btnContent = document.querySelector(".btn-content"),
-        likeBtn = document.querySelector(".like-btn");
       btnContent.removeChild(likeBtn);
-    } else if (token && value[1] === true && value[0] === companyName) {
-      let icon = document.querySelector("#icon");
-      icon.innerHTML = `<i class="fas fa-thumbs-up"></i>`
+    } else {
+      for (let i = 0; i < companyName.length; i++) {
+        if (companyName[i] === searchName) {
+          likeBtn.innerHTML = `<span id="full-icon"><i class="fas fa-thumbs-up"></i></span>
+          <span id="count">Like</span>`
+        }
+      }
     }
   }
 
@@ -56,12 +68,11 @@ class CompanyView {
   // Job - 좋아요 기능을 위한 화면에서 button select
   // Input(args, params) - callback
   // Output(return) - none
-  selectLikeBtn(callback) {
+  selectLikeBtn(callback, likeCompany) {
     const likeBtn = document.querySelector(".like-btn"),
       companyName = document.querySelector(".company-name"),
       likeCount = document.querySelector(".like-count");
-    let icon = document.querySelector("#icon");
-    callback(likeBtn, icon, companyName, likeCount);
+    callback(likeBtn, companyName, likeCount, likeCompany);
   }
 }
 

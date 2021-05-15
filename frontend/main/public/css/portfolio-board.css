@@ -45,6 +45,16 @@
   background-color: #48e0a6;
 }
 
+#select-box {
+  width: 100px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 4px;
+  margin: 4px;
+}
+
 input {
   width: 250px;
   height: 30px;
@@ -73,6 +83,11 @@ a {
 
 .write-title {
   margin-top: 23px;
+  width: 190px;
+  height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .portfolio-write {
@@ -126,5 +141,6 @@ a {
 
 .card-body {
   width: 100%;
-  margin: 10px 10px;
+  /* margin: 10px; */
+  padding: 0;
 }
