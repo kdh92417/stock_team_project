@@ -54,7 +54,7 @@
 
 ## 4. 프로젝트 문서
 
- - [PPT 발표자료](https://docs.google.com/presentation/d/e/2PACX-1vSm4p4LJaotVRQPvUoSAnZjTR6ZKDTqYxzR_5RvNlTFpJujtnoDqSKbz3fGl3NOHQ/pub?start=false&loop=false&delayms=3000)
+ - [PPT 발표자료](https://drive.google.com/file/d/1xgsuuzEtfIeLXrrkexgt9f2R_q62kwzP/view)
 
  - [Postman API 명세서](https://documenter.getpostman.com/view/11682851/TzJvex3F)
 
