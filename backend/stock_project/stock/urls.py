@@ -31,7 +31,4 @@ urlpatterns = [
 
     # Main Page
     path('main/', views.MainView.as_view()),
-
-    # Rank Page
-    path('rank/', views.RankView.as_view())
 ]
