@@ -1,11 +1,7 @@
 from django.views           import View
 from django.http            import JsonResponse
 
-from companies.models       import (
-    Company,
-    LikeCompany
-)
-
+from companies.models       import Company
 
 class SearchCPView(View):
     def get(self, request):

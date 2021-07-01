@@ -81,8 +81,7 @@
 
 <br>
 
-## 7. 트러블 슈팅
 
-<br>
-
-## 8. 회고 / 느낀점
+## 7. Posting
+- [팀 프로젝트 후기](https://velog.io/@wind1992/%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0)
+- [Docker를 이용하여 Django 배포](https://velog.io/@wind1992/Django-Docker%EB%A1%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0)
